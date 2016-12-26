@@ -1,7 +1,7 @@
 <?php
 
-require_once(__DIR__."/../../core/ViewManager.php");
-$view = ViewManager::getInstance();
+require_once(__DIR__ . "/../../core/ViewManager.php");
+$view        = ViewManager::getInstance();
 $currentuser = $view->getVariable("currentusername");
 
 ?><!DOCTYPE html>
@@ -18,7 +18,7 @@ $currentuser = $view->getVariable("currentusername");
     <body>
 	<!-- header -->
 	<header>
-
+	<h1>Welcome bitch</h1>
 	</header>
 
 	<main>
