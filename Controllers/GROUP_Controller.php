@@ -45,7 +45,7 @@ class GROUP_Controller extends BaseController
         $group = new Group();
         
         if (isset($_POST["submit"])) {
-            $group->setName($_POST["groupname"]);
+            $group->setName($_POST["name"]);
             $group->setDescription($_POST["description"]);
             $group->setOwner($_POST["owner"]);
             $group->setType($_POST["type"]);
@@ -53,7 +53,7 @@ class GROUP_Controller extends BaseController
             $group->setStatus($_POST["status"]);
             
             try {
-                if (!$this->groupModel->nameExists($_POST["groupname"])) {
+                if (!$this->groupModel->nameExists($_POST["name"])) {
                     $group->checkIsValidForCreate();
                     $this->groupModel->add($group);
                     $this->view->setFlash(sprintf(i18n("Group\"%s\" successfully added."), $group->getName()));
@@ -86,7 +86,7 @@ class GROUP_Controller extends BaseController
             throw new Exception(i18n("No such group with id: ") . $groupid);
         }
         if (isset($_POST["submit"])) {
-            $group->setName($_POST["groupname"]);
+            $group->setName($_POST["name"]);
             $group->setDescription($_POST["description"]);
             $group->setOwner($_POST["owner"]);
             $group->setType($_POST["type"]);
@@ -94,7 +94,7 @@ class GROUP_Controller extends BaseController
             $group->setStatus($_POST["status"]);
             
             try {
-                if (!$this->groupModel->nameExists($_POST["groupname"])) {
+                if (!$this->groupModel->nameExists($_POST["name"])) {
                     $group->checkIsValidForCreate();
                     $this->groupModel->edit($group);
                     $this->view->setFlash(sprintf(i18n("Group \"%s\" successfully updated."), $group->getName()));
