@@ -45,11 +45,20 @@ class Upload
         $mime     = $_FILES["file"]["type"];
         $tmp_name = $_FILES["file"]["tmp_name"];
         
-        if ($this->checkUploadSize($size) && $this->checkExt($name) && $this->checkMime($mime) && $this->moveUploadedFile($tmp_name, $name)) {
+        if (!$this->checkExt($name)) {
+            /*die("Ext not valid");*/
+            throw new ValidationException($errors, "Ext not valid");
+        }
+        if (!$this->checkMime($mime)) {
+            /*die("Mime not valid");*/
+            throw new ValidationException($errors, "Mime not valid");
+        }
+        if ($this->checkUploadSize($size)) {
+            /*die("Provide a smaller file");*/
+            throw new ValidationException($errors, "Provide a smaller file");
+        }
+        if ($this->moveUploadedFile($tmp_name, $name)) {
             return true;
-        } else {
-            /* throw new ValidationException($errors, "ERROR:");*/
-            throw new Exception("ERROR:");
         }
         
     }
@@ -95,11 +104,10 @@ class Upload
     private function checkUploadSize($size)
     {
         $errors = array();
-        if ($size > $this->getMaxSize()) {
-            /* throw new ValidationException($errors, "Please provide a smaller file");*/
-            throw new Exception("Please provide a smaller file:");
-        } else {
+        if ($this->getMaxSize() < $size) {
             return true;
+        } else {
+            return false;
         }
     }
     
@@ -108,8 +116,7 @@ class Upload
         $errors    = array();
         $extension = end(explode(".", $name));
         if (!(in_array($extension, $this->getAllowedExts()))) {
-            /* throw new ValidationException($errors, "Please provide another file type: Ext not valid");*/
-            throw new Exception("Please provide another file type: Ext not valid:");
+            return false;
         } else {
             return true;
         }
@@ -119,8 +126,7 @@ class Upload
     {
         $errors = array();
         if (!(in_array($mime, $this->getAllowedMimeTypes()))) {
-            /*  throw new ValidationException($errors, "Please provide another file type: Mime not valid");*/
-            throw new Exception("Please provide another file type: Mime not valid");
+            return false;
         } else {
             return true;
         }
@@ -160,7 +166,7 @@ class Upload
 }
 ?>
 <!-- PRUEBAS -->
-<form action="Upload.php" method="post" enctype="multipart/form-data">
+<!-- <form action="Upload.php" method="post" enctype="multipart/form-data">
     <div class="col-xs-3">
         <label for="archivo">Tipo documento</label>
         <input type="file" name="file">
@@ -186,11 +192,13 @@ if (isset($_POST["submit"])) {
         }
         
     }
-    catch (Exception $ex) {
+    catch (ValidationException $ex) {
+        /*   $errors = $ex->getMessage();
+        echo $errors;*/
         $errors = $ex->getMessage();
-        print_r($errors);
+        echo $errors;
     }
     
 }
 ?>
-<!-- PRUEBAS -->
+ -->

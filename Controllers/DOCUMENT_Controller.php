@@ -57,13 +57,12 @@ class DOCUMENT_Controller extends BaseController
                     $this->documentModel->add($document);
                     $this->view->setFlash(sprintf(i18n("Document\"%s\" successfully added."), $document->getName()));
                     $this->view->redirect("document", "show");
+                } else {
+                    $errors            = array();
+                    $errors["general"] = i18n("An error has occurred during upload");
+                    $this->view->setVariable("errors", $errors);
                 }
-                /*else {
-                $errors            = array();
-                $errors["general"] = i18n("An error has occurred during upload");
-                $this->view->setVariable("errors", $errors);
-                }
-                */
+                
             }
             catch (ValidationException $ex) {
                 $errors = $ex->getErrors();
@@ -99,6 +98,10 @@ class DOCUMENT_Controller extends BaseController
                     $this->documentModel->edit($document);
                     $this->view->setFlash(sprintf(i18n("Document \"%s\" successfully updated."), $document->getName()));
                     $this->view->redirect("document", "show");
+                } else {
+                    $errors            = array();
+                    $errors["general"] = i18n("An error has occurred during upload");
+                    $this->view->setVariable("errors", $errors);
                 }
                 
             }
@@ -137,9 +140,5 @@ class DOCUMENT_Controller extends BaseController
         $this->view->setVariable("document", $document);
         $this->view->render("document", "DOCUMENT_DELETE_Vista");
     }
-    
-    
-    
-    
     
 }
