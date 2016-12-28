@@ -11,10 +11,10 @@ class USER_Model {
         $this->db = PDOConnection::getInstance();
     }
 
-    public function showall($activo = 1)
+    public function showall($status = 1)
     {
-        $sql = $this->db->prepare("SELECT * FROM user ORDER BY username");
-        $sql->execute();
+        $sql = $this->db->prepare("SELECT * FROM user where status=? ORDER BY username");
+        $sql->execute(array($status));
         $users_db = $sql->fetchAll(PDO::FETCH_ASSOC);
 
         $users = array();
