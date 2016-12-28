@@ -10,10 +10,10 @@ class User {
     private $surname;
     private $email;
     private $phone;
-    private $birthdate;
-    private $city;
+    private $birthday;
+    private $address;
+    private $status;
     private $photo;
-    private $delete_date;
     /**
      * type
      * false: user
@@ -31,7 +31,7 @@ class User {
 
 
     public function __construct($id=NULL, $user=NULL, $name=NULL, $surname=NULL, $email=NULL, $phone=NULL,
-                                $birthdate=NULL, $city=NULL, $photo=NULL, $delete_date=NULL, $type=NULL,
+                                $birthday=NULL, $address=NULL, $status=NULL, $photo=NULL, $type=NULL,
                                 $private=NULL, $password=NULL)
     {
      $this->id = $id;
@@ -40,10 +40,10 @@ class User {
      $this->surname = $surname;
      $this->email = $email;
      $this->phone = $phone;
-     $this->birthdate = $birthdate;
-     $this->city = $city;
+     $this->birthday = $birthday;
+     $this->address = $address;
      $this->photo = $photo;
-     $this->delete_date = $delete_date;
+     $this->status = $status;
      $this->type = $type;
      $this->private = $private;
      $this->password = $password;
@@ -97,20 +97,20 @@ class User {
         $this->phone = $phone;
     }
 
-    public function getBirthdate() {
-        return $this->birthdate;
+    public function getBirthday() {
+        return $this->birthday;
     }
 
-    public function setBirthdate($birthdate) {
-        $this->birthdate = $birthdate;
+    public function setBirthday($birthday) {
+        $this->birthday = $birthday;
     }
 
-    public function getCity() {
-        return $this->city;
+    public function getAddress() {
+        return $this->address;
     }
 
-    public function setCity($city) {
-        $this->city = $city;
+    public function setAddress($address) {
+        $this->address = $address;
     }
 
     public function getPhoto() {
@@ -121,12 +121,12 @@ class User {
         $this->photo = $photo;
     }
 
-    public function getDeleteDate() {
-        return $this->delete_date;
+    public function getStatus() {
+        return $this->status;
     }
 
-    public function setDeleteDate($delete_date) {
-        $this->delete_date = $delete_date;
+    public function setStatus($status) {
+        $this->status = $status;
     }
 
     public function getType() {
