@@ -10,10 +10,11 @@ class Upload
     private $allowedMimeTypes = array();
     private $maxSize;
     private $destination;
+    private $var
     
-    public function __construct()
+    public function __construct($var="file")
     {
-        $this->allowedExts      = array(
+        $this->allowedExts = array(
             "pdf",
             "doc",
             "docx",
@@ -32,18 +33,19 @@ class Upload
             "image/png",
             "image/gif"
         );
-        $this->maxSize          = 7 * MB;
-        $this->destination      = null;
+        $this->maxSize = 7 * MB;
+        $this->destination = null;
         /*-- 10* 1024 * 1024 -- */
+        $this->var = $var;
     }
     
     public function checkFile()
     {
         $errors   = array();
-        $size     = $_FILES["file"]["size"];
-        $name     = $_FILES["file"]["name"];
-        $mime     = $_FILES["file"]["type"];
-        $tmp_name = $_FILES["file"]["tmp_name"];
+        $size     = $_FILES["$this->var"]["size"];
+        $name     = $_FILES["$this->var"]["name"];
+        $mime     = $_FILES["$this->var"]["type"];
+        $tmp_name = $_FILES["$this->var"]["tmp_name"];
         
         if (!$this->checkExt($name)) {
             /*die("Ext not valid");*/
@@ -66,9 +68,9 @@ class Upload
     private function moveUploadedFile($tmp_name, $name)
     {
         $destination = $this->Destination($name);
-        $this->setDestination($destination);
+        $this->setDestination($destination, $name);
         
-        if (!move_uploaded_file($tmp_name, $this->getDestination() . $name)) {
+        if (!move_uploaded_file($tmp_name, $this->getDestination())) {
             return false;
         } else {
             return true;
@@ -152,9 +154,9 @@ class Upload
         return $this->maxSize;
     }
     
-    private function setDestination($destination)
+    private function setDestination($destination, $name)
     {
-        $this->destination = $destination;
+        $this->destination = $destination . $name;
         
         return $this;
     }
