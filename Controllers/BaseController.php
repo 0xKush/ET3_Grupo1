@@ -11,7 +11,7 @@ class BaseController {
   
     public function __construct() {
         $this->view = ViewManager::getInstance();
-        $this->Permissions = new Permissions();
+        $this->permissions = new Permissions();
    
         if (session_status() == PHP_SESSION_NONE) {      
             session_start();
