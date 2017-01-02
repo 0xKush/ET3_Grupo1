@@ -10,7 +10,7 @@ class Upload
     private $allowedMimeTypes = array();
     private $maxSize;
     private $destination;
-    private $var
+    private $var;
     
     public function __construct($var="file")
     {
