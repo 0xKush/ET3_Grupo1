@@ -24,7 +24,6 @@ class USER_Controller extends BaseController {
                 $user = $this->userModel->show_by_username($_POST["user"]);
                 $_SESSION["currentuser"] = $user->getUser();
                 $_SESSION["currentuserid"] = $user->getID();
-                $_SESSION["currentusertype"] = $user->getType();
                 $this->view->redirect("user", "home");
             }else{
                 $errors = array();
