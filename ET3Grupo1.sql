@@ -35,7 +35,7 @@ DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
 `id` int(11) NOT NULL,
   `publication` int(11) NOT NULL,
-  `user` int(11) NOT NULL,
+  `owner` int(11) NOT NULL,
   `origincomment` int(11) DEFAULT NULL,
   `date` date NOT NULL,
   `hour` time NOT NULL,
@@ -56,13 +56,28 @@ CREATE TABLE IF NOT EXISTS `comment` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `conversation`
+--
+
+DROP TABLE IF EXISTS `conversation`;
+CREATE TABLE IF NOT EXISTS `conversation` (
+`id` int(11) NOT NULL,
+  `member` int(11) NOT NULL,
+  `secondarymember` int(11) NOT NULL,
+  `startdate` date NOT NULL,
+  `status` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `document`
 --
 
 DROP TABLE IF EXISTS `document`;
 CREATE TABLE IF NOT EXISTS `document` (
 `id` int(11) NOT NULL,
-  `user` int(11) NOT NULL,
+  `owner` int(11) NOT NULL,
   `location` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `uploaddate` date NOT NULL,
   `status` tinyint(1) NOT NULL
@@ -103,8 +118,8 @@ CREATE TABLE IF NOT EXISTS `event` (
 
 DROP TABLE IF EXISTS `friendship`;
 CREATE TABLE IF NOT EXISTS `friendship` (
-  `user` int(11) NOT NULL,
-  `friend` int(11) NOT NULL,
+  `member` int(11) NOT NULL,
+  `secondarymember` int(11) NOT NULL,
   `requestdate` date NOT NULL,
   `startdate` date DEFAULT NULL,
   `status` tinyint(1) NOT NULL
@@ -150,10 +165,10 @@ CREATE TABLE IF NOT EXISTS `group` (
 DROP TABLE IF EXISTS `guest`;
 CREATE TABLE IF NOT EXISTS `guest` (
   `event` int(11) NOT NULL,
-  `guest` int(11) NOT NULL,
+  `secondarymember` int(11) NOT NULL,
   `invitationdate` date NOT NULL,
   `assist` tinyint(1) DEFAULT NULL,
-  `invitedby` int(11) NOT NULL,
+  `member` int(11) NOT NULL,
   `answerdate` date DEFAULT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -176,21 +191,15 @@ CREATE TABLE IF NOT EXISTS `guest` (
 
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE IF NOT EXISTS `message` (
-  `sourceuser` int(11) NOT NULL,
-  `destinationuser` int(11) NOT NULL,
-  `content` text COLLATE utf8_spanish_ci NOT NULL,
+`id` int(11) NOT NULL,
+  `conversation` int(11) NOT NULL,
+  `owner` int(11) NOT NULL,
   `senddate` date NOT NULL,
   `sendhour` time NOT NULL,
+  `content` text COLLATE utf8_spanish_ci NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- RELACIONES PARA LA TABLA `message`:
---   `sourceuser`
---       `user` -> `id`
---   `destinationuser`
---       `user` -> `id`
---
 
 -- --------------------------------------------------------
 
@@ -268,10 +277,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 DROP TABLE IF EXISTS `usergroup`;
 CREATE TABLE IF NOT EXISTS `usergroup` (
   `groupid` int(11) NOT NULL,
-  `guest` int(11) NOT NULL,
+  `member` int(11) NOT NULL,
   `invitationdate` date NOT NULL,
   `accept` tinyint(1) NOT NULL,
-  `invitedby` int(11) NOT NULL,
+  `secondarymember` int(11) NOT NULL,
   `answerdate` date NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -294,13 +303,19 @@ CREATE TABLE IF NOT EXISTS `usergroup` (
 -- Indices de la tabla `comment`
 --
 ALTER TABLE `comment`
- ADD PRIMARY KEY (`id`), ADD KEY `publication` (`publication`), ADD KEY `user` (`user`), ADD KEY `origincomment` (`origincomment`);
+ ADD PRIMARY KEY (`id`), ADD KEY `publication` (`publication`), ADD KEY `owner` (`owner`), ADD KEY `origincomment` (`origincomment`);
 
+--
+-- Indices de la tabla `conversation`
+--
+ALTER TABLE `conversation`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `member` (`member`,`secondarymember`,`startdate`), ADD KEY `secondarymember` (`secondarymember`);
+ 
 --
 -- Indices de la tabla `document`
 --
 ALTER TABLE `document`
- ADD PRIMARY KEY (`id`), ADD KEY `user` (`user`);
+ ADD PRIMARY KEY (`id`), ADD KEY `owner` (`owner`);
 
 --
 -- Indices de la tabla `event`
@@ -312,7 +327,7 @@ ALTER TABLE `event`
 -- Indices de la tabla `friendship`
 --
 ALTER TABLE `friendship`
- ADD PRIMARY KEY (`user`,`friend`,`requestdate`), ADD KEY `friendship_2` (`friend`);
+ ADD PRIMARY KEY (`member`,`secondarymember`,`requestdate`), ADD KEY `friendship_2` (`secondarymember`);
 
 --
 -- Indices de la tabla `group`
@@ -324,13 +339,13 @@ ALTER TABLE `group`
 -- Indices de la tabla `guest`
 --
 ALTER TABLE `guest`
- ADD PRIMARY KEY (`event`,`guest`,`invitationdate`), ADD KEY `invitedby` (`invitedby`), ADD KEY `guest` (`guest`);
+ ADD PRIMARY KEY (`event`,`secondarymember`,`invitationdate`), ADD KEY `invitedby` (`member`), ADD KEY `secondarymember` (`secondarymember`);
 
 --
 -- Indices de la tabla `message`
 --
 ALTER TABLE `message`
- ADD PRIMARY KEY (`sourceuser`,`destinationuser`,`senddate`,`sendhour`), ADD KEY `message2` (`destinationuser`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `conversation` (`conversation`,`owner`,`senddate`,`sendhour`);
 
 --
 -- Indices de la tabla `publication`
@@ -354,7 +369,7 @@ ALTER TABLE `user`
 -- Indices de la tabla `usergroup`
 --
 ALTER TABLE `usergroup`
- ADD PRIMARY KEY (`groupid`,`guest`,`invitationdate`), ADD KEY `invitedby` (`invitedby`), ADD KEY `guest_group` (`guest`);
+ ADD PRIMARY KEY (`groupid`,`secondarymember`,`invitationdate`), ADD KEY `member` (`member`), ADD KEY `guest_group` (`secondarymember`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -364,6 +379,11 @@ ALTER TABLE `usergroup`
 -- AUTO_INCREMENT de la tabla `comment`
 --
 ALTER TABLE `comment`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `conversation`
+--
+ALTER TABLE `conversation`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `document`
@@ -379,6 +399,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `group`
 --
 ALTER TABLE `group`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `message`
+--
+ALTER TABLE `message`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `publication`
@@ -400,20 +425,27 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `comment`
 ADD CONSTRAINT `origincom` FOREIGN KEY (`origincomment`) REFERENCES `comment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `publi_comment` FOREIGN KEY (`publication`) REFERENCES `publication` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `user_comment` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `user_comment` FOREIGN KEY (`owner`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `conversation`
+--
+ALTER TABLE `conversation`
+ADD CONSTRAINT `conversation_ibfk_2` FOREIGN KEY (`secondarymember`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `conversation_ibfk_1` FOREIGN KEY (`member`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `document`
 --
 ALTER TABLE `document`
-ADD CONSTRAINT `doc_user` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `doc_user` FOREIGN KEY (`owner`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `friendship`
 --
 ALTER TABLE `friendship`
-ADD CONSTRAINT `friendship_1` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `friendship_2` FOREIGN KEY (`friend`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `friendship_1` FOREIGN KEY (`member`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `friendship_2` FOREIGN KEY (`secondarymember`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `group`
@@ -425,16 +457,15 @@ ADD CONSTRAINT `owner` FOREIGN KEY (`owner`) REFERENCES `user` (`id`) ON DELETE 
 -- Filtros para la tabla `guest`
 --
 ALTER TABLE `guest`
-ADD CONSTRAINT `invitedby` FOREIGN KEY (`invitedby`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `invitedby` FOREIGN KEY (`member`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `event` FOREIGN KEY (`event`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `guest` FOREIGN KEY (`guest`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `guest` FOREIGN KEY (`secondarymember`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `message`
 --
 ALTER TABLE `message`
-ADD CONSTRAINT `message1` FOREIGN KEY (`sourceuser`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `message2` FOREIGN KEY (`destinationuser`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`conversation`) REFERENCES `conversation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `publication`
@@ -454,8 +485,8 @@ ADD CONSTRAINT `doc_publi` FOREIGN KEY (`document`) REFERENCES `document` (`id`)
 --
 ALTER TABLE `usergroup`
 ADD CONSTRAINT `group_user` FOREIGN KEY (`groupid`) REFERENCES `group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `guest_group` FOREIGN KEY (`guest`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `invitedy_group` FOREIGN KEY (`invitedby`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `guest_group` FOREIGN KEY (`secondarymember`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `invitedy_group` FOREIGN KEY (`member`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
