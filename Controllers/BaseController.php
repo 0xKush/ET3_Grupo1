@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__."/../core/ViewManager.php");
 require_once(__DIR__."/../core/I18n.php");
-require_once(__DIR__."/../Serives/Permissions.php");
+require_once(__DIR__."/../Services/Permissions.php");
 require_once(__DIR__."/../Models/User.php");
 
 class BaseController {
