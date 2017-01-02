@@ -17,7 +17,7 @@ class Permissions {
     public function isPublic($id, $entity)
     {
         $table_name = htmlentities(trim($entity));
-        $query = "SELECT count(id) FROM " . $tablename  . " where id=? and private=0";
+        $query = "SELECT count(id) FROM " . $table_name . " where id=? and private=0";
         $sql = $this->db->prepare($query);
         $sql->execute(array($id));
 
@@ -37,7 +37,7 @@ class Permissions {
     public function isMember($id, $entity)
     {
         $table_name = htmlentities(trim($entity));
-        $query = "SELECT count(id) FROM " . $tablename  . " where member=? or secondarymember=?";
+        $query = "SELECT count(id) FROM " . $table_name . " where member=? or secondarymember=?";
         $sql = $this->db->prepare($query);
         $sql->execute(array($id, $id));
 
@@ -56,7 +56,7 @@ class Permissions {
     public function isOwner($id, $entity)
     {
         $table_name = htmlentities(trim($entity));
-        $query = "SELECT count(id) FROM " . $tablename  . " where id=? and owner=1";
+        $query = "SELECT count(id) FROM " . $table_name . " where id=? and owner=1";
         $sql = $this->db->prepare($query);
         $sql->execute(array($id));
 
