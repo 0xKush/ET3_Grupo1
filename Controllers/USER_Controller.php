@@ -103,7 +103,7 @@ class USER_Controller extends BaseController {
             $user->setPasswd($_POST["passwd"]);
             try {
                 if(!$this->userModel->userExists($_POST["user"]) && !empty($_POST["user"])){
-                    if (!$this->userModel->emailExists($_POST["email"] && !empty($_POST["email"]))){
+                    if (!$this->userModel->emailExists($_POST["email"]) && !empty($_POST["email"])){
                         $user->checkIsValidForCreate();
                         $this->userModel->insert($user);
                         $this->view->setFlash(sprintf(i18n("User \"%s\" successfully added."),$user->getUser()));
