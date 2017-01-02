@@ -20,19 +20,25 @@ class USER_Controller extends BaseController {
     public function login()
     {
         if (isset($_POST["user"])){
-            if ($this->userMapper->isValidUser($_POST["user"], $_POST["password"])) {
+            if ($this->userModel->isValidUser($_POST["user"], $_POST["password"])) {
                 $user = $this->userModel->show_by_username($_POST["user"]);
                 $_SESSION["currentuser"] = $user->getUser();
                 $_SESSION["currentuserid"] = $user->getID();
                 $_SESSION["currentusertype"] = $user->getType();
-                $this->view->redirect("user", "login");
+                $this->view->redirect("user", "home");
             }else{
                 $errors = array();
                 $errors["general"] = i18n("User is not valid");
                 $this->view->setVariable("errors", $errors);
             }
         }
+        $this->view->setLayout("login");
         $this->view->render("user", "USER_LOGIN_Vista");
+    }
+
+    public function home(){
+    	$this->view->setVariable("title","Home");
+    	$this->view->render("user","USER_HOME_Vista");
     }
 
     public function showall()

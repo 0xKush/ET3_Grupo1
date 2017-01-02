@@ -21,7 +21,7 @@ class I18n {
   }
   
   public function setLanguage($language) {
-    include(__DIR__."/../view/messages/messages_$language.php");
+    include(__DIR__."/../Views/messages/messages_$language.php");
     $this->messages = $i18n_messages;
     $_SESSION[self::CURRENT_LANGUAGE_SESSION_VAR] = $language;
   }
