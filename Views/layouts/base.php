@@ -13,6 +13,11 @@ $currentuser = $view->getVariable("currentusername");
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 
+	<!--FAVICON-->
+    <link rel="icon"
+          type="image/ico"
+          href="media/images/favicon.ico">
+
 	<?= $view->getFragment("css") ?>
 	<?= $view->getFragment("javascript") ?>
 	
