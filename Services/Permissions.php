@@ -34,12 +34,12 @@ class Permissions {
      * Conversation
      * Any
      */
-    public function isMember($id, $entity)
+    public function isMember($userid, $relationship, $entity)
     {
         $table_name = htmlentities(trim($entity));
-        $query = "SELECT count(id) FROM " . $table_name . " where member=? or secondarymember=?";
+        $query = "SELECT count(id) FROM " . $table_name . " where id=? and (member=? or secondarymember=?)";
         $sql = $this->db->prepare($query);
-        $sql->execute(array($id, $id));
+        $sql->execute(array($relationship, $userid, $userid));
 
         if ($sql->fetchColumn() > 0) {
             return true;
@@ -53,12 +53,12 @@ class Permissions {
      * Wall
      * Any
      */
-    public function isOwner($id, $entity)
+    public function isOwner($userid, $entityid, $entity)
     {
         $table_name = htmlentities(trim($entity));
-        $query = "SELECT count(id) FROM " . $table_name . " where id=? and owner=1";
+        $query = "SELECT count(id) FROM " . $table_name . " where id=? and owner=?";
         $sql = $this->db->prepare($query);
-        $sql->execute(array($id));
+        $sql->execute(array($entityid, $userid));
 
         if ($sql->fetchColumn() > 0) {
             return true;
