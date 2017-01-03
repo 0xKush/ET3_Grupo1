@@ -2,9 +2,9 @@
 
 class PDOConnection {
     private static $dbhost = "127.0.0.1";
-    private static $dbname = "rede_social";
-    private static $dbuser = "rede_social";
-    private static $dbpass = "rede_social";
+    private static $dbname = "ET3Grupo1";
+    private static $dbuser = "ET3Grupo1";
+    private static $dbpass = "ET3Grupo1";
     private static $db_singleton = null;
   
     public static function getInstance() {

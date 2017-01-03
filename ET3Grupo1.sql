@@ -23,7 +23,7 @@ DROP DATABASE IF EXISTS `ET3Grupo1`;
 CREATE DATABASE IF NOT EXISTS `ET3Grupo1` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 USE `ET3Grupo1`;
 
-GRANT ALL PRIVILEGES ON `ET3Grupo1`.* TO 'ET3Grupo1'@'%' IDENTIFIED BY 'ET3Grupo1';
+GRANT ALL PRIVILEGES ON `ET3Grupo1`.* TO 'ET3Grupo1'@'localhost' IDENTIFIED BY 'ET3Grupo1';
 
 -- --------------------------------------------------------
 
