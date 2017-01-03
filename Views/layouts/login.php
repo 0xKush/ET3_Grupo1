@@ -12,6 +12,7 @@ $currentuser = $view->getVariable("currentusername");
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
 	<link rel="stylesheet" href="css/login/login.css" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
 
 	<!--FAVICON-->
     <link rel="icon"
@@ -22,7 +23,7 @@ $currentuser = $view->getVariable("currentusername");
 	<?= $view->getFragment("javascript") ?>
 	
     </head>
-    <body background="media/images/background.jpg">
+    <body>
 
 	<main>
 	    <div id="flash">

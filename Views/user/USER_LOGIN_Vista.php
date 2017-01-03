@@ -1,10 +1,13 @@
 <div class="container">
-
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				
+		<div style="margin-bottom: 10px; text-shadow: 3px 3px 3px #aaa;" class="row">
+			<div class="col-md-8 col-md-offset-2 text-center">
+				<font face="Lobster" color="white" size="30">
+					Welcome to Caralibro!
+				</font>
 			</div>
 		</div>
+
+		
     	<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-login">
@@ -24,10 +27,10 @@
 							<div class="col-lg-12">
 								<form id="login-form" action="index.php?controller=user&action=login" method="post" role="form" style="display: block;">
 									<div class="form-group">
-										<input type="text" name="user" id="user" tabindex="1" class="form-control" placeholder="Username" value="">
+										<input type="text" name="user" id="user" tabindex="1" required class="form-control" placeholder="Username" value="">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										<input type="password" name="password" id="password" tabindex="2" required class="form-control" placeholder="Password">
 									</div>
 									<div class="form-group">
 										<div class="row">
@@ -37,18 +40,18 @@
 										</div>
 									</div>
 								</form>
-								<form id="register-form" action="index.php?controller=user&action=register" method="post" role="form" style="display: none;">
+								<form id="register-form" action="index.php?controller=user&action=add" method="post" role="form" style="display: none;">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+										<input required type="text" name="user" id="user" tabindex="1" class="form-control" placeholder="Username" value="">
 									</div>
 									<div class="form-group">
-										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+										<input required type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										<input required type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
 									</div>
 									<div class="form-group">
-										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+										<input required type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
 									</div>
 									<div class="form-group">
 										<div class="row">
@@ -61,6 +64,15 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="pull-right" style="padding-right: 10px">
+					<?php include '/../../Views/layouts/language_select_element.php'; ?>
 				</div>
 			</div>
 		</div>

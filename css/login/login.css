@@ -1,6 +1,11 @@
+
 body {
     padding-top: 90px;
-    background-color: #cccccc;
+    background: url(../../media/images/background.jpg) no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
 }
 .panel-login {
 	border-color: #ccc;
@@ -98,3 +103,6 @@ body {
 	background-color: #1CA347;
 	border-color: #1CA347;
 }
+
+
+
