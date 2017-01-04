@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `destination` int(11) NOT NULL,
   `type` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `owner` int(11) NOT NULL,
-  `date` date NOT NULL,
+  `creationdate` date NOT NULL,
   `hour` time NOT NULL,
   `description` text COLLATE utf8_spanish_ci NOT NULL,
   `status` tinyint(1) NOT NULL
