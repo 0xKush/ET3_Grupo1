@@ -37,9 +37,9 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `publication` int(11) NOT NULL,
   `owner` int(11) NOT NULL,
   `origincomment` int(11) DEFAULT NULL,
-  `date` date NOT NULL,
+  `creationdate` date NOT NULL,
   `hour` time NOT NULL,
-  `text` text COLLATE utf8_spanish_ci NOT NULL,
+  `content` text COLLATE utf8_spanish_ci NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
