@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `friendship` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `group`
+-- Estructura de tabla para la tabla `groupp`
 --
 
 DROP TABLE IF EXISTS `groupp`;
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `groupp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- RELACIONES PARA LA TABLA `group`:
+-- RELACIONES PARA LA TABLA `groupp`:
 --   `owner`
 --       `user` -> `id`
 --
@@ -330,9 +330,9 @@ ALTER TABLE `friendship`
  ADD PRIMARY KEY (`member`,`secondarymember`,`requestdate`), ADD KEY `friendship_2` (`secondarymember`);
 
 --
--- Indices de la tabla `group`
+-- Indices de la tabla `groupp`
 --
-ALTER TABLE `group`
+ALTER TABLE `groupp`
  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`), ADD KEY `owner` (`owner`);
 
 --
@@ -351,7 +351,7 @@ ALTER TABLE `message`
 -- Indices de la tabla `publication`
 --
 ALTER TABLE `publication`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `destintion` (`destination`,`type`,`owner`,`date`,`hour`), ADD KEY `owner` (`owner`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `destintion` (`destination`,`type`,`owner`,`creationdate`,`hour`), ADD KEY `owner` (`owner`);
 
 --
 -- Indices de la tabla `publidoc`
@@ -398,7 +398,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `group`
 --
-ALTER TABLE `group`
+ALTER TABLE `groupp`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `message`
@@ -448,9 +448,9 @@ ADD CONSTRAINT `friendship_1` FOREIGN KEY (`member`) REFERENCES `user` (`id`) ON
 ADD CONSTRAINT `friendship_2` FOREIGN KEY (`secondarymember`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `group`
+-- Filtros para la tabla `groupp`
 --
-ALTER TABLE `group`
+ALTER TABLE `groupp`
 ADD CONSTRAINT `owner` FOREIGN KEY (`owner`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -484,7 +484,7 @@ ADD CONSTRAINT `doc_publi` FOREIGN KEY (`document`) REFERENCES `document` (`id`)
 -- Filtros para la tabla `usergroup`
 --
 ALTER TABLE `usergroup`
-ADD CONSTRAINT `group_user` FOREIGN KEY (`groupid`) REFERENCES `group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `group_user` FOREIGN KEY (`groupid`) REFERENCES `groupp` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `guest_group` FOREIGN KEY (`secondarymember`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `invitedy_group` FOREIGN KEY (`member`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
