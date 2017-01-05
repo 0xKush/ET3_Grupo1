@@ -22,7 +22,7 @@ class USER_Model {
         foreach ($users_db as $user) {
             array_push($users, new User($user["id"], $user["user"], $user["name"], $user["surname"], $user["email"],
                                         $user["phone"], $user["birthday"], $user["address"], $user["status"],
-                                        $user["photo"], $user["delete_date"],$user["type"], $user["private"]));
+                                        $user["photo"], $user["type"], $user["private"]));
         }
 
         return $users;
@@ -37,7 +37,7 @@ class USER_Model {
         if($user != NULL) {
             return new User($user["id"], $user["user"], $user["name"], $user["surname"], $user["email"],
                                         $user["phone"], $user["birthday"], $user["address"], $user["status"],
-                                        $user["photo"], $user["delete_date"],$user["type"], $user["private"]);
+                                        $user["photo"], $user["type"], $user["private"]);
         } else {
             return NULL;
         }
@@ -52,7 +52,7 @@ class USER_Model {
         if($user != NULL) {
             return new User($user["id"], $user["user"], $user["name"], $user["surname"], $user["email"],
                                         $user["phone"], $user["birthday"], $user["address"], $user["status"],
-                                        $user["photo"], $user["delete_date"],$user["type"], $user["private"]);
+                                        $user["photo"], $user["type"], $user["private"]);
         } else {
             return NULL;
         }
