@@ -40,7 +40,7 @@ class USER_Controller extends BaseController {
     }
 
     public function home(){
-    	$this->view->redirect("publication", "showall","id=".$this->currentuser->getID());
+    	$this->view->redirect("publication", "showall","id=".$this->currentUser->getID());
     }
 
     public function showall()
