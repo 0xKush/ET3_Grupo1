@@ -31,7 +31,7 @@ $userid = $view->getVariable("currentuserid");
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only"><?= i18n("Toggle navigation") ?></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -44,14 +44,14 @@ $userid = $view->getVariable("currentuserid");
       <ul class="nav navbar-nav">
         <ul class="nav navbar-nav navbar-left">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="media/profileImages/test.jpg" alt="" style="height: 25px;;">  <?=$_SESSION['currentuser'] ?><span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="media/profileImages/test.jpg" alt="" style="height: 25px;;">  <?=$currentuser ?><span class="caret"></span></a>
           <ul class="dropdown-menu">
             
 
-              <li><a href="index.php?controller=user&action=showUserFriends">Amigos   </a></li>
-              <li><a href="index.php?controller=user&action=showUserGroups">Grupos   </a></li>
-              <li><a href="index.php?controller=user&action=showUserEvents">Eventos   </a></li>
-              <li><a href="index.php?controller=user&action=showUserConversations">Conversas   </a></li>
+              <li><a href="index.php?controller=user&action=showUserFriends"><?= i18n("Friends") ?>  </a></li>
+              <li><a href="index.php?controller=user&action=showUserGroups"><?= i18n("Groups") ?></a></li>
+              <li><a href="index.php?controller=user&action=showUserEvents"><?= i18n("Events") ?></a></li>
+              <li><a href="index.php?controller=user&action=showUserConversations"><?= i18n("Conversation") ?>  </a></li>
 
               <li role="separator" class="divider"></li>
               <li><a href="index.php?controller=user&action=showcurrent&id=<?= $_SESSION['currentuserid']?>">Ver perfil</a></li>
@@ -80,7 +80,7 @@ $userid = $view->getVariable("currentuserid");
         <div class="form-group">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
-        <?php include '/../../Views/layouts/language_select_element.php'; ?>
+        <?php include(__DIR__."/../layouts/language_select_element.php"); ?>
       </form>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
