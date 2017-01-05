@@ -1,3 +1,10 @@
+<?php
+require_once(__DIR__."/../../core/ViewManager.php");
+$view = ViewManager::getInstance();
+$view->setVariable("title", "Login");
+$errors = $view->getVariable("errors");
+?>
+
 <div class="container">
 		<div style="margin-bottom: 10px; text-shadow: 3px 3px 3px #aaa;" class="row">
 			<div class="col-md-8 col-md-offset-2 text-center">
@@ -72,7 +79,7 @@
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="pull-right" style="padding-right: 10px">
-					<?php include '/../../Views/layouts/language_select_element.php'; ?>
+				    <?php include(__DIR__."/../layouts/language_select_element.php"); ?>
 				</div>
 			</div>
 		</div>

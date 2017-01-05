@@ -3,6 +3,7 @@
 require_once(__DIR__ . "/../../core/ViewManager.php");
 $view        = ViewManager::getInstance();
 $currentuser = $view->getVariable("currentusername");
+$userid = $view->getVariable("currentuserid");
 
 ?><!DOCTYPE html>
 <html>
@@ -81,7 +82,6 @@ $currentuser = $view->getVariable("currentusername");
         <button type="submit" class="btn btn-default">Submit</button>
         <?php include '/../../Views/layouts/language_select_element.php'; ?>
       </form>
-      
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

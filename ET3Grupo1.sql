@@ -120,8 +120,6 @@ DROP TABLE IF EXISTS `friendship`;
 CREATE TABLE IF NOT EXISTS `friendship` (
   `member` int(11) NOT NULL,
   `secondarymember` int(11) NOT NULL,
-  `requestdate` date NOT NULL,
-  `startdate` date DEFAULT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -255,7 +253,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
 `id` int(11) NOT NULL,
   `name` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `surnames` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `surname` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `phone` int(9) NOT NULL,
   `user` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -277,11 +275,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 DROP TABLE IF EXISTS `usergroup`;
 CREATE TABLE IF NOT EXISTS `usergroup` (
   `groupid` int(11) NOT NULL,
-  `member` int(11) NOT NULL,
-  `invitationdate` date NOT NULL,
-  `accept` tinyint(1) NOT NULL,
   `secondarymember` int(11) NOT NULL,
-  `answerdate` date NOT NULL,
+  `member` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -327,7 +322,7 @@ ALTER TABLE `event`
 -- Indices de la tabla `friendship`
 --
 ALTER TABLE `friendship`
- ADD PRIMARY KEY (`member`,`secondarymember`,`requestdate`), ADD KEY `friendship_2` (`secondarymember`);
+ ADD PRIMARY KEY (`member`,`secondarymember`), ADD KEY `friendship_2` (`secondarymember`);
 
 --
 -- Indices de la tabla `groupp`
@@ -369,7 +364,7 @@ ALTER TABLE `user`
 -- Indices de la tabla `usergroup`
 --
 ALTER TABLE `usergroup`
- ADD PRIMARY KEY (`groupid`,`secondarymember`,`invitationdate`), ADD KEY `member` (`member`), ADD KEY `guest_group` (`secondarymember`);
+ ADD PRIMARY KEY (`groupid`,`secondarymember`), ADD KEY `member` (`member`), ADD KEY `guest_group` (`secondarymember`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -396,7 +391,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `event`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `group`
+-- AUTO_INCREMENT de la tabla `groupp`
 --
 ALTER TABLE `groupp`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
