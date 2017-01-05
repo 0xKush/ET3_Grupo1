@@ -91,14 +91,14 @@ class USER_Model {
 
     public function register(User $user)
     {
-        $sql = $this->db->prepare("INSERT INTO user(user,email,status,password,type,private) values (?,?,?,?,?,?)");
+        $sql = $this->db->prepare("INSERT INTO user(user, email, status, password, type, private) values (?,?,?,?,?,?)");
         $sql->execute(array($user->getUser(), $user->getEmail(), $user->getStatus(), $user->getPassword(), $user->getType(), $user->getPrivate()));
     }
 
     public function userExists($user)
     {
         $sql = $this->db->prepare("SELECT count(user) FROM user where user=?");
-        $sql->execute(array($username));
+        $sql->execute(array($user));
 
         if ($sql->fetchColumn() > 0) {
             return true;
