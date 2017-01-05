@@ -162,12 +162,10 @@ CREATE TABLE IF NOT EXISTS `groupp` (
 
 DROP TABLE IF EXISTS `guest`;
 CREATE TABLE IF NOT EXISTS `guest` (
+  `id` int(11) NOT NULL,
   `event` int(11) NOT NULL,
   `secondarymember` int(11) NOT NULL,
-  `invitationdate` date NOT NULL,
-  `assist` tinyint(1) DEFAULT NULL,
   `member` int(11) NOT NULL,
-  `answerdate` date DEFAULT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -274,6 +272,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 DROP TABLE IF EXISTS `usergroup`;
 CREATE TABLE IF NOT EXISTS `usergroup` (
+  `id` int(11) NOT NULL,
   `groupid` int(11) NOT NULL,
   `secondarymember` int(11) NOT NULL,
   `member` int(11) NOT NULL,
@@ -334,7 +333,7 @@ ALTER TABLE `groupp`
 -- Indices de la tabla `guest`
 --
 ALTER TABLE `guest`
- ADD PRIMARY KEY (`event`,`secondarymember`,`invitationdate`), ADD KEY `invitedby` (`member`), ADD KEY `secondarymember` (`secondarymember`);
+ ADD PRIMARY KEY (`id`), ADD KEY `invitedby` (`member`), ADD KEY `secondarymember` (`secondarymember`);
 
 --
 -- Indices de la tabla `message`
@@ -364,7 +363,7 @@ ALTER TABLE `user`
 -- Indices de la tabla `usergroup`
 --
 ALTER TABLE `usergroup`
- ADD PRIMARY KEY (`groupid`,`secondarymember`), ADD KEY `member` (`member`), ADD KEY `guest_group` (`secondarymember`);
+ ADD PRIMARY KEY (`id`), ADD KEY `member` (`member`), ADD KEY `guest_group` (`secondarymember`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -396,6 +395,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `groupp`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `guest`
+--
+ALTER TABLE `guest`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `message`
 --
 ALTER TABLE `message`
@@ -409,6 +413,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `usergroup`
+--
+ALTER TABLE `usergroup`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Restricciones para tablas volcadas

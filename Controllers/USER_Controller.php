@@ -24,7 +24,7 @@ class USER_Controller extends BaseController {
                 $user = $this->userModel->show_by_username($_POST["user"]);
                 $_SESSION["currentuser"] = $user->getUser();
                 $_SESSION["currentuserid"] = $user->getID();
-                $this->view->redirect("user", "showcurrent","id=".$_SESSION['currentuserid']);
+                $this->view->redirect("publications", "showall","id=".$this->currentuser->getID());
             }else{
                 $errors = array();
                 $errors["general"] = i18n("User is not valid");
@@ -36,7 +36,7 @@ class USER_Controller extends BaseController {
     }
 
     public function home(){
-    	$this->view->redirect("user", "showcurrent","id=".$_SESSION['currentuserid']);
+    	$this->view->redirect("publications", "showall","id=".$this->currentuser->getID());
     }
 
     public function showall()
@@ -98,7 +98,7 @@ class USER_Controller extends BaseController {
             else{
                 $user->setPrivate(FALSE);
             }
-            $user->setPasswd($_POST["passwd"]);
+            $user->setPassword($_POST["password"]);
             try {
                 if(!$this->userModel->userExists($_POST["user"]) && !empty($_POST["user"])){
                     if (!$this->userModel->emailExists($_POST["email"]) && !empty($_POST["email"])){
@@ -158,7 +158,7 @@ class USER_Controller extends BaseController {
             else{
                 $user->setPrivate(FALSE);
             }
-            $user->setPasswd($_POST["passwd"]);
+            $user->setPassword($_POST["password"]);
 
             try {
                 if ($user->getUser() == $_POST["user"] && $user->getEmail() == $_POST["email"]) {
@@ -255,35 +255,38 @@ class USER_Controller extends BaseController {
     {
         $user = new User();
         
-        if (isset($_POST["submit"])) {            
-            $user->setUser($_POST["user"]);;
-            $user->setEmail($_POST["email"]);
-            $user->setPasswd($_POST["passwd"]);
+        $user->setUser($_POST["user"]);;
+        $user->setEmail($_POST["email"]);
+        $user->setPassword($_POST["password"]);
             
-            try {
-                if(!$this->userModel->userExists($_POST["user"]) && !empty($_POST["user"])){
-                    if (!$this->userModel->emailExists($_POST["email"]) && !empty($_POST["email"])){
-                        $user->checkIsValidForCreate();
-                        $this->userModel->register($user);
-                        $this->view->setFlash(sprintf(i18n("User \"%s\" successfully registered."),$user->getUser()));
-                        $this->view->redirect("user", "login");
-                    } else {
-                        $errors = array();
-                        $errors["general"] = i18n("email already exists");
-                        $this->view->setVariable("errors", $errors);
-                    }
+        try {
+            if(!$this->userModel->userExists($_POST["user"]) && !empty($_POST["user"])){
+                if (!$this->userModel->emailExists($_POST["email"]) && !empty($_POST["email"])){
+                    $user->checkIsValidForCreate();
+                    $this->userModel->register($user);
+                    $this->view->setFlash(sprintf(i18n("User \"%s\" successfully registered."), $user->getUser()));
+                    $this->view->redirect("user", "login");
                 } else {
                     $errors = array();
-                    $errors["general"] = i18n("Username already exists");
+                    $errors["general"] = i18n("email already exists");
                     $this->view->setVariable("errors", $errors);
                 }
-            }catch(ValidationException $ex) {
-                $errors = $ex->getErrors();
+            } else {
+                $errors = array();
+                $errors["general"] = i18n("Username already exists");
                 $this->view->setVariable("errors", $errors);
             }
+        }catch(ValidationException $ex) {
+            $errors = $ex->getErrors();
+            $this->view->setVariable("errors", $errors);
         }
-        
+
         $this->view->setVariable("user", $user);
-        $this->view->render("user", "USER_LOGIN_Vista");
+        $this->view->redirect("user", "login");
+    }
+
+    public function admin()
+    {
+        $this->view->render("user", "USER_ADMIN_Vista");
     }
 }
