@@ -31,8 +31,8 @@ class User {
 
 
     public function __construct($id=NULL, $user=NULL, $name=NULL, $surname=NULL, $email=NULL, $phone=NULL,
-                                $birthday=NULL, $address=NULL, $status=NULL, $photo=NULL, $type=NULL,
-                                $private=NULL, $password=NULL)
+                                $birthday=NULL, $address=NULL, $status=1, $photo=NULL, $type=0,
+                                $private=0, $password=NULL)
     {
      $this->id = $id;
      $this->user = $user;
