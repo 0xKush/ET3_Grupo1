@@ -251,4 +251,39 @@ class USER_Controller extends BaseController {
         $this->view->redirect("user", "login");
     }
 
+    public function register()
+    {
+        $user = new User();
+        
+        if (isset($_POST["submit"])) {            
+            $user->setUser($_POST["user"]);;
+            $user->setEmail($_POST["email"]);
+            $user->setPasswd($_POST["passwd"]);
+            
+            try {
+                if(!$this->userModel->userExists($_POST["user"]) && !empty($_POST["user"])){
+                    if (!$this->userModel->emailExists($_POST["email"]) && !empty($_POST["email"])){
+                        $user->checkIsValidForCreate();
+                        $this->userModel->register($user);
+                        $this->view->setFlash(sprintf(i18n("User \"%s\" successfully registered."),$user->getUser()));
+                        $this->view->redirect("user", "login");
+                    } else {
+                        $errors = array();
+                        $errors["general"] = i18n("email already exists");
+                        $this->view->setVariable("errors", $errors);
+                    }
+                } else {
+                    $errors = array();
+                    $errors["general"] = i18n("Username already exists");
+                    $this->view->setVariable("errors", $errors);
+                }
+            }catch(ValidationException $ex) {
+                $errors = $ex->getErrors();
+                $this->view->setVariable("errors", $errors);
+            }
+        }
+        
+        $this->view->setVariable("user", $user);
+        $this->view->render("user", "USER_LOGIN_Vista");
+    }
 }
