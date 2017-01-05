@@ -41,6 +41,24 @@ $currentuser = $view->getVariable("currentusername");
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav navbar-left">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="media/profileImages/test.jpg" alt="" style="height: 25px;;">  <?=$_SESSION['currentuser'] ?><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+
+              <li><a href="index.php?controller=user&action=showUserFriends">Amigos   </a></li>
+              <li><a href="index.php?controller=user&action=showUserGroups">Grupos   </a></li>
+              <li><a href="index.php?controller=user&action=showUserEvents">Eventos   </a></li>
+              <li><a href="index.php?controller=user&action=showUserConversations">Conversas   </a></li>
+
+              <li role="separator" class="divider"></li>
+              <li><a href="index.php?controller=user&action=showcurrent&id=<?= $_SESSION['currentuserid']?>">Ver perfil</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="index.php?controller=user&action=logout"><i class="fa fa-exit"></i>Sair</a></li>
+          </ul>
+        </li>
+      </ul>
         <li class="active"><a href="#">Amigos<span class="sr-only">(current)</span></a></li>
         <li><a href="index.php?controller=group&action=showall">Grupos</a></li>
         <li><a href="index.php?controller=event&action=showall">Eventos</a></li>
@@ -57,24 +75,13 @@ $currentuser = $view->getVariable("currentusername");
           </ul>
         </li>
       </ul>
-      <form class="navbar-form navbar-left">
+      <ul class="navbar-form navbar-right">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
+        <?php include '/../../Views/layouts/language_select_element.php'; ?>
       </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="media/profileImages/test.jpg" alt="" style="height: 25px;width: 25px;">  <?=$_SESSION['currentuser'] ?><span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="index.php?controller=user&action=showcurrent&id=<?= $_SESSION['currentuserid']?>">Ver perfil</a></li>
-            <li><a href="index.php?controller=">Mensaxes</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="index.php?controller=user&action=logout"><i class="fa fa-exit">Sair</i></a></li>
-          </ul>
-        </li>
-      </ul>
+      
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
