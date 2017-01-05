@@ -139,8 +139,8 @@ CREATE TABLE IF NOT EXISTS `friendship` (
 -- Estructura de tabla para la tabla `group`
 --
 
-DROP TABLE IF EXISTS `group`;
-CREATE TABLE IF NOT EXISTS `group` (
+DROP TABLE IF EXISTS `groupp`;
+CREATE TABLE IF NOT EXISTS `groupp` (
 `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `description` text COLLATE utf8_spanish_ci NOT NULL,

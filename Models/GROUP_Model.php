@@ -13,7 +13,7 @@ class GROUP_Model
     
     public function showall()
     {
-        $sql = $this->db->prepare("SELECT * FROM group ORDER BY name");
+        $sql = $this->db->prepare("SELECT * FROM groupp ORDER BY name");
         $sql->execute();
         $groups_db = $sql->fetchAll(PDO::FETCH_ASSOC);
         
@@ -28,7 +28,7 @@ class GROUP_Model
     
     public function showcurrent($groupID)
     {
-        $sql = $this->db->prepare("SELECT * FROM group WHERE id=?");
+        $sql = $this->db->prepare("SELECT * FROM groupp WHERE id=?");
         $sql->execute(array(
             $groupID
         ));
@@ -44,7 +44,7 @@ class GROUP_Model
     
     public function show_by_name($name)
     {
-        $sql = $this->db->prepare("SELECT * FROM group WHERE name=?");
+        $sql = $this->db->prepare("SELECT * FROM groupp WHERE name=?");
         $sql->execute(array(
             $name
         ));
@@ -59,7 +59,7 @@ class GROUP_Model
     
     public function add(Group $group)
     {
-        $sql = $this->db->prepare("INSERT INTO group(name,description,owner,type,creationdate,status) values (?,?,?,?,?,?,?,?,?,?,?,?)");
+        $sql = $this->db->prepare("INSERT INTO groupp(name,description,owner,type,creationdate,status) values (?,?,?,?,?,?,?,?,?,?,?,?)");
         $sql->execute(array(
             $group->getName(),
             $group->getDescription(),
@@ -72,7 +72,7 @@ class GROUP_Model
     
     public function edit(Group $group)
     {
-        $sql = $this->db->prepare("UPDATE group SET name=?, description=?, owner=?, type=?, creationdate=?,
+        $sql = $this->db->prepare("UPDATE groupp SET name=?, description=?, owner=?, type=?, creationdate=?,
     status=? where id=?");
         $sql->execute(array(
             $group->getName(),
@@ -89,7 +89,7 @@ class GROUP_Model
     
     public function delete(Group $group)
     {
-        $sql = $this->db->prepare("DELETE FROM group where id=?");
+        $sql = $this->db->prepare("DELETE FROM groupp where id=?");
         $sql->execute(array(
             $group->getID()
         ));
@@ -97,7 +97,7 @@ class GROUP_Model
     
     public function nameExists($name)
     {
-        $sql = $this->db->prepare("SELECT count(name) FROM group where name=?");
+        $sql = $this->db->prepare("SELECT count(name) FROM groupp where name=?");
         $sql->execute(array(
             $name
         ));
