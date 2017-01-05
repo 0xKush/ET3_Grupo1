@@ -275,11 +275,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 DROP TABLE IF EXISTS `usergroup`;
 CREATE TABLE IF NOT EXISTS `usergroup` (
   `groupid` int(11) NOT NULL,
-  `member` int(11) NOT NULL,
-  `invitationdate` date NOT NULL,
-  `accept` tinyint(1) NOT NULL,
   `secondarymember` int(11) NOT NULL,
-  `answerdate` date NOT NULL,
+  `member` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -367,7 +364,7 @@ ALTER TABLE `user`
 -- Indices de la tabla `usergroup`
 --
 ALTER TABLE `usergroup`
- ADD PRIMARY KEY (`groupid`,`secondarymember`,`invitationdate`), ADD KEY `member` (`member`), ADD KEY `guest_group` (`secondarymember`);
+ ADD PRIMARY KEY (`groupid`,`secondarymember`), ADD KEY `member` (`member`), ADD KEY `guest_group` (`secondarymember`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
