@@ -36,7 +36,7 @@ $userid = $view->getVariable("currentuserid");
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.php?controller=user&action=home">[Logo]</a>
+      <a class="navbar-brand" href="index.php?controller=user&action=home">[Caralibro!]</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,35 +46,21 @@ $userid = $view->getVariable("currentuserid");
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="media/profileImages/test.jpg" alt="" style="height: 25px;;">  <?=$currentuser ?><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            
-
-              <li><a href="index.php?controller=user&action=showUserFriends"><?= i18n("Friends") ?>  </a></li>
-              <li><a href="index.php?controller=user&action=showUserGroups"><?= i18n("Groups") ?></a></li>
-              <li><a href="index.php?controller=user&action=showUserEvents"><?= i18n("Events") ?></a></li>
-              <li><a href="index.php?controller=user&action=showUserConversations"><?= i18n("Conversation") ?>  </a></li>
+              <li><a href="index.php?controller=user&action=showUserFriends"><i class="fa fa-user fa-fw"></i>  <?= i18n("Friends") ?>  </a></li>
+              <li><a href="index.php?controller=user&action=showUserGroups"><i class="fa fa-group fa-fw"></i>  <?= i18n("Groups") ?></a></li>
+              <li><a href="index.php?controller=user&action=showUserEvents"><i class="fa fa-calendar fa-fw"></i>  <?= i18n("Events") ?></a></li>
+              <li><a href="index.php?controller=user&action=showUserConversations"><i class="fa fa-envelope fa-fw"></i>  <?= i18n("Conversation") ?>  </a></li>
 
               <li role="separator" class="divider"></li>
-              <li><a href="index.php?controller=user&action=showcurrent&id=<?= $currentuserid?>"><?= i18n("My Profile") ?></a></li>
+              <li><a href="index.php?controller=user&action=admin"><i class="fa fa-cog fa-fw"></i>  <?= i18n("Admin Zone") ?></a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="index.php?controller=user&action=logout"><i class="fa fa-exit"></i><?= i18n("Logout") ?></a></li>
+              <li><a href="index.php?controller=user&action=logout"><i class="fa fa-sign-out" style="color: blue;"></i>  <?= i18n("Logout") ?></a></li>
           </ul>
         </li>
+        <li><li><a href="index.php?controller=user&action=showcurrent&id=<?= $userid ?>"><?= i18n("My Profile") ?></a></li></li>
       </ul>
-        <li class="active"><a href="#">Amigos<span class="sr-only">(current)</span></a></li>
-        <li><a href="index.php?controller=group&action=showall">Grupos</a></li>
-        <li><a href="index.php?controller=event&action=showall">Eventos</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
+        <li><a href="index.php?controller=publication&action=showall"><?= i18n("Publications") ?></a></li>
+
       </ul>
       <ul class="navbar-form navbar-right">
         <div class="form-group">
