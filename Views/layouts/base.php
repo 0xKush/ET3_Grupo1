@@ -54,9 +54,9 @@ $userid = $view->getVariable("currentuserid");
               <li><a href="index.php?controller=user&action=showUserConversations"><?= i18n("Conversation") ?>  </a></li>
 
               <li role="separator" class="divider"></li>
-              <li><a href="index.php?controller=user&action=showcurrent&id=<?= $_SESSION['currentuserid']?>">Ver perfil</a></li>
+              <li><a href="index.php?controller=user&action=showcurrent&id=<?= $currentuserid?>"><?= i18n("My Profile") ?></a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="index.php?controller=user&action=logout"><i class="fa fa-exit"></i>Sair</a></li>
+              <li><a href="index.php?controller=user&action=logout"><i class="fa fa-exit"></i><?= i18n("Logout") ?></a></li>
           </ul>
         </li>
       </ul>
@@ -79,7 +79,7 @@ $userid = $view->getVariable("currentuserid");
       <ul class="navbar-form navbar-right">
         <div class="form-group">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default"><?= i18n("Search") ?></button>
         <?php include(__DIR__."/../layouts/language_select_element.php"); ?>
       </form>
     </div><!-- /.navbar-collapse -->
