@@ -3,6 +3,7 @@
 require_once(__DIR__ . "/../../core/ViewManager.php");
 $view        = ViewManager::getInstance();
 $currentuser = $view->getVariable("currentusername");
+$userid = $view->getVariable("currentuserid");
 
 ?><!DOCTYPE html>
 <html>
@@ -65,9 +66,9 @@ $currentuser = $view->getVariable("currentusername");
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="media/profileImages/test.jpg" alt="" style="height: 25px;width: 25px;">  <?=$_SESSION['currentuser'] ?><span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="media/profileImages/test.jpg" alt="" style="height: 25px;width: 25px;">  <?=$userid ?><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="index.php?controller=user&action=showcurrent&id=<?= $_SESSION['currentuserid']?>">Ver perfil</a></li>
+            <li><a href="index.php?controller=user&action=showcurrent&id=<?= $userid ?>">Ver perfil</a></li>
             <li><a href="index.php?controller=">Mensaxes</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
