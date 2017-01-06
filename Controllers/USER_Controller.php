@@ -19,6 +19,10 @@ class USER_Controller extends BaseController {
 
     public function login()
     {
+        if ($this->currentUser->getName()){
+            $this->view->redirect("publication", "showall","id=".$this->currentUser->getID());
+        }
+        
         if (isset($_POST["user"])){
             if ($this->userModel->isValidUser($_POST["user"], $_POST["password"])) {
                 $user = $this->userModel->show_by_username($_POST["user"]);
@@ -36,7 +40,7 @@ class USER_Controller extends BaseController {
     }
 
     public function home(){
-    	$this->view->redirect("publication", "showall","id=".$this->currentuser->getID());
+    	$this->view->redirect("publication", "showall","id=".$this->currentUser->getID());
     }
 
     public function showall()
