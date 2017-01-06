@@ -58,9 +58,9 @@ $userid = $view->getVariable("currentuserid");
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="media/profileImages/test.jpg" alt="" style="height: 25px;;">  <?=$currentuser ?><span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <li><a href="index.php?controller=user&action=showUserFriends"><i class="fa fa-user fa-fw"></i>  <?= i18n("Friends") ?>  <span class="badge pull-right">0</span></a></li>
-              <li><a href="index.php?controller=user&action=showUserGroups"><i class="fa fa-group fa-fw"></i>  <?= i18n("Groups") ?><span class="badge pull-right">0</span></a></li>
-              <li><a href="index.php?controller=user&action=showUserEvents"><i class="fa fa-calendar fa-fw"></i>  <?= i18n("Events") ?><span class="badge pull-right">0</span></a></li>
+              <li><a href="index.php?controller=friendship&action=showall"><i class="fa fa-user fa-fw"></i>  <?= i18n("Friends") ?>  <span class="badge pull-right">0</span></a></li>
+              <li><a href="index.php?controller=usergroup&action=showall"><i class="fa fa-group fa-fw"></i>  <?= i18n("Groups") ?><span class="badge pull-right">0</span></a></li>
+              <li><a href="index.php?controller=guest&action=showall"><i class="fa fa-calendar fa-fw"></i>  <?= i18n("Events") ?><span class="badge pull-right">0</span></a></li>
               <li><a href="index.php?controller=user&action=showUserConversations"><i class="fa fa-envelope fa-fw"></i>  <?= i18n("Conversation") ?>  <span class="badge pull-right">0</span></a></li>
 
               <li role="separator" class="divider"></li>
