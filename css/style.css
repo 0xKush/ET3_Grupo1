@@ -3,6 +3,8 @@ body{
 }
 
 nav{
+	height: 10px;
 	margin-left: 10px;
 	margin-right: 10px;
+	color: #d3f4c5;
 }
