@@ -8,11 +8,23 @@ $userid = $view->getVariable("currentuserid");
 ?><!DOCTYPE html>
 <html>
     <head>
-	<title><?= $view->getVariable("title", "no title") ?></title>
+	<title>Caralibro!</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
 	<link rel="stylesheet" href="css/style.css" type="text/css">
+
+   <!-- DataTables CSS -->
+    <link href="lib/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="lib/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- DataTables JavaScript -->
+    <script src="js/jquery.min.js"></script>
+    <script src="lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="lib/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="lib/datatables-responsive/dataTables.responsive.js"></script>
 
 	<!--FAVICON-->
     <link rel="icon"
@@ -46,10 +58,10 @@ $userid = $view->getVariable("currentuserid");
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="media/profileImages/test.jpg" alt="" style="height: 25px;;">  <?=$currentuser ?><span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <li><a href="index.php?controller=user&action=showUserFriends"><i class="fa fa-user fa-fw"></i>  <?= i18n("Friends") ?>  </a></li>
-              <li><a href="index.php?controller=user&action=showUserGroups"><i class="fa fa-group fa-fw"></i>  <?= i18n("Groups") ?></a></li>
-              <li><a href="index.php?controller=user&action=showUserEvents"><i class="fa fa-calendar fa-fw"></i>  <?= i18n("Events") ?></a></li>
-              <li><a href="index.php?controller=user&action=showUserConversations"><i class="fa fa-envelope fa-fw"></i>  <?= i18n("Conversation") ?>  </a></li>
+              <li><a href="index.php?controller=user&action=showUserFriends"><i class="fa fa-user fa-fw"></i>  <?= i18n("Friends") ?>  <span class="badge pull-right">0</span></a></li>
+              <li><a href="index.php?controller=user&action=showUserGroups"><i class="fa fa-group fa-fw"></i>  <?= i18n("Groups") ?><span class="badge pull-right">0</span></a></li>
+              <li><a href="index.php?controller=user&action=showUserEvents"><i class="fa fa-calendar fa-fw"></i>  <?= i18n("Events") ?><span class="badge pull-right">0</span></a></li>
+              <li><a href="index.php?controller=user&action=showUserConversations"><i class="fa fa-envelope fa-fw"></i>  <?= i18n("Conversation") ?>  <span class="badge pull-right">0</span></a></li>
 
               <li role="separator" class="divider"></li>
               <li><a href="index.php?controller=user&action=admin"><i class="fa fa-cog fa-fw"></i>  <?= i18n("Admin Zone") ?></a></li>
@@ -65,7 +77,7 @@ $userid = $view->getVariable("currentuserid");
       <ul class="navbar-form navbar-right">
         <div class="form-group">
         </div>
-        <button type="submit" class="btn btn-default"><?= i18n("Search") ?></button>
+        <a href="index.php?controller=user&action=search"><button type="submit" class="btn btn-primary"><?= i18n("Search") ?></button></a>
         <?php include(__DIR__."/../layouts/language_select_element.php"); ?>
       </form>
     </div><!-- /.navbar-collapse -->
@@ -94,7 +106,6 @@ $userid = $view->getVariable("currentuserid");
 	<!-- Bootstrap core JavaScript
 	     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="js/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     </body>

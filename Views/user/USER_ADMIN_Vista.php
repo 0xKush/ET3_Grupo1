@@ -20,13 +20,13 @@ $view = ViewManager::getInstance();
 
  		<div class="well">
  		<div class="row">
-				<a href="index.php?controller=group&action=manage"><button class="btn btn-primary"><?= i18n("Groups") ?></button></a>
+				<a href="index.php?controller=group&action=showall"><button class="btn btn-primary"><?= i18n("Groups") ?></button></a>
  		</div>
  		</div>
 
  		<div class="well">
  		<div class="row">
-		<a href="index.php?controller=event&action=manage"><button class="btn btn-primary"><?= i18n("Events") ?></button></a>
+		<a href="index.php?controller=event&action=showall"><button class="btn btn-primary"><?= i18n("Events") ?></button></a>
  		</div>
  		</div>
  		

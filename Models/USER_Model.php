@@ -13,7 +13,7 @@ class USER_Model {
 
     public function showall($status = 1)
     {
-        $sql = $this->db->prepare("SELECT * FROM user where status=? ORDER BY username");
+        $sql = $this->db->prepare("SELECT * FROM user where status=? ORDER BY user");
         $sql->execute(array($status));
         $users_db = $sql->fetchAll(PDO::FETCH_ASSOC);
 
