@@ -53,7 +53,7 @@ include (__DIR__.'/../../js/datatable/showscript'.$lang.'.js');
 
  								echo '<div class="row text-center">
 					 					<div class="col-xs-3">
-					 						<a href="index.php?controller=user&action=showcurrent&iduser='.
+					 						<a href="index.php?controller=user&action=showcurrent&id='.
 					 						$user->getID().'">
 					 							<button class="btn btn-info btn-xs">
 					 								<i class="fa fa-eye"></i>
@@ -61,7 +61,7 @@ include (__DIR__.'/../../js/datatable/showscript'.$lang.'.js');
 					 						</a>
 					 					</div>
 					 					<div class="col-xs-3">
-					 						<a href="index.php?controller=user&action=edit&userid='.
+					 						<a href="index.php?controller=user&action=edit&id='.
 					 						$user->getID().'">
 					 							<button class="btn btn-warning btn-xs">
 					 								<i class="fa fa-edit"></i>
@@ -69,7 +69,7 @@ include (__DIR__.'/../../js/datatable/showscript'.$lang.'.js');
 					 						</a>
 					 					</div>
 					 					<div class="col-xs-3">
-					 						<a href="index.php?controller=user&action=delete&userid='.
+					 						<a href="index.php?controller=user&action=delete&id='.
 					 						$user->getID().'">
 					 							<button class="btn btn-danger btn-xs">
 					 								<i class="fa fa-trash-o"></i>
