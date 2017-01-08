@@ -100,23 +100,17 @@ class EVENT_Model
         }
     }
     
-    
-    
-    
-    /*    public function show_by_name($name)
+    public function search($query)
     {
-    $sql = $this->db->prepare("SELECT * FROM group WHERE name=?");
-    $sql->execute(array(
-    $name
-    ));
-    $group = $sql->fetch(PDO::FETCH_ASSOC);
-    
-    if ($group != NULL) {
-    return new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["private"], $group["creationdate"], $group["status"]);
-    } else {
-    return NULL;
+        $search_query = "SELECT * FROM event WHERE " . $query;
+        $sql          = $this->db->prepare($search_query);
+        $sql->execute();
+        $events_db = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $events    = array();
+        foreach ($events_db as $event) {
+            array_push($events, new Event($event["id"], $event["creationdate"], $event["owner"], $event["startdate"], $event["enddate"], $event["starthour"], $event["endhour"], $event["description"], $event["status"], $event["name"], $event["private"]));
+        }
+        return $events;
     }
-    }*/
-    
     
 }

@@ -107,5 +107,18 @@ class GROUP_Model
         }
     }
     
+    public function search($query)
+    {
+        $search_query = "SELECT * FROM groupp WHERE " . $query;
+        $sql          = $this->db->prepare($search_query);
+        $sql->execute();
+        $groups_db = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $groups    = array();
+        foreach ($groups_db as $group) {
+            array_push($groups, new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["private"], $group["creationdate"], $group["status"]));
+        }
+        return $groups;
+    }
+    
     
 }
