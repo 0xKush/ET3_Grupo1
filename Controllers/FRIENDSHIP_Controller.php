@@ -51,7 +51,7 @@ class FRIENDSHIP_Controller extends BaseController {
 
             try {
                 if(!$this->friendshipModel->friendExists($_POST["member"], $_POST["secondarymember"]) && !empty($_POST["member"]) && !empty($_POST["secondarymember"])){
-                    $this->friendshipModel->insert($user);
+                    $this->friendshipModel->add($user);
                     $this->view->setFlash(sprintf(i18n("Friend successfully added.")));
                 } else {
                     $this->view->setFlash(sprintf(i18n("Friend already exists.")));
@@ -82,6 +82,7 @@ class FRIENDSHIP_Controller extends BaseController {
         
         if (isset($_POST["submit"])) {
             $friendship->setStatus(1);
+            $this->friendshipModel->edit($friendship);
         }
 
         $this->view->redirect("friendship", "showall", "id=".$this->currentUser->getID());

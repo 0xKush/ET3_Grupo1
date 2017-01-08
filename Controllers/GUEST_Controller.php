@@ -51,7 +51,7 @@ class GUEST_Controller extends BaseController
             
             try {
                 if (!$this->guestModel->guestExists($_POST["event"], $_POST["member"], $_POST["secondarymember"]) && !empty($_POST["event"]) && !empty($_POST["member"]) && !empty($_POST["secondarymember"])) {
-                    $this->guestModel->insert($guest);
+                    $this->guestModel->add($guest);
                     $this->view->setFlash(sprintf(i18n("Guest successfully added.")));
                 } else {
                     $this->view->setFlash(sprintf(i18n("Guest already exists.")));
@@ -82,6 +82,7 @@ class GUEST_Controller extends BaseController
         
         if (isset($_POST["submit"])) {
             $guest->setStatus(1);
+            $this->guestModel->edit($guest);
         }
         
         $this->view->redirect("guest", "showall", "id=" . $this->currentUser->getID());
