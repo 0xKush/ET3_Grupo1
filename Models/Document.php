@@ -5,33 +5,20 @@ require_once(__DIR__ . "/../core/ValidationException.php");
 class Document
 {
     private $id;
-    private $user;
+    private $owner;
     private $location;
     private $uploaddate;
     private $status;
     
     
-    public function __construct($id = NULL, $user = NULL, $location = NULL, $uploaddate = NULL, $status = NULL)
+    public function __construct($id = NULL, $owner = NULL, $location = NULL, $uploaddate = NULL, $status = NULL)
     {
         $this->id         = $id;
-        $this->user       = $user;
+        $this->owner       = $owner;
         $this->location   = $location;
         $this->uploaddate = $uploaddate;
         $this->status     = $status;
     }
-    
-    /*  public function checkIsValidForCreate()
-    {
-    $errors = array();
-    if (strlen($this->name < 4)) {
-    $errors["groupname"] = "Group name must be at least 5 characters length";
-    
-    }
-    
-    if (sizeof($errors) > 0) {
-    throw new ValidationException($errors, "Group is not valid");
-    }
-    }*/
     
     
     public function getID()
@@ -46,14 +33,14 @@ class Document
         return $this;
     }
     
-    public function getUser()
+    public function getOwner()
     {
-        return $this->user;
+        return $this->owner;
     }
     
-    private function setUser($user)
+    private function setOwner($owner)
     {
-        $this->user = $user;
+        $this->owner = $owner;
         
         return $this;
     }

@@ -49,7 +49,7 @@ class DOCUMENT_Controller extends BaseController
         if (isset($_POST["submit"])) {
             try {
                 if ($upload->checkFile()) {
-                    $document->setUser($_POST["user"]);
+                    $document->setOwner($_POST["owner"]);
                     $document->setLocation($upload->getDestination());
                     $document->setUploadDate($_POST["uploaddate"]);
                     $document->setStatus($_POST["status"]);
@@ -91,7 +91,7 @@ class DOCUMENT_Controller extends BaseController
         if (isset($_POST["submit"])) {
             try {
                 if ($upload->checkFile()) {
-                    $document->setUser($_POST["user"]);
+                    $document->setOwner($_POST["owner"]);
                     $document->setLocation($upload->getDestination());
                     $document->setUploadDate($_POST["uploaddate"]);
                     $document->setStatus($_POST["status"]);
