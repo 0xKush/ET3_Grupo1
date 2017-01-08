@@ -4,14 +4,25 @@ require_once(__DIR__ . "/../core/ValidationException.php");
 
 class PubliDoc
 {
+    private $id;
     private $document;
     private $publication;
     
-    public function __construct($document = NULL, $publication = NULL)
+    public function __construct($id = NULL, $document = NULL, $publication = NULL)
     {
         $this->document    = $document;
         $this->publication = $publication;
         
+    }
+    
+    public function getID()
+    {
+        return $this->id;
+    }
+    
+    public function setID($id)
+    {
+        $this->id = $id;
     }
     
     public function getDocument()

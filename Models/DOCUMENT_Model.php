@@ -61,7 +61,7 @@ class DOCUMENT_Model
     {
         $sql = $this->db->prepare("INSERT INTO document(user,location,uploaddate,status) values (?,?,?,?)");
         $sql->execute(array(
-            $document->getUser(),
+            $document->getOwner(),
             $document->getLocation(),
             $document->getUploadDate(),
             $document->getStatus()
@@ -73,7 +73,7 @@ class DOCUMENT_Model
         $sql = $this->db->prepare("UPDATE document SET user=?, location=?,
             uploaddate=?,status=? where id=?");
         $sql->execute(array(
-            $document->getUser(),
+            $document->getOwner(),
             $document->getLocation(),
             $document->getUploadDate(),
             $document->getStatus(),
@@ -90,18 +90,7 @@ class DOCUMENT_Model
             $document->getID()
         ));
     }
-    /*
-    public function nameExists($name)
-    {
-    $sql = $this->db->prepare("SELECT count(name) FROM group where name=?");
-    $sql->execute(array(
-    $name
-    ));
-    
-    if ($sql->fetchColumn() > 0) {
-    return true;
-    }
-    }*/
+
     
     
 }
