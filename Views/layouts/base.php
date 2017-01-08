@@ -26,6 +26,11 @@ $userid = $view->getVariable("currentuserid");
     <script src="lib/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="lib/datatables-responsive/dataTables.responsive.js"></script>
 
+    <!-- includes for datepicker -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 	<!--FAVICON-->
     <link rel="icon"
           type="image/ico"
