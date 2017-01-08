@@ -89,6 +89,20 @@ class USER_Model {
         $this->update($user);
     }
 
+    public function search($query) {
+        $search_query = "SELECT * FROM user WHERE ". $query;
+        $sql = $this->db->prepare($search_query);
+        $sql->execute();
+        $users_db = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $users = array();
+        foreach ($users_db as $user) {
+            array_push($users, new User($user["id"], $user["user"], $user["name"], $user["surname"], $user["email"],
+                                        $user["phone"], $user["birthday"], $user["address"], $user["status"],
+                                        $user["photo"], $user["type"], $user["private"]));
+        }
+        return $users;
+    }
+
     public function register(User $user)
     {
         $sql = $this->db->prepare("INSERT INTO user(user, email, status, password, type, private) values (?,?,?,?,?,?)");
