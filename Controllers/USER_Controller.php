@@ -132,8 +132,19 @@ class USER_Controller extends BaseController {
 
     public function edit()
     {
-        $user = new User();
         $upload = new Upload();
+
+        if (!isset($_REQUEST["id"])) {
+            throw new Exception(i18n("An user id is mandatory"));
+        }
+        
+        $userid = $_REQUEST["id"];
+
+        $user = $this->userModel->showcurrent($userid);
+
+        if ($user == NULL) {
+            throw new Exception(i18n("No such user with id: ").$userid);
+        }
         
         if (isset($_POST["submit"])) {
             if ($upload->checkFile()){
