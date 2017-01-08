@@ -7,7 +7,7 @@ require_once(__DIR__."/../Controllers/BaseController.php");
 
 class FRIENDSHIP_Controller extends BaseController {
 
-    private $userModel;
+    private $friendshipModel;
 
     public function __construct()
     {
