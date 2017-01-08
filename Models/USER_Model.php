@@ -62,7 +62,7 @@ class USER_Model {
         $sql = $this->db->prepare("INSERT INTO user(user,name,surname,email,phone,birthday,address,status,photo,type,private,password) values (?,?,?,?,?,?,?,?,?,?,?,?)");
         $sql->execute(array($user->getUser(), $user->getName(), $user->getSurname(), $user->getEmail(),
                             $user->getPhone(), $user->getBirthday(), $user->getAddress(), $user->getStatus(), $user->getPhoto(),
-                            $user->Type(), $user->getPrivate(), $user->getPassword()));
+                            $user->getType(), $user->getPrivate(), $user->getPassword()));
     }
 
     public function edit(User $user)

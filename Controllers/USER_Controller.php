@@ -74,12 +74,14 @@ class USER_Controller extends BaseController {
         $upload = new Upload();
         
         if (isset($_POST["submit"])) {
-            if ($upload->checkFile()){
-                $user->setPhoto($upload->getDestination());
-            } else {
-                $errors = array();
-                $errors["general"] = i18n("Error while upload image");
-                $this->view->setVariable("errors", $errors);
+            if (isset($_POST["file"])){
+                if ($upload->checkFile()){
+                    $user->setPhoto($upload->getDestination());
+                } else {
+                    $errors = array();
+                    $errors["general"] = i18n("Error while upload image");
+                    $this->view->setVariable("errors", $errors);
+                }
             }
             
             $user->setUser($_POST["user"]);
@@ -107,7 +109,7 @@ class USER_Controller extends BaseController {
                 if(!$this->userModel->userExists($_POST["user"]) && !empty($_POST["user"])){
                     if (!$this->userModel->emailExists($_POST["email"]) && !empty($_POST["email"])){
                         $user->checkIsValidForCreate();
-                        $this->userModel->insert($user);
+                        $this->userModel->add($user);
                         $this->view->setFlash(sprintf(i18n("User \"%s\" successfully added."),$user->getUser()));
                         $this->view->redirect("user", "login");
                     } else {
@@ -178,14 +180,14 @@ class USER_Controller extends BaseController {
             try {
                 if ($user->getUser() == $_POST["user"] && $user->getEmail() == $_POST["email"]) {
                     $user->checkIsValidForCreate();
-                    $this->userModel->update($user);
+                    $this->userModel->edit($user);
                     $this->view->setFlash(sprintf(i18n("User \"%s\" successfully updated."),$user->getUser()));
                     $this->view->redirect("user", "login");
-                } else if ($user->getUser() == $_POST["usern"] && $user->getEmail() != $_POST["email"]) {
+                } else if ($user->getUser() == $_POST["user"] && $user->getEmail() != $_POST["email"]) {
                     if(!$this->userModel->emailExists($_POST["email"]) && !empty($_POST["email"])) {
                         $user->setEmail($_POST["email"]);
                         $user->checkIsValidForCreate();
-                        $this->userModel->update($user);
+                        $this->userModel->edit($user);
                         $this->view->setFlash(sprintf(i18n("User \"%s\" successfully updated."),$user->getUser()));
                         $this->view->redirect("user", "login");
                     } else {
@@ -197,7 +199,7 @@ class USER_Controller extends BaseController {
                     if(!$this->userModel->userExists($_POST["user"]) && !empty($_POST["user"])) {
                         $user->setUser($_POST["user"]);
                         $user->checkIsValidForCreate();
-                        $this->userModel->update($user);
+                        $this->userModel->edit($user);
                         $this->view->setFlash(sprintf(i18n("User \"%s\" successfully updated."),$user->getUser()));
                         $this->view->redirect("user", "login");
                     } else {
@@ -210,7 +212,7 @@ class USER_Controller extends BaseController {
                         $user->setEmail($_POST["email"]);
                         $user->setUser($_POST["user"]);
                         $user->checkIsValidForCreate();
-                        $this->userModel->update($user);
+                        $this->userModel->edit($user);
                         $this->view->setFlash(sprintf(i18n("User \"%s\" successfully updated."),$user->getUser()));
                         $this->view->redirect("user", "login");
                     } else {
