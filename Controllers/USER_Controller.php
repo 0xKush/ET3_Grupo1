@@ -253,7 +253,7 @@ class USER_Controller extends BaseController {
                 $this->view->setFlash(sprintf(i18n("User \"%s\" successfully deleted."),$user->getUsername()));
             }
             
-            $this->view->redirect("user", "show");
+            $this->view->redirect("user", "showall");
         }
         
         $this->view->setVariable("user", $user);
