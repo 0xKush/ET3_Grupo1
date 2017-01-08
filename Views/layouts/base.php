@@ -24,7 +24,7 @@ $userid = $view->getVariable("currentuserid");
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <script src="js/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!--  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
     <script src="lib/datatables/js/jquery.dataTables.min.js"></script>
     <script src="lib/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="lib/datatables-responsive/dataTables.responsive.js"></script>
@@ -112,9 +112,7 @@ $userid = $view->getVariable("currentuserid");
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
 
-    
-
-    
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>    
     <script src="js/datepicker/datepicker_scripts.js"></script>
     <!-- DataTables JavaScript -->
     
