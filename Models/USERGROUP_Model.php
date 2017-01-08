@@ -11,17 +11,18 @@ class USERGROUP_Model
         $this->db = PDOConnection::getInstance();
     }
     
-    public function showall($currentuserid)
+    public function showall($currentuserid, $add = 1)
     {
         $groups = array();
         
         $sql = $this->db->prepare("
             SELECT g.id as id,g.name as name,g.description as description ,g.owner as owner,g.type as type,g.creationdate as creationdate,g.status as status 
             FROM groupp, usergroup 
-            WHERE usergroup.member=? AND usergroup.status=1  
+            WHERE usergroup.member=? AND usergroup.status=?  
             ORDER BY groupp.name");
         $sql->execute(array(
-            $currentuserid
+            $currentuserid,
+            $add
         ));
         $groups_db = $sql->fetchAll(PDO::FETCH_ASSOC);
         
@@ -32,10 +33,11 @@ class USERGROUP_Model
         $sql = $this->db->prepare("
             SELECT g.id as id,g.name as name,g.description as description ,g.owner as owner,g.type as type,g.creationdate as creationdate,g.status as status 
             FROM groupp, usergroup 
-            WHERE usergroup.secondarymember=? AND usergroup.status=1  
+            WHERE usergroup.secondarymember=? AND usergroup.status=? 
             ORDER BY groupp.name");
         $sql->execute(array(
-            $currentuserid
+            $currentuserid,
+            $add
         ));
         $groups_db = $sql->fetchAll(PDO::FETCH_ASSOC);
         
@@ -52,7 +54,7 @@ class USERGROUP_Model
         $sql->execute(array(
             $usergroup->getGroupID(),
             $usergroup->getSecondaryMember(),
-            $usergroup->Member(),
+            $usergroup->getMember(),
             $usergroup->getStatus()
         ));
     }
@@ -63,7 +65,7 @@ class USERGROUP_Model
         $sql->execute(array(
             $usergroup->getGroupID(),
             $usergroup->getSecondaryMember(),
-            $usergroup->Member(),
+            $usergroup->getMember(),
             $usergroup->getStatus(),
             $usergroup->getID()
         ));

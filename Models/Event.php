@@ -14,10 +14,10 @@ class Event
     private $description;
     private $status;
     private $name;
-    private $type;
+    private $private;
     
     
-    public function __construct($id = NULL, $creationdate = NULL, $owner = NULL, $startdate = NULL, $enddate = NULL, $starthour = NULL, $endhour = NULL, $description = NULL, $status = NULL, $name = NULL, $type = NULL)
+    public function __construct($id = NULL, $creationdate = NULL, $owner = NULL, $startdate = NULL, $enddate = NULL, $starthour = NULL, $endhour = NULL, $description = NULL, $status = NULL, $name = NULL, $private = NULL)
     {
         $this->id           = $id;
         $this->creationdate = $creationdate;
@@ -29,7 +29,7 @@ class Event
         $this->description  = $description;
         $this->status       = $status;
         $this->name         = $name;
-        $this->type         = $type;
+        $this->private         = $private;
     }
     
     
@@ -186,15 +186,15 @@ class Event
     }
     
     
-    public function getType()
+    public function getPrivate()
     {
-        return $this->type;
+        return $this->private;
     }
     
     
-    private function setType($type)
+    private function setPrivate($private)
     {
-        $this->type = $type;
+        $this->private = $private;
         
         return $this;
     }

@@ -54,7 +54,7 @@ class EVENT_Controller extends BaseController
             $event->setDescription($_POST["description"]);
             $event->setStatus($_POST["status"]);
             $event->setName($_POST["name"]);
-            $event->setType($_POST["type"]);
+            $event->setPrivate($_POST["private"]);
             
             
             try {
@@ -102,7 +102,7 @@ class EVENT_Controller extends BaseController
             $event->setDescription($_POST["description"]);
             $event->setStatus($_POST["status"]);
             $event->setName($_POST["name"]);
-            $event->setType($_POST["type"]);
+            $event->setPrivate($_POST["private"]);
             
             try {
                 if (!$this->eventModel->nameExists($_POST["name"])) {

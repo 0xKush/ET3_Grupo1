@@ -20,7 +20,7 @@ class EVENT_Model
         $events = array();
         
         foreach ($events_db as $event) {
-            array_push($events, new Event($event["id"], $event["creationdate"], $event["owner"], $event["startdate"], $event["enddate"], $event["starthour"], $event["endhour"], $event["description"], $event["status"], $event["name"], $event["type"]));
+            array_push($events, new Event($event["id"], $event["creationdate"], $event["owner"], $event["startdate"], $event["enddate"], $event["starthour"], $event["endhour"], $event["description"], $event["status"], $event["name"], $event["private"]));
         }
         
         return $events;
@@ -36,7 +36,7 @@ class EVENT_Model
         $event = $sql->fetch(PDO::FETCH_ASSOC);
         
         if ($event != NULL) {
-            return new Event($event["id"], $event["creationdate"], $event["owner"], $event["startdate"], $event["enddate"], $event["starthour"], $event["endhour"], $event["description"], $event["status"], $event["name"], $event["type"]);
+            return new Event($event["id"], $event["creationdate"], $event["owner"], $event["startdate"], $event["enddate"], $event["starthour"], $event["endhour"], $event["description"], $event["status"], $event["name"], $event["private"]);
         } else {
             return NULL;
         }
@@ -45,7 +45,7 @@ class EVENT_Model
     
     public function add(Event $event)
     {
-        $sql = $this->db->prepare("INSERT INTO event(creationdate,owner,startdate,enddate,starthour,endhour,description,status,name,type) values (?,?,?,?,?,?,?,?,?,?)");
+        $sql = $this->db->prepare("INSERT INTO event(creationdate,owner,startdate,enddate,starthour,endhour,description,status,name,private) values (?,?,?,?,?,?,?,?,?,?)");
         $sql->execute(array(
             $event->getCreationDate(),
             $event->getOwner(),
@@ -56,13 +56,13 @@ class EVENT_Model
             $event->getDescription(),
             $event->getStatus(),
             $event->getName(),
-            $event->getType()
+            $event->getPrivate()
         ));
     }
     
     public function edit(Event $event)
     {
-        $sql = $this->db->prepare("UPDATE event SET creationdate=?,owner=?,startdate=?,enddate=?,starthour=?,endhour=?,description=?,status=?,name=?,type=? where id=?");
+        $sql = $this->db->prepare("UPDATE event SET creationdate=?,owner=?,startdate=?,enddate=?,starthour=?,endhour=?,description=?,status=?,name=?,private=? where id=?");
         $sql->execute(array(
             $event->getCreationDate(),
             $event->getOwner(),
@@ -73,7 +73,7 @@ class EVENT_Model
             $event->getDescription(),
             $event->getStatus(),
             $event->getName(),
-            $event->getType(),
+            $event->getPrivate(),
             $event->getID()
         ));
         
@@ -112,7 +112,7 @@ class EVENT_Model
     $group = $sql->fetch(PDO::FETCH_ASSOC);
     
     if ($group != NULL) {
-    return new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["type"], $group["creationdate"], $group["status"]);
+    return new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["private"], $group["creationdate"], $group["status"]);
     } else {
     return NULL;
     }

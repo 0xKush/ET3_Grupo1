@@ -20,7 +20,7 @@ class GROUP_Model
         $groups = array();
         
         foreach ($groups_db as $group) {
-            array_push($groups, new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["type"], $group["creationdate"], $group["status"]));
+            array_push($groups, new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["private"], $group["creationdate"], $group["status"]));
         }
         
         return $groups;
@@ -35,7 +35,7 @@ class GROUP_Model
         $group = $sql->fetch(PDO::FETCH_ASSOC);
         
         if ($group != NULL) {
-            return new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["type"], $group["creationdate"], $group["status"]);
+            return new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["private"], $group["creationdate"], $group["status"]);
         } else {
             return NULL;
         }
@@ -51,7 +51,7 @@ class GROUP_Model
         $group = $sql->fetch(PDO::FETCH_ASSOC);
         
         if ($group != NULL) {
-            return new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["type"], $group["creationdate"], $group["status"]);
+            return new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["private"], $group["creationdate"], $group["status"]);
         } else {
             return NULL;
         }
@@ -59,12 +59,12 @@ class GROUP_Model
     
     public function add(Group $group)
     {
-        $sql = $this->db->prepare("INSERT INTO groupp(name,description,owner,type,creationdate,status) values (?,?,?,?,?,?,?,?,?,?,?,?)");
+        $sql = $this->db->prepare("INSERT INTO groupp(name,description,owner,private,creationdate,status) values (?,?,?,?,?,?,?,?,?,?,?,?)");
         $sql->execute(array(
             $group->getName(),
             $group->getDescription(),
             $group->getOwner(),
-            $group->getType(),
+            $group->getPrivate(),
             $group->getCreationDate(),
             $group->getStatus()
         ));
@@ -72,13 +72,13 @@ class GROUP_Model
     
     public function edit(Group $group)
     {
-        $sql = $this->db->prepare("UPDATE groupp SET name=?, description=?, owner=?, type=?, creationdate=?,
+        $sql = $this->db->prepare("UPDATE groupp SET name=?, description=?, owner=?, private=?, creationdate=?,
     status=? where id=?");
         $sql->execute(array(
             $group->getName(),
             $group->getDescription(),
             $group->getOwner(),
-            $group->getType(),
+            $group->getPrivate(),
             $group->getCreationDate(),
             $group->getStatus(),
             $group->getID()

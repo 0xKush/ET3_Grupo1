@@ -8,18 +8,18 @@ class Group
     private $name;
     private $description;
     private $owner;
-    private $type;
+    private $private;
     private $creationdate;
     private $status;
     
     
-    public function __construct($id = NULL, $name = NULL, $description = NULL, $owner = NULL, $type = NULL, $creationdate = NULL, $status = NULL)
+    public function __construct($id = NULL, $name = NULL, $description = NULL, $owner = NULL, $private = NULL, $creationdate = NULL, $status = NULL)
     {
         $this->id           = $id;
         $this->name         = $name;
         $this->description  = $description;
         $this->owner        = $owner;
-        $this->type         = $type;
+        $this->private      = $private;
         $this->creationdate = $creationdate;
         $this->status       = $status;
     }
@@ -77,14 +77,14 @@ class Group
     }
     
     
-    public function getType()
+    public function getPrivate()
     {
-        return $this->type;
+        return $this->private;
     }
     
-    private function setType($type)
+    private function setPrivate($private)
     {
-        $this->type = $type;
+        $this->private = $private;
         
         return $this;
     }

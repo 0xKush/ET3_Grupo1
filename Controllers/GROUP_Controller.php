@@ -48,7 +48,7 @@ class GROUP_Controller extends BaseController
             $group->setName($_POST["name"]);
             $group->setDescription($_POST["description"]);
             $group->setOwner($_POST["owner"]);
-            $group->setType($_POST["type"]);
+            $group->setPrivate($_POST["private"]);
             $group->setCreationDate($_POST["creationdate"]);
             $group->setStatus($_POST["status"]);
             
@@ -89,7 +89,7 @@ class GROUP_Controller extends BaseController
             $group->setName($_POST["name"]);
             $group->setDescription($_POST["description"]);
             $group->setOwner($_POST["owner"]);
-            $group->setType($_POST["type"]);
+            $group->setPrivate($_POST["private"]);
             $group->setCreationDate($_POST["creationdate"]);
             $group->setStatus($_POST["status"]);
             
