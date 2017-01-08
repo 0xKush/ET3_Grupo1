@@ -2,7 +2,7 @@
 
 require_once(__DIR__."/../core/ValidationException.php");
 
-class User {
+class Friendship {
 
     private $id;
     private $member;
