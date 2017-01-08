@@ -112,6 +112,7 @@ $userid = $view->getVariable("currentuserid");
 	     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/datepicker/datepicker_scripts.js"></script>
 
     </body>
 </html>
