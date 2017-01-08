@@ -11,20 +11,20 @@ class USER_Model {
         $this->db = PDOConnection::getInstance();
     }
 
-    public function showall($currentuserid)
+    public function showall($currentuserid, $invited=1)
     {
         $friends = array();
         
-        $sql = $this->db->prepare("SELECT e.id, e.name FROM event as e, guest as g where g.member=? AND g.status=1 ORDER BY e.name");
-        $sql->execute(array($currentuserid));
+        $sql = $this->db->prepare("SELECT e.id, e.name FROM event as e, guest as g where g.member=? AND g.status=? ORDER BY e.name");
+        $sql->execute(array($currentuserid, $invited));
         $events_db = $sql->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($event_db as $event) {
             array_push($events, new Event($event["id"], $event["name"]));
         }
 
-        $sql = $this->db->prepare("SELECT e.id, e.name FROM event as e, guest as g where g.secondarymember=? AND g.status=1 ORDER BY e.name");
-        $sql->execute(array($currentuserid));
+        $sql = $this->db->prepare("SELECT e.id, e.name FROM event as e, guest as g where g.secondarymember=? AND g.status=? ORDER BY e.name");
+        $sql->execute(array($currentuserid, $invited));
         $events_db = $sql->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($event_db as $event) {

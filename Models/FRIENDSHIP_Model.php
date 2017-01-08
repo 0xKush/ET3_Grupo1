@@ -11,20 +11,20 @@ class USER_Model {
         $this->db = PDOConnection::getInstance();
     }
 
-    public function showall($currentuserid)
+    public function showall($currentuserid, $add=1)
     {
         $friends = array();
         
-        $sql = $this->db->prepare("SELECT u.id, u.user, u.name, u.surname FROM user as u, friendship as f where f.member=? AND f.status=1 ORDER BY u.name");
-        $sql->execute(array($currentuserid));
+        $sql = $this->db->prepare("SELECT u.id, u.user, u.name, u.surname FROM user as u, friendship as f where f.member=? AND f.status=? ORDER BY u.name");
+        $sql->execute(array($currentuserid, $add));
         $friends_db = $sql->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($friends_db as $friend) {
             array_push($friends, new User($user["id"], $user["user"], $user["name"], $user["surname"]));
         }
 
-        $sql = $this->db->prepare("SELECT u.id, u.user, u.name, u.surname FROM user as u, friendship as f where f.secondarymember=? AND f.status=1 ORDER BY u.name");
-        $sql->execute(array($currentuserid));
+        $sql = $this->db->prepare("SELECT u.id, u.user, u.name, u.surname FROM user as u, friendship as f where f.secondarymember=? AND f.status=? ORDER BY u.name");
+        $sql->execute(array($currentuserid, $add));
         $friends_db = $sql->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($friends_db as $friend) {
@@ -68,6 +68,13 @@ class USER_Model {
     {
         $sql = $this->db->prepare("SELECT count(id) FROM friendship where member=? AND secondarymember=?");
         $sql->execute(array($member, $secondarymember));
+
+        if ($sql->fetchColumn() > 0) {
+            return true;
+        }
+
+        $sql = $this->db->prepare("SELECT count(id) FROM friendship where member=? AND secondarymember=?");
+        $sql->execute(array($secondarymember, $member));
 
         if ($sql->fetchColumn() > 0) {
             return true;
