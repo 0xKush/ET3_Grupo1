@@ -7,3 +7,21 @@
     changeYear: true
     });
 });
+
+
+    $(document).ready(function(){
+    $('#date').datepicker({
+  	format: "yyyy-mm-dd",
+  	changeMonth: true,
+    changeYear: true
+    });
+});
+
+        $(document).ready(function(){
+    $('#date2').datepicker({
+    format: "yyyy-mm-dd",
+    changeMonth: true,
+    changeYear: true
+    });
+});
+

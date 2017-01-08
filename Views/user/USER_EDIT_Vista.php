@@ -17,11 +17,11 @@ $user = $view->getVariable("user");
 		 		<form>
 		 			<div class="form-group">
 					    <label for="name"><?= i18n("Name")?></label>
-					    <input type="text" class="form-control" id="name" name="name"> placeholder="<?= $user->getName()?>">
+					    <input type="text" class="form-control" id="name" name="name" placeholder="<?= $user->getName()?>">
 					  </div>
 					  <div class="form-group">
 					    <label for="surname"><?= i18n("Surname")?></label>
-					    <input type="text" class="form-control" id="surname" name="surname"> placeholder="<?= $user->getSurname()?>">
+					    <input type="text" class="form-control" id="surname" name="surname" placeholder="<?= $user->getSurname()?>">
 					  </div>
 					  <div class="form-group">
 					    <label for="phone"><?= i18n("Phone")?></label>

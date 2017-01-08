@@ -30,6 +30,14 @@ $view = ViewManager::getInstance();
  			</div>
  		</div>
 
+ 		<div class="row">
+ 		<div class="container-fluid">
+ 		<div class="pull-right">
+ 			<a href="index.php?controller=event&action=add"><button class="btn btn-success"><?= i18n("Create New Event") ?></button></a>
+ 		</div>
+ 		</div> 			
+ 		</div>
+
  		<div class="well">
  			<div class="row" style="padding: 10px">
  				<table id="dataTable" class="table-responsive table-hover" style="width:80%; margin-right: 10%; margin-left: 10%">
@@ -49,7 +57,7 @@ $view = ViewManager::getInstance();
  							echo '<tr class="row">';
  								echo "<td class='text-center'>".$event->getName()."</td>";
  								echo "<td class='text-center'>".$event->getOwner()."</td>";
- 								echo "<td class='text-center'>".$event->getPrivate()."</td>";
+ 								echo "<td class='text-center'></td>";
  								echo "<td class='text-center'>".$event->getStatus()."</td>";
 
  								echo "<td class='text-center'>";

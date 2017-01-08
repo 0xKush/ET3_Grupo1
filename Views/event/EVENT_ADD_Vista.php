@@ -1,8 +1,7 @@
 <?php 
 $view = ViewManager::getInstance();
 $id = $_GET["id"];
-$group = $view->getVariable("group");
-$users = $view->getVariable("users");
+$event = $view->getVariable("event");
 
  ?>
 
@@ -12,7 +11,7 @@ $users = $view->getVariable("users");
  		<div class="well">
  		<div class="container-fluid">
 	 		<div class="row">
-	 			<h1><?= i18n("Edit Group: ")?><?= $group->getName() ?></h1>
+	 			<h1><?= i18n("Create Event: ")?><?= $event->getName() ?></h1>
 	 		</div>
 	 		<div class="row">
 		 		<form>
@@ -20,11 +19,28 @@ $users = $view->getVariable("users");
 					    <label for="name"><?= i18n("Name")?></label>
 					    <input type="text" class="form-control" id="name" name="name">
 					  </div>
-
 					  <div class="form-group">
 					    <label for="description"><?= i18n("Description")?></label>
 					    <input type="textarea" class="form-control" id="description" name="description">
-					  </div>		   
+					  </div>
+
+					  <div class="form-group">
+					    <label for="date"><?= i18n("Start date")?></label>
+					    <input type="text" class="form-control" id="date" name="startdate" >
+					  </div>
+					  <div class="form-group">
+					    <label for="date2"><?= i18n("End date")?></label>
+					    <input type="text" class="form-control" id="date2" name="enddate" >
+					  </div>
+
+					  <div class="form-group">
+					    <label for="hour1"><?= i18n("Start hour")?></label>
+					    <input type="time" class="form-control" id="hour1" name="starthour" >
+					  </div>
+					  <div class="form-group">
+					    <label for="hour"><?= i18n("End hour")?></label>
+					    <input type="time" class="form-control" id="hour" name="endhour" >
+					  </div>					   
 
 					  <div class="form-group">
 					    <label for="private"><?= i18n("Visivility")?></label>
@@ -34,7 +50,6 @@ $users = $view->getVariable("users");
 					    </select>
 					  </div>
 
-					 
 					  <button type="submit" class="btn btn-primary pull-right"><?= i18n("Submit")?></button>
 					</form>
 	 		</div>
