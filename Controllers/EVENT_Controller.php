@@ -151,5 +151,89 @@ class EVENT_Controller extends BaseController
         $this->view->render("event", "EVENT_DELETE_Vista");
     }
     
+    public function search()
+    {
+        if (isset($_POST["submit"])) {
+            $query = "";
+            $flag  = 0;
+            if ($_POST["creationdate"]) {
+                $query .= "creationdate LIKE '%" . $_POST["creationdate"] . "%'";
+                $flag = 1;
+            }
+            if ($_POST["owner"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "owner LIKE '%" . $_POST["owner"] . "%'";
+                $flag = 1;
+            }
+            if ($_POST["startdate"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "startdate LIKE '%" . $_POST["startdate"] . "%'";
+                $flag = 1;
+            }
+            if ($_POST["enddate"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "enddate LIKE '%" . $_POST["enddate"] . "%'";
+                $flag = 1;
+            }
+            if ($_POST["starthour"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "starthour LIKE '%" . $_POST["starthour"] . "%'";
+                $flag = 1;
+            }
+            if ($_POST["endhour"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "endhour LIKE '%" . $_POST["endhour"] . "%'";
+                $flag = 1;
+            }
+            if ($_POST["description"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "description LIKE '%" . $_POST["description"] . "%'";
+            }
+            
+            if ($_POST["status"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "status LIKE '%" . $_POST["status"] . "%'";
+            }
+            
+            if ($_POST["name"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "name LIKE '%" . $_POST["name"] . "%'";
+            }
+            
+            if ($_POST["private"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "private LIKE '%" . $_POST["private"] . "%'";
+            }
+            
+            if (empty($query)) {
+                $events = $this->userModel->showall();
+            } else {
+                $events = $this->userModel->search($query);
+            }
+            $this->view->setVariable("events", $events);
+            $this->view->render("event", "EVENT_SHOW_Vista");
+        } else {
+            $this->view->render("event", "EVENT_SEARCH_Vista");
+        }
+    }
+    
     
 }

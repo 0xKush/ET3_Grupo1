@@ -136,6 +136,62 @@ class GROUP_Controller extends BaseController
         $this->view->render("group", "GROUP_DELETE_Vista");
     }
     
+    public function search()
+    {
+        if (isset($_POST["submit"])) {
+            $query = "";
+            $flag  = 0;
+            if ($_POST["name"]) {
+                $query .= "name LIKE '%" . $_POST["name"] . "%'";
+                $flag = 1;
+            }
+            if ($_POST["description"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "description LIKE '%" . $_POST["description"] . "%'";
+                $flag = 1;
+            }
+            if ($_POST["owner"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "owner LIKE '%" . $_POST["owner"] . "%'";
+                $flag = 1;
+            }
+            if ($_POST["private"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "private LIKE '%" . $_POST["private"] . "%'";
+                $flag = 1;
+            }
+            if ($_POST["creationdate"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "creationdate LIKE '%" . $_POST["creationdate"] . "%'";
+                $flag = 1;
+            }
+            if ($_POST["status"]) {
+                if ($flag) {
+                    $query .= " AND ";
+                }
+                $query .= "status LIKE '%" . $_POST["status"] . "%'";
+                $flag = 1;
+            }
+            if (empty($query)) {
+                $groups = $this->groupModel->showall();
+            } else {
+                $groups = $this->groupModel->search($query);
+            }
+            $this->view->setVariable("groups", $groups);
+            $this->view->render("group", "GROUP_SHOW_Vista");
+        } else {
+            $this->view->render("group", "GROUP_SEARCH_Vista");
+        }
+    }
+    
     
     
     
