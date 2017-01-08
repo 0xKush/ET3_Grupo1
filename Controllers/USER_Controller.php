@@ -304,4 +304,67 @@ class USER_Controller extends BaseController {
     {
         $this->view->render("user", "USER_ADMIN_Vista");
     }
+
+    public function search() {
+        if (isset($_POST["submit"])) {
+            $query = "";
+            $flag = 0;
+            if ($_POST["user"]){
+                $query .= "user LIKE '%". $_POST["user"] ."%'";
+                $flag = 1;
+            }
+            if ($_POST["name"]){
+                if ($flag){
+                    $query .= " AND ";
+                }
+                $query .= "name LIKE '%". $_POST["name"] ."%'";
+                $flag = 1;
+            }
+            if ($_POST["surname"]){
+                if ($flag){
+                    $query .= " AND ";
+                }
+                $query .= "surname LIKE '%". $_POST["surname"] ."%'";
+                $flag = 1;
+            }
+            if ($_POST["email"]){
+                if ($flag){
+                    $query .= " AND ";
+                }
+                $query .= "email LIKE '%". $_POST["email"] ."%'";
+                $flag = 1;
+            }
+            if ($_POST["type"]){
+                if ($flag){
+                    $query .= " AND ";
+                }
+                $query .= "type LIKE '%". $_POST["type"] ."%'";
+                $flag = 1;
+            }
+            if ($_POST["status"]){
+                if ($flag){
+                    $query .= " AND ";
+                }
+                $query .= "status LIKE '%". $_POST["status"] ."%'";
+                $flag = 1;
+            }
+            if ($_POST["private"]){
+                if ($flag){
+                    $query .= " AND ";
+                }
+                $query .= "private LIKE '%". $_POST["private"] ."%'";
+            }
+            
+            if (empty($query)) {
+                $users = $this->userModel->showall();
+            } else {
+                $users = $this->userModel->search($query);
+            }
+            $this->view->setVariable("users", $users);
+            $this->view->render("user", "USER_SHOW_Vista");
+        }
+        else {
+            $this->view->render("user", "USER_SEARCH_Vista");
+        }
+    }
 }
