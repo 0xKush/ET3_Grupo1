@@ -1,15 +1,19 @@
 <?php 
+	require_once(__DIR__."/../../core/ViewManager.php");
+	$view = ViewManager::getInstance();
 
-$view = ViewManager::getInstance();
-	/*
-		index.php?controller=user&action=view&user=($user)
-	*/
-
-	$user = $view->getVariable("user");
 	$friends = $view->getVariable("friends");//friendship
 	$publications = $view->getVariable("publications");
 	$documents = $view->getVariable("documents");
- ?>
+	$user = $view->getVariable("user");
+	$errors = $view->getVariable("errors");
+?>
+
+<?= isset($errors["general"])?$errors["general"]:"" ?> 
+<?php $view->moveToDefaultFragment(); ?>
+
+<?php print_r($errors) ?>
+
 
  	<div class="col-md-10 col-md-offset-1">
  		<div class="well">

@@ -1,9 +1,16 @@
-<?php 
+<?php
+require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
-$id = $_GET["id"];
 $user = $view->getVariable("user");
+$errors = $view->getVariable("errors");
+$id = $_GET["id"];
+?>
 
- ?>
+<?= isset($errors["general"])?$errors["general"]:"" ?> 
+<?php $view->moveToDefaultFragment(); ?>
+
+<?php print_r($errors) ?>
+
 
  <div class="container-fluid">
  	
@@ -22,6 +29,11 @@ $user = $view->getVariable("user");
 					  <div class="form-group">
 					    <label for="surname"><?= i18n("Surname")?></label>
 					    <input type="text" class="form-control" id="surname" name="surname" placeholder="<?= $user->getSurname()?>">
+					  </div>
+
+					  <div class="form-group">
+					    <label for="password"><?= i18n("Password")?></label>
+					    <input type="password" class="form-control" id="password" name="password" placeholder="<?= $user->getPassword()?>">
 					  </div>
 					  <div class="form-group">
 					    <label for="phone"><?= i18n("Phone")?></label>
@@ -85,7 +97,7 @@ $user = $view->getVariable("user");
 					    <input type="file" class="form-control-file" id="file" name="file">
 					    
 					  </div>
-					  <button type="submit" class="btn btn-primary pull-right"><?= i18n("Submit")?></button>
+					  <button type="submit" name="submit" class="btn btn-primary pull-right"><?= i18n("Submit")?></button>
 					</form>
 	 		</div>
  		</div>

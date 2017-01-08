@@ -33,6 +33,11 @@ $errors = $view->getVariable("errors");
 			    <label for="surname"><?= i18n("Surname")?></label>
 			    <input type="text" class="form-control" id="surname" name="surname" placeholder="<?= i18n("Surname")?>">
 			</div>
+
+			<div class="form-group">
+					    <label for="password"><?= i18n("Password")?></label>
+					    <input type="password" class="form-control" id="password" name="password" placeholder="<?= i18n("Password")?>">
+					  </div>
 			<div class="form-group">
 			    <label for="phone"><?= i18n("Phone")?></label>
 			    <input type="number" class="form-control" id="phone" name="phone" placeholder="<?= i18n("Surname")?>">

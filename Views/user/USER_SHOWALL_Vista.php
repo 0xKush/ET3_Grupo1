@@ -1,15 +1,18 @@
 <?php 
-	/*
-		View: showall
-		input->user->showall()
-	*/
-$view = ViewManager::getInstance();
-$users = $view->getVariable("users");
 
+require_once(__DIR__."/../../core/ViewManager.php");
+$view = ViewManager::getInstance();
 $lang='EN';
 include (__DIR__.'/../../js/datatable/showscript'.$lang.'.js');
+$user = $view->getVariable("user");
+$users = $view->getVariable("users");
+$errors = $view->getVariable("errors");
+?>
 
- ?>
+<?= isset($errors["general"])?$errors["general"]:"" ?> 
+<?php $view->moveToDefaultFragment(); ?>
+
+<?php print_r($errors) ?>
 
 	
 

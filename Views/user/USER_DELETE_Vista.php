@@ -1,9 +1,15 @@
-<?php 
+<?php
+require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
-$id = $_GET["id"];
 $user = $view->getVariable("user");
+$errors = $view->getVariable("errors");
+$id = $_GET["id"];
+?>
 
- ?>
+<?= isset($errors["general"])?$errors["general"]:"" ?> 
+<?php $view->moveToDefaultFragment(); ?>
+
+<?php print_r($errors) ?>
 
 	<div class="container">
 		<div class="col-xs-12 col-md-4 col-md-offset-4">
@@ -16,7 +22,7 @@ $user = $view->getVariable("user");
 					<div class="pull-right">
 					<a href="index.php?controller=user&action=showall">
 					<button type="button" class="btn btn-default"><?= i18n("No, go back") ?></button></a>                                                              
-                    <button type="submit" value="yes" class="btn btn-danger"><?= i18n("Yes, delete it ") ?></button>
+                    <button type="submit" name="submit" value="yes" class="btn btn-danger"><?= i18n("Yes, delete it ") ?></button>
 
 				</div>
 				</div>

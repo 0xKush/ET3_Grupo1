@@ -1,10 +1,17 @@
-<?php 
-$view = ViewManager::getInstance();
-$id = $_GET["id"];
-$event = $view->getVariable("event");
-//$users = $view->getVariable("users");
+<?php
+	$event = $view->getVariable("event");
+	require_once(__DIR__."/../../core/ViewManager.php");
+	$view = ViewManager::getInstance();
+	$user = $view->getVariable("user");
+	$errors = $view->getVariable("errors");
+	$id = $_GET["id"];
+?>
 
- ?>
+<?= isset($errors["general"])?$errors["general"]:"" ?> 
+<?php $view->moveToDefaultFragment(); ?>
+
+<?php print_r($errors) ?>
+
 
  <div class="container-fluid">
  	

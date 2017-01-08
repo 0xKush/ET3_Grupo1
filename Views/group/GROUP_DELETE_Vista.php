@@ -1,9 +1,18 @@
 <?php 
-$view = ViewManager::getInstance();
-$id = $_GET["id"];
-$group = $view->getVariable("group");
+	
+	require_once(__DIR__."/../../core/ViewManager.php");
+	$view = ViewManager::getInstance();
+	$user = $view->getVariable("user");
+	$group = $view->getVariable("group");
+	$errors = $view->getVariable("errors");
+	$id = $_GET["id"];
+?>
 
- ?>
+<?= isset($errors["general"])?$errors["general"]:"" ?> 
+<?php $view->moveToDefaultFragment(); ?>
+
+<?php print_r($errors) ?>
+
 
 	<div class="container">
 		<div class="col-xs-12 col-md-4 col-md-offset-4">

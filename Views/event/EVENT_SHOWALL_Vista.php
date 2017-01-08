@@ -1,19 +1,20 @@
-<?php 
-
-$view = ViewManager::getInstance();
-	/*
-		View: User profile
-		
-		Input: showall grupos
-
-	*/
-
+<?php
 	$events = $view->getVariable("events");
 
 	$lang = 'EN';
 	include (__DIR__.'/../../js/datatable/showscript'.$lang.'.js');
+	require_once(__DIR__."/../../core/ViewManager.php");
+	$view = ViewManager::getInstance();
+	$user = $view->getVariable("user");
+	$errors = $view->getVariable("errors");
+	$id = $_GET["id"];
+?>
 
- ?>
+<?= isset($errors["general"])?$errors["general"]:"" ?> 
+<?php $view->moveToDefaultFragment(); ?>
+
+<?php print_r($errors) ?>
+
 
 	
 
