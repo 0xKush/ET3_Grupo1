@@ -44,6 +44,14 @@ CREATE TABLE IF NOT EXISTS `comment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
+-- Volcado de datos para la tabla `comment`
+--
+
+INSERT INTO `comment` (`id`, `publication`, `owner`, `origincomment`, `creationdate`, `hour`, `content`, `status`) VALUES
+(1, 6, 3, NULL, '2016-12-26', '18:50:00', 'O máximo é de 2 personas por equipo.', 0),
+(2, 6, 5, 1, '2016-12-26', '18:55:00', 'Vale, moitas grazas.', 0);
+
+--
 -- RELACIONES PARA LA TABLA `comment`:
 --   `origincomment`
 --       `comment` -> `id`
@@ -67,6 +75,14 @@ CREATE TABLE IF NOT EXISTS `conversation` (
   `startdate` date NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `conversation`
+--
+
+INSERT INTO `conversation` (`id`, `member`, `secondarymember`, `startdate`, `status`) VALUES
+(1, 2, 3, '2016-10-15', 0),
+(2, 4, 5, '2016-10-16', 0);
 
 -- --------------------------------------------------------
 
@@ -110,6 +126,14 @@ CREATE TABLE IF NOT EXISTS `event` (
   `private` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `event`
+--
+
+INSERT INTO `event` (`id`, `creationdate`, `owner`, `startdate`, `enddate`, `starthour`, `endhour`, `description`, `status`, `name`, `private`) VALUES
+(1, '2016-10-12', 2, '2016-12-31', '2017-01-01', '22:00:00', '07:00:00', 'Cena de fin de año 2016', 0, 'Fin de Año 2016', 1),
+(2, '2016-12-20', 3, '2017-02-02', '2017-02-02', '17:00:00', '21:00:00', 'Torneo Billar 2017.\r\n\r\nEl primer premio del torneo será una cena para dos personas en le restaurante Il Popolo el día 04/02/2017.', 0, 'Torneo de Billar', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -122,6 +146,17 @@ CREATE TABLE IF NOT EXISTS `friendship` (
   `secondarymember` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `friendship`
+--
+
+INSERT INTO `friendship` (`member`, `secondarymember`, `status`) VALUES
+(2, 3, 1),
+(2, 5, 1),
+(3, 4, 1),
+(3, 5, 0),
+(4, 5, 1);
 
 --
 -- RELACIONES PARA LA TABLA `friendship`:
@@ -149,6 +184,14 @@ CREATE TABLE IF NOT EXISTS `groupp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
+-- Volcado de datos para la tabla `groupp`
+--
+
+INSERT INTO `groupp` (`id`, `name`, `description`, `owner`, `private`, `creationdate`, `status`) VALUES
+(1, 'ET3', 'ET3', 2, 1, '2016-12-12', 0),
+(2, 'Celta de Vigo Fans.', 'Grupo compuesto de seguidores del Celta de Vigo.', 5, 0, '2016-10-10', 0);
+
+--
 -- RELACIONES PARA LA TABLA `groupp`:
 --   `owner`
 --       `user` -> `id`
@@ -168,6 +211,16 @@ CREATE TABLE IF NOT EXISTS `guest` (
   `member` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `guest`
+--
+
+INSERT INTO `guest` (`id`, `event`, `secondarymember`, `member`, `status`) VALUES
+(1, 1, 5, 2, 1),
+(2, 1, 4, 5, 1),
+(3, 2, 2, 2, 1),
+(4, 2, 4, 2, 1);
 
 --
 -- RELACIONES PARA LA TABLA `guest`:
@@ -196,6 +249,16 @@ CREATE TABLE IF NOT EXISTS `message` (
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `message`
+--
+
+INSERT INTO `message` (`id`, `conversation`, `owner`, `senddate`, `sendhour`, `content`, `status`) VALUES
+(1, 1, 2, '2016-10-15', '14:00:00', 'Ola,canto tempo, como levas a ET3?', 0),
+(2, 1, 3, '2016-10-16', '17:30:00', 'Puff, estase a complicar bastante.', 0),
+(3, 1, 2, '2016-10-16', '17:35:00', 'Por aquí estamos igual.', 0),
+(4, 2, 4, '2016-10-16', '18:00:00', 'Miraches o partido do Celta?', 0),
+(5, 2, 5, '2016-10-16', '19:00:00', 'Si, menudo partidazo. #FutbolDeSalon.', 0);
 
 -- --------------------------------------------------------
 
@@ -214,6 +277,18 @@ CREATE TABLE IF NOT EXISTS `publication` (
   `description` text COLLATE utf8_spanish_ci NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `publication`
+--
+
+INSERT INTO `publication` (`id`, `destination`, `type`, `owner`, `creationdate`, `hour`, `description`, `status`) VALUES
+(1, 2, 'user', 2, '2016-11-20', '18:00:00', 'a', 0),
+(2, 3, 'user', 2, '2016-12-24', '17:00:00', 'Felices Fiestas :)', 0),
+(3, 2, 'group', 3, '2017-01-01', '09:00:00', 'Feliz ano celtistas!', 0),
+(4, 1, 'group', 4, '2016-12-26', '19:45:00', 'A darle duro con la ET3.', 0),
+(5, 1, 'event', 2, '2016-10-13', '17:00:00', 'Haberá que ir pensado sitio para a cea.', 0),
+(6, 2, 'event', 5, '2016-12-26', '18:46:20', 'Cal é o máximo de persoas por equipo?\r\n', 0);
 
 --
 -- RELACIONES PARA LA TABLA `publication`:
@@ -265,6 +340,17 @@ CREATE TABLE IF NOT EXISTS `user` (
   `private` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `surname`, `email`, `phone`, `user`, `password`, `birthday`, `address`, `status`, `photo`, `type`, `private`) VALUES
+(1, 'admin', 'admin', 'admin@gmail.com', 698547123, 'admin', 'admin', '1990-06-14', 'null', 0, NULL, 1, 1),
+(2, 'Laura', 'Perez', 'lperez@gmail.com', 645123587, 'lperez', 'lperez', '1996-03-19', 'Calle San José 78B 1º', 0, NULL, 0, 1),
+(3, 'Miguel', 'Gomez', 'mgomez', 656238794, 'mgomez', 'mgomez', '1994-01-29', 'Calle Real 16 4ºB', 0, NULL, 0, 1),
+(4, 'Daniel', 'Santiago', 'dsantiago@gmail.com', 675123489, 'dsantiago', 'dsantiago', '1994-06-05', 'Avenida de Marín 56 3ºC', 0, NULL, 0, 0),
+(5, 'Alba', 'Freijomil', 'afreijomil@gmail.com', 684512378, 'afrei', 'afrei', '1990-10-02', 'Avenida de Ourense 26 6ºI', 0, NULL, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -279,6 +365,16 @@ CREATE TABLE IF NOT EXISTS `usergroup` (
   `member` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `usergroup`
+--
+
+INSERT INTO `usergroup` (`id`, `groupid`, `secondarymember`, `member`, `status`) VALUES
+(1, 1, 3, 2, 1),
+(2, 1, 4, 2, 1),
+(3, 2, 3, 5, 1),
+(4, 2, 4, 5, 1);
 
 --
 -- RELACIONES PARA LA TABLA `usergroup`:
@@ -340,7 +436,7 @@ ALTER TABLE `guest`
 -- Indices de la tabla `message`
 --
 ALTER TABLE `message`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `conversation` (`conversation`,`owner`,`senddate`,`sendhour`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `conversation` (`conversation`,`owner`,`senddate`,`sendhour`), ADD KEY `owner_mes` (`owner`);
 
 --
 -- Indices de la tabla `publication`
@@ -374,12 +470,12 @@ ALTER TABLE `usergroup`
 -- AUTO_INCREMENT de la tabla `comment`
 --
 ALTER TABLE `comment`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `conversation`
 --
 ALTER TABLE `conversation`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `document`
 --
@@ -389,27 +485,27 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `event`
 --
 ALTER TABLE `event`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `groupp`
 --
 ALTER TABLE `groupp`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `guest`
 --
 ALTER TABLE `guest`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `message`
 --
 ALTER TABLE `message`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `publication`
 --
 ALTER TABLE `publication`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `publidoc`
 --
@@ -419,12 +515,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `usergroup`
 --
 ALTER TABLE `usergroup`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- Restricciones para tablas volcadas
 --
@@ -451,6 +547,12 @@ ALTER TABLE `document`
 ADD CONSTRAINT `doc_user` FOREIGN KEY (`owner`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `event`
+--
+ALTER TABLE `event`
+ADD CONSTRAINT `event_user` FOREIGN KEY (`owner`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `friendship`
 --
 ALTER TABLE `friendship`
@@ -475,7 +577,8 @@ ADD CONSTRAINT `guest` FOREIGN KEY (`secondarymember`) REFERENCES `user` (`id`) 
 -- Filtros para la tabla `message`
 --
 ALTER TABLE `message`
-ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`conversation`) REFERENCES `conversation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`conversation`) REFERENCES `conversation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `owner_mes` FOREIGN KEY (`owner`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `publication`
