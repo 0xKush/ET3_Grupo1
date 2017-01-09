@@ -1,7 +1,7 @@
 <?php
 
 require_once(__DIR__ . "/../core/PDOConnection.php");
-/*id groupid secondarymember member status*/
+
 class USERGROUP_Model
 {
     private $db;
@@ -16,10 +16,10 @@ class USERGROUP_Model
         $groups = array();
         
         $sql = $this->db->prepare("
-            SELECT g.id as id,g.name as name,g.description as description ,g.owner as owner,g.type as type,g.creationdate as creationdate,g.status as status 
-            FROM groupp, usergroup 
-            WHERE usergroup.member=? AND usergroup.status=?  
-            ORDER BY groupp.name");
+            SELECT g.id as id,g.name as name,g.description as description ,g.owner as owner,g.private as private,g.creationdate as creationdate,g.status as status 
+            FROM groupp as g, usergroup as ug
+            WHERE ug.member=? AND ug.status=?  
+            ORDER BY g.name");
         $sql->execute(array(
             $currentuserid,
             $add
@@ -27,14 +27,15 @@ class USERGROUP_Model
         $groups_db = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         foreach ($groups_db as $group) {
-            array_push($groups, new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["type"], $group["creationdate"], $group["status"]));
+            array_push($groups, new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["private"], $group["creationdate"], $group["status"]));
         }
         
+        
         $sql = $this->db->prepare("
-            SELECT g.id as id,g.name as name,g.description as description ,g.owner as owner,g.type as type,g.creationdate as creationdate,g.status as status 
-            FROM groupp, usergroup 
-            WHERE usergroup.secondarymember=? AND usergroup.status=? 
-            ORDER BY groupp.name");
+            SELECT g.id as id,g.name as name,g.description as description ,g.owner as owner,g.private as private,g.creationdate as creationdate,g.status as status 
+            FROM groupp as g, usergroup as ug 
+            WHERE ug.secondarymember=? AND ug.status=? 
+            ORDER BY g.name");
         $sql->execute(array(
             $currentuserid,
             $add
@@ -42,7 +43,7 @@ class USERGROUP_Model
         $groups_db = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         foreach ($groups_db as $group) {
-            array_push($groups, new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["type"], $group["creationdate"], $group["status"]));
+            array_push($groups, new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["private"], $group["creationdate"], $group["status"]));
         }
         
         return $groups;
