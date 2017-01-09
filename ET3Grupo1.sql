@@ -97,7 +97,16 @@ CREATE TABLE IF NOT EXISTS `document` (
   `location` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `uploaddate` date NOT NULL,
   `status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `document`
+--
+
+INSERT INTO `document` (`id`, `owner`, `location`, `uploaddate`, `status`) VALUES
+(1, 2, '/media/documents/doc1.jpg', '2016-11-20', 0),
+(2, 2, '/media/documents/doc2.jpg', '2016-11-20', 0),
+(3, 5, '/media/documents/doc3.jpg', '2017-08-01', 0);
 
 --
 -- RELACIONES PARA LA TABLA `document`:
@@ -288,7 +297,8 @@ INSERT INTO `publication` (`id`, `destination`, `type`, `owner`, `creationdate`,
 (3, 2, 'group', 3, '2017-01-01', '09:00:00', 'Feliz ano celtistas!', 0),
 (4, 1, 'group', 4, '2016-12-26', '19:45:00', 'A darle duro con la ET3.', 0),
 (5, 1, 'event', 2, '2016-10-13', '17:00:00', 'Haberá que ir pensado sitio para a cea.', 0),
-(6, 2, 'event', 5, '2016-12-26', '18:46:20', 'Cal é o máximo de persoas por equipo?\r\n', 0);
+(6, 2, 'event', 5, '2016-12-26', '18:46:20', 'Cal é o máximo de persoas por equipo?', 0),
+(7, 2, 'group', 5, '2017-01-09', '21:05:00', 'Partidazo contra o malaga. 3 puntiños máis.', 0);
 
 --
 -- RELACIONES PARA LA TABLA `publication`:
@@ -308,6 +318,15 @@ CREATE TABLE IF NOT EXISTS `publidoc` (
   `document` int(11) NOT NULL,
   `publication` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `publidoc`
+--
+
+INSERT INTO `publidoc` (`id`, `document`, `publication`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 7);
 
 --
 -- RELACIONES PARA LA TABLA `publidoc`:
@@ -480,7 +499,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT de la tabla `document`
 --
 ALTER TABLE `document`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `event`
 --
@@ -505,12 +524,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT de la tabla `publication`
 --
 ALTER TABLE `publication`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `publidoc`
 --
 ALTER TABLE `publidoc`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `user`
 --
