@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . "/../core/PDOConnection.php");
+require_once("Group.php");
 
 class USERGROUP_Model
 {
