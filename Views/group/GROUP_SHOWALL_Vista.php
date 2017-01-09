@@ -1,6 +1,4 @@
 <?php 
-	
-
 	$lang = 'EN';
 	include (__DIR__.'/../../js/datatable/showscript'.$lang.'.js');
 	require_once(__DIR__."/../../core/ViewManager.php");
@@ -8,7 +6,6 @@
 	$groups = $view->getVariable("groups");
 	$user = $view->getVariable("user");
 	$errors = $view->getVariable("errors");
-	$id = $_GET["id"];
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
@@ -68,7 +65,7 @@
 
  								echo '<div class="row text-center">
 					 					<div class="col-xs-3">
-					 						<a href="index.php?controller=group&action=showcurrent&iduser='.
+					 						<a href="index.php?controller=group&action=showcurrent&id='.
 					 						$group->getID().'">
 					 							<button class="btn btn-info btn-xs">
 					 								<i class="fa fa-eye"></i>
@@ -76,7 +73,7 @@
 					 						</a>
 					 					</div>
 					 					<div class="col-xs-3">
-					 						<a href="index.php?controller=group&action=edit&userid='.
+					 						<a href="index.php?controller=group&action=edit&id='.
 					 						$group->getID().'">
 					 							<button class="btn btn-warning btn-xs">
 					 								<i class="fa fa-edit"></i>
@@ -84,7 +81,7 @@
 					 						</a>
 					 					</div>
 					 					<div class="col-xs-3">
-					 						<a href="index.php?controller=group&action=delete&userid='.
+					 						<a href="index.php?controller=group&action=delete&id='.
 					 						$group->getID().'">
 					 							<button class="btn btn-danger btn-xs">
 					 								<i class="fa fa-trash-o"></i>

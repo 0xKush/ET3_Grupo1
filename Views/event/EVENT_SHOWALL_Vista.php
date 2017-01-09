@@ -1,5 +1,5 @@
 <?php
-	$events = $view->getVariable("events");
+
 
 	$lang = 'EN';
 	include (__DIR__.'/../../js/datatable/showscript'.$lang.'.js');
@@ -7,7 +7,7 @@
 	$view = ViewManager::getInstance();
 	$user = $view->getVariable("user");
 	$errors = $view->getVariable("errors");
-	$id = $_GET["id"];
+	$events = $view->getVariable("events");
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 

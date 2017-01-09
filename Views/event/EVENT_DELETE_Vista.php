@@ -1,10 +1,11 @@
 <?php
-	$event = $view->getVariable("event");
+
 	require_once(__DIR__."/../../core/ViewManager.php");
 	$view = ViewManager::getInstance();
 	$user = $view->getVariable("user");
 	$errors = $view->getVariable("errors");
 	$id = $_GET["id"];
+	$event = $view->getVariable("event");
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 

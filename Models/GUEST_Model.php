@@ -2,7 +2,7 @@
 
 require_once(__DIR__."/../core/PDOConnection.php");
 
-class USER_Model {
+class GUEST_Model {
        
     private $db;
 

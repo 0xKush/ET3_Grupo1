@@ -3,7 +3,7 @@ require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 $user = $view->getVariable("user");
 $errors = $view->getVariable("errors");
-$publications = $view->getVariable("publications");
+$groups = $view->getVariable("groups");
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
@@ -19,7 +19,7 @@ $publications = $view->getVariable("publications");
  		<div class="row">
  			<div class="col-md-3">
 	 			<div class="container">
-	 				<h1 class="heading"><?= i18n("Your Wall") ?></h1>
+	 				<h1 class="heading"><?= i18n("Your Groups") ?></h1>
 	 			</div>
  				
  			</div>
@@ -33,4 +33,3 @@ $publications = $view->getVariable("publications");
  		
  		
  	</div>
- 	
