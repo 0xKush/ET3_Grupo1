@@ -8,3 +8,8 @@ nav{
 	margin-right: 10px;
 	color: #d3f4c5;
 }
+
+.profileThumbnail{
+	height: 20px;
+	width: 20px;
+}

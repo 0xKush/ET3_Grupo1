@@ -2,10 +2,11 @@
 require_once(__DIR__."/../../core/ViewManager.php");
 require_once(__DIR__."/../../Models/USER_Model.php");
 $view = ViewManager::getInstance();
-$user = $view->getVariable("user");
+$currentuserid = $view->getVariable("currentuserid");
 $errors = $view->getVariable("errors");
 $publications = $view->getVariable("publications");
 $documents = $view->getVariable("documents");
+
 
 //publidoc -->array de k->v: [idpublicacion]->[iddocument]
 $publidoc = $view->getVariable("publidoc");
@@ -59,6 +60,11 @@ $publidoc = $view->getVariable("publidoc");
 
 	 			<div class="row">
 	 				<div class="pull-right ">
+						<?php if ($publication->getOwner() == $currentuserid): ?>
+			 			
+		 						<a href="index.php?controller=publication&action=delete&id=<?= $publication->getID()  ?>"><button class="btn btn-danger"><?= i18n("Delete") ?></button></a>
+		 					
+			 			<?php endif ?>
 	 					<a href="index.php?controller=publication&action=showcurrent&id=<?=$publication->getID() ?>"><button class="btn btn-primary"><?= i18n("View") ?></button></a>
 	 				</div>
 	 			</div>

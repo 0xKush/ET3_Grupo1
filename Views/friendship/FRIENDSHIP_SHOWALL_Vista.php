@@ -25,11 +25,19 @@ $friends = $view->getVariable("friends");
  			</div>
  		</div>
 
- 		<div class="well">
- 			<div class="row">
- 				
+ 		<?php foreach ($friends as $friend): ?>
+ 			<div class="well">
+ 				<div class="row">
+ 						<div class="container-fluid">
+ 							<img class="profileThumbnail" src="<?= $friend->getPhoto()?>" alt=""><?= $friend->getName() ?><?= $friend->getSurname() ?>
+ 							<br>
+ 							<?= $friend->getUsername() ?>
+ 						</div>
+ 				</div>
+
  			</div>
- 		</div>
+ 		<?php endforeach ?>
+ 		
  		
  		
  	</div>
