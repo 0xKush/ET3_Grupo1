@@ -229,6 +229,7 @@ CREATE TABLE IF NOT EXISTS `publication` (
 
 DROP TABLE IF EXISTS `publidoc`;
 CREATE TABLE IF NOT EXISTS `publidoc` (
+  `id` int(11) NOT NULL,
   `document` int(11) NOT NULL,
   `publication` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -351,7 +352,7 @@ ALTER TABLE `publication`
 -- Indices de la tabla `publidoc`
 --
 ALTER TABLE `publidoc`
- ADD PRIMARY KEY (`document`,`publication`), ADD KEY `publi_doc` (`publication`);
+ ADD PRIMARY KEY (`id`),ADD KEY `doc` (`document`), ADD KEY `publi_doc` (`publication`);
 
 --
 -- Indices de la tabla `user`
@@ -408,6 +409,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `publication`
 --
 ALTER TABLE `publication`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `publidoc`
+--
+ALTER TABLE `publidoc`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `user`
@@ -482,7 +488,7 @@ ADD CONSTRAINT `ownerpubli` FOREIGN KEY (`owner`) REFERENCES `user` (`id`) ON DE
 --
 ALTER TABLE `publidoc`
 ADD CONSTRAINT `publi_doc` FOREIGN KEY (`publication`) REFERENCES `publication` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `doc_publi` FOREIGN KEY (`document`) REFERENCES `document` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `doc` FOREIGN KEY (`document`) REFERENCES `document` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usergroup`
