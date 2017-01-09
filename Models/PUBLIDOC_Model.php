@@ -71,4 +71,17 @@ class PUBLIDOC_Model
             $publidoc->getID()
         ));
     }
+    
+    public function publidocExists($document, $publication)
+    {
+        $sql = $this->db->prepare("SELECT count(id) FROM publidoc where document=? AND publication=?");
+        $sql->execute(array(
+            $document,
+            $publication
+        ));
+        
+        if ($sql->fetchColumn() > 0) {
+            return true;
+        }
+    }
 }
