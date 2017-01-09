@@ -1,9 +1,13 @@
 <?php
 
 require_once(__DIR__ . "/../../core/ViewManager.php");
+require_once(__DIR__ . "/../../Models/USER_Model.php");
 $view        = ViewManager::getInstance();
 $currentuser = $view->getVariable("currentusername");
 $userid = $view->getVariable("currentuserid");
+$umapper = new USER_Model();
+$photo = $umapper->showcurrent($userid)->getPhoto();
+
 
 ?><!DOCTYPE html>
 <html>
@@ -59,9 +63,19 @@ $userid = $view->getVariable("currentuserid");
       <ul class="nav navbar-nav">
         <ul class="nav navbar-nav navbar-left">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="media/profileImages/test.jpg" alt="" style="height: 25px;;">  <?=$currentuser ?><span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <?php if ($photo != NULL): ?>
+            <img class="profileThumbnail" src="media/profileImages/<?=$photo ?>" alt=""> 
+          <?php else:  ?>
+            <img class="profileThumbnail" src="media/profileImages/default.png" alt="">
+          <?php endif ?>
+
+           <?=$currentuser ?>
+          
+
+          <span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <li><a href="index.php?controller=friendship&action=showall&id=<?=$currentuser ?>"><i class="fa fa-user fa-fw"></i>  <?= i18n("Friends") ?></a></li>
+              <li><a href="index.php?controller=friendship&action=showall&id=<?=$userid ?>"><i class="fa fa-user fa-fw"></i>  <?= i18n("Friends") ?></a></li>
               <li><a href="index.php?controller=usergroup&action=showall&id=<?= $userid ?>"><i class="fa fa-group fa-fw"></i>  <?= i18n("Groups") ?></a></li>
               <li><a href="index.php?controller=guest&action=showall&id=<?= $userid ?>"><i class="fa fa-calendar fa-fw"></i>  <?= i18n("Events") ?></a></li>
               <li><a href="index.php?controller=conversation&action=showall"><i class="fa fa-envelope fa-fw"></i>  <?= i18n("Conversation") ?>  </a></li>
