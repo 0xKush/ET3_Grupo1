@@ -20,7 +20,7 @@ class CONVERSATION_Model
         $conversations = array();
         
         foreach ($conversations_db as $conversation) {
-            array_push($conversations, new Conversation($message["id"], $message["member"], $message["secondarymember"], $message["startdate"], $message["status"]));
+            array_push($conversations, new Conversation($conversation["id"], $conversation["member"], $conversation["secondarymember"], $conversation["startdate"], $conversation["status"]));
         }
         
         return $conversations;
@@ -36,7 +36,7 @@ class CONVERSATION_Model
         $conversation = $sql->fetch(PDO::FETCH_ASSOC);
         
         if ($conversation != NULL) {
-            return new Conversation($message["id"], $message["member"], $message["secondarymember"], $message["startdate"], $message["status"]);
+            return new Conversation($conversation["id"], $conversation["member"], $conversation["secondarymember"], $conversation["startdate"], $conversation["status"]);
         } else {
             return NULL;
         }
