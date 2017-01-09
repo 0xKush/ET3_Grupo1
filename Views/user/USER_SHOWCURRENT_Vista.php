@@ -29,9 +29,9 @@
  				<div id="dataDump">
  					<div class="container">
  						<?php 
- 							echo $user->getName();
- 							echo $user->getSurname();
- 							echo $user->getUser();
+ 							echo $user->getName().'</br>';
+ 							echo $user->getSurname().'</br>';
+ 							echo $user->getUser().'</br>';
  							echo $user->getPhoto();
  						 ?>
  					</div>
@@ -52,46 +52,42 @@
 
 					</div>
 					<div class="row">
-							<?php print_r($friends) ?>
+							<?php foreach ($friends as $friend): ?>
+					 			<div class="well">
+						 			<div class="row">
+						 				<div class="container-fluid">
+						 					<a href="index.php?controller=user&action=showcurrent&id=<?=$friend->getID() ?>"><?= $friend->getName();  ?></a>
+						 				</div>
+						 				<div class="container-fluid">
+						 					<?= $friend->getUser()?><br>
+						 					<?= $friend->getPhoto()  ?>
+						 				</div>
+						 			</div>
+					 			</div>
+					 		<?php endforeach ?>
 					</div>
 			
 				</div>
-				<div class="well">
-					<div class="row">
-						<i class="fa fa-user fa-fw"></i>   <?= i18n("Documents") ?> 
-
-
-					</div>
-					<div class="row">
-							<?php print_r($documents) ?>
-					</div>
-			
-				</div>
+				
  			</div>
  			<div class="col-md-8">
 
-				<!-- 1 por publicación -->
-				<div class="well">
-					<div class="row">
-						Publicación 1
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod incidunt rem quis perspiciatis dolore, maxime, ratione eum voluptas laudantium voluptatibus modi quam sequi culpa. Quia quae, eius incidunt tenetur magni.
-					</div>
-				</div>
-
-				<!-- 1 por publicación -->
-				<div class="well">
-					<div class="row">
-						Publicación 2
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde ipsam vel illo, doloribus repellat asperiores maiores aliquam quos a modi amet fugiat deserunt consequuntur, delectus cumque, repellendus laborum reiciendis hic.
-					</div>
-				</div>
-
-				<!-- 1 por publicación -->
-				<div class="well">
-					<div class="row">
-						<?php print_r($publications) ?>
-					</div>
-				</div>
+				<?php foreach ($publications as $publication): ?>
+		 			<div class="well">
+			 			<div class="row">
+			 				<div class="container-fluid">
+			 					<?= $publication->getDescription() ?>
+			 				</div>
+			 				<div class="container-fluid">
+			 					<?= i18n("Author") ?>: <a href="index.php?controller=user&action=showcurrent&id=<?=$publication->getOwner() ?>"><?php $owner = $umapper->showcurrent($publication->getOwner()); echo $owner->getUser();  ?></a>
+			 				</div>
+			 				<div class="container-fluid">
+			 					<?= $publication->getCreationDate();?>
+			 					<?= $publication->getHour()  ?>
+			 				</div>
+			 			</div>
+		 			</div>
+		 		<?php endforeach ?>
 
 
  			</div>
