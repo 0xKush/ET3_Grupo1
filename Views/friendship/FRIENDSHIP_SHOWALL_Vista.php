@@ -22,9 +22,7 @@ $requests = $view->getVariable("requests");
  				<?= i18n("Friendship Requests") ?>
  			</div>
  			<div class="row">
- 				<?php foreach ($requests as $rq): ?>
- 					<?php echo "Friend request todo"; ?>
- 				<?php endforeach ?>
+ 				
  			</div>
  		</div>
  		<div class="row">
