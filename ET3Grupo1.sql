@@ -151,6 +151,7 @@ INSERT INTO `event` (`id`, `creationdate`, `owner`, `startdate`, `enddate`, `sta
 
 DROP TABLE IF EXISTS `friendship`;
 CREATE TABLE IF NOT EXISTS `friendship` (
+  `id` int(11) NOT NULL,
   `member` int(11) NOT NULL,
   `secondarymember` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL
@@ -160,12 +161,12 @@ CREATE TABLE IF NOT EXISTS `friendship` (
 -- Volcado de datos para la tabla `friendship`
 --
 
-INSERT INTO `friendship` (`member`, `secondarymember`, `status`) VALUES
-(2, 3, 1),
-(2, 5, 1),
-(3, 4, 1),
-(3, 5, 0),
-(4, 5, 1);
+INSERT INTO `friendship` (`id`,`member`, `secondarymember`, `status`) VALUES
+(1,2, 3, 1),
+(2,2, 5, 1),
+(3,3, 4, 1),
+(4,3, 5, 0),
+(5,4, 5, 1);
 
 --
 -- RELACIONES PARA LA TABLA `friendship`:
@@ -437,7 +438,7 @@ ALTER TABLE `event`
 -- Indices de la tabla `friendship`
 --
 ALTER TABLE `friendship`
- ADD PRIMARY KEY (`member`,`secondarymember`), ADD KEY `friendship_2` (`secondarymember`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `member` (`member`,`secondarymember`), ADD KEY `friendship_2` (`secondarymember`);
 
 --
 -- Indices de la tabla `groupp`
@@ -505,6 +506,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 ALTER TABLE `event`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `friendship`
+--
+ALTER TABLE `friendship`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `groupp`
 --
