@@ -34,12 +34,30 @@ class Permissions {
      * Conversation
      * Any
      */
-    public function isMember($userid, $relationship, $entity)
+    public function isGroupMember($userid, $groupid)
     {
-        $table_name = htmlentities(trim($entity));
-        $query = "SELECT count(id) FROM " . $table_name . " where id=? and (member=? or secondarymember=?)";
-        $sql = $this->db->prepare($query);
-        $sql->execute(array($relationship, $userid, $userid));
+        $sql = $this->db->prepare("SELECT count(id) FROM usergroup where groupid=? and (member=? or secondarymember=?) and status=1");
+        $sql->execute(array($groupid, $userid, $userid));
+
+        if ($sql->fetchColumn() > 0) {
+            return true;
+        }
+    }
+
+    public function isEventMember($userid, $eventid)
+    {
+        $sql = $this->db->prepare("SELECT count(id) FROM guest where eventid=? and (member=? or secondarymember=?) and status=1");
+        $sql->execute(array($eventid, $userid, $userid));
+
+        if ($sql->fetchColumn() > 0) {
+            return true;
+        }
+    }
+
+    public function isFriend($userid, $friendid)
+    {
+        $sql = $this->db->prepare("SELECT count(id) FROM friendship where (member=? and secondarymember=?) or (member=? and secondarymember=?) and status=1");
+        $sql->execute(array($userid, $friendid, $friendid, $userid));
 
         if ($sql->fetchColumn() > 0) {
             return true;
