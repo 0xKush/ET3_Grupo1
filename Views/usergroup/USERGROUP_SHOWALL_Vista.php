@@ -31,7 +31,7 @@ $umapper = new USER_Model();
 		<?php foreach ($groups as $group): ?>
 				<div class="well">
 		 			<div class="row">
-		 				<?= $group->getName()?>
+		 				<a href="index.php?controller=group&action=showcurrent&id=<?= $group->getID()  ?>"><?= $group->getName()?></a>
 		 			</div>
 		 			<div class="">
 		 				<a href="index.php?controller=user&action=showcurrent&id=<?= $group->getOwner()  ?>">

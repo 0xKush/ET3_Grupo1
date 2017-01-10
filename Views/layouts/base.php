@@ -79,9 +79,15 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
               <li><a href="index.php?controller=usergroup&action=showall&id=<?= $userid ?>"><i class="fa fa-group fa-fw"></i>  <?= i18n("Groups") ?></a></li>
               <li><a href="index.php?controller=guest&action=showall&id=<?= $userid ?>"><i class="fa fa-calendar fa-fw"></i>  <?= i18n("Events") ?></a></li>
               <li><a href="index.php?controller=conversation&action=showall"><i class="fa fa-envelope fa-fw"></i>  <?= i18n("Conversation") ?>  </a></li>
+              
+              <?php if (true): ?>
+                  <li role="separator" class="divider"></li>
+                    <li>
+                    <a href="index.php?controller=user&action=admin"><i class="fa fa-cog fa-fw"></i>  <?= i18n("Admin Zone") ?></a>
+                    </li>
+              <?php endif ?>
+              
 
-              <li role="separator" class="divider"></li>
-              <li><a href="index.php?controller=user&action=admin"><i class="fa fa-cog fa-fw"></i>  <?= i18n("Admin Zone") ?></a></li>
               <li role="separator" class="divider"></li>
               <li><a href="index.php?controller=user&action=logout"><i class="fa fa-sign-out" style="color: blue;"></i>  <?= i18n("Logout") ?></a></li>
           </ul>
