@@ -51,6 +51,22 @@ class USERGROUP_Model
         return $groups;
     }
     
+    public function showcurrent($usergroupID)
+    {
+        $sql = $this->db->prepare("SELECT * FROM usergroup WHERE id=?");
+        $sql->execute(array(
+            $usergroupID
+        ));
+        
+        $usergroup = $sql->fetch(PDO::FETCH_ASSOC);
+        
+        if ($usergroup != NULL) {
+            return new UserGroup($usergroup["id"], $usergroup["groupid"], $usergroup["secondarymember"], $usergroup["member"], $usergroup["status"]);
+        } else {
+            return NULL;
+        }
+    }
+    
     public function add(UserGroup $usergroup)
     {
         $sql = $this->db->prepare("INSERT INTO usergroup(groupid,secondarymember,member,status) values (?,?,?,?)");

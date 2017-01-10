@@ -96,3 +96,11 @@ class Permissions {
         }
     }
 }
+
+$perm = new Permissions();
+
+if ($perm->isGroupMember(1,2)) {
+    echo " is member";
+} else{
+    echo "puto iago";
+}

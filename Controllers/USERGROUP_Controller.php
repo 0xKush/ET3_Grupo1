@@ -29,6 +29,23 @@ class USERGROUP_Controller extends BaseController
         $this->view->render("usergroup", "USERGROUP_SHOWALL_Vista");
     }
     
+    public function showcurrent()
+    {
+        if (!isset($_REQUEST["id"])) {
+            throw new Exception(i18n("A usergroup id is mandatory"));
+        }
+        
+        $usergroup = $_REQUEST["id"];
+        $usergroup = $this->usergroupModel->showcurrent($usergroup);
+        
+        if ($usergroup == NULL) {
+            throw new Exception(i18n("No such usergroup with id: ") . $usergroup);
+        }
+        
+        $this->view->setVariable("usergroup", $usergroup);
+        $this->view->render("usergroup", "USERGROUP_SHOWCURRENT_Vista");
+    }
+    
     //invitacion a grupos
     public function requests()
     {

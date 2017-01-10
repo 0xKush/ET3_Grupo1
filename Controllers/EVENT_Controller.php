@@ -36,7 +36,15 @@ class EVENT_Controller extends BaseController
             throw new Exception(i18n("No such event with id: ") . $eventid);
         }
         
+        $perm     = new Permissions();
+        $ismember = false;
+        
+        if (!$perm->isEventMember($this->currentUser->getID(), $eventid)) {
+            $ismember = true;
+        }
+        
         $this->view->setVariable("event", $event);
+        $this->view->setVariable("ismember", $ismember);
         $this->view->render("event", "EVENT_SHOWCURRENT_Vista");
     }
     
