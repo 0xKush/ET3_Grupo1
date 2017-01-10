@@ -15,7 +15,7 @@ class FRIENDSHIP_Model
     {
         $friends = array();
         
-        $sql = $this->db->prepare("SELECT u.id, u.user, u.name, u.surname, u.photo FROM user as u, friendship as f where f.member=? AND f.status=? ORDER BY u.name");
+        $sql = $this->db->prepare("SELECT u.id, u.user, u.name, u.surname, u.status, u.photo FROM user as u, friendship as f where f.member=? AND f.status=? and f.secondarymember=u.id ORDER BY u.name");
         $sql->execute(array(
             $currentuserid,
             $add
@@ -23,10 +23,10 @@ class FRIENDSHIP_Model
         $friends_db = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         foreach ($friends_db as $friend) {
-            array_push($friends, new User($friend["id"], $friend["user"], $friend["name"], $friend["surname"]), NULL, NULL, NULL, NULL, NULL, $friend["photo"]);
+            array_push($friends, new User($friend["id"], $friend["user"], $friend["name"], $friend["surname"], NULL, NULL, NULL, NULL, $friend["status"], $friend["photo"]));
         }
-        
-        $sql = $this->db->prepare("SELECT u.id, u.user, u.name, u.surname, u.photo FROM user as u, friendship as f where f.secondarymember=? AND f.status=? ORDER BY u.name");
+
+        $sql = $this->db->prepare("SELECT u.id, u.user, u.name, u.surname, u.status, u.photo FROM user as u, friendship as f where f.secondarymember=? AND f.status=? and f.member=u.id ORDER BY u.name");
         $sql->execute(array(
             $currentuserid,
             $add
@@ -34,9 +34,9 @@ class FRIENDSHIP_Model
         $friends_db = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         foreach ($friends_db as $friend) {
-            array_push($friends, new User($friend["id"], $friend["user"], $friend["name"], $friend["surname"]), NULL, NULL, NULL, NULL, NULL, $friend["photo"]);
+            array_push($friends, new User($friend["id"], $friend["user"], $friend["name"], $friend["surname"], NULL, NULL, NULL, NULL, $friend["status"], $friend["photo"]));
         }
-        
+
         return $friends;
     }
     
