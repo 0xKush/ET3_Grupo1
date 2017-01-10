@@ -15,7 +15,7 @@ class FRIENDSHIP_Model {
     {
         $friends = array();
         
-        $sql = $this->db->prepare("SELECT u.id, u.user, u.name, u.surname FROM user as u, friendship as f where f.member=? AND f.status=? ORDER BY u.name");
+        $sql = $this->db->prepare("SELECT u.id, u.user, u.name, u.surname, u.photo FROM user as u, friendship as f where f.member=? AND f.status=? ORDER BY u.name");
         $sql->execute(array($currentuserid, $add));
         $friends_db = $sql->fetchAll(PDO::FETCH_ASSOC);
 
@@ -23,7 +23,7 @@ class FRIENDSHIP_Model {
             array_push($friends, new User($friend["id"], $friend["user"], $friend["name"], $friend["surname"]));
         }
 
-        $sql = $this->db->prepare("SELECT u.id, u.user, u.name, u.surname FROM user as u, friendship as f where f.secondarymember=? AND f.status=? ORDER BY u.name");
+        $sql = $this->db->prepare("SELECT u.id, u.user, u.name, u.surname, u.photo FROM user as u, friendship as f where f.secondarymember=? AND f.status=? ORDER BY u.name");
         $sql->execute(array($currentuserid, $add));
         $friends_db = $sql->fetchAll(PDO::FETCH_ASSOC);
 
