@@ -364,11 +364,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `surname`, `email`, `phone`, `user`, `password`, `birthday`, `address`, `status`, `photo`, `type`, `private`) VALUES
-(1, 'admin', 'admin', 'admin@gmail.com', 698547123, 'admin', 'admin', '1990-06-14', 'null', 0, NULL, 1, 1),
-(2, 'Laura', 'Perez', 'lperez@gmail.com', 645123587, 'lperez', 'lperez', '1996-03-19', 'Calle San José 78B 1º', 0, NULL, 0, 1),
-(3, 'Miguel', 'Gomez', 'mgomez', 656238794, 'mgomez', 'mgomez', '1994-01-29', 'Calle Real 16 4ºB', 0, NULL, 0, 1),
-(4, 'Daniel', 'Santiago', 'dsantiago@gmail.com', 675123489, 'dsantiago', 'dsantiago', '1994-06-05', 'Avenida de Marín 56 3ºC', 0, NULL, 0, 0),
-(5, 'Alba', 'Freijomil', 'afreijomil@gmail.com', 684512378, 'afrei', 'afrei', '1990-10-02', 'Avenida de Ourense 26 6ºI', 0, NULL, 0, 0);
+(1, 'admin', 'admin', 'admin@gmail.com', 698547123, 'admin', 'admin', '1990-06-14', 'null', 1, NULL, 1, 1),
+(2, 'Laura', 'Perez', 'lperez@gmail.com', 645123587, 'lperez', 'lperez', '1996-03-19', 'Calle San José 78B 1º', 1, NULL, 0, 1),
+(3, 'Miguel', 'Gomez', 'mgomez', 656238794, 'mgomez', 'mgomez', '1994-01-29', 'Calle Real 16 4ºB', 1, NULL, 0, 1),
+(4, 'Daniel', 'Santiago', 'dsantiago@gmail.com', 675123489, 'dsantiago', 'dsantiago', '1994-06-05', 'Avenida de Marín 56 3ºC', 1, NULL, 0, 0),
+(5, 'Alba', 'Freijomil', 'afreijomil@gmail.com', 684512378, 'afrei', 'afrei', '1990-10-02', 'Avenida de Ourense 26 6ºI', 1, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
