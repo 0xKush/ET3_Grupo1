@@ -18,7 +18,14 @@ class PUBLICATION_Controller extends BaseController
     
     public function showall()
     {
-        $publications = $this->publicationModel->showall();
+        if (!isset($_REQUEST["id"])) {
+            throw new Exception(i18n("Id is mandatory"));
+        }
+        
+        $entityid     = $_REQUEST["id"];
+        $type         = $_REQUEST["type"];
+
+        $publications = $this->publicationModel->showall($entityid,$type);
         $this->view->setVariable("publications", $publications);
         $this->view->render("publication", "PUBLICATION_SHOWALL_Vista");
     }

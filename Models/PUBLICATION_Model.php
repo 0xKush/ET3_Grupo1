@@ -12,10 +12,13 @@ class PUBLICATION_Model
     }
     
     
-    public function showall()
+    public function showall($destinationID, $type)
     {
-        $sql = $this->db->prepare("SELECT * FROM publication ORDER BY creationdate");
-        $sql->execute();
+        $sql = $this->db->prepare("SELECT * FROM publication WHERE destination=? AND type=? ORDER BY creationdate");
+        $sql->execute(array(
+            $destinationID,
+            $type
+        ));
         $publications_db = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         $publications = array();
