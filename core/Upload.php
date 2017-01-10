@@ -95,10 +95,10 @@ class Upload
         );
         
         if (in_array($extension, $array_doc)) {
-            $destination = __DIR__ . "/../Uploads/documents/";
+            $destination = __DIR__ . "/../media/documents/";
         }
         if (in_array($extension, $array_img)) {
-            $destination = __DIR__ . "/../Uploads/images/";
+            $destination = __DIR__ . "/../media/images/";
         }
         return $destination;
     }
