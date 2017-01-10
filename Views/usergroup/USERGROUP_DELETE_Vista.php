@@ -4,6 +4,7 @@
 	$view = ViewManager::getInstance();
 	$user = $view->getVariable("user");
 	$errors = $view->getVariable("errors");
+	$group = $view->getVariable("group");
 	$id = $_GET["id"];
 ?>
 

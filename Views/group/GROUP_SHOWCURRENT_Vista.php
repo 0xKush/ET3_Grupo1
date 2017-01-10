@@ -5,6 +5,7 @@ $currentuserid = $view->getVariable("currentuserid");
 $publications = $view->getVariable("publications");
 $errors = $view->getVariable("errors");
 $group = $view->getVariable("group");
+$isMember = $view->getVariable("ismember");
 //necesito salgo co que saber se currentuser pertence ó grupo en cuestión
 ?>
 
@@ -19,10 +20,20 @@ $group = $view->getVariable("group");
 
  	<div class="col-md-8 col-md-offset-2">
  		<div class="row">
- 			<div class="col-md-3">
+ 			<div class="col-md-12">
 	 			<div class="container">
 	 				<h1 class="heading"><?= i18n("Group Profile") ?></h1>
 	 			</div>
+	 			<?php if ($currentuserid == $group->getOwner()): ?>
+	 				<div class="row">
+	 					<div class="pull-right">
+	 					<form action="index.php?controller=usergroup&action=invite" method="post">
+	 						<button type="submit" class="btn  btn-success"><?= i18n("Invite Friends") ?></button>
+	 					</form>
+ 					</div>
+	 				</div>
+	 				
+	 			<?php endif ?>
  				
  			</div>
  		</div>
@@ -39,13 +50,13 @@ $group = $view->getVariable("group");
 			 					<button class="btn btn-danger"><?= i18n("Delete") ?></button>
 			 				</a>
 			 			</div>
-			 	<?php endif ?>
-			 	<?php if(true): ?>
+			 	<?php elseif($isMember): ?>
 			 			<div class="pull-right">
-			 				<a href="index.php?controller=usergroup&action=delete&id=<?= $group->getID()  ?>">
-			 					<button class="btn btn-warning"><?= i18n("Unsubscribe") ?></button>
-			 				</a>
+			 				<form action="index.php?controller=usergroup&action=delete" method="post">
+			 					<button type="submit" name="id" value="<?=$group->getID() ?>"	 class="btn btn-warning"><?= i18n("Unsubscribe") ?></button>
+			 				</form>
 			 			</div>
+			 	
 		 		<?php endif ?>
  			</div>
  		</div>

@@ -55,9 +55,9 @@ $umapper = new USER_Model();
 			 			</div>
 			 		<?php else: ?>
 			 			<div class="pull-right">
-			 				<a href="index.php?controller=usergroup&action=delete&id=<?= $group->getID()  ?>">
-			 					<button class="btn btn-warning"><?= i18n("Unsubscribe") ?></button>
-			 				</a>
+			 				<form action="index.php?controller=usergroup&action=delete" method="post">
+			 					<button type="submit" name="id" value="<?=$group->getID() ?>"	 class="btn btn-warning"><?= i18n("Unsubscribe") ?></button>
+			 				</form>
 			 			</div>
 		 			<?php endif ?>
 		 			
