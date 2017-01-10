@@ -18,7 +18,7 @@ class USERGROUP_Model
         $groups = array();
         
         $sql = $this->db->prepare("
-            SELECT g.id as id,g.name as name,g.description as description ,g.owner as owner,g.private as private,g.creationdate as creationdate,g.status as status 
+            SELECT distinct g.id as id,g.name as name,g.description as description ,g.owner as owner,g.private as private,g.creationdate as creationdate,g.status as status 
             FROM groupp as g, usergroup as ug
             WHERE ug.member=? AND ug.status=?  
             ORDER BY g.name");
@@ -34,7 +34,7 @@ class USERGROUP_Model
         
         
         $sql = $this->db->prepare("
-            SELECT g.id as id,g.name as name,g.description as description ,g.owner as owner,g.private as private,g.creationdate as creationdate,g.status as status 
+            SELECT distinct g.id as id,g.name as name,g.description as description ,g.owner as owner,g.private as private,g.creationdate as creationdate,g.status as status 
             FROM groupp as g, usergroup as ug 
             WHERE ug.secondarymember=? AND ug.status=? 
             ORDER BY g.name");
