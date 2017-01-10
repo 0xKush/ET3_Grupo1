@@ -7,6 +7,9 @@
 	$documents = $view->getVariable("documents");
 	$user = $view->getVariable("user");
 	$errors = $view->getVariable("errors");
+
+	require_once(__DIR__."/../../Models/USER_Model.php");
+	$umapper = new USER_Model();
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
@@ -20,7 +23,12 @@
  		<div class="row">
  			<div class="col-md-4">
 	 			<div class="container">
-	 				<img class="img-circle" id="profileImage" src="media/profileImages/test.jpg" alt="profile Image" style="height: 200px;width: 200px">
+	 			<?php if ($user->getPhoto() != NULL): ?>
+	 				<img class="img-circle" id="profileImage" src="media/profileImages/<?=$user->getPhoto()  ?>" alt="profile Image" style="height: 200px;width: 200px">
+	 			<?php else: ?>
+	 				<img class="img-circle" id="profileImage" src="media/profileImages/default.png"" alt="profile Image" style="height: 200px;width: 200px">
+	 			<?php endif ?>
+	 				
 	 			</div>
  				
  			</div>

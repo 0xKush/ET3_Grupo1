@@ -6,6 +6,8 @@ $publications = $view->getVariable("publications");
 $errors = $view->getVariable("errors");
 $group = $view->getVariable("group");
 $isMember = $view->getVariable("ismember");
+require_once(__DIR__."/../../Models/USER_Model.php");
+$umapper = new USER_Model();
 //necesito salgo co que saber se currentuser pertence ó grupo en cuestión
 ?>
 
@@ -60,7 +62,6 @@ $isMember = $view->getVariable("ismember");
 		 		<?php endif ?>
  			</div>
  		</div>
-		<div id="alert">NECESITO getVariable("publications")</div>
  		<?php foreach ($publications as $publication): ?>
  			<div class="well">
 	 			<div class="row">

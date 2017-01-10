@@ -94,7 +94,7 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
         </li>
         <li><li><a href="index.php?controller=user&action=showcurrent&id=<?= $userid ?>"><?= i18n("My Profile") ?></a></li></li>
       </ul>
-        <li><a href="index.php?controller=publication&action=showall"><?= i18n("Publications") ?></a></li>
+        <li><a href="index.php?controller=publication&action=showall&id=<?= $userid ?>&type=user"><?= i18n("Publications") ?></a></li>
 
       </ul>
       <ul class="navbar-form navbar-right">

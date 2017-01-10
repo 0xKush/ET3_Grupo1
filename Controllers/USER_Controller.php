@@ -32,7 +32,7 @@ class USER_Controller extends BaseController
                 $user                      = $this->userModel->show_by_username($_POST["user"]);
                 $_SESSION["currentuser"]   = $user->getUser();
                 $_SESSION["currentuserid"] = $user->getID();
-                $this->view->redirect("publication", "showall", "id=" . $this->currentUser->getID());
+                $this->view->redirect("publication", "showall", "id=" . $user->getID()."&type=user");
             } else {
                 $errors            = array();
                 $errors["general"] = i18n("User is not valid");
@@ -73,7 +73,7 @@ class USER_Controller extends BaseController
         
         
         $friendshipModel = new FRIENDSHIP_Model();
-        $friends         = $this->friendshipModel->showall($userid);
+        $friends         = $friendshipModel->showall($userid);
         
         
         

@@ -4,7 +4,7 @@ require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 $lang='EN';
 include (__DIR__.'/../../js/datatable/showscript'.$lang.'.js');
-$user = $view->getVariable("user");
+$currentuserid = $view->getVariable("currentuserid");
 $users = $view->getVariable("users");
 $errors = $view->getVariable("errors");
 ?>
@@ -25,7 +25,6 @@ $errors = $view->getVariable("errors");
 	 			<div class="container">
 	 				<h1 class="heading"><?= i18n("User Management") ?></h1>
 	 			</div>
- 				
  			</div>
  		</div>
 
