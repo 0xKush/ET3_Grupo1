@@ -22,10 +22,14 @@ class PUBLICATION_Controller extends BaseController
             throw new Exception(i18n("Id is mandatory"));
         }
         
-        $entityid     = $_REQUEST["id"];
-        $type         = $_REQUEST["type"];
-
-        $publications = $this->publicationModel->showall($entityid,$type);
+        if (!isset($_REQUEST["type"])) {
+            throw new Exception(i18n("Entity type is mandatory"));
+        }
+        
+        $entityid = $_REQUEST["id"];
+        $type     = $_REQUEST["type"];
+        
+        $publications = $this->publicationModel->showall($entityid, $type);
         $this->view->setVariable("publications", $publications);
         $this->view->render("publication", "PUBLICATION_SHOWALL_Vista");
     }
