@@ -3,6 +3,7 @@ require_once(__DIR__ . "/../core/ViewManager.php");
 require_once(__DIR__ . "/../core/I18n.php");
 require_once(__DIR__ . "/../Models/Event.php");
 require_once(__DIR__ . "/../Models/EVENT_Model.php");
+require_once(__DIR__ . "/../Models/Publication.php");
 require_once(__DIR__ . "/../Models/PUBLICATION_Model.php");
 require_once(__DIR__ . "/../Controllers/BaseController.php");
 
