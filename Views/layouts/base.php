@@ -80,7 +80,7 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
               <li><a href="index.php?controller=friendship&action=showall&id=<?=$userid ?>"><i class="fa fa-user fa-fw"></i>  <?= i18n("Friends") ?></a></li>
               <li><a href="index.php?controller=usergroup&action=showall&id=<?= $userid ?>"><i class="fa fa-group fa-fw"></i>  <?= i18n("Groups") ?></a></li>
               <li><a href="index.php?controller=guest&action=showall&id=<?= $userid ?>"><i class="fa fa-calendar fa-fw"></i>  <?= i18n("Events") ?></a></li>
-              <li><a href="index.php?controller=conversation&action=showall"><i class="fa fa-envelope fa-fw"></i>  <?= i18n("Conversation") ?>  </a></li>
+              <li><a href="index.php?controller=conversation&action=showall&id=<?= $userid ?>"><i class="fa fa-envelope fa-fw"></i>  <?= i18n("Conversation") ?>  </a></li>
               
               <?php if (true): ?>
                   <li role="separator" class="divider"></li>
