@@ -18,7 +18,13 @@ class CONVERSATION_Controller extends BaseController
     
     public function showall()
     {
-        $conversations = $this->conversationModel->showall();
+        if (!isset($_REQUEST["id"])) {
+            throw new Exception(i18n("Id is mandatory"));
+        }
+        
+        $userid = $_REQUEST["id"];
+        
+        $conversations = $this->conversationModel->showall($userid);
         $this->view->setVariable("conversations", $conversations);
         $this->view->render("conversation", "CONVERSATION_SHOWALL_Vista");
     }
