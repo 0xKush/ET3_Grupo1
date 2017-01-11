@@ -51,11 +51,14 @@ class USERGROUP_Model
         return $groups;
     }
     
-    public function showcurrent($usergroupID)
+    public function showcurrent($currentuserid, $group)
     {
-        $sql = $this->db->prepare("SELECT * FROM usergroup WHERE id=?");
+        $sql = $this->db->prepare("SELECT * FROM usergroup WHERE (member=? and secondarymember=?) or (secondarymember=? and member=?)");
         $sql->execute(array(
-            $usergroupID
+            $currentuserid,
+            $group,
+            $group,
+            $currentuserid
         ));
         
         $usergroup = $sql->fetch(PDO::FETCH_ASSOC);

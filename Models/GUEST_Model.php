@@ -23,7 +23,7 @@ class GUEST_Model
             $invited
         ));
         $events_db = $sql->fetchAll(PDO::FETCH_ASSOC);
-
+        
         foreach ($events_db as $event) {
             $ev = new Event();
             $ev->setID($event["id"]);
@@ -34,11 +34,14 @@ class GUEST_Model
         return $events;
     }
     
-    public function showcurrent($guestID)
+    public function showcurrent($currentuserid, $event)
     {
-        $sql = $this->db->prepare("SELECT * FROM guest WHERE id=?");
+        $sql = $this->db->prepare("SELECT * WHERE (member=? and secondarymember=?) or (secondarymember=? and member=?)");
         $sql->execute(array(
-            $guestID
+            $currentuserid,
+            $event,
+            $event,
+            $currentuserid
         ));
         $guest = $sql->fetch(PDO::FETCH_ASSOC);
         
