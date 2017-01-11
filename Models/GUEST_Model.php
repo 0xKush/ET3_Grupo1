@@ -16,27 +16,13 @@ class GUEST_Model
     {
         $events = array();
         
-        $sql = $this->db->prepare("SELECT e.id, e.name FROM event as e, guest as g where g.member=? AND g.status=? ORDER BY e.name");
+        $sql = $this->db->prepare("SELECT distinct e.id, e.name FROM event as e, guest as g where g.member=? or g.secondarymember=? AND g.status=? ORDER BY e.name");
         $sql->execute(array(
+            $currentuserid,
             $currentuserid,
             $invited
         ));
         $events_db = $sql->fetchAll(PDO::FETCH_ASSOC);
-        
-        foreach ($events_db as $event) {
-            array_push($events, new Event($event["id"], $event["name"]));
-        }
-        
-        $sql = $this->db->prepare("SELECT e.id, e.name FROM event as e, guest as g where g.secondarymember=? AND g.status=? ORDER BY e.name");
-        $sql->execute(array(
-            $currentuserid,
-            $invited
-        ));
-        $events_db = $sql->fetchAll(PDO::FETCH_ASSOC);
-        
-        foreach ($events_db as $event) {
-            array_push($events, new Event($event["id"], $event["name"]));
-        }
         
         return $events;
     }
