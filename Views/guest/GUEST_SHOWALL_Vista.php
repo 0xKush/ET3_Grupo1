@@ -53,7 +53,7 @@ $umapper = new USER_Model();
 							 			
 							 		<?php else: ?>
 							 			
-							 				<form action="index.php?controller=userevent&action=delete" method="post">
+							 				<form action="index.php?controller=guest&action=delete" method="post">
 							 					<button type="submit" name="id" value="<?=$event->getID() ?>"	 class="btn btn-warning"><?= i18n("Unsubscribe") ?></button>
 							 				</form>
 							 			
