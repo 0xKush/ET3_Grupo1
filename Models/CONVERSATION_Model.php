@@ -11,10 +11,10 @@ class CONVERSATION_Model
         $this->db = PDOConnection::getInstance();
     }
     
-    public function showall()
+    public function showall($currentuserid)
     {
-        $sql = $this->db->prepare("SELECT * FROM conversation ORDER BY startdate ASC");
-        $sql->execute();
+        $sql = $this->db->prepare("SELECT DISTINCT * FROM conversation WHERE member = ? or secondarymember=? ORDER BY startdate ASC");
+        $sql->execute($currentuserid, $currentuserid);
         $conversations_db = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         $conversations = array();
