@@ -11,6 +11,13 @@ $errors = $view->getVariable("errors");
 <?php print_r($errors) ?>
 
 	<div class="container-fluid">
+		<div class="row text-center" style="padding-left: 15px;padding-right: 15px">
+			<div class="panel">
+					<div class="panel-body">
+					<font class="title"><?= i18n("Administration") ?></font>
+				</div>				
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-sm-4 text-center">
 				<div class="panel">
