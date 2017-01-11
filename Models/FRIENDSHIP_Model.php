@@ -40,11 +40,14 @@ class FRIENDSHIP_Model
         return $friends;
     }
     
-    public function showcurrent($friendshipID)
+    public function showcurrent($currentuserid, $friend)
     {
-        $sql = $this->db->prepare("SELECT * FROM friendship WHERE id=?");
+        $sql = $this->db->prepare("SELECT * FROM friendship WHERE (member=? and secondarymember=?) or (secondarymember=? and member=?)");
         $sql->execute(array(
-            $friendshipID
+            $currentuserid,
+            $friend,
+            $friend,
+            $currentuserid
         ));
         $friendship = $sql->fetch(PDO::FETCH_ASSOC);
         
