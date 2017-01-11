@@ -14,7 +14,7 @@ class PUBLICATION_Model
     
     public function showall($destinationID, $type)
     {
-        $sql = $this->db->prepare("SELECT * FROM publication WHERE destination=? AND type=? ORDER BY creationdate");
+        $sql = $this->db->prepare("SELECT * FROM publication WHERE destination=? AND type=? ORDER BY id DESC");
         $sql->execute(array(
             $destinationID,
             $type
