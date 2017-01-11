@@ -14,7 +14,10 @@ class CONVERSATION_Model
     public function showall($currentuserid)
     {
         $sql = $this->db->prepare("SELECT DISTINCT * FROM conversation WHERE member = ? or secondarymember=? ORDER BY startdate ASC");
-        $sql->execute($currentuserid, $currentuserid);
+        $sql->execute(array(
+            $currentuserid,
+            $currentuserid
+        ));
         $conversations_db = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         $conversations = array();
