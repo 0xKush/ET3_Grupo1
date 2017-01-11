@@ -3,7 +3,6 @@ require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 $user = $view->getVariable("user");
 $errors = $view->getVariable("errors");
-$id = $_GET["id"];
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
@@ -98,6 +97,8 @@ value="down"><?= i18n("Down")?></option>
 			    <input type="file" class="form-control-file" id="file" name="file">
 			    
 			</div>
+			<input type ="hidden" name="id" value="<?= $user->getID()?>">
+			<input type ="hidden" name="user" value="<?= $user->getUser()?>">
 			<button type="submit" name="submit" class="btn btn-primary pull-right"><?= i18n("Submit")?></button>
 		    </form>
 	 	</div>

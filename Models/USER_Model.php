@@ -69,14 +69,14 @@ class USER_Model {
     {
         if ($user->getPassword()) {
             $sql = $this->db->prepare("UPDATE user SET user=?, name=?, surname=?, email=?, phone=?, birthday=?,
-                                                       address=?, status=?, photo=?, deletedate=?, type=?, private=?, password=? where id=?");
+                                                       address=?, status=?, photo=?, type=?, private=?, password=? where id=?");
             $sql->execute(array($user->getUser(), $user->getName(), $user->getSurname(), $user->getEmail(),
                                 $user->getPhone(), $user->getBirthday(), $user->getAddress(), $user->getStatus(), $user->getPhoto(),
                                 $user->Type(), $user->getPrivate(), $user->getPassword(), $user->getID()));
         }
         else {
             $sql = $this->db->prepare("UPDATE user SET user=?, name=?, surname=?, email=?, phone=?, birthday=?,
-                                                       address=?, status=?, photo=?, deletedate=?, type=?, private=? where id=?");
+                                                       address=?, status=?, photo=?, type=?, private=? where id=?");
             $sql->execute(array($user->getUser(), $user->getName(), $user->getSurname(), $user->getEmail(),
                                 $user->getPhone(), $user->getBirthday(), $user->getAddress(), $user->getStatus(), $user->getPhoto(),
                                 $user->Type(), $user->getPrivate(), $user->getID()));

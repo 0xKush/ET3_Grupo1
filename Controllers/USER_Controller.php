@@ -167,12 +167,14 @@ class USER_Controller extends BaseController
         }
         
         if (isset($_POST["submit"])) {
-            if ($upload->checkFile()) {
-                $user->setPhoto($upload->getDestination());
-            } else {
-                $errors            = array();
-                $errors["general"] = i18n("Error while upload image");
-                $this->view->setVariable("errors", $errors);
+            if (isset($_POST["file"])) {
+                if ($upload->checkFile()) {
+                    $user->setPhoto($upload->getDestination());
+                } else {
+                    $errors            = array();
+                    $errors["general"] = i18n("Error while upload image");
+                    $this->view->setVariable("errors", $errors);
+                }
             }
             
             $user->setName($_POST["name"]);
@@ -191,7 +193,9 @@ class USER_Controller extends BaseController
             } else {
                 $user->setPrivate(FALSE);
             }
-            $user->setPassword($_POST["password"]);
+            if ($_POST["password"]){
+                $user->setPassword($_POST["password"]);
+            }
             
             try {
                 if ($user->getUser() == $_POST["user"] && $user->getEmail() == $_POST["email"]) {
