@@ -1,5 +1,6 @@
 body{
 	background-color: #d3d3d3;
+	font-family: 'Roboto', sans-serif; 
 }
 
 nav{
@@ -14,7 +15,27 @@ nav{
 	width: 20px;
 }
 
-.smallPhoto{
-	height: 35px;
-	width: 35px;
+.showPhoto{
+	height: 120px;
+	width: 120px;
+}
+
+.pfname{
+	font-size: 30px;
+	font-style: bold;
+	margin-top: 10px;
+}
+.pfusername{
+	font-size: 25px;
+	font-style: italic;
+	color: grey;
+}
+
+.name{
+	font-style: bold;
+	margin-top: 10px;
+}
+.user{
+	font-style: italic;
+	color: grey;
 }

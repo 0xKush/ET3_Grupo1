@@ -26,6 +26,8 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
 
     <!-- includes for datepicker -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- body font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
     <script src="js/jquery.min.js"></script>
     <!--  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
@@ -65,9 +67,9 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
           <?php if ($photo != NULL): ?>
-            <img class="profileThumbnail" src="media/profileImages/<?=$photo ?>" alt=""> 
+            <img class="img-circle profileThumbnail" src="media/profileImages/<?=$photo ?>" alt=""> 
           <?php else:  ?>
-            <img class="profileThumbnail" src="media/profileImages/default.png" alt="">
+            <img class="img-circle profileThumbnail" src="media/profileImages/default.png" alt="">
           <?php endif ?>
 
            <?=$currentuser ?>
@@ -100,7 +102,11 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
       <ul class="navbar-form navbar-right">
         <div class="form-group">
         </div>
-        <a href="index.php?controller=user&action=search"><button type="submit" class="btn btn-primary"><?= i18n("Search") ?></button></a>
+        <a href="index.php?controller=user&action=search">
+          <button type="submit" class="btn btn-primary"><?= i18n("Search") ?>
+            
+          </button>
+        </a>
         <?php include(__DIR__."/../layouts/language_select_element.php"); ?>
       </form>
     </div><!-- /.navbar-collapse -->
@@ -113,7 +119,7 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
 		      <?= $view->popFlash() ?>
 	    </div>
 
-	    <div class="col-xs-12 col-md-10 col-md-offset-1" >
+	    <div class="col-xs-12 col-md-8 col-md-offset-2" >
         <div class="container-fluid">
           <?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
         </div>
@@ -130,6 +136,7 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
 	     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     
 
     <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>    

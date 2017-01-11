@@ -25,11 +25,13 @@ $conversations = $view->getVariable("conversations");
  			</div>
  		</div>
 
- 		<div class="well">
- 			<div class="row">
- 				
- 			</div>
- 		</div>
  		
+ 		<?php foreach ($conversations as $c): ?>
+ 					<div class="well">
+			 			<div class="row">
+			 				<?php var_dump($c) ?>
+			 			</div>
+			 		</div>
+ 				<?php endforeach ?>
  		
  	</div>

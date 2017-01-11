@@ -34,16 +34,13 @@
  			</div>
 
  			<div class="col-md-8">
- 				<div id="dataDump">
- 					<div class="container">
- 						<?php 
- 							echo $user->getName().'</br>';
- 							echo $user->getSurname().'</br>';
- 							echo $user->getUser().'</br>';
- 							echo $user->getPhoto();
- 						 ?>
- 					</div>
+ 				<div class="row pfname">
+ 					<font><?=$user->getName() ?> <?=$user->getSurname() ?></font>
  				</div>
+ 				<div class="row pfusername">
+ 					<font >@<?=$user->getUser()  ?></font>
+ 				</div>
+ 				
  				
  			</div>
  		</div>

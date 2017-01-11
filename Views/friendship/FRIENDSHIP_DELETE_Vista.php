@@ -3,8 +3,8 @@ require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 $user = $view->getVariable("user");
 $errors = $view->getVariable("errors");
-$friends = $view->getVariable("friends");
-$requests = $view->getVariable("requests");
+$friendship = $view->getVariable("friendship");
+$friend = $view->getVariable("friend");
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
@@ -41,9 +41,9 @@ $requests = $view->getVariable("requests");
 							<div class="row text-center" style="margin-top: 5px">
 								<form action="index.php?controller=friendship&action=delete" method="post">
 									<input type="text" hidden="hidden" name="id" value="<?=$friend->getID() ?>">
-									<button class="btn btn-danger" type="submit" name="submit">
+									<button class="btn btn-danger" type="submit" name="yes">
 										<i class="fa fa-trash-o fa-fw"></i>
-										<?= i18n("Unfriend") ?>
+										<?= i18n("Yes, unfriend") ?>
 									</button>
 								</form>
 							</div>
