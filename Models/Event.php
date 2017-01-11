@@ -29,7 +29,7 @@ class Event
         $this->description  = $description;
         $this->status       = $status;
         $this->name         = $name;
-        $this->private         = $private;
+        $this->private      = $private;
     }
     
     

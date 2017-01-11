@@ -46,7 +46,7 @@ class Permissions {
 
     public function isEventMember($userid, $eventid)
     {
-        $sql = $this->db->prepare("SELECT count(id) FROM guest where eventid=? and (member=? or secondarymember=?) and status=1");
+        $sql = $this->db->prepare("SELECT count(id) FROM guest where event=? and (member=? or secondarymember=?) and status=1");
         $sql->execute(array($eventid, $userid, $userid));
 
         if ($sql->fetchColumn() > 0) {

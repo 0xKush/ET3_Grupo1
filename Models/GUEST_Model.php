@@ -37,12 +37,12 @@ class GUEST_Model
     
     public function showcurrent($currentuserid, $event)
     {
-        $sql = $this->db->prepare("SELECT * WHERE (member=? and secondarymember=?) or (secondarymember=? and member=?)");
+        $sql = $this->db->prepare("SELECT * FROM guest WHERE (member=? and event=?) or (secondarymember=? and event=?)");
         $sql->execute(array(
             $currentuserid,
             $event,
-            $event,
-            $currentuserid
+            $currentuserid,
+            $event
         ));
         $guest = $sql->fetch(PDO::FETCH_ASSOC);
         
