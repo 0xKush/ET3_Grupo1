@@ -22,7 +22,7 @@ $requests = $view->getVariable("requests");
  							<div class="row text-center">
  								<a href="index.php?controller=user&action=showcurrent&id=<?= $friend->getID()?>">
  									<?php if ($friend->getPhoto() != NULL): ?>
- 										<img class="img-circle showPhoto"> src="media/profileImages/<?=$friend->getPhoto()  ?>" alt="<?=$friend->getPhoto()  ?>">
+ 										<img class="img-circle showPhoto" src="media/profileImages/<?=$friend->getPhoto()  ?>" alt="<?=$friend->getPhoto()  ?>">
  									<?php else: ?>
  										<img class="img-circle showPhoto" src="media/profileImages/default.png" alt="default.png">
  									<?php endif ?>
@@ -41,7 +41,7 @@ $requests = $view->getVariable("requests");
 							<div class="row text-center" style="margin-top: 5px">
 								<form action="index.php?controller=friendship&action=delete" method="post">
 									<input type="text" hidden="hidden" name="id" value="<?=$friend->getID() ?>">
-									<button class="btn btn-danger" type="submit" name="submit">
+									<button class="btn btn-danger" type="submit" >
 										<i class="fa fa-trash-o fa-fw"></i>
 										<?= i18n("Unfriend") ?>
 									</button>

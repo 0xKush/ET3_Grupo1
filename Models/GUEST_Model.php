@@ -16,7 +16,7 @@ class GUEST_Model
     {
         $events = array();
         
-        $sql = $this->db->prepare("SELECT distinct e.id, e.name FROM event as e, guest as g where g.member=? or g.secondarymember=? AND g.status=? ORDER BY e.name");
+        $sql = $this->db->prepare("SELECT distinct e.id, e.name, e.owner FROM event as e, guest as g where g.member=? or g.secondarymember=? AND g.status=? ORDER BY e.name");
         $sql->execute(array(
             $currentuserid,
             $currentuserid,
@@ -28,6 +28,7 @@ class GUEST_Model
             $ev = new Event();
             $ev->setID($event["id"]);
             $ev->setName($event["name"]);
+            $ev->setOwner($event["owner"]);
             array_push($events, $ev);
         }
         

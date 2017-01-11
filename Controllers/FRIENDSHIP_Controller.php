@@ -110,7 +110,7 @@ class FRIENDSHIP_Controller extends BaseController {
             
             $this->view->redirect("friendship", "showall", "id=".$this->currentUser->getID());
         }
-        
+
         $this->view->setVariable("friendship", $friendship);
         $this->view->render("friendship", "FRIENDSHIP_DELETE_Vista");
     }

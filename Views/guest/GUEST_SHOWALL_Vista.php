@@ -18,61 +18,58 @@ $umapper = new USER_Model();
  	<!-- se user = currentuser mostrar edit perfil -->
 	
 
- 	<div class="col-md-8 col-md-offset-2">
- 		<div class="row">
- 			<div class="col-md-3">
-	 			<div class="container">
-	 				<h1 class="heading"><?= i18n("Your Events") ?></h1>
-	 			</div>
- 				
- 			</div>
- 		</div>
-		
-		<?php foreach ($events as $event): ?>
-				<div class="well">
-		 			<div class="row">
-		 				<a href="index.php?controller=event&action=showcurrent&id=<?= $event->getID()  ?>"><?= $event->getName()?></a>
-		 			</div>
-		 			<div class="">
-		 				<a href="index.php?controller=user&action=showcurrent&id=<?= $event->getOwner()  ?>">
-		 				<?php $owner = $umapper->showcurrent($event->getOwner())?>
-		 				<?php if ($owner->getPhoto() != NULL): ?>
-		 					<img class="smallPhoto" src="media/profileImages/<?=$owner->getPhoto() ?>" alt="">
-		 				<?php else: ?>
-		 					<img class="smallPhoto" src="media/profileImages/default.png" alt="">
-		 				<?php endif ?>
-		 				<?= $owner->getUser(); ?></a>
-		 			</div>
-		 			<div class="row">
-		 				<?= $event->getDescription() ?>
-		 			</div>
-		 			<div class="row">
-		 			<?php if ($owner->getID() == $currentuserid): ?>
-		 				<div class="pull-right">
-			 				<a href="index.php?controller=event&action=delete&id=<?= $event->getID()  ?>">
-			 					<button class="btn btn-danger"><?= i18n("Delete") ?></button>
-			 				</a>
-			 			</div>
-			 		<?php else: ?>
-			 			<div class="pull-right">
-			 				<form action="index.php?controller=userevent&action=delete" method="post">
-			 					<button type="submit" name="id" value="<?=$event->getID() ?>"	 class="btn btn-warning"><?= i18n("Unsubscribe") ?></button>
-			 				</form>
-			 			</div>
-		 			<?php endif ?>
-		 			
-		 				
-		 			
-		 				<div class="pull-right">
-			 				<a href="index.php?controller=event&action=showcurrent&id=<?= $event->getID()  ?>">
-			 					<button class="btn btn-primary"><?= i18n("View") ?></button>
-			 				</a>
-			 			</div>
-		 			</div>
-			 			
-		 		</div>
-		<?php endforeach ?>
- 		
- 		
- 		
- 	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<?php foreach ($events as $event): ?>
+				<div class="col-md-6">
+					<div class="panel">
+						<div class="panel-body">
+							<div class="row text-center">
+								<font class="pfname"><?=$event->getName() ?></font>
+							</div>
+							<div class="row text-center" style="padding-left: 5px: padding-right: 5px">
+								<font class="user"><?=$event->getDescription() ?></font>
+							</div>
+							<div class="row" style="margin-top: 15px">
+								<div class="col-md-4 text-center">
+
+									<?php $owner = $umapper->showcurrent($event->getOwner())?>
+									<a href="index.php?controller=user&action=showcurrent&id=<?=$owner->getID() ?>">
+						 				<?php if ($owner->getPhoto() != NULL): ?>
+						 					<img class="img-circle smallPhoto" src="media/profileImages/<?=$owner->getPhoto() ?>" alt="">
+						 				<?php else: ?>
+						 					<img class="img-circle smallPhoto" src="media/profileImages/default.png" alt="">
+						 				<?php endif ?>
+					 				</a>
+					 				<font class="user">  @<?=$owner->getUser() ?></font>
+								</div>
+								<div class="col-md-4 text-center">
+									<?php if ($owner->getID() == $currentuserid): ?>
+						 				
+							 				<a href="index.php?controller=event&action=delete&id=<?= $event->getID()  ?>">
+							 					<button class="btn btn-danger"><?= i18n("Delete") ?></button>
+							 				</a>
+							 			
+							 		<?php else: ?>
+							 			
+							 				<form action="index.php?controller=userevent&action=delete" method="post">
+							 					<button type="submit" name="id" value="<?=$event->getID() ?>"	 class="btn btn-warning"><?= i18n("Unsubscribe") ?></button>
+							 				</form>
+							 			
+						 			<?php endif ?>
+								</div>
+								<div class="col-md-4 text-center">
+									<a href="index.php?controller=event&action=showcurrent&id=<?=$event->getID() ?>">
+										<button class="btn btn-info">
+											<?= i18n("View") ?>
+										</button>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php endforeach ?>
+		</div>
+	</div>

@@ -14,6 +14,17 @@
 <?php print_r($errors) ?>
 
 
+	<div class="container-fluid">
+		<div class="row">
+			<?php foreach ($groups as $group): ?>
+				<div class="col-md-12">
+					
+				</div>
+			<?php endforeach ?>
+		</div>
+	</div>
+
+
 
 	
 
