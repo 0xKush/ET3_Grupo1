@@ -44,7 +44,7 @@
  		<div class="row">
  		<div class="container-fluid">
  		<div class="pull-right">
- 			<a href="index.php?controller=event&action=add"><button class="btn btn-success"><?= i18n("Create New Event") ?></button></a>
+ 			<a href="index.php?controller=event&action=add"><button class="btn btn-success"><?= i18n("Create New Group") ?></button></a>
  		</div>
  		</div> 			
  		</div>

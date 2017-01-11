@@ -12,26 +12,40 @@ $conversations = $view->getVariable("conversations");
 <?php print_r($errors) ?>
 
 
- 	<!-- se user = currentuser mostrar edit perfil -->
-	
-
- 	<div class="col-md-8 col-md-offset-2">
+ 	<div class="container-fluid">
  		<div class="row">
- 			<div class="col-md-3">
-	 			<div class="container">
-	 				<h1 class="heading"><?= i18n("Your Conversations") ?></h1>
-	 			</div>
- 				
- 			</div>
- 		</div>
-
- 		
- 		<?php foreach ($conversations as $c): ?>
- 					<div class="well">
-			 			<div class="row">
-			 				<?php var_dump($c) ?>
+ 			<div class="panel">
+ 				<div class="panel-body">
+ 						<div class="text-center">
+			 				<font class="title"><?= i18n("Chats") ?></font>
 			 			</div>
-			 		</div>
- 				<?php endforeach ?>
- 		
+ 				</div>
+ 			</div>
+ 			
+ 		</div>
+ 		<?php foreach ($conversations as $c): ?>
+ 			<div class="col-md-6">
+ 				<div class="row">
+	 				<div class="panel">
+	 					<div class="panel-body">
+	 						 
+	 					</div>
+	 					<div class="panel-footer">
+	 						<div class="pull-left">
+	 							<form action="index.php?controller=conversation&action=delete" method="POST">
+	 								<input type="text" name="id" value="<?=$c->getID()  ?>" hidden="hidden">
+	 								<button type="submit" name="delete">
+	 									<i class="fa fa-trash-o"></i>
+	 									<?= i18n("Delete") ?>
+	 								</button>
+	 							</form>
+	 						</div>
+	 						<div class="pull">
+	 							
+	 						</div>
+	 					</div>
+	 				</div>
+ 				</div>
+ 			</div>			
+ 		<?php endforeach ?>
  	</div>

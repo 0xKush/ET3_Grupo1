@@ -1,11 +1,14 @@
 <?php 
 	
 	require_once(__DIR__."/../../core/ViewManager.php");
+	require_once(__DIR__."/../../Models/EVENT_Model.php");
 	$view = ViewManager::getInstance();
 	$user = $view->getVariable("user");
 	$errors = $view->getVariable("errors");
-	$group = $view->getVariable("group");
-	$id = $_GET["id"];
+	$guest = $view->getVariable("guest");
+
+	$emapper = new EVENT_Model();
+	$event = $emapper->showcurrent($guest->getEvent());
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
@@ -16,14 +19,14 @@
 
 	<div class="container">
 		<div class="col-xs-12 col-md-4 col-md-offset-4">
-		<form action="index.php?controller=group&action=delete&id=<?=$id ?>">
+		<form action="index.php?controller=guest&action=delete&id=<?=$id ?>">
 			<div class="well">
 				<div class="row">
-					<?= i18n("Unsubscribe from group ") ?><?= $group->getName()?>?
+					<?= i18n("Unsubscribe from event ") ?><?= $event->getName()?>?
 				</div>
 				<div class="row">
 					<div class="pull-right">
-					<a href="index.php?controller=usergroup&action=showall">
+					<a href="index.php?controller=group&action=showall">
 					<button type="button" class="btn btn-default"><?= i18n("No, go back") ?></button></a>                                                              
                     <button type="submit" value="yes" class="btn btn-danger"><?= i18n("Yes, delete it ") ?></button>
 

@@ -327,6 +327,11 @@ class USER_Controller extends BaseController
     {
         $this->view->render("user", "USER_ADMIN_Vista");
     }
+
+    public function searchselect()
+    {
+        $this->view->render("user", "USER_SEARCHSELECT_Vista");
+    }
     
     public function search()
     {

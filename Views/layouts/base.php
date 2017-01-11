@@ -102,7 +102,7 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
       <ul class="navbar-form navbar-right">
         <div class="form-group">
         </div>
-        <a href="index.php?controller=user&action=search">
+        <a href="index.php?controller=user&action=searchselect">
           <button type="submit" class="btn btn-primary"><?= i18n("Search") ?>
             
           </button>
