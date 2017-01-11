@@ -52,7 +52,8 @@ class Event
     {
         return $this->id;
     }
-    private function setID($id)
+    
+    public function setID($id)
     {
         $this->id = $id;
         
@@ -66,7 +67,7 @@ class Event
     }
     
     
-    private function setCreationDate($creationdate)
+    public function setCreationDate($creationdate)
     {
         $this->creationdate = $creationdate;
         
@@ -80,7 +81,7 @@ class Event
     }
     
     
-    private function setOwner($owner)
+    public function setOwner($owner)
     {
         $this->owner = $owner;
         
@@ -94,7 +95,7 @@ class Event
     }
     
     
-    private function setStartDate($startdate)
+    public function setStartDate($startdate)
     {
         $this->startdate = $startdate;
         
@@ -108,7 +109,7 @@ class Event
     }
     
     
-    private function setEndDate($enddate)
+    public function setEndDate($enddate)
     {
         $this->enddate = $enddate;
         
@@ -122,7 +123,7 @@ class Event
     }
     
     
-    private function setStartHour($starthour)
+    public function setStartHour($starthour)
     {
         $this->starthour = $starthour;
         
@@ -136,7 +137,7 @@ class Event
     }
     
     
-    private function setEndHour($endhour)
+    public function setEndHour($endhour)
     {
         $this->endhour = $endhour;
         
@@ -150,7 +151,7 @@ class Event
     }
     
     
-    private function setDescription($description)
+    public function setDescription($description)
     {
         $this->description = $description;
         
@@ -164,7 +165,7 @@ class Event
     }
     
     
-    private function setStatus($status)
+    public function setStatus($status)
     {
         $this->status = $status;
         
@@ -178,7 +179,7 @@ class Event
     }
     
     
-    private function setName($name)
+    public function setName($name)
     {
         $this->name = $name;
         
@@ -192,7 +193,7 @@ class Event
     }
     
     
-    private function setPrivate($private)
+    public function setPrivate($private)
     {
         $this->private = $private;
         

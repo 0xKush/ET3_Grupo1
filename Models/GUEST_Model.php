@@ -23,6 +23,13 @@ class GUEST_Model
             $invited
         ));
         $events_db = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($events_db as $event) {
+            $ev = new Event();
+            $ev->setID($event["id"]);
+            $ev->setName($event["name"]);
+            array_push($events, $ev);
+        }
         
         return $events;
     }
