@@ -53,3 +53,12 @@ nav{
 .title{
 	font-size: 35px;
 }
+
+
+.sent{
+	background: #f0ffc9 ;
+}
+
+.received{
+	background: #fff5bf ;
+}

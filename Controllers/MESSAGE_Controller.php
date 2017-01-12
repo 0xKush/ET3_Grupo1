@@ -66,7 +66,7 @@ class MESSAGE_Controller extends BaseController
             try {
                 $this->messageModel->add($message);
                 $this->view->setFlash(sprintf(i18n("Message\"%s\" successfully sent.")));
-                $this->view->redirect("message", "show");
+                $this->view->redirect("conversation", "showcurrent", "id=".$_POST["conversation"]);
                 
             }
             catch (ValidationException $ex) {

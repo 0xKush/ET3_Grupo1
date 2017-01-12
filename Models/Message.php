@@ -34,7 +34,7 @@ class Message
     }
     
     
-    private function setID($id)
+    public function setID($id)
     {
         $this->id = $id;
         
@@ -48,7 +48,7 @@ class Message
     }
     
     
-    private function setConversation($conversation)
+    public function setConversation($conversation)
     {
         $this->conversation = $conversation;
         
@@ -62,7 +62,7 @@ class Message
     }
     
     
-    private function setOwner($owner)
+    public function setOwner($owner)
     {
         $this->owner = $owner;
         
@@ -76,7 +76,7 @@ class Message
     }
     
     
-    private function setSendDate($senddate)
+    public function setSendDate($senddate)
     {
         $this->senddate = $senddate;
         
@@ -90,7 +90,7 @@ class Message
     }
     
     
-    private function setSendHour($sendhour)
+    public function setSendHour($sendhour)
     {
         $this->sendhour = $sendhour;
         
@@ -104,7 +104,7 @@ class Message
     }
     
     
-    private function setContent($content)
+    public function setContent($content)
     {
         $this->content = $content;
         
@@ -118,7 +118,7 @@ class Message
     }
     
     
-    private function setStatus($status)
+    public function setStatus($status)
     {
         $this->status = $status;
         

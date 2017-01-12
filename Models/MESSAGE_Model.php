@@ -1,6 +1,8 @@
 <?php
 
 require_once(__DIR__ . "/../core/PDOConnection.php");
+require_once(__DIR__ . "/../Models/Message.php");
+
 
 class MESSAGE_Model
 {
@@ -14,7 +16,7 @@ class MESSAGE_Model
     public function showall($conversationID)
     {
         $sql = $this->db->prepare("SELECT * FROM message WHERE conversation=? ORDER BY id ASC");
-        $sql->execute($conversationID);
+        $sql->execute(array($conversationID));
         $messages_db = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         $messages = array();
