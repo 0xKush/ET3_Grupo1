@@ -1,19 +1,21 @@
 <?php
 require_once(__DIR__."/../../core/ViewManager.php");
-require_once(__DIR__."/../../Models/USER_Model.php");
 $view = ViewManager::getInstance();
-$user = $view->getVariable("user");
+$currentuserid = $view->getVariable("currentuserid");
 $errors = $view->getVariable("errors");
 $friendship = $view->getVariable("friendship");
 
-$umodel = new USER_Model();
-$friend = $umodel->showcurrent($friendship->getSecondaryMember());
+if ($friendship->getMember() == $currentuserid) {
+								$friendid = $friendship->getSecondaryMember();
+							}else{							
+							 	$friendid = $friendship->getMember();
+							}
+
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
-<?php print_r($errors) ?>
 
 
  	<div class="container-fluid">
@@ -21,12 +23,11 @@ $friend = $umodel->showcurrent($friendship->getSecondaryMember());
  			<div class="panel">
  				<div class="panel-body">
  					<div class="row text-center">
- 						<?= i18n("Are you sure you wanna unfriend") ?> <?=$friend->getName() ?>(
- 						<font class="user">@<?=$friend->getUser() ?></font> )?
+ 						<?= i18n("Are you sure you wanna unfriend this user")?>?
  					</div>
  					<div class="pull-right">
  						<form action="index.php?controller=friendship&action=delete" method="post">
- 							<input hidden="hidden" type="text" name="id" value="<?=$friendship->getID()?>">
+ 							<input hidden="hidden" type="text" name="id" value="<?=$friendid?>">
  							<button class="btn btn-default" type="submit" value="no" name="submit">
  								<?= i18n("No") ?>
  							</button>
