@@ -1,7 +1,7 @@
 <?php
 
 require_once(__DIR__ . "/../../core/ViewManager.php");
-require_once(__DIR__ . "/../../Controllers/LANGUAGE_controller.php");
+require_once(__DIR__ . "/../../Controllers/LANGUAGE_Controller.php");
 $lc = new LANGUAGE_controller();
 $idioma = $lc->getLanguage();
 $view        = ViewManager::getInstance();

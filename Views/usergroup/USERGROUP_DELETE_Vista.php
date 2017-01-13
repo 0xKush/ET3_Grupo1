@@ -15,7 +15,7 @@
 
 	<div class="container">
 		<div class="col-xs-12 col-md-4 col-md-offset-4">
-		<form action="index.php?controller=usergroup&action=delete&id=<?= $usergroup->getID() ?>" method = "post">
+		<form action="index.php?controller=usergroup&action=delete&id=<?= $usergroup->getGroupID() ?>" method = "post">
 			<div class="well">
 				<div class="row">
 					<?= i18n("Unsubscribe from group ") ?>
