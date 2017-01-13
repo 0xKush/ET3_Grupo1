@@ -16,7 +16,7 @@
 
 	<div class="container">
 		<div class="col-xs-12 col-md-4 col-md-offset-4">
-		<form action="index.php?controller=group&action=delete&id=<?=$id ?>">
+		<form action="index.php?controller=group&action=delete&id=<?=$id ?>" method="post">
 			<div class="well">
 				<div class="row">
 					<?= i18n("Delete Group: ") ?><?= $group->getName()?>

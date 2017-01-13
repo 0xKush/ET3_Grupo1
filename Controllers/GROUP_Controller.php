@@ -150,7 +150,7 @@ class GROUP_Controller extends BaseController
                 $this->groupModel->delete($group);
                 $this->view->setFlash(sprintf(i18n("Group \"%s\" successfully deleted."), $group->getName()));
             }
-            $this->view->redirect("group", "show");
+            $this->view->redirect("usergroup", "showall", "id=" . $this->currentUser->getID());
         }
         $this->view->setVariable("group", $group);
         $this->view->render("group", "GROUP_DELETE_Vista");
