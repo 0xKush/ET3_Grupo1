@@ -65,7 +65,7 @@ $umapper = new USER_Model();
 	 							</form>
 	 						</div>
 	 						<div class="pull-right">
-	 							<form action="index.php?controller=conversation&action=showcurrent" method="POST">
+	 							<form action="index.php?controller=conversation&action=showcurrent&id=<?=$c->getID()  ?>" method="POST">
 	 								<input type="text" name="id" value="<?=$c->getID()  ?>" hidden="hidden">
 	 								<button class="btn btn-default" type="submit" name="delete">
 	 									<?= i18n("View") ?>

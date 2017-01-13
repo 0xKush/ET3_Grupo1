@@ -32,7 +32,7 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
     <!-- body font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-    <link rel="stylesheet" href="lib/parsley/parsley/parsley.css">
+    <link rel="stylesheet" href="lib/parsley/parsley.css">
 
     <script src="js/jquery.min.js"></script>
     <!--  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
@@ -156,10 +156,9 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
 	     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/chat.js"></script>
 
-    
-
-    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>    
+    <script src="js/jquery-ui.min.js"></script>    
     <script src="js/datepicker/datepicker_scripts.js"></script>
     <!-- DataTables JavaScript -->
     

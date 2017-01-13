@@ -28,7 +28,8 @@ $messages = $mmapper->showall($conversation->getID());
 						<div class="panel-heading text-center" style="font-size: 35px">
 							<?= i18n("Chat with") ?>: <font class="user">@<?=$receiver->getUser() ?></font>
 						</div>
-						<div class="panel-body">
+						<div class="panel-body" id="panel-body">
+						        <?php $messages = $mmapper->showall($conversation->getID()); ?>
 							<?php foreach ($messages as $msg): ?>
 								<?php if ($msg->getOwner() == $currentuserid): ?>
 										<div class="col-xs-10 col-xs-offset-2">
@@ -82,11 +83,3 @@ $messages = $mmapper->showall($conversation->getID());
 							</form>
 						</div>
 					</div>
-					
-
-		
-		
-	
-
-
-	
