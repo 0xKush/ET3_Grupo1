@@ -58,6 +58,7 @@ $umapper = new USER_Model();
 							<div class="row"> 
 							
 							<?php if ($owner->getID() == $currentuserid): ?>
+								<div class="col-md-6">
 					 				<a href="index.php?controller=group&action=delete&id=<?= $group->getID()  ?>">
 					 					<button class="btn btn-danger btn-md"><?= i18n("Delete") ?></button>
 					 				</a>
