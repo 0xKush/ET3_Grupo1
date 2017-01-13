@@ -239,16 +239,16 @@ class EVENT_Controller extends BaseController
                 if ($flag) {
                     $query .= " AND ";
                 }
-                $query .= "private LIKE '%" . $_POST["private"] . "%'";
+                $query .= "private LIKE '%" . $_POST["private"] . "%' ";
             }
             
             if (empty($query)) {
-                $events = $this->userModel->showall();
+                $events = $this->eventModel->showall();
             } else {
-                $events = $this->userModel->search($query);
+                $events = $this->eventModel->search($query);
             }
             $this->view->setVariable("events", $events);
-            $this->view->render("event", "EVENT_SHOW_Vista");
+            $this->view->render("guest", "GUEST_SHOWALL_Vista");
         } else {
             $this->view->render("event", "EVENT_SEARCH_Vista");
         }

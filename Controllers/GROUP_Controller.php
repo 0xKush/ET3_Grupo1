@@ -206,7 +206,7 @@ class GROUP_Controller extends BaseController
                 $groups = $this->groupModel->search($query);
             }
             $this->view->setVariable("groups", $groups);
-            $this->view->render("group", "GROUP_SHOW_Vista");
+            $this->view->render("usergroup", "USERGROUP_SHOWALL_Vista");
         } else {
             $this->view->render("group", "GROUP_SEARCH_Vista");
         }

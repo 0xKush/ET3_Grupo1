@@ -21,6 +21,13 @@ $umapper = new USER_Model();
 
 	<div class="container-fluid">
 		<div class="row">
+			<?php if ($groups == NULL): ?>
+				<div class="panel">
+					<div class="panel-body">
+						<h1><?= i18n("No entries to show") ?></h1>
+					</div>
+				</div>
+			<?php endif ?>
 			<?php foreach ($groups as $group): ?>
 				<div class="col-md-6">
 					<div class="panel">

@@ -15,6 +15,15 @@ $requests = $view->getVariable("requests");
 
  	<div class="container-fluid">
  		<div class="row">
+ 		<?php if ($friends == NULL): ?>
+ 			<div class="panel">
+ 				<div class="panel-body">
+ 					 <h1 class="text-center">
+ 					 	<?= i18n("No entries to show") ?>
+ 					 </h1>
+ 				</div>
+ 			</div>
+ 		<?php endif ?>
  			<?php foreach ($friends as $friend): ?>
  				<div class="col-md-3">
  					<div class="panel">
@@ -31,22 +40,23 @@ $requests = $view->getVariable("requests");
 
  							<div class="row text-center">
  								<div class="row name">
- 									<font><?=$friend->getName() ?> <?=$friend->getSurname() ?></font>
+ 									<font class="name"><?=$friend->getName() ?> <?=$friend->getSurname() ?></font>
  								</div>
  								<div class="row user">
  									<font>@<?=$friend->getUser()  ?></font>
  								</div>
  							</div>
 
-							<div class="row text-center" style="margin-top: 5px">
+							
+ 						</div>
+ 						<div class="panel-footer"> 							
 								<form action="index.php?controller=friendship&action=delete" method="post">
 									<input type="text" hidden="hidden" name="id" value="<?=$friend->getID() ?>">
-									<button class="btn btn-danger" type="submit" >
+									<button class="btn btn-danger btn-block" type="submit" >
 										<i class="fa fa-trash-o fa-fw"></i>
 										<?= i18n("Unfriend") ?>
 									</button>
 								</form>
-							</div>
  						</div>
  					</div>
  				</div>

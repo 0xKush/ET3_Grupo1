@@ -32,12 +32,31 @@
 					  </div>
 
 					  <div class="form-group">
+					    <label for="date"><?= i18n("Creation date")?></label>
+					    <input type="text" class="form-control" id="date" name="creationdate" >
+					  </div>
+
+					  <div class="form-group">
 					    <label for="date"><?= i18n("Start date")?></label>
 					    <input type="text" class="form-control" id="date" name="startdate" >
 					  </div>
 					  <div class="form-group">
 					    <label for="date2"><?= i18n("End date")?></label>
 					    <input type="text" class="form-control" id="date2" name="enddate" >
+					  </div>
+					   <div class="form-group">
+					    <label for="status"><?= i18n("Status")?></label>
+					    <select class="form-control" id="status" name="status">
+					      <option value="1"><?= i18n("Active")?></option>
+					      <option value="0"><?= i18n("Deceased")?></option>
+					    </select>
+					  </div>
+					  <div class="form-group">
+					    <label for="private"><?= i18n("Visivility")?></label>
+					    <select class="form-control" id="private" name="private">
+					      <option value="1"><?= i18n("Public")?></option>
+					      <option value="0"><?= i18n("Private")?></option>
+					    </select>
 					  </div>
 
 

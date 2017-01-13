@@ -5,6 +5,7 @@ $currentuserid = $view->getVariable("currentuserid");
 $publications = $view->getVariable("publications");
 $errors = $view->getVariable("errors");
 $group = $view->getVariable("group");
+$owner = $view->getVariable("owner");
 $isMember = $view->getVariable("ismember");
 require_once(__DIR__."/../../Models/USER_Model.php");
 $umapper = new USER_Model();
@@ -15,6 +16,21 @@ $umapper = new USER_Model();
 <?php $view->moveToDefaultFragment(); ?>
 
 <?php print_r($errors) ?>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="panel">
+			<div class="panel-body">
+				<h1><?=$group->getName() ?></h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		
+	</div>
+	
+</div>
 
 
  	<!-- se user = currentuser mostrar edit perfil -->

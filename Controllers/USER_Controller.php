@@ -389,8 +389,8 @@ class USER_Controller extends BaseController
             } else {
                 $users = $this->userModel->search($query);
             }
-            $this->view->setVariable("users", $users);
-            $this->view->render("user", "USER_SHOW_Vista");
+            $this->view->setVariable("friends", $users);
+            $this->view->render("friendship", "FRIENDSHIP_SHOWALL_Vista");
         } else {
             $this->view->render("user", "USER_SEARCH_Vista");
         }

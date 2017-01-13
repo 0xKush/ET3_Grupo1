@@ -76,7 +76,7 @@ $errors = $view->getVariable("errors");
 						<a href="index.php?controller=event&action=search">
 							<button class="btn btn-block btn-primary">
 								<i class="fa fa-search"></i>
-								<?= i18n("Seaarch") ?>
+								<?= i18n("Search") ?>
 							</button>
 						</a>
 					</div>

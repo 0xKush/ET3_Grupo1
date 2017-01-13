@@ -115,7 +115,7 @@ class USERGROUP_Controller extends BaseController
         
         $usergroupid = $_REQUEST["id"];
         $usergroup   = $this->usergroupModel->showcurrent($this->currentUser->getID(), $usergroupid);
-        
+
         if ($usergroup == NULL) {
             throw new Exception(i18n("No such usergroup with id: ") . $usergroupid);
         }
