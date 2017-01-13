@@ -39,7 +39,7 @@ $umapper = new USER_Model();
 								<font class="user"><?=$group->getDescription() ?></font>
 							</div>
 							<div class="row" style="margin-top: 15px">
-								<div class="col-md-4 text-center">
+								<div class=" text-center">
 
 									<?php $owner = $umapper->showcurrent($group->getOwner())?>
 									<a href="index.php?controller=user&action=showcurrent&id=<?=$owner->getID() ?>">
@@ -51,24 +51,27 @@ $umapper = new USER_Model();
 					 				</a>
 					 				<font class="user">  @<?=$owner->getUser() ?></font>
 								</div>
-								<div class="col-md-4 text-center">
-									<?php if ($owner->getID() == $currentuserid): ?>
-						 				
-							 				<a href="index.php?controller=group&action=delete&id=<?= $group->getID()  ?>">
-							 					<button class="btn btn-danger"><?= i18n("Delete") ?></button>
-							 				</a>
-							 			
-							 		<?php else: ?>
-							 			
-							 				<form action="index.php?controller=usergroup&action=delete" method="post">
-							 					<button type="submit" name="id" value="<?=$group->getID() ?>"	 class="btn btn-warning"><?= i18n("Unsubscribe") ?></button>
-							 				</form>
-							 			
-						 			<?php endif ?>
-								</div>
-								<div class="col-md-4 text-center">
+								
+							</div>
+						</div>
+						<div class="panel-footer">
+							<div class="row"> 
+							
+							<?php if ($owner->getID() == $currentuserid): ?>
+					 				<a href="index.php?controller=group&action=delete&id=<?= $group->getID()  ?>">
+					 					<button class="btn btn-danger btn-md"><?= i18n("Delete") ?></button>
+					 				</a>
+					 			</div>				 			
+					 		<?php else: ?>
+					 			<div class="col-md-6">
+									<form action="index.php?controller=usergroup&action=delete" method="post">
+					 					<button type="submit" name="id" value="<?=$group->getID() ?>"	 class="btn btn-warning" btn-md><?= i18n("Unsubscribe") ?></button>
+					 				</form>						 			</div>
+					 								 			
+				 			<?php endif ?>
+								<div class="col-md-6">
 									<a href="index.php?controller=group&action=showcurrent&id=<?=$group->getID() ?>">
-										<button class="btn btn-info">
+										<button class="btn btn-info btn-md pull-right">
 											<?= i18n("View") ?>
 										</button>
 									</a>

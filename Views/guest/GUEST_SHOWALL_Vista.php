@@ -51,7 +51,12 @@ $umapper = new USER_Model();
 					 				</a>
 					 				<font class="user">  @<?=$owner->getUser() ?></font>
 								</div>
-								<div class="col-md-4 text-center">
+								
+							</div>
+						</div>
+						<div class="panel-footer">
+							<div class="row">
+								<div class="col-md-6">
 									<?php if ($owner->getID() == $currentuserid): ?>
 						 				
 							 				<a href="index.php?controller=event&action=delete&id=<?= $event->getID()  ?>">
@@ -66,15 +71,16 @@ $umapper = new USER_Model();
 							 			
 						 			<?php endif ?>
 								</div>
-								<div class="col-md-4 text-center">
+								<div class="col-md-6">
 									<a href="index.php?controller=event&action=showcurrent&id=<?=$event->getID() ?>">
-										<button class="btn btn-info">
+										<button class="btn btn-info pull-right">
 											<?= i18n("View") ?>
 										</button>
 									</a>
 								</div>
-							</div>
 						</div>
+							</div>
+							
 					</div>
 				</div>
 			<?php endforeach ?>
