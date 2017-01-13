@@ -39,7 +39,7 @@ $umapper = new USER_Model();
 								<font class="user"><?=$event->getDescription() ?></font>
 							</div>
 							<div class="row" style="margin-top: 15px">
-								<div class="col-md-4 text-center">
+								<div class=" text-center">
 
 									<?php $owner = $umapper->showcurrent($event->getOwner())?>
 									<a href="index.php?controller=user&action=showcurrent&id=<?=$owner->getID() ?>">
@@ -53,22 +53,25 @@ $umapper = new USER_Model();
 								</div>
 								
 							</div>
+							<div class="row">
+								
+							</div>
 						</div>
 						<div class="panel-footer">
 							<div class="row">
 								<div class="col-md-6">
 									<?php if ($owner->getID() == $currentuserid): ?>
-						 				
+						 				<div class="col-md-6">
 							 				<a href="index.php?controller=event&action=delete&id=<?= $event->getID()  ?>">
 							 					<button class="btn btn-danger"><?= i18n("Delete") ?></button>
 							 				</a>
-							 			
+							 			</div>
 							 		<?php else: ?>
-							 			
+							 			<div class="col-md-6">
 							 				<form action="index.php?controller=guest&action=delete" method="post">
 							 					<button type="submit" name="id" value="<?=$event->getID() ?>"	 class="btn btn-warning"><?= i18n("Unsubscribe") ?></button>
 							 				</form>
-							 			
+							 			</div>
 						 			<?php endif ?>
 								</div>
 								<div class="col-md-6">

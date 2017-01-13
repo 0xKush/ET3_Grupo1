@@ -49,14 +49,23 @@ $requests = $view->getVariable("requests");
 
 							
  						</div>
- 						<div class="panel-footer"> 							
-								<form action="index.php?controller=friendship&action=delete" method="post">
+ 						<div class="panel-footer">
+ 						
+ 							<form action="index.php?controller=friendship&action=delete" method="post">
 									<input type="text" hidden="hidden" name="id" value="<?=$friend->getID() ?>">
 									<button class="btn btn-danger btn-block" type="submit"  >
 										<i class="fa fa-trash-o fa-fw"></i>
 										<?= i18n("Unfriend") ?>
 									</button>
 								</form>
+
+							<form action="index.php?controller=conversation&action=add" method="post">
+									<input type="text" hidden="hidden" name="id" value="<?=$friend->getID() ?>">
+									<button style="margin-top: 5px" class="btn btn-default btn-block" type="submit"  >
+										<i class="fa fa-envelope fa-fw"></i>
+										<?= i18n("Message") ?>
+									</button>
+								</form>	
  						</div>
  					</div>
  				</div>
