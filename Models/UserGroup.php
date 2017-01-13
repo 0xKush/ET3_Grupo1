@@ -26,7 +26,7 @@ class UserGroup
     }
     
     
-    private function setID($id)
+    public function setID($id)
     {
         $this->id = $id;
         
@@ -40,7 +40,7 @@ class UserGroup
     }
     
     
-    private function setGroupID($groupid)
+    public function setGroupID($groupid)
     {
         $this->groupid = $groupid;
         
@@ -54,7 +54,7 @@ class UserGroup
     }
     
     
-    private function setSecondaryMember($secondarymember)
+    public function setSecondaryMember($secondarymember)
     {
         $this->secondarymember = $secondarymember;
         
@@ -69,7 +69,7 @@ class UserGroup
     }
     
     
-    private function setMember($member)
+    public function setMember($member)
     {
         $this->member = $member;
         
@@ -84,7 +84,7 @@ class UserGroup
     }
     
     
-    private function setStatus($status)
+    public function setStatus($status)
     {
         $this->status = $status;
         
