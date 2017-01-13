@@ -293,7 +293,7 @@ CREATE TABLE IF NOT EXISTS `publication` (
 --
 
 INSERT INTO `publication` (`id`, `destination`, `type`, `owner`, `creationdate`, `hour`, `description`, `status`) VALUES
-(1, 2, 'user', 2, '2016-11-20', '18:00:00', 'a', 0),
+(1, 2, 'user', 2, '2016-11-20', '18:00:00', 'Lugar máxico. Cabo Home.', 0),
 (2, 3, 'user', 2, '2016-12-24', '17:00:00', 'Felices Fiestas :)', 0),
 (3, 2, 'group', 3, '2017-01-01', '09:00:00', 'Feliz ano celtistas!', 0),
 (4, 1, 'group', 4, '2016-12-26', '19:45:00', 'A darle duro con la ET3.', 0),
@@ -381,7 +381,7 @@ DROP TABLE IF EXISTS `usergroup`;
 CREATE TABLE IF NOT EXISTS `usergroup` (
   `id` int(11) NOT NULL,
   `groupid` int(11) NOT NULL,
-  `secondarymember` int(11) NOT NULL,
+  `secondarymember` int(11) DEFAULT NULL,
   `member` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
