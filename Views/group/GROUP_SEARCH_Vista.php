@@ -2,6 +2,7 @@
 	
 	require_once(__DIR__."/../../core/ViewManager.php");
 	$view = ViewManager::getInstance();
+	$users = $view->getVariable("users");
 	$errors = $view->getVariable("errors");
 ?>
 
@@ -29,6 +30,11 @@
 					  <div class="form-group">
 					    <label for="description"><?= i18n("Description")?></label>
 					    <input type="textarea" class="form-control" id="description" name="description">
+					  </div>
+
+					  <div class="form-group">
+					  	<label for="date"><?= i18n("Creation Date")?></label>
+					  	<input class="form-control" type="text" name="creationdate" id="date">
 					  </div>		   
 
 					  <div class="form-group">
@@ -39,8 +45,25 @@
 					    </select>
 					  </div>
 
+					  <div class="form-group">
+					    <label for="owner"><?= i18n("Owner")?></label>
+					    <select class="form-control" id="owner" name="owner">
+					    	<option value=""><?= i18n("Any")?></option>
+					     <?php foreach ($users as $u): ?>
+					     	<option value="<?=$u->getID() ?>"><?=$u->getUser() ?></option>
+					     <?php endforeach ?>
+					    </select>
+					  </div>
+					   <div class="form-group">
+					    <label for="status"><?= i18n("Status")?></label>
+					    <select class="form-control" id="status" name="status">
+					      <option value="1"><?= i18n("Active")?></option>
+					      <option value="0"><?= i18n("Deceased")?></option>
+					    </select>
+					  </div>
+
 					 
-					  <button type="submit" class="btn btn-primary pull-right"><?= i18n("Submit")?></button>
+					  <button type="submit" name="submit" class="btn btn-primary pull-right"><?= i18n("Submit")?></button>
 					</form>
 	 		</div>
  		</div>

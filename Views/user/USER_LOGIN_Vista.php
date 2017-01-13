@@ -47,23 +47,26 @@ $errors = $view->getVariable("errors");
 										</div>
 									</div>
 								</form>
-								<form id="register-form" action="index.php?controller=user&action=register" method="post" role="form" style="display: none;">
+								<form data-parsley-validate id="register-form" action="index.php?controller=user&action=register" method="post" role="form" style="display: none;">
 									<div class="form-group">
-										<input required type="text" name="user" id="user" tabindex="1" class="form-control" placeholder="<?= i18n("Username") ?>" value="">
+										<input data-parsley-errors-container="#errname" required type="text" name="user" id="user" tabindex="1" class="form-control" placeholder="<?= i18n("Username") ?>" value="">
 									</div>
+									<div id="errname" class="text-danger"></div>
 									<div class="form-group">
-										<input required type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="<?= i18n("Email Adress") ?>" value="">
+										<input data-parsley-errors-container="#errmail" required type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="<?= i18n("Email Adress") ?>" value="">
 									</div>
+									<div id="errmail" class="text-danger"></div>
 									<div class="form-group">
 										<input required type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="<?= i18n("Password") ?>">
 									</div>
 									<div class="form-group">
-										<input required type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="<?= i18n("Confirm Password") ?>">
+										<input data-parsley-errors-container="#errpass" required type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="<?= i18n("Confirm Password") ?>">
 									</div>
+									<div class="text-danger" id="errpass"></div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="<?= i18n("Register") ?> <?= i18n("now") ?>">
+												<input  type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="<?= i18n("Register") ?> <?= i18n("now") ?>">
 											</div>
 										</div>
 									</div>

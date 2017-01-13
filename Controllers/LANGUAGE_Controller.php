@@ -17,4 +17,8 @@ class Language_Controller {
         header("Location: ".$_SERVER["HTTP_REFERER"]);
         die();
     }
+
+    public function getLanguage(){
+        return I18n::getInstance()->getLanguage();
+    }
 }

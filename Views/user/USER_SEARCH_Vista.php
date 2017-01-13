@@ -32,12 +32,32 @@ $errors = $view->getVariable("errors");
 			    <label for="surname"><?= i18n("Surname")?></label>
 			    <input type="text" class="form-control" id="surname" name="surname" placeholder="<?= i18n("Surname")?>">
 			</div>
+			<div class="form-group">
+			    <label for="email"><?= i18n("Email")?></label>
+			    <input type="email" class="form-control" id="email" name="email" placeholder="<?= i18n("Email") ?>">
+			</div>
 	
 			<div class="form-group">
 			    <label for="type"><?= i18n("Privileges")?></label>
 			    <select class="form-control" id="type" name="type">
 				<option value="0"><?= i18n("Base user")?></option>
 				<option value="1"><?= i18n("Admin")?></option>
+			    </select>
+			</div>
+
+			<div class="form-group">
+			    <label for="private"><?= i18n("Visivility")?></label>
+			    <select class="form-control" id="private" name="private">
+				<option value="public"><?= i18n("Public")?></option>
+				<option value="private"><?= i18n("Private")?></option>
+			    </select>
+			</div>
+
+			<div class="form-group">
+			    <label for="status"><?= i18n("Status")?></label>
+			    <select class="form-control" id="status" name="status">
+				<option value="up"><?= i18n("Active")?></option>
+				<option value="down"><?= i18n("Down")?></option>
 			    </select>
 			</div>
 

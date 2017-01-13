@@ -25,6 +25,10 @@ class I18n {
     $this->messages = $i18n_messages;
     $_SESSION[self::CURRENT_LANGUAGE_SESSION_VAR] = $language;
   }
+
+  public function getLanguage(){
+    return $_SESSION[self::CURRENT_LANGUAGE_SESSION_VAR];
+  }
   
   public function i18n($key) {
     if (isset($this->messages[$key])){

@@ -2,6 +2,9 @@
 
 require_once(__DIR__ . "/../../core/ViewManager.php");
 require_once(__DIR__ . "/../../Models/USER_Model.php");
+require_once(__DIR__ . "/../../Controllers/LANGUAGE_controller.php");
+$lc = new LANGUAGE_controller();
+$idioma = $lc->getLanguage();
 $view        = ViewManager::getInstance();
 $currentuser = $view->getVariable("currentusername");
 $userid = $view->getVariable("currentuserid");
@@ -29,19 +32,36 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
     <!-- body font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
+    <link rel="stylesheet" href="lib/parsley/parsley/parsley.css">
+
     <script src="js/jquery.min.js"></script>
     <!--  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
     <script src="lib/datatables/js/jquery.dataTables.min.js"></script>
     <script src="lib/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="lib/datatables-responsive/dataTables.responsive.js"></script>
 
+      <!-- validation js's -->
+    <script src="lib/parsley/parsley.min.js"></script>
+
+    <?php 
+    switch ($idioma) {
+      case 'es':
+        echo '<script src="lib/parsley/language/es.js"></script>';
+        break;
+
+      case 'gl':
+        echo '<script src="lib/parsley/language/gl.js"></script>';
+        break;
+
+    }
+     ?>
+
 	<!--FAVICON-->
     <link rel="icon"
           type="image/ico"
           href="media/images/favicon.ico">
 
-	<?= $view->getFragment("css") ?>
-	<?= $view->getFragment("javascript") ?>
+
 	
     </head>
     <body>
@@ -101,14 +121,14 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
       </ul>
       <ul class="navbar-form navbar-right">
         <div class="form-group">
-        </div>
         <a href="index.php?controller=user&action=searchselect">
-          <button type="submit" class="btn btn-primary"><?= i18n("Search") ?>
-            
+          <button type="submit" class="btn btn-primary"><?= i18n("Search") ?>     
           </button>
         </a>
         <?php include(__DIR__."/../layouts/language_select_element.php"); ?>
-      </form>
+      </div>
+      </ul>
+      </div>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

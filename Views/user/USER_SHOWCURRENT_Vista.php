@@ -22,7 +22,7 @@
  		<div class="well">
  		<div class="row">
  			<div class="col-md-4">
-	 			<div class="container">
+	 			<div class="container-fluid">
 	 			<?php if ($user->getPhoto() != NULL): ?>
 	 				<img class="img-circle" id="profileImage" src="media/profileImages/<?=$user->getPhoto()  ?>" alt="profile Image" style="height: 200px;width: 200px">
 	 			<?php else: ?>
