@@ -19,7 +19,7 @@
 
 	<div class="container">
 		<div class="col-xs-12 col-md-4 col-md-offset-4">
-		<form action="index.php?controller=guest&action=delete&id=<?=$guest->getSecondaryMember() ?>" method="post">
+		<form action="index.php?controller=guest&action=delete&id=<?=$guest->getEvent() ?>" method="post">
 			<div class="well">
 				<div class="row">
 					<?= i18n("Unsubscribe from event ") ?><?= $event->getName()?>?
