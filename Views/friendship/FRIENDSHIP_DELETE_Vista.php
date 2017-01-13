@@ -27,10 +27,10 @@ $friend = $umodel->showcurrent($friendship->getSecondaryMember());
  					<div class="pull-right">
  						<form action="index.php?controller=friendship&action=delete" method="post">
  							<input hidden="hidden" type="text" name="id" value="<?=$friendship->getID()?>">
- 							<button class="btn btn-default" type="submit" name="no">
+ 							<button class="btn btn-default" type="submit" value="no" name="submit">
  								<?= i18n("No") ?>
  							</button>
- 							<button class="btn btn-danger" type="submit" name="yes">
+ 							<button class="btn btn-danger" value="yes" type="submit" name="submit">
  								<?= i18n("Yes") ?>
  							</button>
  						</form>
