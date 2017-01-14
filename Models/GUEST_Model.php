@@ -96,12 +96,21 @@ class GUEST_Model
     
     public function guestExists($event, $member, $secondarymember)
     {
-        $sql = $this->db->prepare("SELECT count(id) FROM guest where event=? AND member=? AND secondarymember=?");
-        $sql->execute(array(
-            $event,
-            $member,
-            $secondarymember
-        ));
+        if ($secondarymember) {
+            $sql = $this->db->prepare("SELECT count(id) FROM guest where event=? AND member=? AND secondarymember=?");
+            $sql->execute(array(
+                $event,
+                $member,
+                $secondarymember
+            ));
+        } else {
+            $sql = $this->db->prepare("SELECT count(id) FROM guest where event=? AND member=? or secondarymember=?");
+            $sql->execute(array(
+                $event,
+                $member,
+                $member
+            ));
+        }
         
         if ($sql->fetchColumn() > 0) {
             return true;

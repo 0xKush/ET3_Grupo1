@@ -65,6 +65,32 @@ class GUEST_Controller extends BaseController
         
         $this->view->redirect("guest", "showall", "id=" . $this->currentUser->getID());
     }
+
+    public function join()
+    {
+        $guest = new Guest();
+        
+        if (isset($_POST["submit"])) {
+            $guest->setEvent($_POST["event"]);
+            $guest->setMember($_POST["member"]);
+            $guest->setStatus(1);
+            
+            try {
+                if (!$this->guestModel->guestExists($_POST["event"], $_POST["member"], NULL) && !empty($_POST["event"]) && !empty($_POST["member"])) {
+                    $this->guestModel->add($guest);
+                    $this->view->setFlash(sprintf(i18n("Guest successfully added.")));
+                } else {
+                    $this->view->setFlash(sprintf(i18n("Guest already exists.")));
+                }
+            }
+            catch (ValidationException $ex) {
+                $errors = $ex->getErrors();
+                $this->view->setVariable("errors", $errors);
+            }
+        }
+        
+        $this->view->redirect("guest", "showall", "id=" . $this->currentUser->getID());
+    }
     
     public function edit()
     {

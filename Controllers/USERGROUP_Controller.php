@@ -71,7 +71,33 @@ class USERGROUP_Controller extends BaseController
             
             try {
                 if (!$this->usergroupModel->usergroupExists($_POST["groupid"], $_POST["member"], $_POST["secondarymember"]) && !empty($_POST["groupid"]) && !empty($_POST["member"]) && !empty($_POST["secondarymember"])) {
-                    $this->usergroupModel->insert($usergroup);
+                    $this->usergroupModel->add($usergroup);
+                    $this->view->setFlash(sprintf(i18n("UserGroup successfully added.")));
+                } else {
+                    $this->view->setFlash(sprintf(i18n("UserGroup already exists.")));
+                }
+            }
+            catch (ValidationException $ex) {
+                $errors = $ex->getErrors();
+                $this->view->setVariable("errors", $errors);
+            }
+        }
+        
+        $this->view->redirect("usergroup", "showall", "id=" . $this->currentUser->getID());
+    }
+
+    public function join()
+    {
+        $usergroup = new UserGroup();
+        
+        if (isset($_POST["submit"])) {
+            $usergroup->setGroupID($_POST["groupid"]);
+            $usergroup->setMember($_POST["member"]);
+            $usergroup->setStatus(1);
+            
+            try {
+                if (!$this->usergroupModel->usergroupExists($_POST["groupid"], $_POST["member"], NULL) && !empty($_POST["groupid"]) && !empty($_POST["member"])) {
+                    $this->usergroupModel->add($usergroup);
                     $this->view->setFlash(sprintf(i18n("UserGroup successfully added.")));
                 } else {
                     $this->view->setFlash(sprintf(i18n("UserGroup already exists.")));

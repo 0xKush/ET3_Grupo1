@@ -91,12 +91,21 @@ class USERGROUP_Model
     
     public function usergroupExists($groupid, $member, $secondarymember)
     {
-        $sql = $this->db->prepare("SELECT count(id) FROM groupp where groupid=? AND member=? AND secondarymember=?");
-        $sql->execute(array(
-            $groupid,
-            $member,
-            $secondarymember
-        ));
+        if ($secondarymember) {
+            $sql = $this->db->prepare("SELECT count(id) FROM groupp where groupid=? AND member=? AND secondarymember=?");
+            $sql->execute(array(
+                $groupid,
+                $member,
+                $secondarymember
+            ));
+        } else {
+            $sql = $this->db->prepare("SELECT count(id) FROM groupp where groupid=? AND member=? OR secondarymember=?");
+            $sql->execute(array(
+                $groupid,
+                $member,
+                $membermember
+            ));
+        }
         
         if ($sql->fetchColumn() > 0) {
             return true;
