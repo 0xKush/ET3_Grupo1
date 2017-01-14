@@ -137,7 +137,7 @@ class Publication
     public function checkIsValidForCreate()
     {
         $errors = array();
-        if (strlen($this->description < 4)) {
+        if (strlen($this->description) < 4) {
             $errors["publidescription"] = "Description must be at least 5 characters length";
             
         }

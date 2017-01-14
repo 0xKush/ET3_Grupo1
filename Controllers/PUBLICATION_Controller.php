@@ -60,7 +60,7 @@ class PUBLICATION_Controller extends BaseController
         $publication = new Publication();
         
         $documentModel = new DOCUMENT_Model();
-        $documents     = $documentModel->showall($userid);
+        $documents     = $documentModel->showall($this->currentUser->getID());
         
         if (isset($_POST["submit"])) {
             $publication->setDestination($_POST["destination"]);
@@ -75,7 +75,7 @@ class PUBLICATION_Controller extends BaseController
                 $publication->checkIsValidForCreate();
                 $this->publicationModel->add($publication);
                 $this->view->setFlash(sprintf(i18n("Publication\"%s\" successfully added.")));
-                $this->view->redirect("publication", "show");
+                $this->view->redirect("publication", "showall", "id=" . $this->currentUser->getID());
                 
             }
             catch (ValidationException $ex) {
@@ -90,45 +90,6 @@ class PUBLICATION_Controller extends BaseController
         $this->view->setVariable("publication", $publication);
         $this->view->render("publication", "PUBLICATION_ADD_Vista");
     }
-    
-    
-    public function edit()
-    {
-        if (!isset($_REQUEST["id"])) {
-            throw new Exception(i18n("A publication id is mandatory"));
-        }
-        
-        $publicationid = $_REQUEST["id"];
-        $publication   = $this->publicationModel->showcurrent($publicationid);
-        
-        if ($publication == NULL) {
-            throw new Exception(i18n("No such publication with id: ") . $publicationid);
-        }
-        
-        if (isset($_POST["submit"])) {
-            $publication->setDestination($_POST["destination"]);
-            $publication->setType($_POST["type"]);
-            $publication->setOwner($_POST["owner"]);
-            $publication->setCreationDate($_POST["creationdate"]);
-            $publication->setHour($_POST["hour"]);
-            $publication->setDescription($_POST["description"]);
-            $publication->setStatus($_POST["status"]);
-            
-            try {
-                $publication->checkIsValidForCreate();
-                $this->publicationModel->edit($publication);
-                $this->view->setFlash(sprintf(i18n("Publication \"%s\" successfully updated.")));
-                $this->view->redirect("publication", "show");
-            }
-            catch (ValidationException $ex) {
-                $errors = $ex->getErrors();
-                $this->view->setVariable("errors", $errors);
-            }
-        }
-        $this->view->setVariable("publication", $publication);
-        $this->view->render("publication", "PUBLICATION_EDIT_Vista");
-    }
-    
     
     public function delete()
     {

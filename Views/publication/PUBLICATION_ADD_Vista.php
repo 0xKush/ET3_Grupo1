@@ -7,7 +7,7 @@ $errors = $view->getVariable("errors");
 
 $type = $view->getVariable("type");
 
-$destiantion = $view->getVariable("destiantion");
+$destination = $view->getVariable("destination");
 
 ?>
 
