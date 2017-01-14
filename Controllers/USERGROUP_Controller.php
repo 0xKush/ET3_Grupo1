@@ -34,7 +34,7 @@ class USERGROUP_Controller extends BaseController
         $userid = $_REQUEST["id"];
         $groups = $this->usergroupModel->showall($userid);
         $this->view->setVariable("groups", $groups);
-        $requests = $this->usergroupModel->showall($userid, 0);
+        $requests = $this->usergroupModel->requests($userid);
         $this->view->setVariable("requests", $requests);
          $owners = array();
         foreach ($groups as $group) {

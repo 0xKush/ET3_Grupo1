@@ -150,4 +150,34 @@ class GUEST_Model
         
         return $events;
     }
+
+        public function request($currentuserid)
+    {
+        $events = array();
+        
+        $sql = $this->db->prepare("
+            SELECT distinct e.id, e.name, e.owner
+            FROM event as e
+            INNER JOIN guest as g
+            ON e.id = g.event
+            WHERE g.secondarymember=? AND g.status=0
+            ORDER BY e.name
+            ");
+        
+        $sql->execute(array(
+            $currentuserid
+        ));
+        
+        $events_db = $sql->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($events_db as $event) {
+            $ev = new Event();
+            $ev->setID($event["id"]);
+            $ev->setName($event["name"]);
+            $ev->setOwner($event["owner"]);
+            array_push($events, $ev);
+        }
+        
+        return $events;
+    }
 }

@@ -146,4 +146,28 @@ class USERGROUP_Model
     
         return $groups;
     }
+
+    public function requests($currentuserid)
+    {
+        $groups = array();
+
+        $sql = $this->db->prepare("
+            SELECT distinct g.id as id,g.name as name,g.description as description ,g.owner as owner,g.private as private,g.creationdate as creationdate,g.status as status
+            FROM groupp as g
+            INNER JOIN usergroup as ug
+            ON g.id=ug.groupid
+            WHERE ug.secondarymember=? AND ug.status=0
+             ORDER BY g.name");
+        
+        $sql->execute(array(
+            $currentuserid
+        ));
+        $groups_db = $sql->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($groups_db as $group) {
+            array_push($groups, new Group($group["id"], $group["name"], $group["description"], $group["owner"], $group["private"], $group["creationdate"], $group["status"]));
+        }
+    
+        return $groups;
+    }
 }

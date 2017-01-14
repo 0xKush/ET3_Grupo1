@@ -31,7 +31,7 @@ class GUEST_Controller extends BaseController
         $userid = $_REQUEST["id"];
         $events = $this->guestModel->showall($userid);
         $this->view->setVariable("events", $events);
-        $requests = $this->guestModel->showall($userid, 0);
+        $requests = $this->guestModel->requests($userid);
         $this->view->setVariable("requests", $requests);
         $this->view->render("guest", "GUEST_SHOWALL_Vista");
     }
