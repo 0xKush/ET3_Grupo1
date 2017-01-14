@@ -94,10 +94,12 @@ class Upload
         );
         
         if (in_array($extension, $array_doc)) {
-            $destination = __DIR__ . "/../media/documents/";
+            $destination = "media/documents/";
+            /*$destination = __DIR__ . "/../media/documents";*/
         }
         if (in_array($extension, $array_img)) {
-            $destination = __DIR__ . "/../media/images/";
+            $destination = "media/images/";
+             /*$destination = __DIR__ . "/../media/images";*/
         }
         return $destination;
     }
@@ -165,41 +167,3 @@ class Upload
         return $this->destination;
     }
 }
-?>
-<!-- PRUEBAS -->
-<!-- <form action="Upload.php" method="post" enctype="multipart/form-data">
-    <div class="col-xs-3">
-        <label for="archivo">Tipo documento</label>
-        <input type="file" name="file">
-        <button type="submit" name="submit">Enviar</button>
-    </div>
-</form>
-
-<?php
-$upload = new Upload();
-if (isset($_POST["submit"])) {
-    try {
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mime  = finfo_file($finfo, $_FILES['file']['tmp_name']);
-        echo "<h3>MIME:$mime</h3>";
-        $extension = end(explode(".", $_FILES["file"]["name"]));
-        echo "<h3>EXTENSION:$extension</h3>";
-        $size = $_FILES['file']['size'];
-        echo "<h3>SIZE:" . round($size / MB, 3) . " MB</h3>";
-        
-        
-        if ($upload->checkFile()) {
-            echo "Document successfully added in :" . $upload->getDestination();
-        }
-        
-    }
-    catch (ValidationException $ex) {
-        /*   $errors = $ex->getMessage();
-        echo $errors;*/
-        $errors = $ex->getMessage();
-        echo $errors;
-    }
-    
-}
-?>
- -->

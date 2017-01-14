@@ -104,9 +104,9 @@ CREATE TABLE IF NOT EXISTS `document` (
 --
 
 INSERT INTO `document` (`id`, `owner`, `location`, `uploaddate`, `status`) VALUES
-(1, 2, '/media/documents/doc1.jpg', '2016-11-20', 0),
-(2, 2, '/media/documents/doc2.jpg', '2016-11-20', 0),
-(3, 5, '/media/documents/doc3.jpg', '2017-08-01', 0);
+(1, 2, 'media/images/doc1.jpg', '2016-11-20', 0),
+(2, 2, 'media/images/doc2.jpg', '2016-11-20', 0),
+(3, 5, 'media/images/doc3.jpg', '2017-08-01', 0);
 
 --
 -- RELACIONES PARA LA TABLA `document`:
