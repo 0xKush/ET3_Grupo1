@@ -84,6 +84,8 @@ class PUBLICATION_Controller extends BaseController
             }
             
         }
+        $this->view->setVariable("type", $_REQUEST["type"]);
+        $this->view->setVariable("destination", $_REQUEST["destination"]);
         $this->view->setVariable("docs", $documents);
         $this->view->setVariable("publication", $publication);
         $this->view->render("publication", "PUBLICATION_ADD_Vista");
