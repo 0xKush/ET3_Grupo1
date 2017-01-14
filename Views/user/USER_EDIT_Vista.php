@@ -23,32 +23,32 @@ $errors = $view->getVariable("errors");
 		    <form action="index.php?controller=user&action=edit" method="POST" enctype="multipart/form-data">
 		 	<div class="form-group">
 			    <label for="name"><?= i18n("Name")?></label>
-			    <input type="text" class="form-control" id="name" name="name" placeholder="<?= $user->getName()?>">
+			    <input type="text" class="form-control" id="name" name="name" value="<?= $user->getName()?>">
 			</div>
 			<div class="form-group">
 			    <label for="surname"><?= i18n("Surname")?></label>
-			    <input type="text" class="form-control" id="surname" name="surname" placeholder="<?= $user->getSurname()?>">
+			    <input type="text" class="form-control" id="surname" name="surname" value="<?= $user->getSurname()?>">
 			</div>
 
 			<div class="form-group">
 			    <label for="password"><?= i18n("Password")?></label>
-			    <input type="password" class="form-control" id="password" name="password" placeholder="<?= $user->getPassword()?>">
+			    <input type="password" class="form-control" id="password" name="password">
 			</div>
 			<div class="form-group">
 			    <label for="phone"><?= i18n("Phone")?></label>
-			    <input type="number" class="form-control" id="phone" name="phone" placeholder="<?= $user->getPhone()?>">
+			    <input type="number" class="form-control" id="phone" name="phone" value="<?= $user->getPhone()?>">
 			</div>
 			<div class="form-group">
 			    <label for="address"><?= i18n("Adress")?></label>
-			    <input type="text" class="form-control" id="address" name="address" placeholder="<?= $user->getAddress()?>">
+			    <input type="text" class="form-control" id="address" name="address" value="<?= $user->getAddress()?>">
 			</div>
 			<div class="form-group">
 			    <label for="birthday"><?= i18n("Birth Date")?></label>
-			    <input type="text" class="form-control" id="birthday" name="birthday">
+			    <input type="text" class="form-control" id="birthday" name="birthday" value="<?=$user->getBirthday() ?>"
 			</div>
 			<div class="form-group">
 			    <label for="email"><?= i18n("Email")?></label>
-			    <input type="email" class="form-control" id="email" name="email" placeholder="<?= $user->getEmail() ?>">
+			    <input type="email" class="form-control" id="email" name="email" value="<?= $user->getEmail() ?>">
 			</div>
 			
 

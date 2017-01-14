@@ -271,8 +271,8 @@ class USER_Controller extends BaseController
         
         if (isset($_POST["submit"])) {
             if ($_POST["submit"] == "yes") {
-                $this->userMapper->delete($user);
-                $this->view->setFlash(sprintf(i18n("User \"%s\" successfully deleted."), $user->getUsername()));
+                $this->userModel->delete($user);
+                $this->view->setFlash(sprintf(i18n("User \"%s\" successfully deleted."), $user->getUser()));
             }
             
             $this->view->redirect("user", "showall");
