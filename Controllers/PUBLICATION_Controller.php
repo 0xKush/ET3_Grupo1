@@ -3,6 +3,8 @@ require_once(__DIR__ . "/../core/ViewManager.php");
 require_once(__DIR__ . "/../core/I18n.php");
 require_once(__DIR__ . "/../Models/Publication.php");
 require_once(__DIR__ . "/../Models/PUBLICATION_Model.php");
+require_once(__DIR__ . "/../Models/Document.php");
+require_once(__DIR__ . "/../Models/DOCUMENT_Model.php");
 require_once(__DIR__ . "/../Controllers/BaseController.php");
 
 class PUBLICATION_Controller extends BaseController
@@ -22,12 +24,12 @@ class PUBLICATION_Controller extends BaseController
             throw new Exception(i18n("Id is mandatory"));
         }
         
-      /*  if (!isset($_REQUEST["type"])) {
-            throw new Exception(i18n("Entity type is mandatory"));
+        /*  if (!isset($_REQUEST["type"])) {
+        throw new Exception(i18n("Entity type is mandatory"));
         }*/
         
         $entityid = $_REQUEST["id"];
-      /*  $type     = $_REQUEST["type"];*/
+        /*  $type     = $_REQUEST["type"];*/
         
         $publications = $this->publicationModel->showall($entityid, "user");
         $this->view->setVariable("publications", $publications);
@@ -57,6 +59,9 @@ class PUBLICATION_Controller extends BaseController
     {
         $publication = new Publication();
         
+        $documentModel = new DOCUMENT_Model();
+        $documents     = $documentModel->showall($userid);
+        
         if (isset($_POST["submit"])) {
             $publication->setDestination($_POST["destination"]);
             $publication->setType($_POST["type"]);
@@ -79,6 +84,7 @@ class PUBLICATION_Controller extends BaseController
             }
             
         }
+        $this->view->setVariable("docs", $documents);
         $this->view->setVariable("publication", $publication);
         $this->view->render("publication", "PUBLICATION_ADD_Vista");
     }
