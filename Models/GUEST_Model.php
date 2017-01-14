@@ -16,8 +16,6 @@ class GUEST_Model
     {
         $events = array();
         
-        /*    $sql = $this->db->prepare("SELECT distinct e.id, e.name, e.owner FROM event as e, guest as g where g.member=? or g.secondarymember=? AND g.status=? ORDER BY e.name");*/
-        
         $sql = $this->db->prepare("
             SELECT distinct e.id, e.name, e.owner
             FROM event as e
@@ -126,5 +124,32 @@ class GUEST_Model
         if ($sql->fetchColumn() > 0) {
             return true;
         }
+    }
+
+    public function getEvents($currentuserid)
+    {
+        $events = array();
+        
+        $sql = $this->db->prepare("
+            SELECT distinct e.id
+            FROM event as e
+            INNER JOIN guest as g
+            ON e.id = g.event
+            WHERE (g.member=? OR g.secondarymember=?)
+            ORDER BY e.name
+            ");
+        
+        $sql->execute(array(
+            $currentuserid,
+            $currentuserid
+        ));
+        
+        $events_db = $sql->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($events_db as $event) {
+            array_push($events, $event["id"]);
+        }
+        
+        return $events;
     }
 }

@@ -123,5 +123,28 @@ class USERGROUP_Model
         }
     }
     
+    public function getGroups($currentuserid)
+    {
+        $groups = array();
+
+        $sql = $this->db->prepare("
+            SELECT distinct g.id as id
+            FROM groupp as g
+            INNER JOIN usergroup as ug
+            ON g.id=ug.groupid
+            WHERE ug.member=? OR ug.secondarymember=?)
+             ORDER BY g.name");
+        
+        $sql->execute(array(
+            $currentuserid,
+            $currentuserid
+        ));
+        $groups_db = $sql->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($groups_db as $group) {
+            array_push($groups, $group["id"]);
+        }
     
+        return $groups;
+    }
 }

@@ -139,8 +139,3 @@ class GROUP_Model
     
     
 }
-
-/*$prueba = new GROUP_Model();
-$group = new Group()
-$prueba->add();
-*/

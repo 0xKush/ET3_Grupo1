@@ -3,6 +3,8 @@ require_once(__DIR__ . "/../core/ViewManager.php");
 require_once(__DIR__ . "/../core/I18n.php");
 require_once(__DIR__ . "/../Models/Event.php");
 require_once(__DIR__ . "/../Models/EVENT_Model.php");
+require_once(__DIR__ . "/../Models/Guest.php");
+require_once(__DIR__ . "/../Models/GUEST_Model.php");
 require_once(__DIR__ . "/../Models/Publication.php");
 require_once(__DIR__ . "/../Models/PUBLICATION_Model.php");
 require_once(__DIR__ . "/../Controllers/BaseController.php");
@@ -244,6 +246,11 @@ class EVENT_Controller extends BaseController
             } else {
                 $events = $this->eventModel->search($query);
             }
+
+            $guestModel = new GUEST_Model();
+            $guests = $guestModel->getEvents($this->currentUser->getID());
+            
+            $this->view->setVariable("guests", $guests);
             $this->view->setVariable("events", $events);
             $this->view->render("event", "EVENT_SHOWALL_Vista");
         } else {

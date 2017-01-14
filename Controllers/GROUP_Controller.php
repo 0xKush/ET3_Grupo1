@@ -3,6 +3,8 @@ require_once(__DIR__ . "/../core/ViewManager.php");
 require_once(__DIR__ . "/../core/I18n.php");
 require_once(__DIR__ . "/../Models/Group.php");
 require_once(__DIR__ . "/../Models/GROUP_Model.php");
+require_once(__DIR__ . "/../Models/UserGroup.php");
+require_once(__DIR__ . "/../Models/USERGROUP_Model.php");
 require_once(__DIR__ . "/../Models/Publication.php");
 require_once(__DIR__ . "/../Models/PUBLICATION_Model.php");
 require_once(__DIR__ . "/../Controllers/BaseController.php");
@@ -203,6 +205,12 @@ class GROUP_Controller extends BaseController
             } else {
                 $groups = $this->groupModel->search($query);
             }
+
+            $userModel = new USERGROUP_Model();
+            $usergroups = $usergroupModel->getGroups($this->currentUser->getID());
+            
+            $this->view->setVariable("usergroups", $usergroups);
+            
             $this->view->setVariable("groups", $groups);
             $this->view->render("group", "GROUP_SHOWALL_Vista");
         } else {

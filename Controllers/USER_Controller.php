@@ -389,6 +389,11 @@ class USER_Controller extends BaseController
             } else {
                 $users = $this->userModel->search($query);
             }
+
+            $friendshipModel = new FRIENDSHIP_Model();
+            $friends = $friendshipModel->getFriends($this->currentUser->getID());
+
+            $this->view->setVariable("friends", $friends);
             $this->view->setVariable("users", $users);
             $this->view->render("user", "USER_SHOWALL_Vista");
         } else {

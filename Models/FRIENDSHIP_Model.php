@@ -88,18 +88,10 @@ class FRIENDSHIP_Model
     
     public function friendExists($member, $secondarymember)
     {
-        $sql = $this->db->prepare("SELECT count(id) FROM friendship where member=? AND secondarymember=?");
+        $sql = $this->db->prepare("SELECT count(id) FROM friendship where (member=? AND secondarymember=?) or (secondarymember=? AND member=?)");
         $sql->execute(array(
             $member,
-            $secondarymember
-        ));
-        
-        if ($sql->fetchColumn() > 0) {
-            return true;
-        }
-        
-        $sql = $this->db->prepare("SELECT count(id) FROM friendship where member=? AND secondarymember=?");
-        $sql->execute(array(
+            $secondarymember,
             $secondarymember,
             $member
         ));
@@ -107,5 +99,31 @@ class FRIENDSHIP_Model
         if ($sql->fetchColumn() > 0) {
             return true;
         }
+    }
+
+    public function getFriends($currentuserid) {
+        $friends = array();
+                
+        $sql = $this->db->prepare("SELECT u.id FROM user as u, friendship as f where f.member=? AND f.secondarymember=u.id ORDER BY u.name");
+        $sql->execute(array(
+            $currentuserid
+        ));
+        $friends_db = $sql->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($friends_db as $friend) {
+            array_push($friends, $friend["id"]);
+        }
+
+        $sql = $this->db->prepare("SELECT u.id FROM user as u, friendship as f where f.secondarymember=? AND f.member=u.id ORDER BY u.name");
+        $sql->execute(array(
+            $currentuserid
+        ));
+        $friends_db = $sql->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($friends_db as $friend) {
+            array_push($friends, $friend["id"]);
+        }
+
+        return $friends;
     }
 }
