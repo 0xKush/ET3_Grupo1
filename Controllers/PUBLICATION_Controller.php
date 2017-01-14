@@ -65,11 +65,11 @@ class PUBLICATION_Controller extends BaseController
         if (isset($_POST["submit"])) {
             $publication->setDestination($_POST["destination"]);
             $publication->setType($_POST["type"]);
-            $publication->setOwner($_POST["owner"]);
-            $publication->setCreationDate($_POST["creationdate"]);
-            $publication->setHour($_POST["hour"]);
+            $publication->setOwner($this->currentUser->getID());
+            $publication->setCreationDate(date("Y-m-d"));
+            $publication->setHour(date('H:i'));
             $publication->setDescription($_POST["description"]);
-            $publication->setStatus($_POST["status"]);
+            $publication->setStatus(1);
             
             try {
                 $publication->checkIsValidForCreate();
