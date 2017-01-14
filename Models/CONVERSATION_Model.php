@@ -64,4 +64,32 @@ class CONVERSATION_Model
             $conversation->getID()
         ));
     }
+
+    public function conversationExists(Conversation $conversation)
+    {
+        $sql = $this->db->prepare("SELECT count(id) FROM conversation where (member=? AND secondarymember=?) OR (secondarymember=? AND member=?)");
+        $sql->execute(array(
+            $conversation->getMember(),
+            $conversation->getSecondaryMember(),
+            $conversation->getMember(),
+            $conversation->getSecondaryMember()
+        ));
+
+        if ($sql->fetchColumn() > 0) {
+            return true;
+        }
+    }
+    
+    public function conversation_by_friend($member, $secondarymember)
+    {
+        $sql = $this->db->prepare("SELECT * FROM conversation where (member=? AND secondarymember=?) OR (secondarymember=? AND member=?)");
+        $sql->execute(array($member, $secondarymember, $member, $secondarymember));
+        $conversation = $sql->fetch(PDO::FETCH_ASSOC);
+        
+        if ($conversation != NULL) {
+            return new Conversation($conversation["id"], $conversation["member"], $conversation["secondarymember"], $conversation["startdate"], $conversation["status"]);
+        } else {
+            return NULL;
+        }
+    }
 }
