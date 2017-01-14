@@ -64,24 +64,22 @@ class EVENT_Controller extends BaseController
         $event = new Event();
         
         if (isset($_POST["submit"])) {
-            $event->setCreationDate($_POST["creationdate"]);
+            $event->setName($_POST["name"]);
             $event->setOwner($_POST["owner"]);
+            $event->setPrivate($_POST["private"]);
             $event->setStartDate($_POST["startdate"]);
             $event->setEndDate($_POST["enddate"]);
             $event->setStartHour($_POST["starthour"]);
             $event->setEndHour($_POST["endhour"]);
             $event->setDescription($_POST["description"]);
-            $event->setStatus($_POST["status"]);
-            $event->setName($_POST["name"]);
-            $event->setPrivate($_POST["private"]);
-            
+            $event->setStatus(1);
             
             try {
                 if (!$this->eventModel->nameExists($_POST["name"])) {
                     $event->checkIsValidForCreate();
                     $this->eventModel->add($event);
                     $this->view->setFlash(sprintf(i18n("Event\"%s\" successfully added."), $event->getName()));
-                    $this->view->redirect("event", "show");
+                    $this->view->redirect("event", "showall");
                 } else {
                     $errors            = array();
                     $errors["general"] = i18n("Event already exists");
@@ -128,7 +126,7 @@ class EVENT_Controller extends BaseController
                     $event->checkIsValidForCreate();
                     $this->eventModel->edit($event);
                     $this->view->setFlash(sprintf(i18n("Event\"%s\" successfully updated."), $event->getName()));
-                    $this->view->redirect("event", "show");
+                    $this->view->redirect("event", "showall");
                 } else {
                     $errors            = array();
                     $errors["general"] = i18n("Event already exists");
@@ -164,7 +162,7 @@ class EVENT_Controller extends BaseController
                 $this->eventModel->delete($event);
                 $this->view->setFlash(sprintf(i18n("Event \"%s\" successfully deleted."), $event->getName()));
             }
-            $this->view->redirect("event", "show");
+            $this->view->redirect("event", "showall");
         }
         $this->view->setVariable("event", $event);
         $this->view->render("event", "EVENT_DELETE_Vista");

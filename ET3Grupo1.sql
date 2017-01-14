@@ -217,7 +217,7 @@ DROP TABLE IF EXISTS `guest`;
 CREATE TABLE IF NOT EXISTS `guest` (
   `id` int(11) NOT NULL,
   `event` int(11) NOT NULL,
-  `secondarymember` int(11) NOT NULL,
+  `secondarymember` int(11) DEFAULT NULL,
   `member` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;

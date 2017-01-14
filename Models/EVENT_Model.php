@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . "/../core/PDOConnection.php");
+require_once(__DIR__ . "/../Models/Guest.php");
 
 class EVENT_Model
 {
@@ -58,6 +59,22 @@ class EVENT_Model
             $event->getName(),
             $event->getPrivate()
         ));
+        
+        $sql = $this->db->query("SELECT * FROM event ORDER BY id DESC LIMIT 1");
+        
+        $event = $sql->fetch(PDO::FETCH_ASSOC);
+        
+        if ($event != NULL) {
+            $guest = new Guest(NULL, $event["id"], $event["owner"], NULL, $event["status"]);
+            
+            $sql = $this->db->prepare("INSERT INTO guest(event,member,status) values (?,?,?)");
+            
+            $sql->execute(array(
+                $guest->getEvent(),
+                $guest->getMember(),
+                $guest->getStatus()
+            ));
+        }
     }
     
     public function edit(Event $event)

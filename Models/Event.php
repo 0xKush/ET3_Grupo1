@@ -37,7 +37,7 @@ class Event
     public function checkIsValidForCreate()
     {
         $errors = array();
-        if (strlen($this->name < 4)) {
+        if (strlen($this->name) < 4) {
             $errors["eventname"] = "Event name must be at least 5 characters length";
             
         }
