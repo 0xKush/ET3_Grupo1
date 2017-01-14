@@ -5,15 +5,13 @@ $view = ViewManager::getInstance();
 $currentuserid = $view->getVariable("currentuserid");
 $errors = $view->getVariable("errors");
 $groups = $view->getVariable("groups");
+$owners = $view->getVariable("owners");
 $requests = $view->getVariable("requests");
 
-$umapper = new USER_Model();
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
-
-
 
 
 	
@@ -101,7 +99,7 @@ $umapper = new USER_Model();
 							<div class="row" style="margin-top: 15px">
 								<div class=" text-center">
 
-									<?php $owner = $umapper->showcurrent($group->getOwner())?>
+									<?php $owner = $owners[$group->getOwner()]?>
 									<a href="index.php?controller=user&action=showcurrent&id=<?=$owner->getID() ?>">
 						 				<?php if ($owner->getPhoto() != NULL): ?>
 						 					<img class="img-circle smallPhoto" src="media/profileImages/<?=$owner->getPhoto() ?>" alt="">
@@ -120,8 +118,14 @@ $umapper = new USER_Model();
 							<?php if ($owner->getID() == $currentuserid): ?>
 								<div class="col-md-6">
 					 				<a href="index.php?controller=group&action=delete&id=<?= $group->getID()  ?>">
-					 					<button class="btn btn-danger btn-md"><?= i18n("Delete") ?></button>
+					 					<button class="btn btn-danger btn-md"><i class="fa fa-trash-o"></i> <?= i18n("Delete") ?></button>
 					 				</a>
+					 				<a href="index.php?controller=group&action=edit&id=<?=$group->getID() ?>">
+							<button class="btn btn-warning">
+								<i class="fa fa-edit"></i>
+								<?= i18n("Edit") ?>
+							</button>
+						</a>
 					 			</div>				 			
 					 		<?php else: ?>
 					 			<div class="col-md-6">
@@ -134,6 +138,7 @@ $umapper = new USER_Model();
 									<a href="index.php?controller=group&action=showcurrent&id=<?=$group->getID() ?>">
 										<button class="btn btn-info btn-md pull-right">
 											<?= i18n("View") ?>
+											<i class="fa fa-angle-double-right"></i>
 										</button>
 									</a>
 								</div>

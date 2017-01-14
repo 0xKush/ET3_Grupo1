@@ -19,11 +19,12 @@
 					<h1><?= i18n("Add Group: ")?> <?= $group->getName() ?> </h1>
 				</div>
 				<div class="row">
-					<form action="index.php?controller=group&action=add" method="post">
-						<div class="form-group">
+					<form id="formulario" action="index.php?controller=group&action=add" method="post">
+						<div parsley-data-target="#erro" class="form-group">
 							<label for="name"><?= i18n("Name")?></label>
-							<input type="text" class="form-control" id="name" name="name">
+							<input minlength="5" type="text" class="form-control" id="name" name="name">
 						</div>
+						<div id="erro" class="text-danger"></div>
 						<div class="form-group">
 							<label for="description"><?= i18n("Description")?></label>
 							<input type="textarea" class="form-control" id="description" name="description">
@@ -43,3 +44,7 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$('#formulario').parsley();
+</script>
