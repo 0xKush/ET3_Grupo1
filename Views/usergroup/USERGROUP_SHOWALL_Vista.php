@@ -21,6 +21,16 @@ $umapper = new USER_Model();
 
 	<div class="container-fluid">
 		<div class="row">
+				<div class="pull-right" style="padding: 10px">
+					<a href="index.php?controller=group&action=add">
+						<button class="btn btn-success">
+							<?= i18n("Create new group") ?>
+							<i class="fa fa-plus"></i>
+						</button>
+					</a>
+				</div>
+		</div>
+		<div class="row">
 			<?php if ($groups == NULL): ?>
 				<div class="panel">
 					<div class="panel-body">
