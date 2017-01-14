@@ -158,7 +158,7 @@ class GUEST_Controller extends BaseController
         }
         
         $guestid = $_REQUEST["id"];
-        $guest   = $this->guestModel->showcurrent($guestid);
+        $guest   = $this->guestModel->showcurrent($this->currentUser->getID(), $guestid);
         
         if ($guest == NULL) {
             throw new Exception(i18n("No such guest with id: ") . $guestid);
