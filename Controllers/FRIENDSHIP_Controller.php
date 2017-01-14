@@ -25,6 +25,8 @@ class FRIENDSHIP_Controller extends BaseController {
         $userid = $_REQUEST["id"];
         $friends = $this->friendshipModel->showall($userid);
         $this->view->setVariable("friends", $friends);
+        $requests = $this->friendshipModel->showall($userid, 0);
+        $this->view->setVariable("requests", $requests);
         $this->view->render("friendship", "FRIENDSHIP_SHOWALL_Vista");
     }
 

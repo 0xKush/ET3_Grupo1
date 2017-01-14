@@ -26,6 +26,8 @@ class USERGROUP_Controller extends BaseController
         $userid = $_REQUEST["id"];
         $groups = $this->usergroupModel->showall($userid);
         $this->view->setVariable("groups", $groups);
+        $requests = $this->usergroupModel->showall($userid, 0);
+        $this->view->setVariable("requests", $requests);
         $this->view->render("usergroup", "USERGROUP_SHOWALL_Vista");
     }
     
