@@ -5,6 +5,7 @@ $view = ViewManager::getInstance();
 $currentuserid = $view->getVariable("currentuserid");
 $errors = $view->getVariable("errors");
 $events = $view->getVariable("events");
+$guests = $view->getVariable("guests");
 
 ?>
 
@@ -52,7 +53,7 @@ $events = $view->getVariable("events");
 							 					<button class="btn btn-danger"><?= i18n("Delete") ?></button>
 							 				</a>
 							 			</div>
-							 		<?php else: ?>
+							 		<?php elseif(in_array($event->getID(), $guests)): ?>
 							 			<div class="col-md-6">
 							 				<form action="index.php?controller=guest&action=delete" method="post">
 							 					<button type="submit" name="id" value="<?=$event->getID() ?>"	 class="btn btn-warning"><?= i18n("Unsubscribe") ?></button>

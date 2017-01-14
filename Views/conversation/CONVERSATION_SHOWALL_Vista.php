@@ -29,11 +29,10 @@ $umapper = new USER_Model();
  		</div>
  		<?php foreach ($conversations as $c): ?>
  			<div class="col-md-6">
- 				<div class="row">
 	 				<div class="panel">
 	 					<div class="panel-body">
 	 						 <div class="row">
-	 						 		<div class="col-xs-12 text-center">
+	 						 		<div class=" text-center">
 									<?= i18n("With") ?>:
 									<?php if ($umapper->showcurrent($c->getMember())->getID() == $currentuserid): ?>
 										<?php $owner = $umapper->showcurrent($c->getSecondaryMember())?>
@@ -77,7 +76,6 @@ $umapper = new USER_Model();
 	 						
 	 					</div>
 	 				</div>
- 				</div>
  			</div>			
  		<?php endforeach ?>
  	</div>

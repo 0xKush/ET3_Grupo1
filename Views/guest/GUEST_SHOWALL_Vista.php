@@ -136,7 +136,7 @@ $requests = $view->getVariable("requests");
 					 			</div>				 			
 					 		<?php else: ?>
 					 			<div class="col-md-6">
-									<form action="index.php?controller=userevent&action=delete" method="post">
+									<form action="index.php?controller=guest&action=delete" method="post">
 					 					<button type="submit" name="id" value="<?=$event->getID() ?>"	 class="btn btn-warning" btn-md><?= i18n("Unsubscribe") ?></button>
 					 				</form>						 			</div>
 					 								 			
