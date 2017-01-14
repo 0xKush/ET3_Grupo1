@@ -48,10 +48,10 @@
 					  </div>					   
 
 					  <div class="form-group">
-					    <label for="private"><?= i18n("Visivility")?></label>
+					    <label for="private"><?= i18n("Visibility")?></label>
 					    <select class="form-control" id="private" name="private">
-					      <option value="public"><?= i18n("Public")?></option>
-					      <option value="private"><?= i18n("Private")?></option>
+					      <option value="0"><?= i18n("Public")?></option>
+					      <option value="1"><?= i18n("Private")?></option>
 					    </select>
 					  </div>
 
