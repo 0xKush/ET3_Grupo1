@@ -39,20 +39,6 @@
 					  </div>					   
 
 					  <div class="form-group">
-					    <label for="type"><?= i18n("Owner")?></label>
-					    <select class="form-control" id="type" name="type">
-					      <?php foreach ($users as $u){
-					      	if ($group->getOwner()->getUser() == $user->getUser()) {
-					      		echo "<option selected value=". $u->getID().">". $u->getUser()."</option>";
-					      	}else{
-					      		echo "<option value=". $u->getID().">". $u->getUser()."</option>";
-					      	}
-					      } 
-					       ?>
-					    </select>
-					  </div>
-
-					  <div class="form-group">
 					    <label for="private"><?= i18n("Visivility")?></label>
 					    <select class="form-control" id="private" name="private">
 					      <option value="public"><?= i18n("Public")?></option>
