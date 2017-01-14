@@ -57,7 +57,7 @@
  							echo '<tr class="row">';
  								echo "<td class='text-center'>".$event->getName()."</td>";
  								echo "<td class='text-center'>".$event->getOwner()."</td>";
- 								echo "<td class='text-center'></td>";
+ 								echo "<td class='text-center'>".$event->getPrivate()."</td>";
  								echo "<td class='text-center'>".$event->getStatus()."</td>";
 
  								echo "<td class='text-center'>";
