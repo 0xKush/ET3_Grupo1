@@ -20,10 +20,10 @@
  		<div class="well">
  		<div class="container-fluid">
 	 		<div class="row">
-	 			<h1><?= i18n("Edit Group: ")?><?= $event->getName() ?></h1>
+	 			<h1><?= i18n("Edit Event: ")?><?= $event->getName() ?></h1>
 	 		</div>
 	 		<div class="row">
-		 		<form>
+		 		<form method="post" action="index.php?controller=event&action=edit">
 		 			<div class="form-group">
 					    <label for="name"><?= i18n("Name")?></label>
 					    <input type="text" class="form-control" id="name" name="name" placeholder="<?= $event->getName()?>">
@@ -61,8 +61,9 @@
 					       value="down"><?= i18n("Down")?></option>
 					    </select>
 					  </div>
+					  <input type="text" name="id" value="<?= $event->getID() ?>" hidden>
 					 
-					  <button type="submit" class="btn btn-primary pull-right"><?= i18n("Submit")?></button>
+					  <button type="submit" name="submit" class="btn btn-primary pull-right"><?= i18n("Submit")?></button>
 					</form>
 	 		</div>
  		</div>
