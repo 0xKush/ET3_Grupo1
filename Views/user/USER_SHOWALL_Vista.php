@@ -53,7 +53,7 @@ $friends = $view->getVariable("friends");
  						
  							<form action="index.php?controller=user&action=showcurrent" method="post">
 									<input type="text" hidden="hidden" name="id" value="<?=$user->getID() ?>">
-									<button class="btn btn-success btn-block" type="submit"  >
+									<button class="btn btn-primary btn-block" type="submit"  >
 										<?= i18n("View") ?>
 										<i class="fa fa-eye fa-fw"></i>
 									</button>
@@ -65,6 +65,14 @@ $friends = $view->getVariable("friends");
 									<button class="btn btn-danger btn-block" type="submit"  >
 										<?= i18n("Unfriend") ?>
 										<i class="fa fa-trash-o fa-fw"></i>
+									</button>
+									</form>
+								<?php else: ?>
+									<form action="index.php?controller=friendship&action=add" method="post">
+									<input type="text" hidden="hidden" name="id" value="<?=$user->getID() ?>">
+									<button class="btn btn-success btn-block" type="submit"  >
+										<?= i18n("Add") ?>
+										<i class="fa fa-plus fa-fw"></i>
 									</button>
 									</form>
 								<?php endif ?>

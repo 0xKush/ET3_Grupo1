@@ -133,22 +133,6 @@
 	</div>
 	<?php endforeach ?>
 
-	<div class="row">
-		<div class="panel">
-			<div class="panel-body">
-			<div class="row">
-				<label for=""><?= i18n("Add document") ?></label>
-			</div>
-				<form action="index.php?controller=document&action=add" method="post">
-					<input class="form-control" type="file" name="doc" >
-					<button class="btn btn-success pull-right" name="submit" type="submit" value="yes">
-						<?= i18n("Submit") ?>
-					</button>
-				</form>
-			</div>
-		</div>
-	</div>
-
 	</div>
 
 	<div class="col-md-8"> 
