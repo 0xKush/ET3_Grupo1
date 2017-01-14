@@ -40,10 +40,9 @@ class EVENT_Controller extends BaseController
             throw new Exception(i18n("No such event with id: ") . $eventid);
         }
         
-        $perm     = new Permissions();
         $ismember = false;
         
-        if (!$perm->isEventMember($this->currentUser->getID(), $eventid)) {
+        if ($this->permissions->isEventMember($this->currentUser->getID(), $eventid)) {
             $ismember = true;
         }
         
