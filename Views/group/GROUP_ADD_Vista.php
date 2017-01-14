@@ -20,6 +20,7 @@
  		<div class="well">
  		<div class="container-fluid">
 	 		<div class="row">
+	 			<h1><?= i18n("Add Group: ")?> <?= $group->getName() ?> </h1>
 	 		</div>
 	 		<div class="row">
 		 		<form action="index.php?controller=group&action=add" method="post">
