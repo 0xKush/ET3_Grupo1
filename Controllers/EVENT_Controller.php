@@ -120,19 +120,14 @@ class EVENT_Controller extends BaseController
             $event->setStartHour($_POST["starthour"]);
             $event->setEndHour($_POST["endhour"]);
             $event->setDescription($_POST["description"]);
-            $event->setStatus(1);
+            $event->setStatus($_POST["status"]);
             
             try {
-                if (!$this->eventModel->nameExists($_POST["name"])) {
-                    $event->checkIsValidForCreate();
-                    $this->eventModel->edit($event);
-                    $this->view->setFlash(sprintf(i18n("Event\"%s\" successfully updated."), $event->getName()));
-                    $this->view->redirect("event", "showall");
-                } else {
-                    $errors            = array();
-                    $errors["general"] = i18n("Event already exists");
-                    $this->view->setVariable("errors", $errors);
-                }
+                $event->checkIsValidForCreate();
+                $this->eventModel->edit($event);
+                $this->view->setFlash(sprintf(i18n("Event\"%s\" successfully updated."), $event->getName()));
+                $this->view->redirect("event", "showall");
+                
             }
             catch (ValidationException $ex) {
                 $errors = $ex->getErrors();
@@ -246,9 +241,9 @@ class EVENT_Controller extends BaseController
             } else {
                 $events = $this->eventModel->search($query);
             }
-
+            
             $guestModel = new GUEST_Model();
-            $guests = $guestModel->getEvents($this->currentUser->getID());
+            $guests     = $guestModel->getEvents($this->currentUser->getID());
             
             $this->view->setVariable("guests", $guests);
             $this->view->setVariable("events", $events);

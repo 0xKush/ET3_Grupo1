@@ -26,39 +26,39 @@
 		 		<form method="post" action="index.php?controller=event&action=edit">
 		 			<div class="form-group">
 					    <label for="name"><?= i18n("Name")?></label>
-					    <input type="text" class="form-control" id="name" name="name" placeholder="<?= $event->getName()?>">
+					    <input type="text" class="form-control" id="name" name="name" value="<?= $event->getName()?>">
 					  </div>
 					  <div class="form-group">
 					    <label for="description"><?= i18n("Description")?></label>
-					    <input type="textarea" class="form-control" id="description" name="description" placeholder="<?= $event->getDescription()?>">
+					    <input type="textarea" class="form-control" id="description" name="description" value="<?= $event->getDescription()?>">
 					  </div>
 					  
 
 					  <div class="form-group">
-					    <label for="private"><?= i18n("Visivility")?></label>
+					    <label for="private"><?= i18n("Visibility")?></label>
 					    <select class="form-control" id="private" name="private">
-					      <option value="public"><?= i18n("Public")?></option>
+					      <option value="0"><?= i18n("Public")?></option>
 					      <option
 							<?php 
 								if ($event->getPrivate()) {
 									echo " selected ";
 								}
 							 ?>
-					       value="private"><?= i18n("Private")?></option>
+					       value="1"><?= i18n("Private")?></option>
 					    </select>
 					  </div>
 
 					  <div class="form-group">
 					    <label for="status"><?= i18n("Status")?></label>
 					    <select class="form-control" id="status" name="status">
-					      <option value="up"><?= i18n("Active")?></option>
+					      <option value="1"><?= i18n("Active")?></option>
 					      <option
 							<?php
 								if (!$event->getStatus()) {
 								 	echo " selected ";
 								 } 
 							 ?>
-					       value="down"><?= i18n("Down")?></option>
+					       value="0"><?= i18n("Down")?></option>
 					    </select>
 					  </div>
 					  <input type="text" name="id" value="<?= $event->getID() ?>" hidden>

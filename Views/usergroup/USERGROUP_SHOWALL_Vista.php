@@ -30,6 +30,7 @@ $umapper = new USER_Model();
 					</a>
 				</div>
 		</div>
+
 		<?php if ($requests != NULL): ?>
 			<div class="panel">
 				<div class="panel-heading">
@@ -77,6 +78,7 @@ $umapper = new USER_Model();
 				</div>
 			</div>
 		<?php endif ?>
+
 
 		<div class="row">
 			<?php if ($groups == NULL): ?>

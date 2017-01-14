@@ -45,7 +45,7 @@
  						<tr class="row">
  						<th class='text-center'><?= i18n("Name") ?></th>
  						<th class='text-center'><?= i18n("Owner") ?></th>
- 						<th class='text-center'><?= i18n("Private?") ?></th>
+ 						<th class='text-center'><?= i18n("Private") ?></th>
  						<th class='text-center'><?= i18n("Status") ?></th>
  						<th class='text-center'><?= i18n("Options") ?></th>
  					</tr>
@@ -57,7 +57,7 @@
  							echo '<tr class="row">';
  								echo "<td class='text-center'>".$event->getName()."</td>";
  								echo "<td class='text-center'>".$event->getOwner()."</td>";
- 								echo "<td class='text-center'></td>";
+ 								echo "<td class='text-center'>".$event->getPrivate()."</td>";
  								echo "<td class='text-center'>".$event->getStatus()."</td>";
 
  								echo "<td class='text-center'>";
