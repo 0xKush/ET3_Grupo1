@@ -99,7 +99,7 @@ class MESSAGE_Controller extends BaseController
                 $this->view->setFlash(sprintf(i18n("Message \"%s\" successfully deleted.")));
             }
             
-            $this->view->redirect("message", "show");
+            $this->view->redirect("conversation", "showcurrent", "&id=".$message->getConversation());
         }
         $this->view->setVariable("message", $message);
         $this->view->render("message", "MESSAGE_DELETE_Vista");

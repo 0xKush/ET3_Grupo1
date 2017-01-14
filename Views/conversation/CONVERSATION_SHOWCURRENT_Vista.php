@@ -48,6 +48,11 @@ $messages = $mmapper->showall($conversation->getID());
 												</div>
 												<div class="col-xs-2">
 													<font class="user"><?=$msg->getSendHour() ?></font>
+													<?php if ($msg->getOwner() == $currentuserid): ?>
+														<a href="index.php?controller=message&action=delete&id=<?= $msg->getID() ?>">
+															<i class="fa fa-trash-o"></i>
+														</a>
+													<?php endif ?>
 												</div>
 
 												</div>
