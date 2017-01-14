@@ -47,6 +47,7 @@
 					   <div class="form-group">
 					    <label for="status"><?= i18n("Status")?></label>
 					    <select class="form-control" id="status" name="status">
+					    	<option value=""><?= i18n("Any") ?></option>
 					      <option value="1"><?= i18n("Active")?></option>
 					      <option value="0"><?= i18n("Deceased")?></option>
 					    </select>
@@ -54,6 +55,7 @@
 					  <div class="form-group">
 					    <label for="private"><?= i18n("Visivility")?></label>
 					    <select class="form-control" id="private" name="private">
+					    	<option value=""><?= i18n("Any") ?></option>
 					      <option value="1"><?= i18n("Public")?></option>
 					      <option value="0"><?= i18n("Private")?></option>
 					    </select>
@@ -63,6 +65,7 @@
 					  <div class="form-group">
 					    <label for="owner"><?= i18n("Owner")?></label>
 					    <select class="form-control" id="owner" name="owner">
+					    	<option value=""><?= i18n("Any") ?></option>
 					    	<option value=""><?= i18n("Any")?></option>
 					     <?php foreach ($users as $u): ?>
 					     	<option value="<?=$u->getID() ?>"><?=$u->getUser() ?></option>

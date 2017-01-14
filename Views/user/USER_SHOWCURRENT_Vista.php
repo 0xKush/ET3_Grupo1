@@ -116,9 +116,6 @@
 		<?php else: ?>
 			<?php foreach ($publications as $publication): ?>
 							<div class="panel">
-								<div class="panel-header">
-									<font class="publiTitle"><?= $publication->getOwner() ?></font>
-								</div>
 								<div class="panel-body">
 									<font class="user">
 										<?=$publication->getDescription() ?>

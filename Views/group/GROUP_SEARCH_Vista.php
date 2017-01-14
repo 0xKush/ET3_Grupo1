@@ -40,6 +40,7 @@
 					  <div class="form-group">
 					    <label for="private"><?= i18n("Visivility")?></label>
 					    <select class="form-control" id="private" name="private">
+					    	<option value=""><?=i18n("Not relevant") ?></option>
 					      <option value="public"><?= i18n("Public")?></option>
 					      <option value="private"><?= i18n("Private")?></option>
 					    </select>
@@ -57,6 +58,7 @@
 					   <div class="form-group">
 					    <label for="status"><?= i18n("Status")?></label>
 					    <select class="form-control" id="status" name="status">
+					    	<option value=""><?=i18n("Not relevant") ?></option>
 					      <option value="1"><?= i18n("Active")?></option>
 					      <option value="0"><?= i18n("Deceased")?></option>
 					    </select>

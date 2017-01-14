@@ -40,6 +40,7 @@ $errors = $view->getVariable("errors");
 			<div class="form-group">
 			    <label for="type"><?= i18n("Privileges")?></label>
 			    <select class="form-control" id="type" name="type">
+			    <option value=""><?= i18n("Any") ?></option>
 				<option value="0"><?= i18n("Base user")?></option>
 				<option value="1"><?= i18n("Admin")?></option>
 			    </select>
@@ -48,6 +49,7 @@ $errors = $view->getVariable("errors");
 			<div class="form-group">
 			    <label for="private"><?= i18n("Visivility")?></label>
 			    <select class="form-control" id="private" name="private">
+			    <option value=""><?= i18n("Any") ?></option>
 				<option value="public"><?= i18n("Public")?></option>
 				<option value="private"><?= i18n("Private")?></option>
 			    </select>
@@ -56,6 +58,7 @@ $errors = $view->getVariable("errors");
 			<div class="form-group">
 			    <label for="status"><?= i18n("Status")?></label>
 			    <select class="form-control" id="status" name="status">
+			    <option value=""><?= i18n("Any") ?></option>
 				<option value="up"><?= i18n("Active")?></option>
 				<option value="down"><?= i18n("Down")?></option>
 			    </select>
