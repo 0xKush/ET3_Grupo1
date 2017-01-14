@@ -24,7 +24,7 @@
 	 			<h1><?= i18n("Edit Group: ")?><?= $group->getName() ?></h1>
 	 		</div>
 	 		<div class="row">
-		 		<form>
+		 		<form action="index.php?controller=group&action=edit&id=<?=$id ?>" method="post">
 		 			<div class="form-group">
 					    <label for="name"><?= i18n("Name")?></label>
 					    <input type="text" class="form-control" id="name" name="name" placeholder="<?= $group->getName()?>">
@@ -80,7 +80,7 @@
 					    </select>
 					  </div>
 					 
-					  <button type="submit" class="btn btn-primary pull-right"><?= i18n("Submit")?></button>
+					  <button type="submit" name="submit" class="btn btn-primary pull-right"><?= i18n("Submit")?></button>
 					</form>
 	 		</div>
  		</div>
