@@ -78,6 +78,7 @@ class USER_Controller extends BaseController
         $friends         = $friendshipModel->showall($userid);
         
         $documentModel = new DOCUMENT_Model();
+        $documents = $documentModel->showall($userid);
         
         $this->view->setVariable("user", $user);
         
