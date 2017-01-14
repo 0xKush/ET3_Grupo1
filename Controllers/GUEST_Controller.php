@@ -3,6 +3,12 @@ require_once(__DIR__ . "/../core/ViewManager.php");
 require_once(__DIR__ . "/../core/I18n.php");
 require_once(__DIR__ . "/../Models/Guest.php");
 require_once(__DIR__ . "/../Models/GUEST_Model.php");
+require_once(__DIR__ . "/../Models/Event.php");
+require_once(__DIR__ . "/../Models/EVENT_Model.php");
+require_once(__DIR__ . "/../Models/User.php");
+require_once(__DIR__ . "/../Models/USER_Model.php");
+require_once(__DIR__ . "/../Models/Friendship.php");
+require_once(__DIR__ . "/../Models/FRIENDSHIP_Model.php");
 require_once(__DIR__ . "/../Controllers/BaseController.php");
 
 class GUEST_Controller extends BaseController
@@ -66,6 +72,57 @@ class GUEST_Controller extends BaseController
         }
         
         $this->view->redirect("guest", "showall", "id=" . $this->currentUser->getID());
+    }
+
+    public function invite()
+    {
+
+        if (!isset($_REQUEST["id"])) {
+            throw new Exception(i18n("Id is mandatory"));
+        }
+        
+        $eventid = $_REQUEST["id"];
+        $eventModel = new EVENT_Model();
+        $event = $eventModel->showcurrent($groupid);
+
+        if ($event == NULL) {
+            throw new Exception(i18n("No such event with id: ") . $eventid);
+        }
+        
+        if (isset($_POST["submit"])) {
+            $invites = $_POST["invites"];
+
+            foreach ($invites as $invite){
+                $guest = new Guest();
+                $guest->setEvent($_POST["event"]);
+                $guest->setMember($_POST["member"]);
+                $guest->setSecondaryMember($invite);
+            
+                try {
+                    if (!$this->guestModel->guestExists($_POST["event"], $_POST["member"], $_POST["secondarymember"]) && !empty($_POST["event"]) && !empty($_POST["member"]) && !empty($_POST["secondarymember"])) {
+                        $this->guestModel->add($guest);
+                    }
+                }
+                catch (ValidationException $ex) {
+                    $errors = $ex->getErrors();
+                    $this->view->setVariable("errors", $errors);
+                }
+            }
+            $this->view->setFlash(sprintf(i18n("Invitations successfully sent.")));
+            $this->view->redirect("guest", "showall", "id=" . $this->currentUser->getID());
+        }
+        
+        if ($this->permissions->isAdmin($this->currentUser->getID())){
+            $userModel = new USER_Model();
+            $friends = $userModel->showall();
+        } else {
+            $friendshipModel = new FRIENDSHIP_Model();
+            $friends = $friendshipModel->showall($this->currentUser->getID());
+        }
+
+        $this->view->setVariable("friends", $friends);
+        $this->view->setVariable("event", $event);
+        $this->view->render("guest", "GUEST_INVITE_Vista");
     }
 
     public function join()
