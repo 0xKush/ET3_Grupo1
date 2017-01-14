@@ -94,12 +94,12 @@ class GUEST_Controller extends BaseController
 
             foreach ($invites as $invite){
                 $guest = new Guest();
-                $guest->setEvent($_POST["event"]);
-                $guest->setMember($_POST["member"]);
+                $guest->setEvent($eventid);
+                $guest->setMember($this->currentUser->getID());
                 $guest->setSecondaryMember($invite);
             
                 try {
-                    if (!$this->guestModel->guestExists($_POST["event"], $_POST["member"], $_POST["secondarymember"]) && !empty($_POST["event"]) && !empty($_POST["member"]) && !empty($_POST["secondarymember"])) {
+                    if (!$this->guestModel->guestExists($guest->getEvent(), $guest->getMember(), $guest->getSecondaryMember())) {
                         $this->guestModel->add($guest);
                     }
                 }
