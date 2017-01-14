@@ -89,13 +89,12 @@ class CONVERSATION_Controller extends BaseController
             throw new Exception(i18n("No such conversation with id: ") . $conversationid);
         }
         
-        
         if (isset($_POST["submit"])) {
             if ($_POST["submit"] == "yes") {
                 $this->conversationModel->delete($conversation);
                 $this->view->setFlash(sprintf(i18n("Conversation \"%s\" successfully deleted.")));
             }
-            $this->view->redirect("conversation", "show");
+            $this->view->redirect("conversation", "showall","id=".$this->currentUser->getID());
         }
         $this->view->setVariable("conversation", $conversation);
         $this->view->render("conversation", "CONVERSATION_DELETE_Vista");
