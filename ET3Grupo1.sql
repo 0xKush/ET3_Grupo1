@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `groupp` (
   `description` text COLLATE utf8_spanish_ci NOT NULL,
   `owner` int(11) NOT NULL,
   `private` tinyint(1) NOT NULL,
-  `creationdate` date NOT NULL,
+  `creationdate` date DEFAULT NULL,
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
