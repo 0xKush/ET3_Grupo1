@@ -5,6 +5,7 @@ $view = ViewManager::getInstance();
 $currentuserid = $view->getVariable("currentuserid");
 $errors = $view->getVariable("errors");
 $groups = $view->getVariable("groups");
+$requests = $view->getVariable("requests");
 
 $umapper = new USER_Model();
 ?>
@@ -12,14 +13,71 @@ $umapper = new USER_Model();
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
-<?php print_r($errors) ?>
 
 
- 	<!-- se user = currentuser mostrar edit perfil -->
+
 	
 
 
 	<div class="container-fluid">
+		<div class="row">
+				<div class="pull-right" style="padding: 10px">
+					<a href="index.php?controller=group&action=add">
+						<button class="btn btn-success">
+							<?= i18n("Create new group") ?>
+							<i class="fa fa-plus"></i>
+						</button>
+					</a>
+				</div>
+		</div>
+		<?php if ($requests != NULL): ?>
+			<div class="panel">
+				<div class="panel-heading">
+					<h1><?=i18n("Group invites") ?></h1>
+				</div>
+				<div class="panel-body" style="background: #cbd8ed">
+					
+			
+			<?php foreach ($requests as $request): ?>
+				<div class="col-md-6">
+					<div class="panel">
+						<div class="panel-body">
+							<div class="row text-center">
+								<font class="pfname"><?=$request->getName() ?></font>
+							</div>
+							<div class="row text-center" style="padding-left: 5px: padding-right: 5px">
+								<font class="user"><?=$request->getDescription() ?></font>
+							</div>
+							
+						</div>
+						<div class="panel-footer">
+							<div class="row"> 
+							
+								<div class="col-md-6">
+					 				<a href="index.php?controller=usergroup&action=delete&id=<?= $group->getID()  ?>">
+					 					<button class="btn btn-danger btn-md"><?= i18n("Decline") ?></button>
+					 				</a>		 			
+
+									<form action="index.php?controller=usergroup&action=edit" method="post">
+					 					<button type="submit" name="id" value="<?=$group->getID() ?>"	 class="btn btn-warning" btn-md><?= i18n("Accept") ?></button>
+					 				</form>						 			</div>
+					 								 			
+								<div class="col-md-6">
+									<a href="index.php?controller=group&action=showcurrent&id=<?=$group->getID() ?>">
+										<button class="btn btn-info btn-md pull-right">
+											<?= i18n("View") ?>
+										</button>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php endforeach ?>
+				</div>
+			</div>
+		<?php endif ?>
+
 		<div class="row">
 			<?php if ($groups == NULL): ?>
 				<div class="panel">

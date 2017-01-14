@@ -6,11 +6,10 @@ $members = $view->getVariable("members");
 $publications = $view->getVariable("publications");
 $errors = $view->getVariable("errors");
 $group = $view->getVariable("group");
-$owner = $view->getVariable("owner");
+$isOwner = $view->getVariable("isOwner");
 $isMember = $view->getVariable("ismember");
 require_once(__DIR__."/../../Models/USER_Model.php");
-$umapper = new USER_Model();
-//necesito salgo co que saber se currentuser pertence ó grupo en cuestión
+
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
@@ -61,14 +60,18 @@ $umapper = new USER_Model();
 
 	<div class="row">
 		<div class="col-md-4">
-		<div class="row" style="margin-bottom: 10px">
+		<?php if ($isOwner || $isMember): ?>
+			<div class="row" style="margin-bottom: 10px">
 		<form action="index.php?controller=usergroup&action=invite" method="post">
-			<button class="btn btn-block btn-success" name="submit">
+		<input type="text" name="id" hidden value="<?= $group->getID() ?>">
+			<button class="btn btn-block btn-success" type="submit">
 				<?=i18n("Invite") ?> 
 				<i class="fa fa-plus"></i>
 			</button>
 			</form>
 		</div>
+		<?php endif ?>
+
 		<?php if ($members == NULL): ?>
 			<div class="panel">
 				<div class="panel-body">

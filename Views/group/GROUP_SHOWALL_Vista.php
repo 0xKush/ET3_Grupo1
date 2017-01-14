@@ -12,7 +12,7 @@ $groups = $view->getVariable("groups");
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
-<?php print_r($errors) ?>
+
 
 
  	<!-- se user = currentuser mostrar edit perfil -->
