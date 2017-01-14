@@ -46,8 +46,9 @@ class FRIENDSHIP_Model
         $sql->execute(array(
             $currentuserid,
             $friend,
-            $friend,
-            $currentuserid
+            $currentuserid,
+            $friend
+            
         ));
         $friendship = $sql->fetch(PDO::FETCH_ASSOC);
         
@@ -92,8 +93,9 @@ class FRIENDSHIP_Model
         $sql->execute(array(
             $member,
             $secondarymember,
-            $secondarymember,
-            $member
+            $member,
+            $secondarymember
+            
         ));
         
         if ($sql->fetchColumn() > 0) {
