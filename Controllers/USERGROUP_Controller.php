@@ -198,9 +198,15 @@ class USERGROUP_Controller extends BaseController
         if (!isset($_REQUEST["id"])) {
             throw new Exception(i18n("Id is mandatory"));
         }
+
+        if (isset($_REQUEST["kick"])) {
+            $usertodelete = $_REQUEST["kick"];
+        } else {
+            $usertodelete = $this->currentUser->getID();
+        }
         
         $usergroupid = $_REQUEST["id"];
-        $usergroup   = $this->usergroupModel->showcurrent($this->currentUser->getID(), $usergroupid);
+        $usergroup   = $this->usergroupModel->showcurrent($usertodelete, $usergroupid);
 
         if ($usergroup == NULL) {
             throw new Exception(i18n("No such usergroup with id: ") . $usergroupid);

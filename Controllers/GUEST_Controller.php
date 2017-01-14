@@ -178,9 +178,15 @@ class GUEST_Controller extends BaseController
         if (!isset($_REQUEST["id"])) {
             throw new Exception(i18n("Id is mandatory"));
         }
+
+        if (isset($_REQUEST["kick"])) {
+            $usertodelete = $_REQUEST["kick"];
+        } else {
+            $usertodelete = $this->currentUser->getID();
+        }
         
         $guestid = $_REQUEST["id"];
-        $guest   = $this->guestModel->showcurrent($this->currentUser->getID(), $guestid);
+        $guest   = $this->guestModel->showcurrent($usertodelete, $guestid);
         
         if ($guest == NULL) {
             throw new Exception(i18n("No such guest with id: ") . $guestid);
