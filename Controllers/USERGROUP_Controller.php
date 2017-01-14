@@ -197,6 +197,7 @@ class USERGROUP_Controller extends BaseController
         
         if (isset($_POST["submit"])) {
             $usergroup->setStatus(1);
+            $this->usergroupModel->edit($usergroup);
         }
         
         $this->view->redirect("usergroup", "showall", "id=" . $this->currentUser->getID());

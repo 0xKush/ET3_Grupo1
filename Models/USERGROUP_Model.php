@@ -42,7 +42,7 @@ class USERGROUP_Model
     
     public function showcurrent($currentuserid, $group)
     {
-        $sql = $this->db->prepare("SELECT * FROM usergroup WHERE (member=? or secondarymember=?) and groupid=? and status=1");
+        $sql = $this->db->prepare("SELECT * FROM usergroup WHERE (member=? or secondarymember=?) and groupid=?");
         $sql->execute(array(
             $currentuserid,
             $currentuserid,
