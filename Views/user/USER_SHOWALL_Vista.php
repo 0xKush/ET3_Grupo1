@@ -70,7 +70,7 @@ $friends = $view->getVariable("friends");
 								<?php else: ?>
 									<form action="index.php?controller=friendship&action=add" method="post">
 									<input type="text" hidden="hidden" name="id" value="<?=$user->getID() ?>">
-									<button class="btn btn-success btn-block" type="submit"  >
+									<button class="btn btn-success btn-block" type="submit" name="submit" >
 										<?= i18n("Add") ?>
 										<i class="fa fa-plus fa-fw"></i>
 									</button>

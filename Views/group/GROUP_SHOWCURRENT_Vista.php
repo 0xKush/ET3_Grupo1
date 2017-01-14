@@ -6,7 +6,6 @@ $members = $view->getVariable("members");
 $publications = $view->getVariable("publications");
 $errors = $view->getVariable("errors");
 $group = $view->getVariable("group");
-$isOwner = $view->getVariable("isOwner");
 $isMember = $view->getVariable("ismember");
 $requests = $view->getVariable("requests");
 
@@ -104,6 +103,15 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 								<?= i18n("Unsubscribe") ?>
 							</button>
 						</form>
+					<?php elseif($group->getPrivate()): ?>
+						<form action="index.php?controller=usergroup&action=edit" method="post">
+							<input type="text" name="id" value="<?=$group->getID() ?>" hidden>
+							<input type="text" name="member" value="<?=$currentuserid ?>" hidden>
+							<button class="btn btn-warning" name="submit" value="yes">
+								<i class="fa fa-"></i>
+								<?=i18n("Request entrance")  ?>
+							</button>
+						</form>
 					<?php else: ?>
 						<form action="index.php?controller=usergroup&action=join" method="post">
 							<input type="text" name="groupid" value="<?=$group->getID() ?>" hidden>
@@ -123,7 +131,7 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 
 	<div class="row">
 		<div class="col-md-4">
-		<?php if ($isOwner || $isMember): ?>
+		<?php if ($group->getOwner() == $currentuserid || $isMember): ?>
 			<div class="row" style="margin-bottom: 10px">
 		<form action="index.php?controller=usergroup&action=invite" method="post">
 		<input type="text" name="id" hidden value="<?= $group->getID() ?>">
@@ -160,7 +168,7 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 			</div>
 			<div class="panel-footer">
 			<div class="row">
-			<?php if ($isOwner): ?>
+			<?php if ($group->getOwner() == $currentuserid): ?>
 				<form action="index.php&action=delete&controller=usergroup" method="post">
 					<input type="text" class="" hidden name="kick" value="<?= $member->getID() ?>">
 					<button class="btn btn-danger" name="submit" type="submit">

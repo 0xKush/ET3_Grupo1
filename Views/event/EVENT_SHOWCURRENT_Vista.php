@@ -1,65 +1,223 @@
 <?php
 require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
-$user = $view->getVariable("user");
+$currentuserid = $view->getVariable("currentuserid");
+$members = $view->getVariable("members");
+$publications = $view->getVariable("publications");
 $errors = $view->getVariable("errors");
 $event = $view->getVariable("event");
+$isMember = $view->getVariable("ismember");
+$requests = $view->getVariable("requests");
 
-$isAdmin = $view->getVariable("isadmin");
-$isOwner = $view->getVariable("isowner");
-$isEventMember = $view->getVariable("iseventmember");
-$isPrivate = $view->getVariable("isprivate");
+$owner = $view->getVariable("owner");
+require_once(__DIR__."/../../Models/USER_Model.php");
+
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
+
 <div class="container-fluid">
-	<div class="row">
-		<div class="pull-right">
-			<?php if($isAdmin || $isOwner): ?>
-				<div>
-					<form action="index.php?controller=event&action=delete" method="post">
-						<input type="text" name="id" value="<?= $event->getID() ?>" hidden>
-						<button class="btn btn-danger" name="delete">
-							<?= i18n("Delete") ?>
-							<i class="fa fa-trash"></i>
-						</button>
-					</form>
+	
+	<?php if ($requests !=NULL): ?>
+		
+			<div class="panel">
+				<div class="panel-heading">
+					<h1><?=i18n("Event invites") ?></h1>
 				</div>
-			<?php endif ?>
+				<div class="panel-body" style="background: #cbd8ed">
+					
 			
-			<?php if ($isEventMember): ?>
-				<div>
-					<form action="index.php?controller=guest&action=delete" method="post">
-						<input type="text" name="id" value="<?= $event->getID() ?>" hidden>
-						<button class="btn btn-warning" name="delete">
-							<?= i18n("Unsubscribe") ?>
-							<i class="fa fa-trash"></i>
-						</button>
-					</form>
-				</div> 
-			<?php elseif(!$isPrivate): ?>
-				<div>
-					<form action="index.php?controller=guest&action=add" method="post">
-						<input type="text" name="id" value="<?= $event->getID() ?>" hidden>
-						<button class="btn btn-warning" name="delete">
-							<?= i18n("Join") ?>
-							<i class="fa fa-trash"></i>
-						</button>
-					</form>
+			<?php foreach ($requests as $request): ?>
+				<div class="col-md-6">
+					<div class="panel">
+						<div class="panel-body">
+							<div class="row text-center">
+								<font class="pfname"><?=$request->getName() ?></font>
+							</div>
+							<div class="row text-center" style="padding-left: 5px: padding-right: 5px">
+								<font class="user"><?=$request->getDescription() ?></font>
+							</div>
+							
+						</div>
+						<div class="panel-footer">
+							<div class="row"> 
+							
+								<div class="col-md-6">
+					 				<a href="index.php?controller=guest&action=delete&id=<?= $event->getID()  ?>">
+					 					<button class="btn btn-danger btn-md"><?= i18n("Decline") ?></button>
+					 				</a>		 			
+
+									<form action="index.php?controller=guest&action=edit" method="post">
+					 					<button type="submit" name="id" value="<?=$event->getID() ?>"	 class="btn btn-warning" btn-md><?= i18n("Accept") ?></button>
+					 				</form>						 			</div>
+					 								 			
+								<div class="col-md-6">
+									<a href="index.php?controller=user&action=showcurrent&id=<?=$event->getID() ?>">
+										<button class="btn btn-info btn-md pull-right">
+											<?= i18n("View") ?>
+										</button>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			<?php else: ?>
-			 <div>
-					<form action="index.php?controller=guest&action=add" method="post">
-						<input type="text" name="id" value="<?= $event->getID() ?>" hidden>
-						<button class="btn btn-warning" name="delete">
-							<?= i18n("Ask to join") ?>
-							<i class="fa fa-hand-rock-o"></i>
-						</button>
-					</form>
+			<?php endforeach ?>
 				</div>
-			<?php endif ?>
+			</div>
+	<?php endif ?>
+
+	<div class="row">
+		<div class="panel">
+			<div class="panel-body">
+			<div class="col-xs-8">
+				<h1><?=$event->getName() ?></h1>
+				<div class="row" style="padding-left: 15px">
+					<font size="3" class="user">
+						<?= $event->getDescription()?>
+					</font>	
+				</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="row pull-right">
+					<?php if ($currentuserid == $event->getOwner()): ?>
+						<a href="index.php?controller=event&action=edit&id=<?=$event->getID() ?>">
+							<button class="btn btn-warning">
+								<i class="fa fa-edit"></i>
+								<?= i18n("Edit") ?>
+							</button>
+						</a>
+						<a href="index.php?controller=event&action=delete&id=<?=$event->getID() ?>">
+							<button class="btn btn-danger">
+								<i class="fa fa-trash"></i>
+								<?= i18n("Delete") ?>
+							</button>
+						</a>
+					<?php elseif($isMember): ?>
+						<form action="index.php?controller=guest&action=delete" method="post">
+							<input type="text" name="id" value="<?=$event->getID() ?>" hidden>
+							<button type="submit" class="btn btn-warning">
+								<i class="fa fa-leave"></i>
+								<?= i18n("Unsubscribe") ?>
+							</button>
+						</form>
+					<?php else: ?>
+						<form action="index.php?controller=guest&action=join" method="post">
+							<input type="text" name="eventid" value="<?=$event->getID() ?>" hidden>
+							<input type="text" name="member" value="<?=$currentuserid ?>" hidden>
+							<button class="btn btn-success" name="submit" value="yes">
+								<i class="fa fa-"></i>
+								<?=i18n("Join")  ?>
+							</button>
+						</form>
+					<?php endif ?>
+				</div>
+			</div>
+				
+			</div>
 		</div>
 	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+		<?php if ($event->getOwner() == $currentuserid || $isMember): ?>
+			<div class="row" style="margin-bottom: 10px">
+		<form action="index.php?controller=guest&action=invite" method="post">
+		<input type="text" name="id" hidden value="<?= $event->getID() ?>">
+			<button class="btn btn-block btn-success" type="submit">
+				<?=i18n("Invite") ?> 
+				<i class="fa fa-plus"></i>
+			</button>
+			</form>
+		</div>
+		<?php endif ?>
+
+		<?php if ($members == NULL): ?>
+			<div class="panel">
+				<div class="panel-body">
+					<div class="text-center">
+						<font class=""><?= i18n("No members yet") ?></font>
+					</div>
+				</div>
+			</div>
+		<?php else: ?>
+			<?php foreach ($members as $member): ?>
+		<div class="row">
+		<div class="panel">
+			<div class="panel-body" >
+				<div class="row text-center" style="padding: 5px">
+					<?php if ($member->getPhoto() == NULL): ?>
+						<img class="smallPhoto img-circle" src="media/profileImages/default.png" alt="default">
+					<?php else: ?>
+						<img class="smallPhoto img-circle" src="media/profileImages/<?=$member->getPhoto() ?>" alt="<?=$member->getPhoto() ?>">
+					<?php endif ?>
+					<font class="name"><?= $member->getName()." ".$member->getSurname() ?></font><br>
+					<font class="user">@<?=$member->getUser() ?></font>
+				</div>
+			</div>
+			<div class="panel-footer">
+			<div class="row">
+			<?php if ($isOwner): ?>
+				<form action="index.php&action=delete&controller=guest" method="post">
+					<input type="text" class="" hidden name="kick" value="<?= $member->getID() ?>">
+					<button class="btn btn-danger" name="submit" type="submit">
+						<i class="fa fa-kick"></i>
+						<?=i18n("Kick") ?>
+					</button>
+				</form>
+			<?php endif ?>
+				<a href="index.php?controller=user&action=showcurrent&id=<?=$friend->getID()  ?>">
+					<button class="btn btn-default pull-right">
+					<i class="fa fa-angle-double-right"></i>
+						<?= i18n("View") ?>	
+					</button>
+				</a>
+			</div>
+				
+			</div>
+		</div>
+	</div>
+	<?php endforeach ?>
+<?php endif ?>
+		</div>
+		<div class="col-md-8">
+			<?php if ($publications == NULL): ?>
+			<div class="panel">
+				<div class="panel-body">
+					<div class="text-center">
+						<font class=""><?= i18n("No publication here") ?></font>
+					</div>
+				</div>
+			</div>
+		<?php else: ?>
+			<?php foreach ($publications as $publication): ?>
+							<div class="panel">
+								<div class="panel-body">
+									<font class="user">
+										<?=$publication->getDescription() ?>
+									</font>
+								</div>
+								<div class="panel-footer">
+									<div class="row">
+										<div class="col-md-6 pull-left">
+											
+										</div>
+										<div class="col-md-6">
+											<a href="index.php?controller=publication&action=showcurrent&id=<?=$publication->getID() ?>">
+												<button class="btn btn-default pull-right">
+													<?= i18n("View")  ?>
+													<i class="fa fa-angle-double-right"></i>
+												</button>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						<?php endforeach ?>			
+		<?php endif ?>
+		</div>
+	</div>
+	
 </div>

@@ -77,10 +77,11 @@ class GUEST_Model
     {
         $sql = $this->db->prepare("UPDATE guest SET event=?, member=?, secondarymember=?, status=? where id=?");
         $sql->execute(array(
-            $guest->getMember(),
             $guest->getEvent(),
+            $guest->getMember(),
             $guest->getSecondaryMember(),
-            $guest->getStatus()
+            $guest->getStatus(),
+            $guest->getID()
         ));
     }
     

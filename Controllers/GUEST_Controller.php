@@ -14,11 +14,13 @@ require_once(__DIR__ . "/../Controllers/BaseController.php");
 class GUEST_Controller extends BaseController
 {
     private $guestModel;
+    private $userModel;
     
     public function __construct()
     {
         parent::__construct();
         $this->guestModel = new GUEST_Model();
+        $this->userModel = new USER_Model();
         $this->view->setLayout("base");
     }
     
@@ -33,6 +35,11 @@ class GUEST_Controller extends BaseController
         $this->view->setVariable("events", $events);
         $requests = $this->guestModel->requests($userid);
         $this->view->setVariable("requests", $requests);
+          $owners = array();
+        foreach ($events as $guest) {
+            $owners[$guest->getOwner()] = $this->userModel->showcurrent($guest->getOwner());
+        }
+        $this->view->setVariable("owners", $owners);
         $this->view->render("guest", "GUEST_SHOWALL_Vista");
     }
     
@@ -83,7 +90,7 @@ class GUEST_Controller extends BaseController
         
         $eventid = $_REQUEST["id"];
         $eventModel = new EVENT_Model();
-        $event = $eventModel->showcurrent($groupid);
+        $event = $eventModel->showcurrent($eventid);
 
         if ($event == NULL) {
             throw new Exception(i18n("No such event with id: ") . $eventid);

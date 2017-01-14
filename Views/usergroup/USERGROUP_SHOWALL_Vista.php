@@ -38,7 +38,8 @@ $requests = $view->getVariable("requests");
 					
 			
 			<?php foreach ($requests as $request): ?>
-				<div class="col-md-6">
+				<?php if (true): ?>
+					<div class="col-md-6">
 					<div class="panel">
 						<div class="panel-body">
 							<div class="row text-center">
@@ -76,6 +77,8 @@ $requests = $view->getVariable("requests");
 						</div>
 					</div>
 				</div>
+				<?php endif ?>
+				
 			<?php endforeach ?>
 				</div>
 			</div>
