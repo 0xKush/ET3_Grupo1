@@ -123,7 +123,7 @@ INSERT INTO `document` (`id`, `owner`, `location`, `uploaddate`, `status`) VALUE
 DROP TABLE IF EXISTS `event`;
 CREATE TABLE IF NOT EXISTS `event` (
 `id` int(11) NOT NULL,
-  `creationdate` date NOT NULL,
+  `creationdate` date DEFAULT NULL,
   `owner` int(11) NOT NULL,
   `startdate` date NOT NULL,
   `enddate` date NOT NULL,

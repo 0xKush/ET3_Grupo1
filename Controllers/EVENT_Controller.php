@@ -65,7 +65,7 @@ class EVENT_Controller extends BaseController
         
         if (isset($_POST["submit"])) {
             $event->setName($_POST["name"]);
-            $event->setOwner($_POST["owner"]);
+            $event->setOwner($this->currentUser->getID());
             $event->setPrivate($_POST["private"]);
             $event->setStartDate($_POST["startdate"]);
             $event->setEndDate($_POST["enddate"]);
