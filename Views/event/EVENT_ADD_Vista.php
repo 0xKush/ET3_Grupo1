@@ -2,16 +2,13 @@
 	
 	require_once(__DIR__."/../../core/ViewManager.php");
 	$view = ViewManager::getInstance();
-	$user = $view->getVariable("user");
+	$currenuserid = $view->getVariable("currenuserid");
 	$errors = $view->getVariable("errors");
 	$event = $view->getVariable("event");
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
-
-<?php print_r($errors) ?>
-
 
  <div class="container-fluid">
  	
@@ -22,7 +19,7 @@
 	 			<h1><?= i18n("Create Event: ")?><?= $event->getName() ?></h1>
 	 		</div>
 	 		<div class="row">
-		 		<form>
+		 		<form action="index.php?controller=event&action=add" method="post">
 		 			<div class="form-group">
 					    <label for="name"><?= i18n("Name")?></label>
 					    <input type="text" class="form-control" id="name" name="name">
@@ -58,7 +55,7 @@
 					    </select>
 					  </div>
 
-					  <button type="submit" class="btn btn-primary pull-right"><?= i18n("Submit")?></button>
+					  <button type="submit" name="submit" class="btn btn-primary pull-right"><?= i18n("Submit")?></button>
 					</form>
 	 		</div>
  		</div>

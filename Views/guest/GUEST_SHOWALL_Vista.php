@@ -12,14 +12,18 @@ $umapper = new USER_Model();
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
-<?php print_r($errors) ?>
-
-
- 	<!-- se user = currentuser mostrar edit perfil -->
-	
-
 
 	<div class="container-fluid">
+		<div class="row">
+				<div class="pull-right" style="padding: 10px">
+					<a href="index.php?controller=event&action=add">
+						<button class="btn btn-success">
+							<?= i18n("Create new event") ?>
+							<i class="fa fa-plus"></i>
+						</button>
+					</a>
+				</div>
+		</div>
 		<div class="row">
 		<?php if ($events == NULL): ?>
 			<div class="panel">

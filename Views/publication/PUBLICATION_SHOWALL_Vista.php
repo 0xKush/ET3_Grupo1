@@ -19,60 +19,12 @@ $publidoc = $view->getVariable("publidoc");
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
-<?php print_r($errors) ?>
+<div class="container-fluid">
+	<div class="row">
+		<?php include(__DIR__.'/../../Views/publication/PUBLICATION_ADD_Vista.php'); ?>
+	</div>
 
-
- 	<!-- se user = currentuser mostrar edit perfil -->
-	
-
- 	<div class="col-md-8 col-md-offset-2">
- 		<div class="row">
- 			<div class="col-md-3">
-	 			<div class="container-fluid">
-	 				<h1 class="heading"><?= i18n("Your Wall") ?></h1>
-	 			</div>
- 				
- 			</div>
- 		</div>
-
- 		<?php foreach ($publications as $publication): ?>
- 			<div class="well">
-	 			<div class="row">
-	 				<div class="container-fluid">
-	 					<?= $publication->getDescription() ?>
-	 				</div>
-	 				<div class="container-fluid">
-	 					<?= i18n("Author") ?>: <a href="index.php?controller=user&action=showcurrent&id=<?=$publication->getOwner() ?>"><?php $owner = $umapper->showcurrent($publication->getOwner()); echo $owner->getUser();  ?></a>
-	 				</div>
-	 				<div class="container-fluid">
-	 					<?= $publication->getCreationDate();?>
-	 					<?= $publication->getHour()  ?>
-	 				</div>
-	 			</div>
-
-	 			<?php if (isset($publidoc[$publication->getID()])): ?>
-	 				<div class="row">
-	 					<div class="container-fluid">
-	 						<?= $publidoc[$publication->getID()]->getLocation() ?>
-	 					</div>
-	 				</div>
-	 			<?php endif ?>
-
-	 			<div class="row">
-	 				<div class="pull-right ">
-						<?php if ($publication->getOwner() == $currentuserid): ?>
-			 			
-		 						<a href="index.php?controller=publication&action=delete&id=<?= $publication->getID()  ?>"><button class="btn btn-danger"><?= i18n("Delete") ?></button></a>
-		 					
-			 			<?php endif ?>
-	 					<a href="index.php?controller=publication&action=showcurrent&id=<?=$publication->getID() ?>"><button class="btn btn-primary"><?= i18n("View") ?></button></a>
-	 				</div>
-	 			</div>
- 			</div>
- 		<?php endforeach ?>
-
- 		
- 		
- 		
- 	</div>
- 	
+	<div class="row">
+		
+	</div>
+</div>
