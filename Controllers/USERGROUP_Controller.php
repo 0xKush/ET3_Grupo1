@@ -1,8 +1,14 @@
 <?php
 require_once(__DIR__ . "/../core/ViewManager.php");
 require_once(__DIR__ . "/../core/I18n.php");
+require_once(__DIR__ . "/../Models/Group.php");
+require_once(__DIR__ . "/../Models/GROUP_Model.php");
 require_once(__DIR__ . "/../Models/UserGroup.php");
 require_once(__DIR__ . "/../Models/USERGROUP_Model.php");
+require_once(__DIR__ . "/../Models/User.php");
+require_once(__DIR__ . "/../Models/USER_Model.php");
+require_once(__DIR__ . "/../Models/Friendship.php");
+require_once(__DIR__ . "/../Models/FRIENDSHIP_Model.php");
 require_once(__DIR__ . "/../Controllers/BaseController.php");
 
 class USERGROUP_Controller extends BaseController
@@ -86,6 +92,58 @@ class USERGROUP_Controller extends BaseController
         }
         
         $this->view->redirect("usergroup", "showall", "id=" . $this->currentUser->getID());
+    }
+
+    public function invite()
+    {
+
+        if (!isset($_REQUEST["id"])) {
+            throw new Exception(i18n("Id is mandatory"));
+        }
+        
+        $groupid = $_REQUEST["id"];
+        $groupModel = new GROUP_Model();
+        $group = $groupModel->showcurrent($groupid);
+
+        if ($group == NULL) {
+            throw new Exception(i18n("No such usergroup with id: ") . $groupid);
+        }
+        
+        if (isset($_POST["submit"])) {
+            $invites= $_POST["invites"];
+            foreach ($invites as $invite){
+                $usergroup = new UserGroup();
+                $usergroup->setGroupID($_POST["groupid"]);
+                $usergroup->setSecondaryMember($invite);
+                $usergroup->setMember($this->currentUser->getID());
+                $usergroup->setStatus(0);
+            
+                try {
+                    if (!$this->usergroupModel->usergroupExists($_POST["groupid"], $_POST["member"], $_POST["secondarymember"]) && !empty($_POST["groupid"]) && !empty($_POST["member"]) && !empty($_POST["secondarymember"])) {
+                        $this->usergroupModel->add($usergroup);
+                    }
+                }
+                catch (ValidationException $ex) {
+                    $errors = $ex->getErrors();
+                    $this->view->setVariable("errors", $errors);
+                }
+            }
+            $this->view->setFlash(sprintf(i18n("Invitations successfully sent.")));
+            $this->view->redirect("usergroup", "showall", "id=" . $this->currentUser->getID());
+        }
+
+        if ($this->permissions->isAdmin($this->currentUser->getID())){
+            $userModel = new USER_Model();
+            $friends = $userModel->showall();
+        } else {
+            $friendshipModel = new FRIENDSHIP_Model();
+            $friends = $friendshipModel->showall($this->currentUser->getID());
+        }
+
+        $this->view->setVariable("friends", $friends);
+        $this->view->setVariable("group", $group);
+        $this->view->render("usergroup", "USERGROUP_INVITE_Vista");
+        
     }
 
     public function join()

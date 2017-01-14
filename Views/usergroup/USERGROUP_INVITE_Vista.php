@@ -4,6 +4,7 @@ $view = ViewManager::getInstance();
 $currentuserid = $view->getVariable("currentuserid");
 $errors = $view->getVariable("errors");
 $friends = $view->getVariable("friends");
+$group = $view->getVariable("group");
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
