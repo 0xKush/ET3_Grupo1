@@ -28,6 +28,7 @@ $isPrivate = $view->getVariable("isprivate");
 					</form>
 				</div>
 			<?php endif ?>
+			
 			<?php if ($isEventMember): ?>
 				<div>
 					<form action="index.php?controller=guest&action=delete" method="post">

@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
+$currentuserid = $view->getVariable("currentuserid");
 $user = $view->getVariable("user");
 $errors = $view->getVariable("errors");
 $id = $_GET["id"];
@@ -9,26 +10,29 @@ $id = $_GET["id"];
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
-<?php print_r($errors) ?>
-
-	<div class="container">
-		<div class="col-xs-12 col-md-4 col-md-offset-4">
-		<form action="index.php?controller=user&action=delete&id=<?=$id ?>">
-			<div class="well">
-				<div class="row">
-					<?= i18n("Delete User: ") ?><?= $user->getUser()?>
-				</div>
-				<div class="row">
-					<div class="pull-right">
-					<a href="index.php?controller=user&action=showall">
-					<button type="button" class="btn btn-default"><?= i18n("No, go back") ?></button></a>                                                              
-                    <button type="submit" name="submit" value="yes" class="btn btn-danger"><?= i18n("Yes, delete it ") ?></button>
-
-				</div>
-				</div>
-				
+<div class="container-fluid">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="panel">
+			<div class="panel-body">
+				<?php if ($user->getID() == $currentuserid): ?>
+					<?php echo i18n("Are you sure you want to delete your account?"); ?>
+				<?php else: ?>
+					<?= i18n("Are you sure you want to delete") ?> @<?=$user->getUser() ?>?
+				<?php endif ?>
 			</div>
-		</form>
+			<div class="panel-footer">
+				<form action="index.php?controller=user&action=delete" method="post">
+					<input type="text" name="id" value="<?= $user->getID() ?>" hidden>
+					<button class="btn btn-default" name="submit" type="submit" value="no">
+						<?= i18n("No, go back") ?>
+					</button>
+					<button class="btn btn-danger pull-right" type="submit" name="submit" value="yes">
+						<?= i18n("Yes, delete it") ?>
+					</button>
+				</form>
+			</div>
 		</div>
 	</div>
+</div>
 
+	

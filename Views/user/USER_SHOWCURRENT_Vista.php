@@ -7,6 +7,9 @@
 	$friends = $view->getVariable("friends");//friendship
 	$publications = $view->getVariable("publications");
 	$documents = $view->getVariable("documents");
+	$isPrivate = $view->getVariable("isPrivate");
+
+
 
 	$errors = $view->getVariable("errors");
 
@@ -16,7 +19,8 @@
 <?php $view->moveToDefaultFragment(); ?>
 
 <div class="container-fluid">
-<div class="row">
+
+	<div class="row">
 	<div class="panel">
 		<div class="panel-body">
 			<div class="row">
@@ -41,8 +45,19 @@
 	</div>
 </div>
 
+<?php if (!($isPrivate && !$isFriend)): ?>
+
+
 <div class="row">
 	<div class="col-md-4">
+	<div class="row" style="margin-bottom: 15px">
+	<a href="index.php?controller=user&action=edit&id=<?= $currentuserid ?>">
+		<button class="btn btn-block btn-warning">
+			<?= i18n("Edit my profile") ?>
+			<i class="fa fa-edit"></i>
+		</button>
+	</a>	
+	</div>
 	<div class="row">
 		<div class="panel">
 			<div class="panel-header" style="padding: 5px">
@@ -63,6 +78,15 @@
 					</div>
 			</div>
 		</div>
+	</div>
+	<div class="row" style="margin-bottom: 15px">
+	<a href="index.php?controller=user&action=delete&id=<?= $currentuserid ?>">
+		<button class="btn btn-block btn-danger">
+			<i class="fa fa-warning"></i>
+			<?= i18n("Delete my acconunt") ?>
+			<i class="fa fa-warning"></i>
+		</button>
+	</a>	
 	</div>
 	<div class="row">
 		<div class="panel">
@@ -143,6 +167,13 @@
 	</div>
 	
 </div>
-	
-	
+<?php else: ?>
+	<div class="row">
+		<div class="panel">
+			<div class="panel-body">
+				<?= i18n("This user's profile is private") ?>
+			</div>
+		</div>
+	</div>		
+	<?php endif ?>	
 </div>

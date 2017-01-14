@@ -61,6 +61,14 @@ $umapper = new USER_Model();
 
 	<div class="row">
 		<div class="col-md-4">
+		<div class="row" style="margin-bottom: 10px">
+		<form action="index.php?controller=usergroup&action=invite" method="post">
+			<button class="btn btn-block btn-success" name="submit">
+				<?=i18n("Invite") ?> 
+				<i class="fa fa-plus"></i>
+			</button>
+			</form>
+		</div>
 		<?php if ($members == NULL): ?>
 			<div class="panel">
 				<div class="panel-body">
