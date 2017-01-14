@@ -22,7 +22,7 @@ class EVENT_Controller extends BaseController
     {
         $events = $this->eventModel->showall();
         $this->view->setVariable("events", $events);
-        $this->view->render("event", "EVENT_SHOWALL_Vista");
+        $this->view->render("event", "EVENT_SHOWALL_ADMIN_Vista");
     }
     
     public function showcurrent()
@@ -246,7 +246,7 @@ class EVENT_Controller extends BaseController
                 $events = $this->eventModel->search($query);
             }
             $this->view->setVariable("events", $events);
-            $this->view->render("guest", "GUEST_SHOWALL_Vista");
+            $this->view->render("event", "EVENT_SHOWALL_Vista");
         } else {
             $this->view->render("event", "EVENT_SEARCH_Vista");
         }

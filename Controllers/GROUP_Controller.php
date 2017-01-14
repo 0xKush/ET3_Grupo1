@@ -23,7 +23,7 @@ class GROUP_Controller extends BaseController
     {
         $groups = $this->groupModel->showall();
         $this->view->setVariable("groups", $groups);
-        $this->view->render("group", "GROUP_SHOWALL_Vista");
+        $this->view->render("group", "GROUP_SHOWALL_ADMIN_Vista");
     }
     
     public function showcurrent()
@@ -205,7 +205,7 @@ class GROUP_Controller extends BaseController
                 $groups = $this->groupModel->search($query);
             }
             $this->view->setVariable("groups", $groups);
-            $this->view->render("usergroup", "USERGROUP_SHOWALL_Vista");
+            $this->view->render("group", "GROUP_SHOWALL_Vista");
         } else {
             $this->view->render("group", "GROUP_SEARCH_Vista");
         }

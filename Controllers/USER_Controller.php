@@ -52,7 +52,7 @@ class USER_Controller extends BaseController
     {
         $users = $this->userModel->showall();
         $this->view->setVariable("users", $users);
-        $this->view->render("user", "USER_SHOWALL_Vista");
+        $this->view->render("user", "USER_SHOWALL_ADMIN_Vista");
     }
     
     public function showcurrent()
