@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . "/../core/PDOConnection.php");
+require_once(__DIR__ . "/../Models/UserGroup.php");
 
 
 class GROUP_Model
@@ -60,13 +61,12 @@ class GROUP_Model
     
     public function add(Group $group)
     {
-        $sql = $this->db->prepare("INSERT INTO groupp(name,description,owner,private,creationdate,status) values (?,?,?,?,?,?,?,?,?,?,?,?)");
+        $sql = $this->db->prepare("INSERT INTO groupp(name,description,owner,private,status) values (?,?,?,?,?)");
         $sql->execute(array(
             $group->getName(),
             $group->getDescription(),
             $group->getOwner(),
             $group->getPrivate(),
-            $group->getCreationDate(),
             $group->getStatus()
         ));
         
@@ -75,19 +75,16 @@ class GROUP_Model
         $group = $sql->fetch(PDO::FETCH_ASSOC);
         
         if ($group != NULL) {
-            $usergroup = new UserGroup($group["id"], NULL, $group["owner"], $group["status"]);
+            $usergroup = new UserGroup(NULL, $group["id"], NULL, $group["owner"], $group["status"]);
             
-            $sql = $this->db->prepare("INSERT INTO usergroup(groupid,secondarymember,member,status) values (?,?,?,?)");
+            $sql = $this->db->prepare("INSERT INTO usergroup(groupid,member,status) values (?,?,?)");
             
             $sql->execute(array(
                 $usergroup->getGroupID(),
-                $usergroup->getSecondaryMember(),
                 $usergroup->getMember(),
                 $usergroup->getStatus()
             ));
-            
         }
-        
     }
     
     public function edit(Group $group)
@@ -142,3 +139,8 @@ class GROUP_Model
     
     
 }
+
+/*$prueba = new GROUP_Model();
+$group = new Group()
+$prueba->add();
+*/

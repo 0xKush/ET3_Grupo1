@@ -33,7 +33,7 @@ class Comment
     }
     
     
-    private function setID($id)
+    public function setID($id)
     {
         $this->id = $id;
         
@@ -47,7 +47,7 @@ class Comment
     }
     
     
-    private function setPublication($publication)
+    public function setPublication($publication)
     {
         $this->publication = $publication;
         
@@ -61,7 +61,7 @@ class Comment
     }
     
     
-    private function setOwner($owner)
+    public function setOwner($owner)
     {
         $this->owner = $owner;
         
@@ -75,7 +75,7 @@ class Comment
     }
     
     
-    private function setOriginComment($origincomment)
+    public function setOriginComment($origincomment)
     {
         $this->origincomment = $origincomment;
         
@@ -89,7 +89,7 @@ class Comment
     }
     
     
-    private function setCreationDate($creationdate)
+    public function setCreationDate($creationdate)
     {
         $this->creationdate = $creationdate;
         
@@ -103,7 +103,7 @@ class Comment
     }
     
     
-    private function setHour($hour)
+    public function setHour($hour)
     {
         $this->hour = $hour;
         
@@ -117,7 +117,7 @@ class Comment
     }
     
     
-    private function setContent($content)
+    public function setContent($content)
     {
         $this->content = $content;
         
@@ -130,7 +130,7 @@ class Comment
         return $this->status;
     }
     
-    private function setStatus($status)
+    public function setStatus($status)
     {
         $this->status = $status;
         

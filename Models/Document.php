@@ -26,7 +26,7 @@ class Document
         return $this->id;
     }
     
-    private function setID($id)
+    public function setID($id)
     {
         $this->id = $id;
         
@@ -38,7 +38,7 @@ class Document
         return $this->owner;
     }
     
-    private function setOwner($owner)
+    public function setOwner($owner)
     {
         $this->owner = $owner;
         
@@ -52,7 +52,7 @@ class Document
     }
     
     
-    private function setLocation($location)
+    public function setLocation($location)
     {
         $this->location = $location;
         
@@ -64,7 +64,7 @@ class Document
         return $this->uploaddate;
     }
     
-    private function setUploadDate($uploaddate)
+    public function setUploadDate($uploaddate)
     {
         $this->uploaddate = $uploaddate;
         
@@ -77,7 +77,7 @@ class Document
     }
     
     
-    private function setStatus($status)
+    public function setStatus($status)
     {
         $this->status = $status;
         

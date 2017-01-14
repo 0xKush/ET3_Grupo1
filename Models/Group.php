@@ -31,7 +31,7 @@ class Group
         return $this->id;
     }
     
-    private function setID($id)
+    public function setID($id)
     {
         $this->id = $id;
         
@@ -43,7 +43,7 @@ class Group
         return $this->name;
     }
     
-    private function setName($name)
+    public function setName($name)
     {
         $this->name = $name;
         
@@ -57,7 +57,7 @@ class Group
     }
     
     
-    private function setDescription($description)
+    public function setDescription($description)
     {
         $this->description = $description;
         
@@ -69,7 +69,7 @@ class Group
         return $this->owner;
     }
     
-    private function setOwner($owner)
+    public function setOwner($owner)
     {
         $this->owner = $owner;
         
@@ -82,7 +82,7 @@ class Group
         return $this->private;
     }
     
-    private function setPrivate($private)
+    public function setPrivate($private)
     {
         $this->private = $private;
         
@@ -96,7 +96,7 @@ class Group
     }
     
     
-    private function setCreationDate($creationdate)
+    public function setCreationDate($creationdate)
     {
         $this->creationdate = $creationdate;
         
@@ -110,7 +110,7 @@ class Group
     }
     
     
-    private function setStatus($status)
+    public function setStatus($status)
     {
         $this->status = $status;
         
@@ -120,7 +120,7 @@ class Group
     public function checkIsValidForCreate()
     {
         $errors = array();
-        if (strlen($this->name < 4)) {
+        if (strlen($this->getName()) < 5) {
             $errors["groupname"] = "Group name must be at least 5 characters length";
             
         }

@@ -27,7 +27,7 @@ class Conversation
     }
     
     
-    private function setID($id)
+    public function setID($id)
     {
         $this->id = $id;
         
@@ -40,7 +40,7 @@ class Conversation
         return $this->member;
     }
     
-    private function setMember($member)
+    public function setMember($member)
     {
         $this->member = $member;
         
@@ -54,7 +54,7 @@ class Conversation
     }
     
     
-    private function setSecondaryMember($secondarymember)
+    public function setSecondaryMember($secondarymember)
     {
         $this->secondarymember = $secondarymember;
         
@@ -68,7 +68,7 @@ class Conversation
     }
     
     
-    private function setStartDate($startdate)
+    public function setStartDate($startdate)
     {
         $this->startdate = $startdate;
         
@@ -82,7 +82,7 @@ class Conversation
     }
     
     
-    private function setStatus($status)
+    public function setStatus($status)
     {
         $this->status = $status;
         

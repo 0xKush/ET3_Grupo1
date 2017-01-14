@@ -33,7 +33,7 @@ class Publication
         return $this->id;
     }
     
-    private function setID($id)
+    public function setID($id)
     {
         $this->id = $id;
         
@@ -46,7 +46,7 @@ class Publication
     }
     
     
-    private function setDestination($destination)
+    public function setDestination($destination)
     {
         $this->destination = $destination;
         
@@ -59,7 +59,7 @@ class Publication
         return $this->type;
     }
     
-    private function setType($type)
+    public function setType($type)
     {
         $this->type = $type;
         
@@ -72,7 +72,7 @@ class Publication
         return $this->owner;
     }
     
-    private function setOwner($owner)
+    public function setOwner($owner)
     {
         $this->owner = $owner;
         
@@ -87,7 +87,7 @@ class Publication
     }
     
     
-    private function setCreationDate($creationdate)
+    public function setCreationDate($creationdate)
     {
         $this->creationdate = $creationdate;
         
@@ -100,7 +100,7 @@ class Publication
         return $this->hour;
     }
     
-    private function setHour($hour)
+    public function setHour($hour)
     {
         $this->hour = $hour;
         
@@ -112,7 +112,7 @@ class Publication
         return $this->description;
     }
     
-    private function setDescription($description)
+    public function setDescription($description)
     {
         $this->description = $description;
         
@@ -127,7 +127,7 @@ class Publication
     }
     
     
-    private function setStatus($status)
+    public function setStatus($status)
     {
         $this->status = $status;
         

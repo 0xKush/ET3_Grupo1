@@ -31,7 +31,7 @@ class PubliDoc
     }
     
     
-    private function setDocument($document)
+    public function setDocument($document)
     {
         $this->document = $document;
         
@@ -45,7 +45,7 @@ class PubliDoc
     }
     
     
-    private function setPublication($publication)
+    public function setPublication($publication)
     {
         $this->publication = $publication;
         

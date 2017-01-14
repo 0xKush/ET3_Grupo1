@@ -67,17 +67,16 @@ class GROUP_Controller extends BaseController
         if (isset($_POST["submit"])) {
             $group->setName($_POST["name"]);
             $group->setDescription($_POST["description"]);
-            $group->setOwner($_POST["owner"]);
+            $group->setOwner($this->currentUser->getID());
             $group->setPrivate($_POST["private"]);
-            $group->setCreationDate($_POST["creationdate"]);
-            $group->setStatus($_POST["status"]);
+            $group->setStatus(1);
             
             try {
                 if (!$this->groupModel->nameExists($_POST["name"])) {
                     $group->checkIsValidForCreate();
                     $this->groupModel->add($group);
                     $this->view->setFlash(sprintf(i18n("Group\"%s\" successfully added."), $group->getName()));
-                    $this->view->redirect("group", "show");
+                    $this->view->redirect("group", "showall");
                 } else {
                     $errors            = array();
                     $errors["general"] = i18n("Group already exists");
@@ -118,7 +117,7 @@ class GROUP_Controller extends BaseController
                     $group->checkIsValidForCreate();
                     $this->groupModel->edit($group);
                     $this->view->setFlash(sprintf(i18n("Group \"%s\" successfully updated."), $group->getName()));
-                    $this->view->redirect("group", "show");
+                    $this->view->redirect("group", "showall");
                 } else {
                     $errors            = array();
                     $errors["general"] = i18n("Group already exists");
