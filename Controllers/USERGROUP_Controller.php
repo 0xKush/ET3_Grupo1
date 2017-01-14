@@ -122,13 +122,13 @@ class USERGROUP_Controller extends BaseController
             $invites= $_POST["invites"];
             foreach ($invites as $invite){
                 $usergroup = new UserGroup();
-                $usergroup->setGroupID($_POST["groupid"]);
+                $usergroup->setGroupID($groupid);
                 $usergroup->setSecondaryMember($invite);
                 $usergroup->setMember($this->currentUser->getID());
                 $usergroup->setStatus(0);
             
                 try {
-                    if (!$this->usergroupModel->usergroupExists($_POST["groupid"], $_POST["member"], $_POST["secondarymember"]) && !empty($_POST["groupid"]) && !empty($_POST["member"]) && !empty($_POST["secondarymember"])) {
+                    if (!$this->usergroupModel->usergroupExists($usergroup->getGroupID(), $usergroup->getMember(), $usergroup->getSecondaryMember())) {
                         $this->usergroupModel->add($usergroup);
                     }
                 }
