@@ -34,7 +34,7 @@ class USERGROUP_Controller extends BaseController
         $userid = $_REQUEST["id"];
         $groups = $this->usergroupModel->showall($userid);
         $this->view->setVariable("groups", $groups);
-        $requests = $this->usergroupModel->showall($userid, 0);
+        $requests = $this->usergroupModel->requests($userid);
         $this->view->setVariable("requests", $requests);
          $owners = array();
         foreach ($groups as $group) {
@@ -122,13 +122,13 @@ class USERGROUP_Controller extends BaseController
             $invites= $_POST["invites"];
             foreach ($invites as $invite){
                 $usergroup = new UserGroup();
-                $usergroup->setGroupID($_POST["groupid"]);
+                $usergroup->setGroupID($groupid);
                 $usergroup->setSecondaryMember($invite);
                 $usergroup->setMember($this->currentUser->getID());
                 $usergroup->setStatus(0);
             
                 try {
-                    if (!$this->usergroupModel->usergroupExists($_POST["groupid"], $_POST["member"], $_POST["secondarymember"]) && !empty($_POST["groupid"]) && !empty($_POST["member"]) && !empty($_POST["secondarymember"])) {
+                    if (!$this->usergroupModel->usergroupExists($usergroup->getGroupID(), $usergroup->getMember(), $usergroup->getSecondaryMember())) {
                         $this->usergroupModel->add($usergroup);
                     }
                 }
@@ -188,7 +188,7 @@ class USERGROUP_Controller extends BaseController
         }
         
         $usergroupid = $_REQUEST["id"];
-        $usergroup   = $this->usergroupModel->showcurrent($usergroupid);
+        $usergroup   = $this->usergroupModel->showcurrent($this->currentUser->getID(), $usergroupid);
         
         if ($usergroup == NULL) {
             throw new Exception(i18n("No such usergroup with id: ") . $usergroupid);
@@ -197,6 +197,7 @@ class USERGROUP_Controller extends BaseController
         
         if (isset($_POST["submit"])) {
             $usergroup->setStatus(1);
+            $this->usergroupModel->edit($usergroup);
         }
         
         $this->view->redirect("usergroup", "showall", "id=" . $this->currentUser->getID());

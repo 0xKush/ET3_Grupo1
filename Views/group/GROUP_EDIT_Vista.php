@@ -20,14 +20,14 @@
 					<h1><?= i18n("Edit Group: ")?><?= $group->getName() ?></h1>
 				</div>
 				<div class="row">
-					<form action="index.php?controller=group&action=edit&id=<?=$id ?>" method="post">
+					<form id="formulario" action="index.php?controller=group&action=edit&id=<?=$id ?>" method="post">
 						<div class="form-group">
 							<label for="name"><?= i18n("Name")?></label>
-							<input type="text" class="form-control" id="name" name="name" placeholder="<?= $group->getName()?>" value="<?= $group->getName()?>">
+							<input required="" minlength="5" type="text" class="form-control" id="name" name="name" value="<?= $group->getName()?>">
 						</div>
 						<div class="form-group">
 							<label for="description"><?= i18n("Description")?></label>
-							<input type="textarea" class="form-control" id="description" name="description" placeholder="<?= $group->getDescription()?>" value="<?= $group->getDescription()?>">
+							<input type="textarea" class="form-control" id="description" name="description" value="<?= $group->getDescription()?>">
 						</div>
 						<div class="form-group">
 							<label for="private"><?= i18n("Visivility")?></label>
@@ -64,3 +64,7 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$('#formulario').parsley();
+</script>

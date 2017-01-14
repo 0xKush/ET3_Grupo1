@@ -31,7 +31,7 @@ class GUEST_Controller extends BaseController
         $userid = $_REQUEST["id"];
         $events = $this->guestModel->showall($userid);
         $this->view->setVariable("events", $events);
-        $requests = $this->guestModel->showall($userid, 0);
+        $requests = $this->guestModel->requests($userid);
         $this->view->setVariable("requests", $requests);
         $this->view->render("guest", "GUEST_SHOWALL_Vista");
     }
@@ -94,12 +94,12 @@ class GUEST_Controller extends BaseController
 
             foreach ($invites as $invite){
                 $guest = new Guest();
-                $guest->setEvent($_POST["event"]);
-                $guest->setMember($_POST["member"]);
+                $guest->setEvent($eventid);
+                $guest->setMember($this->currentUser->getID());
                 $guest->setSecondaryMember($invite);
             
                 try {
-                    if (!$this->guestModel->guestExists($_POST["event"], $_POST["member"], $_POST["secondarymember"]) && !empty($_POST["event"]) && !empty($_POST["member"]) && !empty($_POST["secondarymember"])) {
+                    if (!$this->guestModel->guestExists($guest->getEvent(), $guest->getMember(), $guest->getSecondaryMember())) {
                         $this->guestModel->add($guest);
                     }
                 }
@@ -158,7 +158,7 @@ class GUEST_Controller extends BaseController
         }
         
         $guestid = $_REQUEST["id"];
-        $guest   = $this->guestModel->showcurrent($guestid);
+        $guest   = $this->guestModel->showcurrent($this->currentUser->getID(), $guestid);
         
         if ($guest == NULL) {
             throw new Exception(i18n("No such guest with id: ") . $guestid);

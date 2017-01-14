@@ -9,6 +9,8 @@ $group = $view->getVariable("group");
 $isOwner = $view->getVariable("isOwner");
 $isMember = $view->getVariable("ismember");
 $requests = $view->getVariable("requests");
+
+$owner = $view->getVariable("owner");
 require_once(__DIR__."/../../Models/USER_Model.php");
 
 ?>
@@ -53,7 +55,7 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 					 				</form>						 			</div>
 					 								 			
 								<div class="col-md-6">
-									<a href="index.php?controller=group&action=showcurrent&id=<?=$group->getID() ?>">
+									<a href="index.php?controller=user&action=showcurrent&id=<?=$group->getID() ?>">
 										<button class="btn btn-info btn-md pull-right">
 											<?= i18n("View") ?>
 										</button>
@@ -73,6 +75,11 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 			<div class="panel-body">
 			<div class="col-xs-8">
 				<h1><?=$group->getName() ?></h1>
+				<div class="row" style="padding-left: 15px">
+					<font size="3" class="user">
+						<?= $group->getDescription()?>
+					</font>	
+				</div>
 			</div>
 			<div class="col-xs-4">
 				<div class="row pull-right">

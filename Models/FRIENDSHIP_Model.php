@@ -126,4 +126,21 @@ class FRIENDSHIP_Model
 
         return $friends;
     }
+
+    public function requests($currentuserid)
+    {
+        $friends = array();
+
+        $sql = $this->db->prepare("SELECT u.id, u.user, u.name, u.surname, u.status, u.photo FROM user as u, friendship as f where f.secondarymember=? AND f.status=0 and f.member=u.id ORDER BY u.name");
+        $sql->execute(array(
+            $currentuserid
+        ));
+        $friends_db = $sql->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($friends_db as $friend) {
+            array_push($friends, new User($friend["id"], $friend["user"], $friend["name"], $friend["surname"], NULL, NULL, NULL, NULL, $friend["status"], $friend["photo"]));
+        }
+
+        return $friends;
+    }
 }

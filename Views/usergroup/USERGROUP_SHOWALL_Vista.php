@@ -53,16 +53,20 @@ $requests = $view->getVariable("requests");
 							<div class="row"> 
 							
 								<div class="col-md-6">
-					 				<a href="index.php?controller=usergroup&action=delete&id=<?= $group->getID()  ?>">
+					 				<a href="index.php?controller=usergroup&action=delete&id=<?= $request->getID()  ?>">
 					 					<button class="btn btn-danger btn-md"><?= i18n("Decline") ?></button>
 					 				</a>		 			
 
 									<form action="index.php?controller=usergroup&action=edit" method="post">
-					 					<button type="submit" name="id" value="<?=$group->getID() ?>"	 class="btn btn-warning" btn-md><?= i18n("Accept") ?></button>
-					 				</form>						 			</div>
+					 					<input type="text" value="<?=$request->getID() ?>" name="id" hidden>
+					 					<button type="submit" name="submit" 	 class="btn btn-warning" btn-md><?= i18n("Accept") ?>
+					 						
+					 					</button>
+					 				</form>						 			
+					 				</div>
 					 								 			
 								<div class="col-md-6">
-									<a href="index.php?controller=group&action=showcurrent&id=<?=$group->getID() ?>">
+									<a href="index.php?controller=group&action=showcurrent&id=<?=$request->getID() ?>">
 										<button class="btn btn-info btn-md pull-right">
 											<?= i18n("View") ?>
 										</button>
