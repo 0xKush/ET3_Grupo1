@@ -5,6 +5,8 @@ $currentuserid = $view->getVariable("currentuserid");
 $errors = $view->getVariable("errors");
 $friends = $view->getVariable("friends");
 $group = $view->getVariable("group");
+
+
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
@@ -45,10 +47,10 @@ $group = $view->getVariable("group");
 	<?php endforeach ?>
 	</div>
 	<div class="row" >
-				<input type="text" hidden name="groupid" value="<?= $group->getID() ?>">
+				<input type="text" hidden  name="id" value="<?= $group->getID() ?>">
 		
 					<div class="row pull-right" style="padding-right: 15px">
-						<button class="btn btn-success">
+						<button class="btn btn-success" type="submit" name="submit">
 							<?= i18n("Invite") ?> 
 							<i class="fa fa-send fa-fw"></i>
 						</button>
