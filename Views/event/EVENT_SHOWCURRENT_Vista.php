@@ -13,7 +13,6 @@ $owner = $view->getVariable("owner");
 require_once(__DIR__."/../../Models/USER_Model.php");
 
 ?>
-
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
@@ -105,7 +104,7 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 						</form>
 					<?php else: ?>
 						<form action="index.php?controller=guest&action=join" method="post">
-							<input type="text" name="eventid" value="<?=$event->getID() ?>" hidden>
+							<input type="text" name="event" value="<?=$event->getID() ?>" hidden>
 							<input type="text" name="member" value="<?=$currentuserid ?>" hidden>
 							<button class="btn btn-success" name="submit" value="yes">
 								<i class="fa fa-"></i>
