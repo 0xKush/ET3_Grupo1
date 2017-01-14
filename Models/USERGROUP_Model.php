@@ -132,8 +132,7 @@ class USERGROUP_Model
             FROM groupp as g
             INNER JOIN usergroup as ug
             ON g.id=ug.groupid
-            WHERE ug.member=? OR ug.secondarymember=?)
-             ORDER BY g.name");
+            WHERE ug.member=? OR ug.secondarymember=?");
         
         $sql->execute(array(
             $currentuserid,
