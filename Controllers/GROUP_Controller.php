@@ -107,23 +107,18 @@ class GROUP_Controller extends BaseController
             throw new Exception(i18n("No such group with id: ") . $groupid);
         }
         if (isset($_POST["submit"])) {
-           $group->setName($_POST["name"]);
+            $group->setName($_POST["name"]);
             $group->setDescription($_POST["description"]);
             $group->setOwner($this->currentUser->getID());
             $group->setPrivate($_POST["private"]);
-            $group->setStatus(1);
+            $group->setStatus($_POST["status"]);
             
             try {
-                if (!$this->groupModel->nameExists($_POST["name"])) {
-                    $group->checkIsValidForCreate();
-                    $this->groupModel->edit($group);
-                    $this->view->setFlash(sprintf(i18n("Group \"%s\" successfully updated."), $group->getName()));
-                    $this->view->redirect("group", "showall");
-                } else {
-                    $errors            = array();
-                    $errors["general"] = i18n("Group already exists");
-                    $this->view->setVariable("errors", $errors);
-                }
+                $group->checkIsValidForCreate();
+                $this->groupModel->edit($group);
+                $this->view->setFlash(sprintf(i18n("Group \"%s\" successfully updated."), $group->getName()));
+                $this->view->redirect("group", "showall");
+                
             }
             catch (ValidationException $ex) {
                 $errors = $ex->getErrors();
