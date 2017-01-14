@@ -37,7 +37,7 @@ class DOCUMENT_Model
         $document = $sql->fetch(PDO::FETCH_ASSOC);
         
         if ($document != NULL) {
-            return new Document($document["id"], $document["user"], $document["location"], $document["uploaddate"], $document["status"]);
+            return new Document($document["id"], $document["owner"], $document["location"], $document["uploaddate"], $document["status"]);
         } else {
             return NULL;
         }

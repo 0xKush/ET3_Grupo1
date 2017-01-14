@@ -4,6 +4,8 @@ $view = ViewManager::getInstance();
 $user = $view->getVariable("user");
 $documents = $view->getVariable("documents");
 $errors = $view->getVariable("errors");
+$currentuserid = $view->getVariable("currentuserid");
+$isAdmin = $view->getVariable("isadmin");
 ?>
 <?= isset($errors["general"])?$errors["general"]:"" ?>
 <?php $view->moveToDefaultFragment(); ?>
@@ -49,19 +51,21 @@ $errors = $view->getVariable("errors");
  								echo "<td class='text-center'>".$document->getUploadDate()."</td>";
  							
  								echo "<td class='text-center'>";
+ 								if ($document->getOwner() == $currentuserid || $document->getOwner() == $isAdmin ){
 
-
- 								echo '<div class="row text-center">
-
-					 					<div class="col-xs-3">
+ 								echo'	<div class="col-xs-3">
 					 						<a href="index.php?controller=document&action=delete&id='.
 					 						$document->getID().'">
 					 							<button class="btn btn-danger btn-xs">
 					 								<i class="fa fa-trash-o"></i>
 					 							</button>
 					 						</a>
-					 					</div>
-					 				</div>';
+					 					</div>';
+ 								}
+
+ 								echo '<div class="row text-center">';
+								
+					 			echo	'</div>';
  								echo "</td>";
  							echo '</tr>';
  						}
@@ -75,3 +79,5 @@ $errors = $view->getVariable("errors");
  				</table>
  			</div>
  		</div>
+
+ 			

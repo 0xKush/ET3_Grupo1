@@ -20,7 +20,9 @@ class DOCUMENT_Controller extends BaseController
     public function showall()
     {
         $documents = $this->documentModel->showall($this->currentUser->getID());
+        $isAdmin   = $this->permissions->isAdmin($this->currentUser->getID());
         $this->view->setVariable("documents", $documents);
+        $this->view->setVariable("isAdmin", $isAdmin);
         $this->view->render("document", "DOCUMENT_SHOWALL_Vista");
     }
     
@@ -92,9 +94,9 @@ class DOCUMENT_Controller extends BaseController
         if (isset($_POST["submit"])) {
             if ($_POST["submit"] == "yes") {
                 $this->documentModel->delete($document);
-                $this->view->setFlash(sprintf(i18n("Document \"%s\" successfully deleted."), $document->getName()));
+                $this->view->setFlash(sprintf(i18n("Document \"%s\" successfully deleted.")));
             }
-            $this->view->redirect("document", "show");
+            $this->view->redirect("document", "showall");
         }
         
         $this->view->setVariable("document", $document);
