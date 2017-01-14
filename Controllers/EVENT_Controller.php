@@ -110,16 +110,15 @@ class EVENT_Controller extends BaseController
         }
         
         if (isset($_POST["submit"])) {
-            $event->setCreationDate($_POST["creationdate"]);
-            $event->setOwner($_POST["owner"]);
+            $event->setName($_POST["name"]);
+            $event->setOwner($this->currentUser->getID());
+            $event->setPrivate($_POST["private"]);
             $event->setStartDate($_POST["startdate"]);
             $event->setEndDate($_POST["enddate"]);
             $event->setStartHour($_POST["starthour"]);
             $event->setEndHour($_POST["endhour"]);
             $event->setDescription($_POST["description"]);
-            $event->setStatus($_POST["status"]);
-            $event->setName($_POST["name"]);
-            $event->setPrivate($_POST["private"]);
+            $event->setStatus(1);
             
             try {
                 if (!$this->eventModel->nameExists($_POST["name"])) {
