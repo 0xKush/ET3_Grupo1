@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . "/../core/PDOConnection.php");
 
+
 class GROUP_Model
 {
     private $db;
@@ -68,6 +69,25 @@ class GROUP_Model
             $group->getCreationDate(),
             $group->getStatus()
         ));
+        
+        $sql = $this->db->query("SELECT * FROM groupp ORDER BY id DESC LIMIT 1");
+        
+        $group = $sql->fetch(PDO::FETCH_ASSOC);
+        
+        if ($group != NULL) {
+            $usergroup = new UserGroup($group["id"], NULL, $group["owner"], $group["status"]);
+            
+            $sql = $this->db->prepare("INSERT INTO usergroup(groupid,secondarymember,member,status) values (?,?,?,?)");
+            
+            $sql->execute(array(
+                $usergroup->getGroupID(),
+                $usergroup->getSecondaryMember(),
+                $usergroup->getMember(),
+                $usergroup->getStatus()
+            ));
+            
+        }
+        
     }
     
     public function edit(Group $group)
