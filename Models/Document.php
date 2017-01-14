@@ -14,7 +14,7 @@ class Document
     public function __construct($id = NULL, $owner = NULL, $location = NULL, $uploaddate = NULL, $status = NULL)
     {
         $this->id         = $id;
-        $this->owner       = $owner;
+        $this->owner      = $owner;
         $this->location   = $location;
         $this->uploaddate = $uploaddate;
         $this->status     = $status;

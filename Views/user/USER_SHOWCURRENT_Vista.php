@@ -51,12 +51,19 @@
 <div class="row">
 	<div class="col-md-4">
 	<div class="row" style="margin-bottom: 15px">
+	<a href="index.php?controller=document&action=showall&id=<?= $currentuserid ?>">
+		<button class="btn btn-block btn-primary">
+			<?= i18n("My Documents") ?>
+			<i class="fa fa-edit"></i>
+		</button>
+	</a>	
 	<a href="index.php?controller=user&action=edit&id=<?= $currentuserid ?>">
 		<button class="btn btn-block btn-warning">
 			<?= i18n("Edit my profile") ?>
 			<i class="fa fa-edit"></i>
 		</button>
-	</a>	
+	</a>
+	
 	</div>
 	<div class="row">
 		<div class="panel">

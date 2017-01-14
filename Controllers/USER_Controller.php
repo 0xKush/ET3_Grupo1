@@ -8,6 +8,8 @@ require_once(__DIR__ . "/../Models/Publication.php");
 require_once(__DIR__ . "/../Models/PUBLICATION_Model.php");
 require_once(__DIR__ . "/../Models/Friendship.php");
 require_once(__DIR__ . "/../Models/FRIENDSHIP_Model.php");
+require_once(__DIR__ . "/../Models/Document.php");
+require_once(__DIR__ . "/../Models/DOCUMENT_Model.php");
 require_once(__DIR__ . "/../Controllers/BaseController.php");
 
 class USER_Controller extends BaseController
@@ -75,13 +77,15 @@ class USER_Controller extends BaseController
         $friendshipModel = new FRIENDSHIP_Model();
         $friends         = $friendshipModel->showall($userid);
         
-        
+        $documentModel = new DOCUMENT_Model();
         
         $this->view->setVariable("user", $user);
         
         $this->view->setVariable("publications", $publications);
         
         $this->view->setVariable("friends", $friends);
+
+      /*  $this->view->setVariable("documents", $documents);*/
         
         $this->view->render("user", "USER_SHOWCURRENT_Vista");
     }

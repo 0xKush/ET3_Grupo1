@@ -19,7 +19,7 @@ class DOCUMENT_Controller extends BaseController
     
     public function showall()
     {
-        $documents = $this->documentModel->showall();
+        $documents = $this->documentModel->showall($this->currentUser->getID());
         $this->view->setVariable("documents", $documents);
         $this->view->render("document", "DOCUMENT_SHOWALL_Vista");
     }
@@ -49,14 +49,14 @@ class DOCUMENT_Controller extends BaseController
         if (isset($_POST["submit"])) {
             try {
                 if ($upload->checkFile()) {
-                    $document->setOwner($_POST["owner"]);
+                    $document->setOwner($this->currentUser->getID());
                     $document->setLocation($upload->getDestination());
-                    $document->setUploadDate($_POST["uploaddate"]);
-                    $document->setStatus($_POST["status"]);
+                    $document->setUploadDate(date("Y-m-d"));
+                    $document->setStatus(1);
                     
                     $this->documentModel->add($document);
-                    $this->view->setFlash(sprintf(i18n("Document\"%s\" successfully added."), $document->getName()));
-                    $this->view->redirect("document", "show");
+                    $this->view->setFlash(sprintf(i18n("Document\"%s\" successfully added.")));
+                    $this->view->redirect("document", "showall");
                 } else {
                     $errors            = array();
                     $errors["general"] = i18n("An error has occurred during upload");
@@ -73,46 +73,6 @@ class DOCUMENT_Controller extends BaseController
         
         $this->view->setVariable("document", $document);
         $this->view->render("document", "DOCUMENT_ADD_Vista");
-    }
-    
-    public function edit()
-    {
-        if (!isset($_REQUEST["id"])) {
-            throw new Exception(i18n("A document id is mandatory"));
-        }
-        
-        $documentid = $_REQUEST["id"];
-        $document   = $this->documentModel->showcurrent($documentid);
-        
-        if ($document == NULL) {
-            throw new Exception(i18n("No such document with id: ") . $documentid);
-        }
-        
-        if (isset($_POST["submit"])) {
-            try {
-                if ($upload->checkFile()) {
-                    $document->setOwner($_POST["owner"]);
-                    $document->setLocation($upload->getDestination());
-                    $document->setUploadDate($_POST["uploaddate"]);
-                    $document->setStatus($_POST["status"]);
-                    $this->documentModel->edit($document);
-                    $this->view->setFlash(sprintf(i18n("Document \"%s\" successfully updated."), $document->getName()));
-                    $this->view->redirect("document", "show");
-                } else {
-                    $errors            = array();
-                    $errors["general"] = i18n("An error has occurred during upload");
-                    $this->view->setVariable("errors", $errors);
-                }
-                
-            }
-            catch (ValidationException $ex) {
-                $errors = $ex->getErrors();
-                $this->view->setVariable("errors", $errors);
-            }
-        }
-        
-        $this->view->setVariable("document", $document);
-        $this->view->render("document", "DOCUMENT_EDIT_Vista");
     }
     
     

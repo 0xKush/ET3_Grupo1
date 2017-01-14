@@ -11,16 +11,18 @@ class DOCUMENT_Model
         $this->db = PDOConnection::getInstance();
     }
     
-    public function showall()
+    public function showall($owner)
     {
-        $sql = $this->db->prepare("SELECT * FROM document ORDER BY uploaddate");
-        $sql->execute();
+        $sql = $this->db->prepare("SELECT * FROM document where owner=? ORDER BY uploaddate ");
+        $sql->execute(array(
+            $owner
+        ));
         $documents_db = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         $documents = array();
         
-        foreach ($documents_db as $group) {
-            array_push($documents, new Document($document["id"], $document["user"], $document["location"], $document["uploaddate"], $document["status"]));
+        foreach ($documents_db as $document) {
+            array_push($documents, new Document($document["id"], $document["owner"], $document["location"], $document["uploaddate"], $document["status"]));
         }
         
         return $documents;
@@ -42,16 +44,16 @@ class DOCUMENT_Model
     }
     
     
-    public function show_by_user($user)
+    public function show_by_user($owner)
     {
-        $sql = $this->db->prepare("SELECT * FROM document WHERE user=?");
+        $sql = $this->db->prepare("SELECT * FROM document WHERE owner=?");
         $sql->execute(array(
-            $user
+            $owner
         ));
-        $group = $sql->fetch(PDO::FETCH_ASSOC);
+        $document = $sql->fetch(PDO::FETCH_ASSOC);
         
-        if ($group != NULL) {
-            return new Document($document["id"], $document["user"], $document["location"], $document["uploaddate"], $document["status"]);
+        if ($document != NULL) {
+            return new Document($document["id"], $document["owner"], $document["location"], $document["uploaddate"], $document["status"]);
         } else {
             return NULL;
         }
@@ -59,7 +61,7 @@ class DOCUMENT_Model
     
     public function add(Document $document)
     {
-        $sql = $this->db->prepare("INSERT INTO document(user,location,uploaddate,status) values (?,?,?,?)");
+        $sql = $this->db->prepare("INSERT INTO document(owner,location,uploaddate,status) values (?,?,?,?)");
         $sql->execute(array(
             $document->getOwner(),
             $document->getLocation(),
@@ -68,21 +70,6 @@ class DOCUMENT_Model
         ));
     }
     
-    public function edit(Document $document)
-    {
-        $sql = $this->db->prepare("UPDATE document SET user=?, location=?,
-            uploaddate=?,status=? where id=?");
-        $sql->execute(array(
-            $document->getOwner(),
-            $document->getLocation(),
-            $document->getUploadDate(),
-            $document->getStatus(),
-            $document->getID()
-        ));
-        
-    }
-    
-    
     public function delete(Document $document)
     {
         $sql = $this->db->prepare("DELETE FROM document where id=?");
@@ -90,7 +77,7 @@ class DOCUMENT_Model
             $document->getID()
         ));
     }
-
+    
     
     
 }

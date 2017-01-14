@@ -12,9 +12,9 @@ class Upload
     private $destination;
     private $var;
     
-    public function __construct($var="file")
+    public function __construct($var = "file")
     {
-        $this->allowedExts = array(
+        $this->allowedExts      = array(
             "pdf",
             "doc",
             "docx",
@@ -33,10 +33,10 @@ class Upload
             "image/png",
             "image/gif"
         );
-        $this->maxSize = 7 * MB;
-        $this->destination = null;
+        $this->maxSize          = 7 * MB;
+        $this->destination      = null;
         /*-- 10* 1024 * 1024 -- */
-        $this->var = $var;
+        $this->var              = $var;
     }
     
     public function checkFile()
@@ -48,15 +48,14 @@ class Upload
         $tmp_name = $_FILES["$this->var"]["tmp_name"];
         
         if (!$this->checkExt($name)) {
-            /*die("Ext not valid");*/
             throw new ValidationException($errors, "Ext not valid");
         }
+        
         if (!$this->checkMime($mime)) {
-            /*die("Mime not valid");*/
             throw new ValidationException($errors, "Mime not valid");
         }
+        
         if ($this->checkUploadSize($size)) {
-            /*die("Provide a smaller file");*/
             throw new ValidationException($errors, "Provide a smaller file");
         }
         if ($this->moveUploadedFile($tmp_name, $name)) {
@@ -65,7 +64,7 @@ class Upload
         
     }
     
-    private function moveUploadedFile($tmp_name, $name)
+    public function moveUploadedFile($tmp_name, $name)
     {
         $destination = $this->Destination($name);
         $this->setDestination($destination, $name);
@@ -78,7 +77,7 @@ class Upload
         
     }
     
-    private function Destination($name)
+    public function Destination($name)
     {
         $extension = end(explode(".", $name));
         $array_doc = array(
@@ -103,7 +102,7 @@ class Upload
         return $destination;
     }
     
-    private function checkUploadSize($size)
+    public function checkUploadSize($size)
     {
         $errors = array();
         if ($this->getMaxSize() < $size) {
@@ -113,7 +112,7 @@ class Upload
         }
     }
     
-    private function checkExt($name)
+    public function checkExt($name)
     {
         $errors    = array();
         $extension = end(explode(".", $name));
@@ -124,7 +123,7 @@ class Upload
         }
     }
     
-    private function checkMime($mime)
+    public function checkMime($mime)
     {
         $errors = array();
         if (!(in_array($mime, $this->getAllowedMimeTypes()))) {
@@ -135,26 +134,26 @@ class Upload
     }
     
     
-    private function getAllowedExts()
+    public function getAllowedExts()
     {
         return $this->allowedExts;
     }
     
     
     
-    private function getAllowedMimeTypes()
+    public function getAllowedMimeTypes()
     {
         return $this->allowedMimeTypes;
     }
     
     
     
-    private function getMaxSize()
+    public function getMaxSize()
     {
         return $this->maxSize;
     }
     
-    private function setDestination($destination, $name)
+    public function setDestination($destination, $name)
     {
         $this->destination = $destination . $name;
         
