@@ -141,7 +141,11 @@ CREATE TABLE IF NOT EXISTS `event` (
 
 INSERT INTO `event` (`id`, `creationdate`, `owner`, `startdate`, `enddate`, `starthour`, `endhour`, `description`, `status`, `name`, `private`) VALUES
 (1, '2016-10-12', 2, '2016-12-31', '2017-01-01', '22:00:00', '07:00:00', 'Cena de fin de año 2016', 0, 'Fin de Año 2016', 1),
-(2, '2016-12-20', 3, '2017-02-02', '2017-02-02', '17:00:00', '21:00:00', 'Torneo Billar 2017.\r\n\r\nEl primer premio del torneo será una cena para dos personas en le restaurante Il Popolo el día 04/02/2017.', 0, 'Torneo de Billar', 0);
+(2, '2016-12-20', 3, '2017-02-02', '2017-02-02', '17:00:00', '21:00:00', 'Torneo Billar 2017.\r\n\r\nEl primer premio del torneo será una cena para dos personas en le restaurante Il Popolo el día 04/02/2017.', 0, 'Torneo de Billar', 0),
+(3, '2017-01-21', 12, '2017-01-26', '2017-01-27', '22:00:00', '05:00:00', 'El día 26 de Enero se realizará una fiesta organizada por los estudiantes de erasmus por el fin de los examenes.', 0, 'Cena Erasmus fin examens', 0),
+(4, '2016-10-06', 3, '2017-01-30', '2017-01-30', '11:00:00', '12:30:00', 'Conferencia en el Salón de Actos a cargo de Chema Alonso.', 0, 'Conferencia Chema Alonso', 1),
+(5, '2016-09-13', 8, '2017-02-16', '2017-02-16', '19:00:00', '20:30:00', 'Concierto a cargo de la Banda de Música de la Uvigo en el auditorio de Ourense.', 0, 'Concierto Banda de Musica Uvigo.', 0),
+(6, '2016-11-08', 13, '2017-02-19', '2017-02-12', '18:30:00', '19:30:00', 'Curso de programación web a cargo del profesor Federico Tilves. La duración es de cuatro semanas. Se impartirá los lunes en el sotano 3 del edificio politecnico de Ourense.', 0, 'Curso de Programación Web.', 1);
 
 -- --------------------------------------------------------
 
@@ -161,12 +165,51 @@ CREATE TABLE IF NOT EXISTS `friendship` (
 -- Volcado de datos para la tabla `friendship`
 --
 
-INSERT INTO `friendship` (`id`,`member`, `secondarymember`, `status`) VALUES
-(1,2, 3, 1),
-(2,2, 5, 1),
-(3,3, 4, 1),
-(4,3, 5, 0),
-(5,4, 5, 1);
+INSERT INTO `friendship` (`id`, `member`, `secondarymember`, `status`) VALUES
+(1, 2, 3, 1),
+(2, 2, 5, 1),
+(3, 3, 4, 1),
+(4, 3, 5, 1),
+(5, 4, 5, 1),
+(6, 6, 2, 1),
+(7, 6, 3, 1),
+(8, 6, 4, 1),
+(9, 6, 5, 1),
+(10, 6, 7, 1),
+(11, 6, 8, 1),
+(12, 6, 9, 1),
+(13, 6, 10, 1),
+(14, 6, 11, 1),
+(15, 7, 2, 1),
+(16, 7, 8, 1),
+(17, 7, 9, 1),
+(18, 7, 12, 1),
+(19, 7, 13, 1),
+(20, 8, 3, 1),
+(21, 8, 5, 1),
+(22, 8, 10, 1),
+(23, 8, 12, 1),
+(24, 8, 13, 1),
+(25, 9, 3, 1),
+(26, 9, 4, 1),
+(27, 9, 12, 1),
+(28, 9, 13, 0),
+(29, 9, 10, 0),
+(30, 10, 2, 0),
+(31, 10, 4, 0),
+(32, 10, 11, 1),
+(33, 10, 12, 1),
+(34, 10, 13, 1),
+(35, 11, 12, 0),
+(36, 11, 13, 1),
+(37, 11, 5, 1),
+(38, 11, 3, 1),
+(39, 12, 2, 0),
+(40, 12, 3, 1),
+(41, 13, 12, 0),
+(42, 13, 4, 1),
+(43, 13, 5, 1),
+(44, 5, 7, 1);
 
 --
 -- RELACIONES PARA LA TABLA `friendship`:
@@ -199,7 +242,11 @@ CREATE TABLE IF NOT EXISTS `groupp` (
 
 INSERT INTO `groupp` (`id`, `name`, `description`, `owner`, `private`, `creationdate`, `status`) VALUES
 (1, 'ET3', 'ET3', 2, 1, '2016-12-12', 0),
-(2, 'Celta de Vigo Fans.', 'Grupo compuesto de seguidores del Celta de Vigo.', 5, 0, '2016-10-10', 0);
+(2, 'Celta de Vigo Fans.', 'Grupo compuesto de seguidores del Celta de Vigo.', 5, 0, '2016-10-10', 0),
+(3, 'Ourense Turismo.', 'Grupo dedicado a cidade de Ourense e os seus arredores.', 6, 0, '2016-12-20', 0),
+(4, 'Emprego Ourense.', 'Grupo onde se irán publicando diversas ofertas de traballo en Ourense e arredores.', 7, 0, '2016-11-08', 0),
+(5, 'Erasmus Uvigo.', 'Grupo de información para las personas de Erasmus en la uvigo.Information group for Erasmus people in the Uvigo.', 4, 0, '2016-08-16', 0),
+(6, 'Tercero Ingenieria Informatica-Ou.', 'Grupo compuesto de los alumnos de tercero de Ingeniería informatica en Ourense.', 9, 1, '2016-08-17', 0);
 
 --
 -- RELACIONES PARA LA TABLA `groupp`:
@@ -230,7 +277,35 @@ INSERT INTO `guest` (`id`, `event`, `secondarymember`, `member`, `status`) VALUE
 (1, 1, 5, 2, 1),
 (2, 1, 4, 5, 1),
 (3, 2, 2, 2, 1),
-(4, 2, 4, 2, 1);
+(4, 2, 4, 2, 1),
+(5, 1, 6, 2, 1),
+(6, 1, 8, 6, 0),
+(7, 1, 10, 2, 1),
+(8, 1, 12, 2, 0),
+(9, 2, 3, 2, 1),
+(10, 2, 5, 2, 1),
+(11, 2, 7, 2, 0),
+(12, 2, 9, 3, 1),
+(13, 2, 11, 3, 1),
+(14, 2, 13, 11, 1),
+(15, 3, 8, 12, 1),
+(16, 3, 9, 12, 1),
+(17, 3, 4, 9, 0),
+(18, 3, 5, 8, 1),
+(19, 3, 13, 12, 1),
+(20, 4, 2, 3, 1),
+(21, 4, 6, 3, 1),
+(22, 4, 7, 6, 1),
+(23, 4, 10, 2, 0),
+(24, 4, 11, 3, 1),
+(25, 5, 5, 8, 1),
+(26, 5, 2, 5, 1),
+(27, 5, 11, 5, 1),
+(28, 5, 13, 5, 0),
+(29, 6, 9, 13, 1),
+(30, 6, 3, 9, 1),
+(31, 6, 6, 3, 1),
+(32, 6, 11, 6, 1);
 
 --
 -- RELACIONES PARA LA TABLA `guest`:
@@ -369,7 +444,15 @@ INSERT INTO `user` (`id`, `name`, `surname`, `email`, `phone`, `user`, `password
 (2, 'Laura', 'Perez', 'lperez@gmail.com', 645123587, 'lperez', 'lperez', '1996-03-19', 'Calle San José 78B 1º', 1, NULL, 0, 1),
 (3, 'Miguel', 'Gomez', 'mgomez', 656238794, 'mgomez', 'mgomez', '1994-01-29', 'Calle Real 16 4ºB', 1, NULL, 0, 1),
 (4, 'Daniel', 'Santiago', 'dsantiago@gmail.com', 675123489, 'dsantiago', 'dsantiago', '1994-06-05', 'Avenida de Marín 56 3ºC', 1, NULL, 0, 0),
-(5, 'Alba', 'Freijomil', 'afreijomil@gmail.com', 684512378, 'afrei', 'afrei', '1990-10-02', 'Avenida de Ourense 26 6ºI', 1, NULL, 0, 0);
+(5, 'Alba', 'Freijomil', 'afreijomil@gmail.com', 684512378, 'afrei', 'afrei', '1990-10-02', 'Avenida de Ourense 26 6ºI', 1, NULL, 0, 0),
+(6, 'Alejandro', 'Rodriguez', 'arodriguez', 652137894, 'arodriguez', 'arodriguez', '1994-05-15', 'Avenida de Ourense 54 3ºB', 1, NULL, 0, 0),
+(7, 'Isis', 'Martinez', 'imartinez@gmail.com', 658712345, 'imartinez', 'imartinez', '1992-10-04', 'Paseo Maritimo 7 3º', 1, NULL, 0, 1),
+(8, 'Gaia', 'Martinez', 'gmartinez', 698457128, 'gmartinez', 'gmartinez', '1990-10-12', 'Calle Eugenio Sequeiros 16 1º', 1, NULL, 0, 1),
+(9, 'Daniel', 'Lopez', 'dlopez@gmail.com', 636250347, 'dlopez', 'dlopez', '1994-09-06', 'Calle Bouza Vella 11 Nerga-O Hio', 1, NULL, 0, 0),
+(10, 'Sara', 'Lorenzo', 'slorenzo@gmail.com', 648888720, 'slorenzo', 'slorenzo', '1994-09-26', 'Calle Alvaro Guitian 13 2ºE', 1, NULL, 0, 0),
+(11, 'Cecilia', 'Gonzalez', 'cgonzalez@gmail.com', 659874157, 'cgonzalez', 'cgonzalez', '1994-06-26', 'Calle San José 80 4ºC', 1, NULL, 0, 1),
+(12, 'Francisco', 'Costas', 'fcostas@gmail.com', 659481275, 'fcostas', 'fcostas', '1989-02-06', 'Avenida de Marin 23 2ºA', 1, NULL, 0, 0),
+(13, 'Xesús', 'Castro', 'xcastro@gmail.com', 651478952, 'xcastro', 'xcastro', '1994-04-05', 'Avenida de Vigo 29 5ºC', 1, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -394,7 +477,35 @@ INSERT INTO `usergroup` (`id`, `groupid`, `secondarymember`, `member`, `status`)
 (1, 1, 3, 2, 1),
 (2, 1, 4, 2, 1),
 (3, 2, 3, 5, 1),
-(4, 2, 4, 5, 1);
+(4, 2, 4, 5, 1),
+(5, 1, 6, 2, 1),
+(6, 1, 8, 6, 1),
+(7, 1, 10, 6, 1),
+(8, 1, 12, 10, 1),
+(9, 2, 7, 5, 1),
+(10, 2, 9, 3, 1),
+(11, 2, 11, 5, 1),
+(12, 2, 13, 5, 1),
+(13, 3, 2, 6, 1),
+(14, 3, 4, 6, 1),
+(15, 3, 8, 6, 1),
+(16, 3, 10, 6, 1),
+(17, 3, 12, 10, 1),
+(18, 4, 5, 7, 1),
+(19, 4, 3, 5, 1),
+(20, 4, 9, 7, 1),
+(21, 4, 13, 7, 1),
+(22, 4, 11, 13, 1),
+(23, 5, 6, 4, 1),
+(24, 5, 2, 6, 1),
+(25, 5, 8, 6, 1),
+(26, 5, 10, 4, 1),
+(27, 5, 12, 10, 1),
+(28, 6, 3, 9, 1),
+(29, 6, 5, 3, 1),
+(30, 6, 7, 5, 1),
+(31, 6, 11, 5, 1),
+(32, 6, 13, 11, 1);
 
 --
 -- RELACIONES PARA LA TABLA `usergroup`:
@@ -505,22 +616,22 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT de la tabla `event`
 --
 ALTER TABLE `event`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `friendship`
 --
 ALTER TABLE `friendship`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT de la tabla `groupp`
 --
 ALTER TABLE `groupp`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `guest`
 --
 ALTER TABLE `guest`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT de la tabla `message`
 --
@@ -540,12 +651,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `usergroup`
 --
 ALTER TABLE `usergroup`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 --
 -- Restricciones para tablas volcadas
 --
