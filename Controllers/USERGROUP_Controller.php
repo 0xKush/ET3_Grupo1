@@ -14,11 +14,13 @@ require_once(__DIR__ . "/../Controllers/BaseController.php");
 class USERGROUP_Controller extends BaseController
 {
     private $usergroupModel;
+    private $userModel;
     
     public function __construct()
     {
         parent::__construct();
         $this->usergroupModel = new USERGROUP_Model();
+        $this->userModel = new USER_Model();
         $this->view->setLayout("base");
     }
     
@@ -34,6 +36,11 @@ class USERGROUP_Controller extends BaseController
         $this->view->setVariable("groups", $groups);
         $requests = $this->usergroupModel->showall($userid, 0);
         $this->view->setVariable("requests", $requests);
+         $owners = array();
+        foreach ($groups as $group) {
+            $owners[$group->getOwner()] = $this->userModel->showcurrent($group->getOwner());
+        }
+        $this->view->setVariable("owners", $owners);
         $this->view->render("usergroup", "USERGROUP_SHOWALL_Vista");
     }
     
@@ -63,7 +70,9 @@ class USERGROUP_Controller extends BaseController
         
         $userid = $_REQUEST["id"];
         $groups = $this->usergroupModel->showall($userid, 0);
+
         $this->view->setVariable("groups", $groups);
+       
         $this->view->render("usergroup", "USERGROUP_SHOWALL_Vista");
     }
     
@@ -198,9 +207,15 @@ class USERGROUP_Controller extends BaseController
         if (!isset($_REQUEST["id"])) {
             throw new Exception(i18n("Id is mandatory"));
         }
+
+        if (isset($_REQUEST["kick"])) {
+            $usertodelete = $_REQUEST["kick"];
+        } else {
+            $usertodelete = $this->currentUser->getID();
+        }
         
         $usergroupid = $_REQUEST["id"];
-        $usergroup   = $this->usergroupModel->showcurrent($this->currentUser->getID(), $usergroupid);
+        $usergroup   = $this->usergroupModel->showcurrent($usertodelete, $usergroupid);
 
         if ($usergroup == NULL) {
             throw new Exception(i18n("No such usergroup with id: ") . $usergroupid);

@@ -14,6 +14,7 @@ $requests = $view->getVariable("requests");
 
 
  	<div class="container-fluid">
+ 		
  		<div class="row">
  		<?php if ($friends == NULL): ?>
  			<div class="panel">

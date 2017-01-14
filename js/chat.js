@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-    console.log( "ready!" );
     jQuery.ajaxSetup({"cache":false});
     setInterval("loadOldMessages()", 400);
 });

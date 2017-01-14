@@ -6,19 +6,68 @@ $members = $view->getVariable("members");
 $publications = $view->getVariable("publications");
 $errors = $view->getVariable("errors");
 $group = $view->getVariable("group");
-$owner = $view->getVariable("owner");
+$isOwner = $view->getVariable("isOwner");
 $isMember = $view->getVariable("ismember");
+$requests = $view->getVariable("requests");
 require_once(__DIR__."/../../Models/USER_Model.php");
-$umapper = new USER_Model();
-//necesito salgo co que saber se currentuser pertence ó grupo en cuestión
+
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
-<?php print_r($errors) ?>
 
 <div class="container-fluid">
+	
+	<?php if ($requests !=NULL): ?>
+		
+			<div class="panel">
+				<div class="panel-heading">
+					<h1><?=i18n("Group invites") ?></h1>
+				</div>
+				<div class="panel-body" style="background: #cbd8ed">
+					
+			
+			<?php foreach ($requests as $request): ?>
+				<div class="col-md-6">
+					<div class="panel">
+						<div class="panel-body">
+							<div class="row text-center">
+								<font class="pfname"><?=$request->getName() ?></font>
+							</div>
+							<div class="row text-center" style="padding-left: 5px: padding-right: 5px">
+								<font class="user"><?=$request->getDescription() ?></font>
+							</div>
+							
+						</div>
+						<div class="panel-footer">
+							<div class="row"> 
+							
+								<div class="col-md-6">
+					 				<a href="index.php?controller=usergroup&action=delete&id=<?= $group->getID()  ?>">
+					 					<button class="btn btn-danger btn-md"><?= i18n("Decline") ?></button>
+					 				</a>		 			
+
+									<form action="index.php?controller=usergroup&action=edit" method="post">
+					 					<button type="submit" name="id" value="<?=$group->getID() ?>"	 class="btn btn-warning" btn-md><?= i18n("Accept") ?></button>
+					 				</form>						 			</div>
+					 								 			
+								<div class="col-md-6">
+									<a href="index.php?controller=group&action=showcurrent&id=<?=$group->getID() ?>">
+										<button class="btn btn-info btn-md pull-right">
+											<?= i18n("View") ?>
+										</button>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php endforeach ?>
+				</div>
+			</div>
+	<?php endif ?>
+
 	<div class="row">
 		<div class="panel">
 			<div class="panel-body">
@@ -28,6 +77,12 @@ $umapper = new USER_Model();
 			<div class="col-xs-4">
 				<div class="row pull-right">
 					<?php if ($currentuserid == $group->getOwner()): ?>
+						<a href="index.php?controller=group&action=edit&id=<?=$group->getID() ?>">
+							<button class="btn btn-warning">
+								<i class="fa fa-edit"></i>
+								<?= i18n("Edit") ?>
+							</button>
+						</a>
 						<a href="index.php?controller=group&action=delete&id=<?=$group->getID() ?>">
 							<button class="btn btn-danger">
 								<i class="fa fa-trash"></i>
@@ -61,14 +116,18 @@ $umapper = new USER_Model();
 
 	<div class="row">
 		<div class="col-md-4">
-		<div class="row" style="margin-bottom: 10px">
+		<?php if ($isOwner || $isMember): ?>
+			<div class="row" style="margin-bottom: 10px">
 		<form action="index.php?controller=usergroup&action=invite" method="post">
-			<button class="btn btn-block btn-success" name="submit">
+		<input type="text" name="id" hidden value="<?= $group->getID() ?>">
+			<button class="btn btn-block btn-success" type="submit">
 				<?=i18n("Invite") ?> 
 				<i class="fa fa-plus"></i>
 			</button>
 			</form>
 		</div>
+		<?php endif ?>
+
 		<?php if ($members == NULL): ?>
 			<div class="panel">
 				<div class="panel-body">
@@ -94,6 +153,15 @@ $umapper = new USER_Model();
 			</div>
 			<div class="panel-footer">
 			<div class="row">
+			<?php if ($isOwner): ?>
+				<form action="index.php&action=delete&controller=usergroup" method="post">
+					<input type="text" class="" hidden name="kick" value="<?= $member->getID() ?>">
+					<button class="btn btn-danger" name="submit" type="submit">
+						<i class="fa fa-kick"></i>
+						<?=i18n("Kick") ?>
+					</button>
+				</form>
+			<?php endif ?>
 				<a href="index.php?controller=user&action=showcurrent&id=<?=$friend->getID()  ?>">
 					<button class="btn btn-default pull-right">
 					<i class="fa fa-angle-double-right"></i>

@@ -201,7 +201,7 @@ class GROUP_Controller extends BaseController
                 $groups = $this->groupModel->search($query);
             }
 
-            $userModel = new USERGROUP_Model();
+            $usergroupModel = new USERGROUP_Model();
             $usergroups = $usergroupModel->getGroups($this->currentUser->getID());
             
             $this->view->setVariable("usergroups", $usergroups);

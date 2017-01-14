@@ -48,33 +48,30 @@ class CONVERSATION_Controller extends BaseController
     
     public function add()
     {
+
+        if (!isset($_REQUEST["id"])) {
+            throw new Exception(i18n("A conversation id is mandatory"));
+        }
+
         $conversation = new Conversation();
         
-        if (isset($_POST["submit"])) {
-            $conversation->setMember($_POST["member"]);
-            $conversation->setSecondaryMember($_POST["secondarymember"]);
-            $conversation->setStartDate($_POST["startdate"]);
-            $conversation->setStatus($_POST["status"]);
+        $conversation->setMember($this->currentUser->getID());
+        $conversation->setSecondaryMember($_REQUEST["id"]);
+        $conversation->setStartDate(date("Y-m-d"));
+        $conversation->setStatus(1);
             
-            try {
-                /*   if (!$this->conversationModel->nameExists($_POST["name"])) {*/
+        try {
+            if (!$this->conversationModel->conversationExists($conversation)) {
                 $this->conversationModel->add($conversation);
-                $this->view->setFlash(sprintf(i18n("Conversation\"%s\" successfully added.")));
-                $this->view->redirect("conversation", "show");
-                /*  } else {
-                $errors            = array();
-                $errors["general"] = i18n("Conversation already exists");
-                $this->view->setVariable("errors", $errors);
-                }*/
             }
-            catch (ValidationException $ex) {
-                $errors = $ex->getErrors();
-                $this->view->setVariable("errors", $errors);
-            }
-            
         }
-        $this->view->setVariable("conversation", $conversation);
-        $this->view->render("conversation", "CONVERSATION_ADD_Vista");
+        catch (ValidationException $ex) {
+            $this->view->setFlash(sprintf(i18n("Conversation error: \"%s\"."), $ex->getErrors()));
+            $this->view->redirect("conversation", "show");
+        }
+
+        $conversation = $this->conversationModel->conversation_by_friend($this->currentUser->getID(), $_REQUEST["id"]);
+        $this->view->redirect("conversation", "showcurrent", "id=".$conversation->getID());
     }
     
     
@@ -92,13 +89,12 @@ class CONVERSATION_Controller extends BaseController
             throw new Exception(i18n("No such conversation with id: ") . $conversationid);
         }
         
-        
         if (isset($_POST["submit"])) {
             if ($_POST["submit"] == "yes") {
                 $this->conversationModel->delete($conversation);
                 $this->view->setFlash(sprintf(i18n("Conversation \"%s\" successfully deleted.")));
             }
-            $this->view->redirect("conversation", "show");
+            $this->view->redirect("conversation", "showall","id=".$this->currentUser->getID());
         }
         $this->view->setVariable("conversation", $conversation);
         $this->view->render("conversation", "CONVERSATION_DELETE_Vista");

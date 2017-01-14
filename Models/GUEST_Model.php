@@ -135,9 +135,7 @@ class GUEST_Model
             FROM event as e
             INNER JOIN guest as g
             ON e.id = g.event
-            WHERE (g.member=? OR g.secondarymember=?)
-            ORDER BY e.name
-            ");
+            WHERE (g.member=? OR g.secondarymember=?)");
         
         $sql->execute(array(
             $currentuserid,
