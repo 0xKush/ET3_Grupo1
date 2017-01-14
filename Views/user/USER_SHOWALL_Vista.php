@@ -10,7 +10,6 @@ $friends = $view->getVariable("friends");
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
-<?php print_r($errors) ?>
 
 
  	<div class="container-fluid">
@@ -58,7 +57,6 @@ $friends = $view->getVariable("friends");
 										<i class="fa fa-eye fa-fw"></i>
 									</button>
 								</form>
-							<?php if ($friends != NULL): ?>
 								<?php if (in_array($user->getID(), $friends)): ?>
 									<form action="index.php?controller=friendship&action=delete" method="post">
 									<input type="text" hidden="hidden" name="id" value="<?=$user->getID() ?>">
@@ -76,7 +74,6 @@ $friends = $view->getVariable("friends");
 									</button>
 									</form>
 								<?php endif ?>
-							<?php endif ?>
 								
  						</div>
  					</div>

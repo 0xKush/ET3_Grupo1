@@ -10,11 +10,63 @@ $requests = $view->getVariable("requests");
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
-<?php print_r($errors) ?>
 
 
  	<div class="container-fluid">
- 		
+ 			<?php if ($requests != NULL): ?>
+			<div class="panel">
+				<div class="panel-heading">
+					<h1><?=i18n("Friendship Requests") ?></h1>
+				</div>
+				<div class="panel-body" style="background: #cbd8ed">
+					
+			
+			<?php foreach ($requests as $request): ?>
+				<?php if (true): ?>
+					<div class="col-md-6">
+					<div class="panel">
+						<div class="panel-body">
+							<div class="row text-center">
+								<font class="pfname"><?=$request->getName()." ".$request->getSurname() ?></font>
+							</div>
+							<div class="row text-center" style="padding-left: 5px: padding-right: 5px">
+								<font class="user">@<?=$request->getUser() ?></font>
+							</div>
+							
+						</div>
+						<div class="panel-footer">
+							<div class="row"> 
+							
+								<div class="col-md-6">
+					 				<a href="index.php?controller=friendship&action=delete&id=<?= $request->getID()  ?>">
+					 					<button class="btn btn-danger btn-md"><?= i18n("Decline") ?></button>
+					 				</a>		 			
+
+									<form action="index.php?controller=friendship&action=edit" method="post">
+					 					<input type="text" value="<?=$request->getID() ?>" name="id" hidden>
+					 					<button type="submit" name="submit" 	 class="btn btn-warning" btn-md><?= i18n("Accept") ?>
+					 						
+					 					</button>
+					 				</form>						 			
+					 				</div>
+					 								 			
+								<div class="col-md-6">
+									<a href="index.php?controller=user&action=showcurrent&id=<?=$request->getID() ?>">
+										<button class="btn btn-info btn-md pull-right">
+											<?= i18n("View") ?>
+										</button>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php endif ?>
+				
+			<?php endforeach ?>
+				</div>
+			</div>
+		<?php endif ?>
  		<div class="row">
  		<?php if ($friends == NULL): ?>
  			<div class="panel">
