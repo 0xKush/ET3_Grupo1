@@ -151,7 +151,7 @@ class GUEST_Model
         return $events;
     }
 
-        public function request($currentuserid)
+    public function requests($currentuserid)
     {
         $events = array();
         
