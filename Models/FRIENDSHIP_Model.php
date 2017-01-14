@@ -75,7 +75,8 @@ class FRIENDSHIP_Model
         $sql->execute(array(
             $friendship->getMember(),
             $friendship->getSecondaryMember(),
-            $friendship->getStatus()
+            $friendship->getStatus(),
+            $friendship->getID()
         ));
     }
     

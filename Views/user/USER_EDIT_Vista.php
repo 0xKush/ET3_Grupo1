@@ -44,7 +44,7 @@ $errors = $view->getVariable("errors");
 			</div>
 			<div class="form-group">
 			    <label for="birthday"><?= i18n("Birth Date")?></label>
-			    <input type="text" class="form-control" id="birthday" name="birthday" value="<?=$user->getBirthday() ?>"
+			    <input type="text" class="form-control" id="birthday" name="birthday" value="<?=$user->getBirthday() ?>">
 			</div>
 			<div class="form-group">
 			    <label for="email"><?= i18n("Email")?></label>

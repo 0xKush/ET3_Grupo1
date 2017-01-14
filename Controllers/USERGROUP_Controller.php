@@ -61,19 +61,30 @@ class USERGROUP_Controller extends BaseController
         $this->view->render("usergroup", "USERGROUP_SHOWCURRENT_Vista");
     }
     
-    //invitacion a grupos
-    public function requests()
+    public function request()
     {
-        if (!isset($_REQUEST["id"])) {
-            throw new Exception(i18n("Id is mandatory"));
+        $usergroup = new UserGroup();
+        
+        if (isset($_POST["submit"])) {
+            $usergroup->setGroupID($_POST["groupid"]);
+            $usergroup->setMember($_POST["member"]);
+            $usergroup->setStatus(0);
+            
+            try {
+                if (!$this->usergroupModel->usergroupExists($_POST["groupid"], $_POST["member"], NULL) && !empty($_POST["groupid"]) && !empty($_POST["member"])) {
+                    $this->usergroupModel->add($usergroup);
+                    $this->view->setFlash(sprintf(i18n("UserGroup successfully added.")));
+                } else {
+                    $this->view->setFlash(sprintf(i18n("UserGroup already exists.")));
+                }
+            }
+            catch (ValidationException $ex) {
+                $errors = $ex->getErrors();
+                $this->view->setVariable("errors", $errors);
+            }
         }
         
-        $userid = $_REQUEST["id"];
-        $groups = $this->usergroupModel->showall($userid, 0);
-
-        $this->view->setVariable("groups", $groups);
-       
-        $this->view->render("usergroup", "USERGROUP_SHOWALL_Vista");
+        $this->view->redirect("usergroup", "showall", "id=" . $this->currentUser->getID());
     }
     
     public function add()

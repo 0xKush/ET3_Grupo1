@@ -43,16 +43,30 @@ class GUEST_Controller extends BaseController
         $this->view->render("guest", "GUEST_SHOWALL_Vista");
     }
     
-    public function requests()
+    public function request()
     {
-        if (!isset($_REQUEST["id"])) {
-            throw new Exception(i18n("Id is mandatory"));
+        $guest = new Guest();
+        
+        if (isset($_POST["submit"])) {
+            $guest->setEvent($_POST["event"]);
+            $guest->setMember($_POST["member"]);
+            $guest->setStatus(0);
+            
+            try {
+                if (!$this->guestModel->guestExists($_POST["event"], $_POST["member"], NULL) && !empty($_POST["event"]) && !empty($_POST["member"])) {
+                    $this->guestModel->add($guest);
+                    $this->view->setFlash(sprintf(i18n("Guest successfully added.")));
+                } else {
+                    $this->view->setFlash(sprintf(i18n("Guest already exists.")));
+                }
+            }
+            catch (ValidationException $ex) {
+                $errors = $ex->getErrors();
+                $this->view->setVariable("errors", $errors);
+            }
         }
         
-        $userid = $_REQUEST["id"];
-        $events = $this->guestModel->showall($userid, 0);
-        $this->view->setVariable("events", $events);
-        $this->view->render("guest", "GUEST_SHOWALL_Vista");
+        $this->view->redirect("guest", "showall", "id=" . $this->currentUser->getID());
     }
     
     public function add()

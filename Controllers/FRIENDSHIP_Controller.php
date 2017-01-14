@@ -75,7 +75,7 @@ class FRIENDSHIP_Controller extends BaseController {
         }
         
         $friendshipid = $_REQUEST["id"];
-        $friendship = $this->friendshipModel->showcurrent($friendshipid);
+        $friendship = $this->friendshipModel->showcurrent($this->currentUser->getID(), $friendshipid);
 
         if ($friendship == NULL) {
             throw new Exception(i18n("No such friendship with id: ").$friendshipid);
