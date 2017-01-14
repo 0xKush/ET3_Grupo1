@@ -92,18 +92,20 @@ class USERGROUP_Model
     public function usergroupExists($groupid, $member, $secondarymember)
     {
         if ($secondarymember) {
-            $sql = $this->db->prepare("SELECT count(id) FROM usergroup where groupid=? AND member=? AND secondarymember=?");
+            $sql = $this->db->prepare("SELECT count(id) FROM usergroup where groupid=? AND (member=? AND secondarymember=?) or (secondarymember=? AND member=?");
             $sql->execute(array(
                 $groupid,
+                $member,
+                $secondarymember,
                 $member,
                 $secondarymember
             ));
         } else {
-            $sql = $this->db->prepare("SELECT count(id) FROM usergroup where groupid=? AND member=? OR secondarymember=?");
+            $sql = $this->db->prepare("SELECT count(id) FROM usergroup where groupid=? AND (member=? OR secondarymember=?)");
             $sql->execute(array(
                 $groupid,
                 $member,
-                $membermember
+                $member
             ));
         }
         
@@ -111,16 +113,6 @@ class USERGROUP_Model
             return true;
         }
         
-        $sql = $this->db->prepare("SELECT count(id) FROM usergroup where groupid=? AND member=? AND secondarymember=?");
-        $sql->execute(array(
-            $groupid,
-            $secondarymember,
-            $member
-        ));
-        
-        if ($sql->fetchColumn() > 0) {
-            return true;
-        }
     }
     
     public function getGroups($currentuserid)

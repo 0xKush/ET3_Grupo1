@@ -66,8 +66,8 @@ class GUEST_Model
     {
         $sql = $this->db->prepare("INSERT INTO guest(event,member,secondarymember,status) values (?,?,?,?)");
         $sql->execute(array(
-            $guest->getMember(),
             $guest->getEvent(),
+            $guest->getMember(),
             $guest->getSecondaryMember(),
             $guest->getStatus()
         ));
@@ -96,14 +96,16 @@ class GUEST_Model
     public function guestExists($event, $member, $secondarymember)
     {
         if ($secondarymember) {
-            $sql = $this->db->prepare("SELECT count(id) FROM guest where event=? AND member=? AND secondarymember=?");
+            $sql = $this->db->prepare("SELECT count(id) FROM guest where event=? AND (member=? AND secondarymember=?) OR (secondarymember=? AND member=?");
             $sql->execute(array(
                 $event,
+                $member,
+                $secondarymember,
                 $member,
                 $secondarymember
             ));
         } else {
-            $sql = $this->db->prepare("SELECT count(id) FROM guest where event=? AND member=? or secondarymember=?");
+            $sql = $this->db->prepare("SELECT count(id) FROM guest where event=? AND (member=? OR secondarymember=?)");
             $sql->execute(array(
                 $event,
                 $member,
@@ -115,16 +117,6 @@ class GUEST_Model
             return true;
         }
         
-        $sql = $this->db->prepare("SELECT count(id) FROM guest where event=? AND member=? AND secondarymember=?");
-        $sql->execute(array(
-            $event,
-            $secondarymember,
-            $member
-        ));
-        
-        if ($sql->fetchColumn() > 0) {
-            return true;
-        }
     }
 
     public function getEvents($currentuserid)
