@@ -125,7 +125,7 @@
 					<?php if ($friend->getPhoto() == NULL): ?>
 						<img class="smallPhoto img-circle" src="media/profileImages/default.png" alt="default">
 					<?php else: ?>
-						<img class="smallPhoto img-circle" src="media/profileImages/<?=$friend->getPhoto() ?>" alt="<?=$friend->getPhoto() ?>">
+						<img class="smallPhoto img-circle" src="<?=$friend->getPhoto() ?>" alt="<?=$friend->getPhoto() ?>">
 					<?php endif ?>
 					<font class="name"><?= $friend->getName()." ".$friend->getSurname() ?></font><br>
 					<font class="user">@<?=$friend->getUser() ?></font>
