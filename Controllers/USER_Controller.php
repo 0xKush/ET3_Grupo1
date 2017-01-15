@@ -44,7 +44,11 @@ class USER_Controller extends BaseController
         $this->view->setLayout("login");
         $this->view->render("user", "USER_LOGIN_Vista");
     }
-    
+
+    /**
+    * Aux method to redirect to main view.
+    *
+    */
     public function home()
     {
         $this->view->redirect("publication", "showall", "id=" . $this->currentUser->getID());
@@ -322,6 +326,9 @@ class USER_Controller extends BaseController
             if ($_POST["submit"] == "yes") {
                 $this->userModel->delete($user);
                 $this->view->setFlash(sprintf(i18n("User \"%s\" successfully deleted."), $user->getUser()));
+                if ($this->currentUser->getID() == $userid){
+                    $this->logout();
+                }
             }
             
              $this->view->redirect("user", "showcurrent", "id=" . $this->currentUser->getID());
