@@ -1,27 +1,27 @@
-  $(document).ready(function(){
+$(document).ready(function(){
     $('#birthday').datepicker({
-  	format: "yyyy-mm-dd",
+  	dateFormat: "yy-mm-dd",
   	minDate: "-100y",
   	maxDate: "0d",
   	changeMonth: true,
-    changeYear: true
+	changeYear: true
     });
 });
 
 
-    $(document).ready(function(){
+$(document).ready(function(){
     $('#date').datepicker({
-  	format: "yyyy-mm-dd",
+  	dateFormat: "yy-mm-dd",
   	changeMonth: true,
-    changeYear: true
+	changeYear: true
     });
 });
 
-        $(document).ready(function(){
+$(document).ready(function(){
     $('#date2').datepicker({
-    format: "yyyy-mm-dd",
-    changeMonth: true,
-    changeYear: true
+	dateFormat: "yy-mm-dd",
+	changeMonth: true,
+	changeYear: true
     });
 });
 
