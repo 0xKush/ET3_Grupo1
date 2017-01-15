@@ -37,7 +37,10 @@ $owners = $view->getVariable("owners");
 		<?php foreach ($publications as $publication): ?>
 			<div class="panel">
 				<div class="panel-heading">
-					
+				<?php $owner = $owners[$publication->getOwner()] ?>
+					<font class="name">
+						<?= $owner->getName()." ".$owner->getSurname() ?>
+					</font>  <a href="index.php?controller=user&action=showcurrent&id=<?= $owner->getID() ?>"><font class="user">@<?=$owner->getUser()  ?></font></a>
 				</div>
 				<div class="panel-body">
 					<font class="user"><?= $publication->getDescription() ?></font>

@@ -5,7 +5,8 @@ require_once(__DIR__ . "/../Models/Publication.php");
 require_once(__DIR__ . "/../Models/PUBLICATION_Model.php");
 require_once(__DIR__ . "/../Models/User.php");
 require_once(__DIR__ . "/../Models/USER_Model.php");
-
+require_once(__DIR__ . "/../Models/Comment.php");
+require_once(__DIR__ . "/../Models/COMMENT_Model.php");
 require_once(__DIR__ . "/../Models/Document.php");
 require_once(__DIR__ . "/../Models/DOCUMENT_Model.php");
 require_once(__DIR__ . "/../Controllers/BaseController.php");
@@ -14,6 +15,7 @@ class PUBLICATION_Controller extends BaseController
 {
     private $publicationModel;
     private $userModel;
+    private $conmentController;
     
     public function __construct()
     {
@@ -37,6 +39,12 @@ class PUBLICATION_Controller extends BaseController
         /*  $type     = $_REQUEST["type"];*/
         
         $publications = $this->publicationModel->showall($entityid, "user");
+
+        $owners = array();
+        foreach ($publications as $publication) {
+            $owners[$publication->getOwner()] = $this->userModel->showcurrent($publication->getOwner());
+        }
+        $this->view->setVariable("owners", $owners);
         $this->view->setVariable("publications", $publications);
         $this->view->render("publication", "PUBLICATION_SHOWALL_Vista");
     }
@@ -57,7 +65,11 @@ class PUBLICATION_Controller extends BaseController
         
         $user = $this->userModel->showcurrent($publication->getOwner());
 
+        //AQUI O showpublicomments
+        $comments = NULL;
+
         $this->view->setVariable("user", $user);
+        $this->view->setVariable("comments", $comments);
         $this->view->setVariable("publication", $publication);
         $this->view->render("publication", "PUBLICATION_SHOWCURRENT_Vista");
     }
