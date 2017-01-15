@@ -8,7 +8,7 @@
 	$publications = $view->getVariable("publications");
 	$documents = $view->getVariable("documents");
 	$isPrivate = $view->getVariable("isPrivate");
-
+	$isAdmin = $view->getVariable("isAdmin");
 
 
 	$errors = $view->getVariable("errors");
@@ -64,18 +64,21 @@
 
 	<div class="col-md-4">
 	<div class="row" style="margin-bottom: 15px">
-	<a href="index.php?controller=document&action=showall&id=<?= $currentuserid ?>">
+	<a href="index.php?controller=document&action=showall&id=<?= $user->getID() ?>">
 		<button class="btn btn-block btn-primary">
 			<?= i18n("My Documents") ?>
 			<i class="fa fa-edit"></i>
 		</button>
 	</a>	
-	<a href="index.php?controller=user&action=edit&id=<?= $currentuserid ?>">
+	<?php if ($currentuserid == $user->getID() || $isAdmin): ?>
+		<a href="index.php?controller=user&action=edit&id=<?= $currentuserid ?>">
 		<button class="btn btn-block btn-warning">
 			<?= i18n("Edit my profile") ?>
 			<i class="fa fa-edit"></i>
 		</button>
 	</a>
+	<?php endif ?>
+	
 	
 	</div>
 	<div class="row">
@@ -99,6 +102,7 @@
 			</div>
 		</div>
 	</div>
+<?php if ($currentuserid == $user->getID() || $isAdmin): ?>
 	<div class="row" style="margin-bottom: 15px">
 	<a href="index.php?controller=user&action=delete&id=<?= $currentuserid ?>">
 		<button class="btn btn-block btn-danger">
@@ -108,6 +112,7 @@
 		</button>
 	</a>	
 	</div>
+<?php endif ?>	
 	<div class="row">
 		<div class="panel">
 			<div class="panel-body" >

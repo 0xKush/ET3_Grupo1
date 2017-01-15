@@ -82,6 +82,7 @@ class USER_Controller extends BaseController
         }
         
         $user   = $this->userModel->showcurrent($userid);
+        $isAdmin   = $this->permissions->isAdmin($this->currentUser->getID());
         
         if ($user == NULL) {
             throw new Exception(i18n("No such user with id: ") . $userid);
@@ -96,6 +97,9 @@ class USER_Controller extends BaseController
         
         $documentModel = new DOCUMENT_Model();
         $documents     = $documentModel->showall($userid);
+
+         
+        $this->view->setVariable("isAdmin", $isAdmin);
         
         $this->view->setVariable("user", $user);
         

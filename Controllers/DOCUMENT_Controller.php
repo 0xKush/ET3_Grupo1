@@ -19,7 +19,23 @@ class DOCUMENT_Controller extends BaseController
     
     public function showall()
     {
-        $documents = $this->documentModel->showall($this->currentUser->getID());
+        if (!isset($_REQUEST["id"])) {
+            throw new Exception(i18n("A user id is mandatory"));
+        }
+        
+        $userid = $_REQUEST["id"];
+        
+        if ($this->currentUser->getID() != $userid) {
+            if (!$this->permissions->isAdmin($this->currentUser->getID()) && !$this->permissions->isFriend($this->currentUser->getID(), $userid)) {
+                
+                $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+                $this->view->redirect("user", "login");
+            }
+        }
+        
+        
+        
+        $documents = $this->documentModel->showall($userid);
         $isAdmin   = $this->permissions->isAdmin($this->currentUser->getID());
         $this->view->setVariable("documents", $documents);
         $this->view->setVariable("isAdmin", $isAdmin);
@@ -49,6 +65,10 @@ class DOCUMENT_Controller extends BaseController
         $upload   = new Upload();
         
         if (isset($_POST["submit"])) {
+            if ($_FILES["file"]["size"] == 0) {
+                $this->view->setFlash(sprintf(i18n("File is requerid.")));
+                $this->view->redirect("document", "add");
+            }
             try {
                 if ($upload->checkFile()) {
                     $document->setOwner($this->currentUser->getID());
@@ -58,7 +78,7 @@ class DOCUMENT_Controller extends BaseController
                     
                     $this->documentModel->add($document);
                     $this->view->setFlash(sprintf(i18n("Document\"%s\" successfully added.")));
-                    $this->view->redirect("document", "showall");
+                    $this->view->redirect("document", "showall", "id=" . $this->currentUser->getID());
                 } else {
                     $errors            = array();
                     $errors["general"] = i18n("An error has occurred during upload");
@@ -96,7 +116,7 @@ class DOCUMENT_Controller extends BaseController
                 $this->documentModel->delete($document);
                 $this->view->setFlash(sprintf(i18n("Document \"%s\" successfully deleted.")));
             }
-            $this->view->redirect("document", "showall");
+            $this->view->redirect("document", "showall", "id=" . $this->currentUser->getID());
         }
         
         $this->view->setVariable("document", $document);
