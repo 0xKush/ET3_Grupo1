@@ -31,6 +31,17 @@ class GUEST_Controller extends BaseController
         }
         
         $userid = $_REQUEST["id"];
+
+        if ($this->currentUser->getID() != $userid){
+            if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
+                !$this->permissions->isFriend($this->currentUser->getID(), $userid) &&
+                !$this->permissions->isPublic($userid, "user")
+            ){
+                $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+                $this->view->redirect("user", "login");
+            }
+        }
+        
         $events = $this->guestModel->showall($userid);
         $this->view->setVariable("events", $events);
         $requests = $this->guestModel->requests($userid);
@@ -103,6 +114,16 @@ class GUEST_Controller extends BaseController
         }
         
         $eventid = $_REQUEST["id"];
+
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
+            !$this->permissions->isOwner($this->currentUser->getID(), $eventid, "event") &&
+            !$this->permissions->isEventMember($this->currentUser->getID(), $eventid) &&
+            !$this->permissions->isPublic($eventid, "event")
+        ){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $eventModel = new EVENT_Model();
         $event = $eventModel->showcurrent($eventid);
 
