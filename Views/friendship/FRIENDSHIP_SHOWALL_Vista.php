@@ -84,7 +84,7 @@ $requests = $view->getVariable("requests");
  							<div class="row text-center">
  								<a href="index.php?controller=user&action=showcurrent&id=<?= $friend->getID()?>">
  									<?php if ($friend->getPhoto() != NULL): ?>
- 										<img class="img-circle showPhoto" src="media/profileImages/<?=$friend->getPhoto()  ?>" alt="<?=$friend->getPhoto()  ?>">
+ 										<img class="img-circle showPhoto" src="<?=$friend->getPhoto()  ?>" alt="<?=$friend->getPhoto()  ?>">
  									<?php else: ?>
  										<img class="img-circle showPhoto" src="media/profileImages/default.png" alt="default.png">
  									<?php endif ?>
