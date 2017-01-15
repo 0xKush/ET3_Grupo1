@@ -87,7 +87,7 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
           <?php if ($photo != NULL): ?>
-            <img class="img-circle profileThumbnail" src="media/profileImages/<?=$photo ?>" alt=""> 
+            <img class="img-circle profileThumbnail" src="<?=$photo ?>" alt=""> 
           <?php else:  ?>
             <img class="img-circle profileThumbnail" src="media/profileImages/default.png" alt="">
           <?php endif ?>

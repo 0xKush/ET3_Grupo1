@@ -75,7 +75,7 @@ class PUBLICATION_Controller extends BaseController
             $publication->setType($_POST["type"]);
             $publication->setOwner($this->currentUser->getID());
             $publication->setCreationDate(date("Y-m-d"));
-            $publication->setHour(date('H:i'));
+            $publication->setHour(date('H:i:s'));
             $publication->setDescription($_POST["description"]);
             $publication->setStatus(1);
             

@@ -28,7 +28,7 @@
 					<?php if ($user->getPhoto() == NUll): ?>
 						<img class="pfphoto img-circle" src="media/profileImages/default.png" alt="default">
 					<?php else: ?>
-						<img class="pfphoto img-circle" src="media/profileImages/<?=$user->getPhoto() ?>" alt="<?=$user->getPhoto() ?>">
+						<img class="pfphoto img-circle" src="<?=$user->getPhoto() ?>" alt="<?=$user->getPhoto() ?>">
 					<?php endif ?>
 					
 				</div>

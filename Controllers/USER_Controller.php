@@ -98,7 +98,8 @@ class USER_Controller extends BaseController
         $upload = new Upload();
         
         if (isset($_POST["submit"])) {
-            if (isset($_POST["file"])) {
+            if ($_FILES["file"]["error"] == 4){
+            } else {
                 if ($upload->checkFile()) {
                     $user->setPhoto($upload->getDestination());
                 } else {
@@ -172,7 +173,8 @@ class USER_Controller extends BaseController
         }
         
         if (isset($_POST["submit"])) {
-            if (isset($_POST["file"])) {
+            if ($_FILES["file"]["error"] == 4){
+            } else {
                 if ($upload->checkFile()) {
                     $user->setPhoto($upload->getDestination());
                 } else {
