@@ -1,0 +1,30 @@
+
+#widgetContainer {
+    max-width: 30%;
+    min-width: 300px;
+}
+
+.left {
+    background-color: #0600b8;
+    color: white;
+}
+
+.right {
+    background-color: white;
+    color: #0600b8;
+
+}
+
+.img-user {
+    max-width: 50px;
+    max-height: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.post-content {
+    padding-top: 10px;
+}
+
