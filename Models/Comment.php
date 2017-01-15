@@ -140,7 +140,7 @@ class Comment
     public function checkIsValidForCreate()
     {
         $errors = array();
-        if (strlen($this->content < 1)) {
+        if (strlen($this->content) < 1) {
             $errors["commentcontent"] = "Content must be at least 1 character length";
             
         }

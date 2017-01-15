@@ -23,6 +23,17 @@ class FRIENDSHIP_Controller extends BaseController {
         }
         
         $userid = $_REQUEST["id"];
+        
+        if ($this->currentUser->getID() != $userid){
+            if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
+                !$this->permissions->isFriend($this->currentUser->getID(), $userid) &&
+                !$this->permissions->isPublic($userid, "user")
+            ){
+                $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+                $this->view->redirect("user", "login");
+            }
+        }
+        
         $friends = $this->friendshipModel->showall($userid);
         $this->view->setVariable("friends", $friends);
         $requests = $this->friendshipModel->requests($userid);
@@ -37,6 +48,15 @@ class FRIENDSHIP_Controller extends BaseController {
         }
         
         $userid = $_REQUEST["id"];
+
+        if ($this->currentUser->getID() != $userid){
+            if (!$this->permissions->isAdmin($this->currentUser->getID())
+            ){
+                $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+                $this->view->redirect("user", "login");
+            }
+        }
+        
         $friends = $this->friendshipModel->showall($userid, 0);
         $this->view->setVariable("friends", $friends);
         $this->view->render("friendship", "FRIENDSHIP_SHOWALL_Vista");

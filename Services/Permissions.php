@@ -54,6 +54,16 @@ class Permissions {
         }
     }
 
+    public function isConversationMember($userid, $conversationid)
+    {
+        $sql = $this->db->prepare("SELECT count(id) FROM conversation where id=? and (member=? or secondarymember=?)");
+        $sql->execute(array($conversationid, $userid, $userid));
+
+        if ($sql->fetchColumn() > 0) {
+            return true;
+        }
+    }
+
     public function isFriend($userid, $friendid)
     {
         $sql = $this->db->prepare("SELECT count(id) FROM friendship where (member=? and secondarymember=?) or (member=? and secondarymember=?) and status=1");

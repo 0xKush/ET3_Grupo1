@@ -43,22 +43,20 @@ class COMMENT_Controller extends BaseController
     public function add()
     {
         $comment = new Comment();
-        $publicationid = $_REQUEST["publication"];
-
+        
         if (isset($_POST["submit"])) {
             $comment->setPublication($_POST["publication"]);
-            $comment->setOwner($_POST["owner"]);
-            $comment->setOriginComment($_POST["origincomment"]);
-            $comment->setCreationDate($_POST["creationdate"]);
-            $comment->setHour($_POST["hour"]);
             $comment->setContent($_POST["content"]);
-            $comment->setStatus($_POST["status"]);
+            $comment->setOwner($this->currentUser->getID());
+            $comment->setCreationDate(date("Y-m-d"));
+            $comment->setHour(date('H:i:s'));
+            $comment->setStatus(1);
             
             try {
                 $comment->checkIsValidForCreate();
                 $this->commentModel->add($comment);
                 $this->view->setFlash(sprintf(i18n("Comment\"%s\" successfully added.")));
-                $this->view->redirect("publication", "showcurrent", "&id=".$publicationid);
+                $this->view->redirect("comment", "showall");
                 
             }
             catch (ValidationException $ex) {
@@ -67,8 +65,6 @@ class COMMENT_Controller extends BaseController
             }
             
         }
-
-        $this->view->setVariable("publicationid", $publicationid);
         $this->view->setVariable("comment", $comment);
         $this->view->render("comment", "COMMENT_ADD_Vista");
     }

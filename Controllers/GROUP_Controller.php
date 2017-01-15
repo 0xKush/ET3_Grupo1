@@ -79,6 +79,11 @@ class GROUP_Controller extends BaseController
     
     public function add()
     {
+        if (!$this->currentUser->getID()){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $group = new Group();
         
         if (isset($_POST["submit"])) {

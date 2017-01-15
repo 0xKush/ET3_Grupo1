@@ -23,6 +23,14 @@ class CONVERSATION_Controller extends BaseController
         }
         
         $userid = $_REQUEST["id"];
+
+        if ($this->currentUser->getID() != $userid){
+            if (!$this->permissions->isAdmin($this->currentUser->getID())
+            ){
+                $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+                $this->view->redirect("user", "login");
+            }
+        }
         
         $conversations = $this->conversationModel->showall($userid);
         $this->view->setVariable("conversations", $conversations);
@@ -36,6 +44,14 @@ class CONVERSATION_Controller extends BaseController
         }
         
         $conversationid = $_REQUEST["id"];
+
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
+            !$this->permissions->isConversationMember($this->currentUser->getID(), $conversationid)
+        ){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $conversation   = $this->conversationModel->showcurrent($conversationid);
         
         if ($conversation == NULL) {
@@ -83,6 +99,14 @@ class CONVERSATION_Controller extends BaseController
         }
         
         $conversationid = $_REQUEST["id"];
+
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
+            !$this->permissions->isConversationMember($this->currentUser->getID(), $conversationid)
+        ){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $conversation   = $this->conversationModel->showcurrent($conversationid);
         
         if ($conversation == NULL) {

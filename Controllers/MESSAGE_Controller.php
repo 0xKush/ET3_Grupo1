@@ -87,6 +87,14 @@ class MESSAGE_Controller extends BaseController
         }
         
         $messageid = $_REQUEST["id"];
+
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
+            !$this->permissions->isOwner($this->currentUser->getID(), $messageid, "message")
+        ){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $message   = $this->messageModel->showcurrent($messageid);
         
         if ($message == NULL) {
