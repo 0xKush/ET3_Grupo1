@@ -22,6 +22,11 @@ class EVENT_Controller extends BaseController
     
     public function showall()
     {
+        if (!$this->permissions->isAdmin($this->currentUser->getID())){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $events = $this->eventModel->showall();
         $this->view->setVariable("events", $events);
         $this->view->render("event", "EVENT_SHOWALL_ADMIN_Vista");
@@ -34,6 +39,16 @@ class EVENT_Controller extends BaseController
         }
         
         $eventid = $_REQUEST["id"];
+
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
+            !$this->permissions->isOwner($this->currentUser->getID(), $eventid, "event") &&
+            !$this->permissions->isEventMember($this->currentUser->getID(), $eventid) &&
+            !$this->permissions->isPublic($eventid, "event")
+        ){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $event   = $this->eventModel->showcurrent($eventid);
         
         if ($event == NULL) {
@@ -99,6 +114,13 @@ class EVENT_Controller extends BaseController
     
     public function edit()
     {
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
+            !$this->permissions->isOwner($this->currentUser->getID(), $eventid, "event")
+        ){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         if (!isset($_REQUEST["id"])) {
             throw new Exception(i18n("An event id is mandatory"));
         }
@@ -145,6 +167,14 @@ class EVENT_Controller extends BaseController
         }
         
         $eventid = $_REQUEST["id"];
+
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
+            !$this->permissions->isOwner($this->currentUser->getID(), $eventid, "event")
+        ){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $event   = $this->eventModel->showcurrent($eventid);
         
         if ($event == NULL) {
