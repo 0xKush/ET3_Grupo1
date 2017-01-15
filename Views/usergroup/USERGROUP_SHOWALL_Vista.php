@@ -109,7 +109,7 @@ $requests = $view->getVariable("requests");
 									<?php $owner = $owners[$group->getOwner()]?>
 									<a href="index.php?controller=user&action=showcurrent&id=<?=$owner->getID() ?>">
 						 				<?php if ($owner->getPhoto() != NULL): ?>
-						 					<img class="img-circle smallPhoto" src="media/profileImages/<?=$owner->getPhoto() ?>" alt="">
+						 					<img class="img-circle smallPhoto" src="<?=$owner->getPhoto() ?>" alt="">
 						 				<?php else: ?>
 						 					<img class="img-circle smallPhoto" src="media/profileImages/default.png" alt="">
 						 				<?php endif ?>

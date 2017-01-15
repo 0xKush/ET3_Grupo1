@@ -34,7 +34,7 @@ class USER_Controller extends BaseController
                 $user                      = $this->userModel->show_by_username($_POST["user"]);
                 $_SESSION["currentuser"]   = $user->getUser();
                 $_SESSION["currentuserid"] = $user->getID();
-                $this->view->redirect("publication", "showall", "id=" . $user->getID()."&type=user");
+                $this->view->redirect("publication", "showall", "id=" . $user->getID() . "&type=user");
             } else {
                 $errors            = array();
                 $errors["general"] = i18n("User is not valid");
@@ -78,15 +78,15 @@ class USER_Controller extends BaseController
         $friends         = $friendshipModel->showall($userid);
         
         $documentModel = new DOCUMENT_Model();
-        $documents = $documentModel->showall($userid);
+        $documents     = $documentModel->showall($userid);
         
         $this->view->setVariable("user", $user);
         
         $this->view->setVariable("publications", $publications);
         
         $this->view->setVariable("friends", $friends);
-
-      /*  $this->view->setVariable("documents", $documents);*/
+        
+        /*  $this->view->setVariable("documents", $documents);*/
         
         $this->view->render("user", "USER_SHOWCURRENT_Vista");
     }
@@ -96,9 +96,10 @@ class USER_Controller extends BaseController
     {
         $user   = new User();
         $upload = new Upload();
+        $upload->setAllowedExt(array("PNG","JPG","png","jpg"));
         
         if (isset($_POST["submit"])) {
-            if ($_FILES["file"]["error"] == 4){
+            if ($_FILES["file"]["error"] == 4) {
             } else {
                 if ($upload->checkFile()) {
                     $user->setPhoto($upload->getDestination());
@@ -159,6 +160,7 @@ class USER_Controller extends BaseController
     public function edit()
     {
         $upload = new Upload();
+        $upload->setAllowedExt(array("PNG","JPG","png","jpg"));
         
         if (!isset($_REQUEST["id"])) {
             throw new Exception(i18n("An user id is mandatory"));
@@ -173,7 +175,7 @@ class USER_Controller extends BaseController
         }
         
         if (isset($_POST["submit"])) {
-            if ($_FILES["file"]["error"] == 4){
+            if ($_FILES["file"]["error"] == 4) {
             } else {
                 if ($upload->checkFile()) {
                     $user->setPhoto($upload->getDestination());
@@ -200,7 +202,7 @@ class USER_Controller extends BaseController
             } else {
                 $user->setPrivate(FALSE);
             }
-            if ($_POST["password"]){
+            if ($_POST["password"]) {
                 $user->setPassword($_POST["password"]);
             }
             
@@ -334,7 +336,7 @@ class USER_Controller extends BaseController
     {
         $this->view->render("user", "USER_ADMIN_Vista");
     }
-
+    
     public function searchselect()
     {
         $this->view->render("user", "USER_SEARCHSELECT_Vista");
@@ -396,10 +398,10 @@ class USER_Controller extends BaseController
             } else {
                 $users = $this->userModel->search($query);
             }
-
+            
             $friendshipModel = new FRIENDSHIP_Model();
-            $friends = $friendshipModel->getFriends($this->currentUser->getID());
-
+            $friends         = $friendshipModel->getFriends($this->currentUser->getID());
+            
             $this->view->setVariable("friends", $friends);
             $this->view->setVariable("users", $users);
             $this->view->render("user", "USER_SHOWALL_Vista");

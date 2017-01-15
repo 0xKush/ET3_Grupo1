@@ -54,7 +54,7 @@
  						<tr class="row">
  						<th class='text-center'><?= i18n("Name") ?></th>
  						<th class='text-center'><?= i18n("Owner") ?></th>
- 						<th class='text-center'><?= i18n("Private?") ?></th>
+ 						<th class='text-center'><?= i18n("Private") ?></th>
  						<th class='text-center'><?= i18n("Status") ?></th>
  						<th class='text-center'><?= i18n("Options") ?></th>
  					</tr>

@@ -99,7 +99,7 @@ class Upload
         }
         if (in_array($extension, $array_img)) {
             $destination = "media/images/";
-             /*$destination = __DIR__ . "/../media/images";*/
+            /*$destination = __DIR__ . "/../media/images";*/
         }
         return $destination;
     }
@@ -158,6 +158,13 @@ class Upload
     public function setDestination($destination, $name)
     {
         $this->destination = $destination . $name;
+        
+        return $this;
+    }
+    
+    public function setAllowedExt($array)
+    {
+        $this->allowedExts = $array;
         
         return $this;
     }
