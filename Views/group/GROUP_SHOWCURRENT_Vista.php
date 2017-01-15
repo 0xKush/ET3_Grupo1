@@ -179,13 +179,14 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 			<div class="panel-footer">
 			<div class="row">
 			<?php if ($group->getOwner() == $currentuserid): ?>
-				<form action="index.php&action=delete&controller=usergroup" method="post">
+				<!-- <form action="index.php?controller=usergroup&action=delete&id=<?=$group->getID()  ?>" method="post">
 					<input type="text" class="" hidden name="kick" value="<?= $member->getID() ?>">
 					<button class="btn btn-danger" name="submit" type="submit">
 						<i class="fa fa-kick"></i>
 						<?=i18n("Kick") ?>
 					</button>
-				</form>
+
+				</form> -->
 			<?php endif ?>
 				<a href="index.php?controller=user&action=showcurrent&id=<?=$member->getID()  ?>">
 					<button class="btn btn-default pull-right">
