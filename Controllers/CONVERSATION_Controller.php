@@ -57,7 +57,10 @@ class CONVERSATION_Controller extends BaseController
         if ($conversation == NULL) {
             throw new Exception(i18n("No such conversation with id: ") . $conversationid);
         }
+
+        $isFriend= $this->permissions->isFriend($conversation->getMember(),$conversation->getSecondaryMember());
         
+        $this->view->setVariable("isFriend", $isFriend);
         $this->view->setVariable("conversation", $conversation);
         $this->view->render("conversation", "CONVERSATION_SHOWCURRENT_Vista");
     }
