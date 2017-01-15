@@ -74,7 +74,7 @@ $messages = $mmapper->showall($conversation->getID());
 										<input hidden type="text" name="owner" value="<?=$currentuserid ?>">
 										<input hidden type="text" name="status" value="0">
 
-								    	<input autofocus="" type="textarea" class="form-control" name="content">
+								    	<input autofocus="" type="textarea" class="form-control" name="content" required>
 								      <span class="input-group-btn">
 								        <button class="btn btn-success" type="submit" name="submit">
 								        	<i class="fa fa-send"></i>
