@@ -31,11 +31,11 @@
 
 					  <div class="form-group">
 					    <label for="date"><?= i18n("Start date")?></label>
-					    <input type="text" class="form-control" id="date" name="startdate" >
+					    <input type="text" class="form-control" id="dateev" name="startdate" >
 					  </div>
 					  <div class="form-group">
 					    <label for="date2"><?= i18n("End date")?></label>
-					    <input type="text" class="form-control" id="date2" name="enddate" >
+					    <input type="text" class="form-control" id="dateev2" name="enddate" >
 					  </div>
 
 					  <div class="form-group">
