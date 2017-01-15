@@ -23,6 +23,11 @@ class GROUP_Controller extends BaseController
     
     public function showall()
     {
+        if (!$this->permissions->isAdmin($this->currentUser->getID())){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $groups = $this->groupModel->showall();
         $this->view->setVariable("groups", $groups);
         $this->view->render("group", "GROUP_SHOWALL_ADMIN_Vista");
@@ -35,6 +40,16 @@ class GROUP_Controller extends BaseController
         }
         
         $groupid = $_REQUEST["id"];
+
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
+            !$this->permissions->isOwner($this->currentUser->getID(), $groupid, "groupp") &&
+            !$this->permissions->isEventMember($this->currentUser->getID(), $groupid) &&
+            !$this->permissions->isPublic($groupid, "groupp")
+        ){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $group   = $this->groupModel->showcurrent($groupid);
         
         if ($group == NULL) {
@@ -102,6 +117,14 @@ class GROUP_Controller extends BaseController
         }
         
         $groupid = $_REQUEST["id"];
+
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
+            !$this->permissions->isOwner($this->currentUser->getID(), $groupid, "groupp")
+        ){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $group   = $this->groupModel->showcurrent($groupid);
         if ($group == NULL) {
             throw new Exception(i18n("No such group with id: ") . $groupid);
@@ -136,6 +159,14 @@ class GROUP_Controller extends BaseController
             throw new Exception(i18n("Id is mandatory"));
         }
         $groupid = $_REQUEST["id"];
+
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
+            !$this->permissions->isOwner($this->currentUser->getID(), $groupid, "groupp")
+        ){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $group   = $this->groupModel->showcurrent($groupid);
         if ($group == NULL) {
             throw new Exception(i18n("No such group with id: ") . $groupid);
@@ -212,9 +243,5 @@ class GROUP_Controller extends BaseController
             $this->view->render("group", "GROUP_SEARCH_Vista");
         }
     }
-    
-    
-    
-    
-    
+
 }
