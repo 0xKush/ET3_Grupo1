@@ -1,3 +1,3 @@
 #!/bin/sh
-chmod -R 644 media/
+chmod -R 777 media/
 exit
