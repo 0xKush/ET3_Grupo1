@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__."/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
-$user = $view->getVariable("user");
+$userid = $view->getVariable("userid");
 $documents = $view->getVariable("documents");
 $errors = $view->getVariable("errors");
 $currentuserid = $view->getVariable("currentuserid");
@@ -26,9 +26,13 @@ $isAdmin = $view->getVariable("isAdmin");
 
 	<div class="row">
  		<div class="container-fluid">
- 		<div class="pull-right">
+		
+		<?php if ($userid == $currentuserid || $isAdmin ): ?>
+		<div class="pull-right">
  			<a href="index.php?controller=document&action=add"><button class="btn btn-success"><?= i18n("Upload a new document") ?></button></a>
  		</div>
+		<?php endif ?>
+ 		
  		</div> 			
  		</div>
 
@@ -51,7 +55,7 @@ $isAdmin = $view->getVariable("isAdmin");
  								echo "<td class='text-center'>".$document->getUploadDate()."</td>";
  							
  								echo "<td class='text-center'>";
- 								if ($document->getOwner() == $currentuserid || $document->getOwner() == $isAdmin ){
+ 								if ($document->getOwner() == $currentuserid || $isAdmin ){
 
  								echo'	<div class="col-xs-3">
 					 						<a href="index.php?controller=document&action=delete&id='.

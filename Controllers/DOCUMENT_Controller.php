@@ -26,8 +26,7 @@ class DOCUMENT_Controller extends BaseController
         $userid = $_REQUEST["id"];
         
         if ($this->currentUser->getID() != $userid) {
-            if (!$this->permissions->isAdmin($this->currentUser->getID()) && !$this->permissions->isFriend($this->currentUser->getID(), $userid)) {
-                
+            if (!$this->permissions->isAdmin($this->currentUser->getID()) && !$this->permissions->isFriend($this->currentUser->getID(), $userid) && !$this->permissions->isPublic($userid, "user")) {
                 $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
                 $this->view->redirect("user", "login");
             }
@@ -37,8 +36,10 @@ class DOCUMENT_Controller extends BaseController
         
         $documents = $this->documentModel->showall($userid);
         $isAdmin   = $this->permissions->isAdmin($this->currentUser->getID());
+        
         $this->view->setVariable("documents", $documents);
         $this->view->setVariable("isAdmin", $isAdmin);
+        $this->view->setVariable("userid", $userid);
         $this->view->render("document", "DOCUMENT_SHOWALL_Vista");
     }
     

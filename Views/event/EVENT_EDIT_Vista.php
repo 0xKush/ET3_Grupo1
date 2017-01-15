@@ -32,6 +32,26 @@
 					    <label for="description"><?= i18n("Description")?></label>
 					    <input type="textarea" class="form-control" id="description" name="description" value="<?= $event->getDescription()?>">
 					  </div>
+
+
+					<div class="form-group">
+					    <label for="date"><?= i18n("Start date")?></label>
+					    <input type="text" class="form-control" id="date" name="startdate" value="<?= $event->getStartDate()?>" >
+					  </div>
+					  <div class="form-group">
+					    <label for="date2"><?= i18n("End date")?></label>
+					    <input type="text" class="form-control" id="date2" name="enddate"  value="<?= $event->getEndDate()?>">
+					  </div>
+
+					  <div class="form-group">
+					    <label for="hour1"><?= i18n("Start hour")?></label>
+					    <input type="time" class="form-control" id="hour1" name="starthour" value="<?= $event->getStartHour()?>" >
+					  </div>
+					  <div class="form-group">
+					    <label for="hour"><?= i18n("End hour")?></label>
+					    <input type="time" class="form-control" id="hour" name="endhour" value="<?= $event->getEndHour()?>" >
+					  </div>					
+
 					  
 
 					  <div class="form-group">
