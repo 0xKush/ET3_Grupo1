@@ -13,8 +13,6 @@ $umapper = new USER_Model();
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
-<?php print_r($errors) ?>
-
 
  	<div class="container-fluid">
  		<div class="row" style="padding-left: 15px; padding-right: 15px">

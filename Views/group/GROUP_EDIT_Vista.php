@@ -10,7 +10,7 @@
 ?>
 <?= isset($errors["general"])?$errors["general"]:"" ?>
 <?php $view->moveToDefaultFragment(); ?>
-<?php print_r($errors) ?>
+
 <div class="container-fluid">
 	
 	<div class="col-md-8 col-md-offset-2" >

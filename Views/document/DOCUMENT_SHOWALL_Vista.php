@@ -9,7 +9,7 @@ $isAdmin = $view->getVariable("isAdmin");
 ?>
 <?= isset($errors["general"])?$errors["general"]:"" ?>
 <?php $view->moveToDefaultFragment(); ?>
-<?php print_r($errors) ?>
+
 
 
 <div class="container-fluid">

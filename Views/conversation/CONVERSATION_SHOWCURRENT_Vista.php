@@ -16,7 +16,7 @@ $messages = $mmapper->showall($conversation->getID());
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
-<?php print_r($errors) ?>
+
 
 <?php if ($umapper->showcurrent($conversation->getMember())->getID() == $currentuserid): ?>
 	<?php $receiver = $umapper->showcurrent($conversation->getSecondaryMember())?>

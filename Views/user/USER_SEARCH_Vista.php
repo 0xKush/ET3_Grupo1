@@ -7,7 +7,7 @@ $errors = $view->getVariable("errors");
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
-<?php print_r($errors) ?>
+
 
 <div class="container-fluid">
     

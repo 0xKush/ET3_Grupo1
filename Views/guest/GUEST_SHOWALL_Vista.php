@@ -14,8 +14,6 @@ $requests = $view->getVariable("requests");
 <?php $view->moveToDefaultFragment(); ?>
 
 
-	
-
 
 	<div class="container-fluid">
 		<div class="row">
