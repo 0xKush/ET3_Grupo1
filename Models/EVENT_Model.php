@@ -12,6 +12,33 @@ class EVENT_Model
         $this->db = PDOConnection::getInstance();
     }
     
+    public function showmembers($eventid)
+    {
+        $members = array();
+        
+        $sql = $this->db->prepare("SELECT DISTINCT u.id as id, u.name as name, u.surname as surname,u.photo as photo FROM user as u, guest as g where g.event=? and u.id=g.member or u.id=g.secondarymember");
+        $sql->execute(array(
+            $eventid
+        ));
+        
+        $members_db = $sql->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        
+        foreach ($members_db as $member) {
+            $user = new User();
+            
+            $user->setID($member["id"]);
+            $user->setName($member["name"]);
+            $user->setSurname($member["surname"]);
+            $user->setPhoto($member["photo"]);
+            
+            array_push($members, $user);
+        }
+        
+        return $members;
+    }
+    
     public function showall()
     {
         $sql = $this->db->prepare("SELECT * FROM event ORDER BY creationdate");

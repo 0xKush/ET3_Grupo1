@@ -178,7 +178,7 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 			</div>
 			<div class="panel-footer">
 			<div class="row">
-			<?php if ($isOwner): ?>
+			<?php if ($event->getOwner() == $currentuserid): ?>
 				<form action="index.php&action=delete&controller=guest" method="post">
 					<input type="text" class="" hidden name="kick" value="<?= $member->getID() ?>">
 					<button class="btn btn-danger" name="submit" type="submit">
@@ -187,7 +187,7 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 					</button>
 				</form>
 			<?php endif ?>
-				<a href="index.php?controller=user&action=showcurrent&id=<?=$friend->getID()  ?>">
+				<a href="index.php?controller=user&action=showcurrent&id=<?=$member->getID()  ?>">
 					<button class="btn btn-default pull-right">
 					<i class="fa fa-angle-double-right"></i>
 						<?= i18n("View") ?>	

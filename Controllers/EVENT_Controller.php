@@ -61,6 +61,9 @@ class EVENT_Controller extends BaseController
         
         $publications = $publicationModel->showall($eventid, "event");
         
+        $members = $this->eventModel->showmembers($eventid);
+        
+        $this->view->setVariable("members", $members);
         
         $this->view->setVariable("event", $event);
         
@@ -87,7 +90,7 @@ class EVENT_Controller extends BaseController
                     $event->setStartDate($_POST["startdate"]);
                     if (!empty($_POST["enddate"])) {
                         $event->setEndDate($_POST["enddate"]);
-                        if ($event->getEndDate() < $event->getStartDate()){
+                        if ($event->getEndDate() < $event->getStartDate()) {
                             $this->view->setFlash(sprintf(i18n("Start Date can't be greater than End Date.")));
                             $this->view->redirect("event", "add");
                         }
