@@ -66,9 +66,16 @@ class PUBLICATION_Controller extends BaseController
         $user = $this->userModel->showcurrent($publication->getOwner());
         
         $comment_Model = new COMMENT_Model();
-        //AQUI O showpublicomments
         $comments = $comment_Model->showall($publicationid);
+
+        $commentOwners = array();
         
+        foreach($comments as $comment){
+            $aux = $comment->getOwner();
+            $commentOwners[$aux] = $this->userModel->showcurrent($aux);
+        }
+
+        $this->view->setVariable("commentOwners", $commentOwners);
         $this->view->setVariable("user", $user);
         $this->view->setVariable("comments", $comments);
         $this->view->setVariable("publication", $publication);
