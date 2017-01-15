@@ -8,7 +8,6 @@ $publicationid = $view->getVariable("publicationid");
 
 ?>
 
-<?php print_r($publicationid) ?>
 
 <div class="panel">
 	<div class="panel-heading">

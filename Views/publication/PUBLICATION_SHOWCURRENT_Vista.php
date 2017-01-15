@@ -7,6 +7,7 @@ $errors = $view->getVariable("errors");
 $publication = $view->getVariable("publication");
 
 $comments = $view->getVariable("comments");
+$commentOwners = $view->getVariable("commentowners");
 
 $owner = $view->getVariable("user");
 
@@ -65,6 +66,11 @@ $owner = $view->getVariable("user");
 	
 		<?php foreach ($comments as $comment): ?>
 			<div class="panel">
+			<div class="panel-headingl">
+				<?php $commentowner = $commentOwners[$comment->getOwner()]  ?>
+				<font size="4" class=""><?=  $commentowner->getName()." ". $commentowner->getSurname() ?></font>
+				<a href="index.php?controller=user&action=showcurrent&id=<?=$commentowner->getID() ?>"></a><font color="user">@<?=$commentowner->getUser ?></font></a>
+			</div>
 				<div class="panel-body">
 					<font size="4" class="user"><?= $comment->getContent() ?></font>
 				</div>
