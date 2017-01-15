@@ -83,7 +83,7 @@ class PUBLICATION_Controller extends BaseController
                 $publication->checkIsValidForCreate();
                 $this->publicationModel->add($publication);
                 $this->view->setFlash(sprintf(i18n("Publication\"%s\" successfully added.")));
-                $this->view->redirect("publication", "showall", "id=" . $this->currentUser->getID());
+                $this->view->redirect($_REQUEST["type"], "showcurrent", "id=" . $_REQUEST["destination"]);
                 
             }
             catch (ValidationException $ex) {

@@ -129,6 +129,16 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 	</div>
 
 	<div class="row">
+	<div class="row" style="margin-bottom: 10px;margin-right: 15px"> 
+			<div class="pull-right">
+				<form action="index.php?controller=publication&action=add" method="post">
+					<input type="text" name="type" value="event" hidden="">
+					<input type="text" name="destination" value="<?=$event->getID() ?>" hidden>
+
+					<button class="btn btn-success"><?= i18n("Create publication") ?></button>
+				</form>
+			</div>
+		</div>
 		<div class="col-md-4">
 		<?php if ($event->getOwner() == $currentuserid || $isMember): ?>
 			<div class="row" style="margin-bottom: 10px">

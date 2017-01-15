@@ -49,6 +49,19 @@
 
 
 <div class="row">
+<?php if ($currentuserid == $user->getID()): ?>
+	<div class="row" style="margin-bottom: 10px;margin-right: 15px"> 
+			<div class="pull-right">
+				<form action="index.php?controller=publication&action=add" method="post">
+					<input type="text" name="type" value="user" hidden="">
+					<input type="text" name="destination" value="<?=$user->getID() ?>" hidden>
+
+					<button class="btn btn-success"><?= i18n("Create publication") ?></button>
+				</form>
+			</div>
+		</div>
+<?php endif ?>
+
 	<div class="col-md-4">
 	<div class="row" style="margin-bottom: 15px">
 	<a href="index.php?controller=document&action=showall&id=<?= $currentuserid ?>">
