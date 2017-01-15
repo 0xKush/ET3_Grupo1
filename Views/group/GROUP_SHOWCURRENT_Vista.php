@@ -170,7 +170,7 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 					<?php if ($member->getPhoto() == NULL): ?>
 						<img class="smallPhoto img-circle" src="media/profileImages/default.png" alt="default">
 					<?php else: ?>
-						<img class="smallPhoto img-circle" src="media/profileImages/<?=$member->getPhoto() ?>" alt="<?=$member->getPhoto() ?>">
+						<img class="smallPhoto img-circle" src="<?=$member->getPhoto() ?>" alt="<?=$member->getPhoto() ?>">
 					<?php endif ?>
 					<font class="name"><?= $member->getName()." ".$member->getSurname() ?></font><br>
 					<font class="user">@<?=$member->getUser() ?></font>

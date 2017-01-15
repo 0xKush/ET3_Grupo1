@@ -30,7 +30,7 @@ $friends = $view->getVariable("friends");
  							<div class="row text-center">
  								<a href="index.php?controller=user&action=showcurrent&id=<?= $user->getID()?>">
  									<?php if ($user->getPhoto() != NULL): ?>
- 										<img class="img-circle showPhoto" src="media/profileImages/<?=$user->getPhoto()  ?>" alt="<?=$user->getPhoto()  ?>">
+ 										<img class="img-circle showPhoto" src="<?=$user->getPhoto()  ?>" alt="<?=$user->getPhoto()  ?>">
  									<?php else: ?>
  										<img class="img-circle showPhoto" src="media/profileImages/default.png" alt="default.png">
  									<?php endif ?>
