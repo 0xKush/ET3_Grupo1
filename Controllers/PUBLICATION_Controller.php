@@ -27,16 +27,15 @@ class PUBLICATION_Controller extends BaseController
     
     public function showall()
     {
+        if (!$this->currentUser->getID()){
+            $this->view->redirect("user", "login");
+        }
+        
         if (!isset($_REQUEST["id"])) {
             throw new Exception(i18n("Id is mandatory"));
         }
         
-        /*  if (!isset($_REQUEST["type"])) {
-        throw new Exception(i18n("Entity type is mandatory"));
-        }*/
-        
         $entityid = $_REQUEST["id"];
-        /*  $type     = $_REQUEST["type"];*/
         
         $publications = $this->publicationModel->showall($entityid, "user");
         
