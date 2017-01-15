@@ -168,6 +168,7 @@
 		"Document\"%s\" successfully added."=>"Documento\"%s\" añadido satisfactoriamente.",
 		"An error has occurred during upload"=>"Se ha producido un error durante la subida",
 		"Document \"%s\" successfully deleted."=>"Documento \"%s\" eliminado satisfactoriamente.",
+		"File is requerid."=>"El archivo es necesario.",
 	/*Event Controller*/
 		"An event id is mandatory"=>"Es obligatorio el id de evento",
 		"No such event with id: "=>"Ningun evento con id: ",
@@ -236,6 +237,10 @@
 		"Invitations successfully sent."=>"Invitaciones enviadas correctamente",
 		"UserGroup successfully deleted."=>"Usuariogrupo eliminado correctamente",
 	/*Faltaba*/
-		"Add"=>"Añadir"
+		"Add"=>"Añadir",
+	/*Upload.php*/
+		"Ext not valid"=>"Ext no valida",
+		"Mime not valid"=>"Mime no valido",
+		"Provide a smaller file"=>"Proporcionar un archivo más pequeño"
   )
 ?>

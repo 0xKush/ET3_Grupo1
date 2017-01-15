@@ -88,7 +88,11 @@ CREATE TABLE IF NOT EXISTS `conversation` (
 
 INSERT INTO `conversation` (`id`, `member`, `secondarymember`, `startdate`, `status`) VALUES
 (1, 2, 3, '2016-10-15', 0),
-(2, 4, 5, '2016-10-16', 0);
+(2, 4, 5, '2016-10-16', 0),
+(3, 6, 7, '2017-01-13', 0),
+(4, 8, 13, '2017-01-13', 0),
+(5, 9, 12, '2017-01-13', 0),
+(6, 11, 13, '2017-01-13', 0);
 
 -- --------------------------------------------------------
 
@@ -349,7 +353,20 @@ INSERT INTO `message` (`id`, `conversation`, `owner`, `senddate`, `sendhour`, `c
 (2, 1, 3, '2016-10-16', '17:30:00', 'Puff, estase a complicar bastante.', 0),
 (3, 1, 2, '2016-10-16', '17:35:00', 'Por aquí estamos igual.', 0),
 (4, 2, 4, '2016-10-16', '18:00:00', 'Miraches o partido do Celta?', 0),
-(5, 2, 5, '2016-10-16', '19:00:00', 'Si, menudo partidazo. #FutbolDeSalon.', 0);
+(5, 2, 5, '2016-10-16', '19:00:00', 'Si, menudo partidazo. #FutbolDeSalon.', 0),
+(6, 3, 6, '2017-01-14', '10:00:00', 'Que tal fue el examen de LC?', 0),
+(7, 3, 7, '2017-01-14', '11:00:00', 'Puf bastante mal la verdad, en la pregunta 2 se me olvidaron los ejemplos. A ti?', 0),
+(8, 3, 6, '2017-01-14', '12:00:00', 'Bueno malo será. A mi bastante bien, la pregunta de la Maquina de Turing se la clavé jaja', 0),
+(9, 4, 8, '2017-01-14', '10:00:00', 'Cuanto tiempo, que es de ti?', 0),
+(10, 4, 13, '2017-01-14', '11:00:00', 'Bueno pues ahora estoy estudiando en Santiago. El cambio me vino perfecto. Y tú?', 0),
+(11, 4, 8, '2017-01-14', '12:00:00', 'Nada, aqui sigo en Ourense, a ver si algun día acabo la carrera.', 0),
+(12, 5, 9, '2017-01-14', '10:00:00', 'Eh vas a ir a la fiesta de de Elisa? Es que de los invitados solo me llevo contigo y así ibamos juntos.', 0),
+(13, 5, 12, '2017-01-14', '11:00:00', 'Pues me aptecía bastante pero me pasaba como a ti asi que si amos juntos perfecto.', 0),
+(14, 5, 9, '2017-01-14', '12:00:00', 'Oh guay, vamos hablando para ver como hacemos.', 0),
+(15, 6, 11, '2017-01-14', '10:00:00', 'Parece que nos tocó en el mismo grupo del trabajo de BDII, tenemos que ver cuando quedar.', 0),
+(16, 6, 13, '2017-01-14', '11:00:00', 'Si, yo puedo todos los días por la tarde menos el viernes', 0),
+(17, 6, 11, '2017-01-14', '12:00:00', 'Pues el proximo martes podemos quedar para ir empezando.', 0),
+(18, 6, 13, '2017-01-14', '13:00:00', 'Perfecto', 0);
 
 -- --------------------------------------------------------
 
@@ -629,7 +646,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 -- AUTO_INCREMENT de la tabla `conversation`
 --
 ALTER TABLE `conversation`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `document`
 --
@@ -659,7 +676,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 -- AUTO_INCREMENT de la tabla `message`
 --
 ALTER TABLE `message`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de la tabla `publication`
 --
