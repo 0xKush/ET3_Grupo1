@@ -1,6 +1,9 @@
 <?php
   $i18n_messages =
   array(
+	/*Comment*/
+		"New Comment"=>"Nuevo Comentario",
+		"Delete Comment "=>"Eliminar Comentario",
     /*Conversation*/
 		"Delete Conversation with: " => "Eliminar conversa con:",
 		"No, go back"=>"Non,voltar atras",
@@ -101,6 +104,8 @@
 		"Delete Publication: "=>"Eliminar Publicacion: ",
 		"Create publication"=>"Crear Publicacion",
 		"Author"=>"Autor",
+		"Comment"=>"Comentario",
+		"View in site posted"=>"Ver no sitio publicado",
 		"This publication has no documents"=>"Esta publicacion non ten documentos",
 	/*User*/
 		"Create User"=>"Crear Usuario",
@@ -144,6 +149,93 @@
 	/*Usergroup*/
 		"Unsubscribe from group "=>"Cancelar suscricion ao grupo",
 	/*Permissions*/
-		"You have no permissions here."=>"Non tes permisos aqui."
+		"You have no permissions here."=>"Non tes permisos aqui.",
+	/*Comment Controller*/
+		"An comment id is mandatory"=>"E obrigatorio o id de comentario",
+		"No such comment with id: "=>"Ningun comentario con id: ",
+		"Comment\"%s\" successfully added."=>"Comentario\"%s\" engadido con exito.",
+		"Comment \"%s\" successfully updated."=>"Comentario \"%s\" actualizado con exito.",
+		"Id is mandatory"=>"É obrigatorio o id",
+		"Comment \"%s\" successfully deleted."=>"Comentario \"%s\" eliminado con exito.",
+	/*Conversation Controller*/
+		"A conversation id is mandatory"=>"E obrigatorio o id de conversacion",
+		"No such conversation with id: "=>"Ningunha publicacion con id: ",
+		"Conversation error: \"%s\"."=>"Erro de conversacion: \"%s\".",
+		"Conversation \"%s\" successfully deleted."=>"Conversacion \"%s\" eliminada con exito.",
+	/*Document Controller*/
+		"A document id is mandatory"=>"É obrigatorio o id de documento",
+		"No such document with id: "=>"Ningun documento con id: ",
+		"Document\"%s\" successfully added."=>"Documento\"%s\" engadido con exito.",
+		"An error has occurred during upload"=>"Produciuse un erro durante a subida",
+		"Document \"%s\" successfully deleted."=>"Documento \"%s\" eliminado con exito.",
+	/*Event Controller*/
+		"An event id is mandatory"=>"E obrigatorio o id de evento",
+		"No such event with id: "=>"Ningun evento con id: ",
+		"Event\"%s\" successfully added."=>"Evento\"%s\" engadido con exito.",
+		"Event already exists"=>"O evento xa existe",
+		"Event\"%s\" successfully updated."=>"Evento\"%s\" actualizado con exito.",
+		"Event \"%s\" successfully deleted."=>"Evento \"%s\" eliminado con exito.",
+	/*Friendship Controller*/
+		"Friend successfully added."=>"Amigo engadido con exito.",
+		"Friend already exists."=>"O amigo xa existe.",
+		"No such friendship with id: "=>"Ningunha amizade con id: ",
+		"Friendship successfully deleted."=>"Amizade eliminada con exito.",
+	/*Group Controller*/
+		"An group id is mandatory"=>"E obrigatorio o id de grupo",
+		"No such group with id: "=>"Ningun grupo con id: ",
+		"Group\"%s\" successfully added."=>"Grupo\"%s\" engadido con exito.",
+		"Group already exists"=>"O grupo xa existe",
+		"An group id is mandatory"=>"E obrigatorio o id de grupo",
+		"Group \"%s\" successfully updated."=>"Grupo \"%s\" actualizado con exito.",
+		"Group \"%s\" successfully deleted."=>"Grupo \"%s\" eliminado con exito.",
+	/*Guest Controller*/
+		"Guest successfully added."=>"Invitado engadido con exito.",
+		"Guest already exists."=>"O invitado xa existe.",
+		"Invitations successfully sent."=>"Invitacions enviadas correctamente",
+		"No such guest with id: "=>"Ningun invitado con id: ",
+		"Guest successfully deleted."=>"Invitado eliminado con exito",
+	/*Language Controller*/
+		"No lang parameter was provided"=>"Non se proporcionou ningun parametro lang",
+	/*Message Controller*/
+		"A conversation is mandatory"=>"E obrigatoria unha conversa",
+		"No such messages with conversation id: "=>"Non hai mensaxes con id de conversa: ",
+		"A message id is mandatory"=>"E obrigatorio o id de mensaxe",
+		"No such message with id: "=>"Ningunha mensaxe con id: ",
+		"Message\"%s\" successfully sent."=>"Mensaxe\"%s\" enviada correctamente.",
+		"Message \"%s\" successfully deleted."=>"Mensaxe \"%s\" eliminada correctamente.",
+	/*Publication Controller*/
+		"Entity type is mandatory"=>"Entidade tipo obrigatoria",
+		"No such publication with id: "=>"Ningunha publicacion con id: ",
+		"A publication id is mandatory"=>"E obrigatorio o id de publicacion",
+		"Publication\"%s\" successfully added."=>"Publicacion\"%s\" engadida con exito.",
+		"Publication \"%s\" successfully deleted."=>"Publicacion \"%s\" eliminada con exito.",
+	/*Publidoc Controller*/
+		"A publidoc id is mandatory"=>"E obrigatorio o id de publidoc",
+		"No such publidoc with id: "=>"Ningun publidoc con id: ",
+		"PubliDoc successfully added."=>"PubliDoc engadido correctamente.",
+		"PubliDoc already exists."=>"O PubliDoc xa existe.",
+		"PubliDoc successfully deleted."=>"PubliDoc eliminado correctamente.",
+	/*User Controller*/
+		"User is not valid"=>"Usuario non valido",
+		"An user id is mandatory"=>"E obrigatorio o id de usuario",
+		"No such user with id: "=>"Ningun usuario con id: ",
+		"Error while upload image"=>"Erro ao subir a imaxen",
+		"User \"%s\" successfully added."=>"Usuario \"%s\" engadido con exito.",
+		"email already exists"=>"O email xa existe",
+		"Username already exists"=>"Nome de usuario xa existe",
+		"User \"%s\" successfully updated."=>"Usuario \"%s\" actualizado con exito.",
+		"Email already exists or NULL"=>"O email xa existe ou e NULL.",
+		"Username already exists or NULL"=>"O nome de usuario xa existe ou e NULL",
+		"User \"%s\" successfully deleted."=>"Usuario \"%s\" eliminado con exito.",
+		"User \"%s\" successfully registered."=>"Usuario \"%s\" rexistrado correctamente.",
+	/*Usergroup Controller*/
+		"A usergroup id is mandatory"=>"E obrigatorio o id de usuariogrupo",
+		"No such usergroup with id: "=>"Ningun usuariogrupo con id: ",
+		"UserGroup successfully added."=>"UsuarioGrupo engadido correctamente.",
+		"UserGroup already exists."=>"O Usuariogrupo xa existe.",
+		"Invitations successfully sent."=>"Invitacions enviadas correctamente",
+		"UserGroup successfully deleted."=>"Usuariogrupo eliminado correctamente",
+		/*Faltaba*/
+		"Add"=>"Engadir"
   )
 ?>

@@ -1,6 +1,9 @@
 <?php
   $i18n_messages =
   array(
+	/*Comment*/
+		"New Comment"=>"Nuevo Comentario",
+		"Delete Comment "=>"Eliminar Comentario",
 	/*Conversation*/
 		"Delete Conversation with: " => "Eliminar conversacion con:",
 		"No, go back"=>"No,volver atras",
@@ -101,6 +104,8 @@
 		"Delete Publication: "=>"Eliminar Publicacion: ",
 		"Create publication"=>"Crear Publicacion",
 		"Author"=>"Autor",
+		"Comment"=>"Comentario",
+		"View in site posted"=>"Ver en el sitio publicado",
 		"This publication has no documents"=>"Esta publicacion no tiene documentos",
 	/*User*/
 		"Create User"=>"Crear Usuario",
@@ -144,6 +149,93 @@
 	/*Usergroup*/
 		"Unsubscribe from group "=>"Cancelar suscripcion al grupo",
 	/*Permissions*/
-		"You have no permissions here."=>"No tienes permisos aqui."
+		"You have no permissions here."=>"No tienes permisos aqui.",
+	/*Comment Controller*/
+		"An comment id is mandatory"=>"Es obligatorio el id de comentario",
+		"No such comment with id: "=>"Ningun comentario con id: ",
+		"Comment\"%s\" successfully added."=>"Comentario\"%s\" añadido satisfactoriamente.",
+		"Comment \"%s\" successfully updated."=>"Comentario \"%s\" actualizado satisfactoriamente.",
+		"Id is mandatory"=>"Es obligatorio el id",
+		"Comment \"%s\" successfully deleted."=>"Comentario \"%s\" eliminado satisfactoriamente.",
+	/*Conversation Controller*/
+		"A conversation id is mandatory"=>"Es obligatorio el id de conversacion",
+		"No such conversation with id: "=>"Ninguna publicacion con id: ",
+		"Conversation error: \"%s\"."=>"Error de conversacion: \"%s\".",
+		"Conversation \"%s\" successfully deleted."=>"Conversacion \"%s\" eliminada satisfactoriamente.",
+	/*Document Controller*/
+		"A document id is mandatory"=>"Es obligatorio el id de documento",
+		"No such document with id: "=>"Ningun documento con id: ",
+		"Document\"%s\" successfully added."=>"Documento\"%s\" añadido satisfactoriamente.",
+		"An error has occurred during upload"=>"Se ha producido un error durante la subida",
+		"Document \"%s\" successfully deleted."=>"Documento \"%s\" eliminado satisfactoriamente.",
+	/*Event Controller*/
+		"An event id is mandatory"=>"Es obligatorio el id de evento",
+		"No such event with id: "=>"Ningun evento con id: ",
+		"Event\"%s\" successfully added."=>"Evento\"%s\" añadido satisfactoriamente.",
+		"Event already exists"=>"El evento ya existe",
+		"Event\"%s\" successfully updated."=>"Evento\"%s\" actualizado satisfactoriamente.",
+		"Event \"%s\" successfully deleted."=>"Evento \"%s\" eliminado satisfactoriamente.",
+	/*Friendship Controller*/
+		"Friend successfully added."=>"Amigo añadido satisfactoriamente.",
+		"Friend already exists."=>"El amigo ya existe.",
+		"No such friendship with id: "=>"Ninguna amistad con id: ",
+		"Friendship successfully deleted."=>"Amistad eliminada satisfactoriamente.",
+	/*Group Controller*/
+		"An group id is mandatory"=>"Es obligatorio el id de grupo",
+		"No such group with id: "=>"Ningun grupo con id: ",
+		"Group\"%s\" successfully added."=>"Grupo\"%s\" añadido satisfactoriamente.",
+		"Group already exists"=>"El grupo ya existe",
+		"An group id is mandatory"=>"Es obligatorio el id de grupo",
+		"Group \"%s\" successfully updated."=>"Grupo \"%s\" actualizado satisfactoriamente.",
+		"Group \"%s\" successfully deleted."=>"Grupo \"%s\" eliminado satisfactoriamente.",
+	/*Guest Controller*/
+		"Guest successfully added."=>"Invitado añadido satisfactoriamente.",
+		"Guest already exists."=>"El invitado ya existe.",
+		"Invitations successfully sent."=>"Invitaciones enviadas correctamente",
+		"No such guest with id: "=>"Ningun invitado con id: ",
+		"Guest successfully deleted."=>"Invitado eliminado satisfactoriamente",
+	/*Language Controller*/
+		"No lang parameter was provided"=>"No se ha proporcionado ningun parametro lang",
+	/*Message Controller*/
+		"A conversation is mandatory"=>"Es obligatoria una conversacion",
+		"No such messages with conversation id: "=>"No hay mensajes con id de conversacion: ",
+		"A message id is mandatory"=>"Es obligatorio el id de mensaje",
+		"No such message with id: "=>"Ningun mensaje con id: ",
+		"Message\"%s\" successfully sent."=>"Mensaje\"%s\" enviado correctamente.",
+		"Message \"%s\" successfully deleted."=>"Mensaje \"%s\" eliminado correctamente.",
+	/*Publication Controller*/
+		"Entity type is mandatory"=>"Entidad tipo obligatoria",
+		"No such publication with id: "=>"Ninguna publicacion con id: ",
+		"A publication id is mandatory"=>"Es obligatorio el id de publicacion",
+		"Publication\"%s\" successfully added."=>"Publicacion\"%s\" añadida satisfactoriamente.",
+		"Publication \"%s\" successfully deleted."=>"Publicacion \"%s\" eliminada satisfactoriamente.",
+	/*Publidoc Controller*/
+		"A publidoc id is mandatory"=>"Es obligatorio el id de publidoc",
+		"No such publidoc with id: "=>"Ningun publidoc con id: ",
+		"PubliDoc successfully added."=>"PubliDoc añadido correctamente.",
+		"PubliDoc already exists."=>"El PubliDoc ya existe.",
+		"PubliDoc successfully deleted."=>"PubliDoc eliminado correctamente.",
+	/*User Controller*/
+		"User is not valid"=>"Usuario no valido",
+		"An user id is mandatory"=>"Es obligatorio el id de usuario",
+		"No such user with id: "=>"Ningun usuario con id: ",
+		"Error while upload image"=>"Error al subir la imagen",
+		"User \"%s\" successfully added."=>"Usuario \"%s\" añadido satisfactoriamente.",
+		"email already exists"=>"El email ya existe",
+		"Username already exists"=>"Nombre de usuario ya existe",
+		"User \"%s\" successfully updated."=>"Usuario \"%s\" actualizado satisfactoriamente.",
+		"Email already exists or NULL"=>"El email ya existeo es NULL.",
+		"Username already exists or NULL"=>"El nombre de usuario ya existe o es NULL",
+		"User \"%s\" successfully deleted."=>"Usuario \"%s\" eliminado satisfactoriamente.",
+		"User \"%s\" successfully registered."=>"Usuario \"%s\" registrado correctamente.",
+	/*Usergroup Controller*/
+		"A usergroup id is mandatory"=>"Es obligatorio el id de usuariogrupo",
+		"No such usergroup with id: "=>"Ningun usuariogrupo con id: ",
+		"UserGroup successfully added."=>"UsuarioGrupo añadido correctamente.",
+		"UserGroup already exists."=>"El Usuariogrupo ya existe.",
+		"Invitations successfully sent."=>"Invitaciones enviadas correctamente",
+		"UserGroup successfully deleted."=>"Usuariogrupo eliminado correctamente",
+	/*Faltaba*/
+		"Add"=>"Añadir"
   )
 ?>
