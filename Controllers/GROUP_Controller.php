@@ -93,7 +93,10 @@ class GROUP_Controller extends BaseController
                     $group->checkIsValidForCreate();
                     $this->groupModel->add($group);
                     $this->view->setFlash(sprintf(i18n("Group\"%s\" successfully added."), $group->getName()));
-                    $this->view->redirect("group", "showall");
+                    if ($this->permissions->isAdmin($this->currentUser->getID())){
+                        $this->view->redirect("group", "showall");
+                    }
+                    $this->view->redirect("usergroup", "showall", "id=".$this->currentUser->getID());
                 } else {
                     $errors            = array();
                     $errors["general"] = i18n("Group already exists");
@@ -140,7 +143,10 @@ class GROUP_Controller extends BaseController
                 $group->checkIsValidForCreate();
                 $this->groupModel->edit($group);
                 $this->view->setFlash(sprintf(i18n("Group \"%s\" successfully updated."), $group->getName()));
-                $this->view->redirect("group", "showall");
+                if ($this->permissions->isAdmin($this->currentUser->getID())){
+                    $this->view->redirect("group", "showall");
+                }
+                $this->view->redirect("usergroup", "showall", "id=".$this->currentUser->getID());
                 
             }
             catch (ValidationException $ex) {
@@ -176,7 +182,10 @@ class GROUP_Controller extends BaseController
                 $this->groupModel->delete($group);
                 $this->view->setFlash(sprintf(i18n("Group \"%s\" successfully deleted."), $group->getName()));
             }
-            $this->view->redirect("usergroup", "showall", "id=" . $this->currentUser->getID());
+            if ($this->permissions->isAdmin($this->currentUser->getID())){
+                $this->view->redirect("group", "showall");
+            }
+            $this->view->redirect("usergroup", "showall", "id=".$this->currentUser->getID());
         }
         $this->view->setVariable("group", $group);
         $this->view->render("group", "GROUP_DELETE_Vista");

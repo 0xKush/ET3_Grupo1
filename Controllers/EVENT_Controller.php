@@ -95,7 +95,10 @@ class EVENT_Controller extends BaseController
                     $event->checkIsValidForCreate();
                     $this->eventModel->add($event);
                     $this->view->setFlash(sprintf(i18n("Event\"%s\" successfully added."), $event->getName()));
-                    $this->view->redirect("event", "showall");
+                    if ($this->permissions->isAdmin($this->currentUser->getID())){
+                        $this->view->redirect("event", "showall");
+                    }
+                    $this->view->redirect("guest", "showall", "id=".$this->currentUser->getID());
                 } else {
                     $errors            = array();
                     $errors["general"] = i18n("Event already exists");
@@ -148,7 +151,10 @@ class EVENT_Controller extends BaseController
                 $event->checkIsValidForCreate();
                 $this->eventModel->edit($event);
                 $this->view->setFlash(sprintf(i18n("Event\"%s\" successfully updated."), $event->getName()));
-                $this->view->redirect("event", "showall");
+                if ($this->permissions->isAdmin($this->currentUser->getID())){
+                    $this->view->redirect("event", "showall");
+                }
+                $this->view->redirect("guest", "showall", "id=".$this->currentUser->getID());
                 
             }
             catch (ValidationException $ex) {
@@ -188,7 +194,10 @@ class EVENT_Controller extends BaseController
                 $this->eventModel->delete($event);
                 $this->view->setFlash(sprintf(i18n("Event \"%s\" successfully deleted."), $event->getName()));
             }
-            $this->view->redirect("event", "showall");
+            if ($this->permissions->isAdmin($this->currentUser->getID())){
+                $this->view->redirect("event", "showall");
+            }
+            $this->view->redirect("guest", "showall", "id=".$this->currentUser->getID());
         }
         $this->view->setVariable("event", $event);
         $this->view->render("event", "EVENT_DELETE_Vista");
