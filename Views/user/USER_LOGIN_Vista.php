@@ -5,6 +5,10 @@ $view->setVariable("title", "Login");
 $errors = $view->getVariable("errors");
 ?>
 
+<?= isset($errors["general"])?$errors["general"]:"" ?>
+
+<?php $view->moveToDefaultFragment(); ?>
+        
 <div class="container">
 		<div style="margin-bottom: 10px; text-shadow: 3px 3px 3px #aaa;" class="row">
 			<div class="col-md-8 col-md-offset-2 text-center">
