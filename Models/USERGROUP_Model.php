@@ -92,7 +92,7 @@ class USERGROUP_Model
     public function usergroupExists($groupid, $member, $secondarymember)
     {
         if ($secondarymember) {
-            $sql = $this->db->prepare("SELECT count(id) FROM usergroup where groupid=? AND (member=? AND secondarymember=?) or (secondarymember=? AND member=?");
+            $sql = $this->db->prepare("SELECT count(id) FROM usergroup where groupid=? AND (member=? AND secondarymember=?) or (secondarymember=? AND member=?)");
             $sql->execute(array(
                 $groupid,
                 $member,

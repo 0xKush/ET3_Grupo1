@@ -43,7 +43,7 @@ class GROUP_Controller extends BaseController
 
         if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
             !$this->permissions->isOwner($this->currentUser->getID(), $groupid, "groupp") &&
-            !$this->permissions->isEventMember($this->currentUser->getID(), $groupid) &&
+            !$this->permissions->isGroupMember($this->currentUser->getID(), $groupid) &&
             !$this->permissions->isPublic($groupid, "groupp")
         ){
             $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
