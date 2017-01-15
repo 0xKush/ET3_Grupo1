@@ -113,7 +113,13 @@ class EVENT_Controller extends BaseController
     }
     
     public function edit()
-    {
+    {        
+        if (!isset($_REQUEST["id"])) {
+            throw new Exception(i18n("An event id is mandatory"));
+        }
+        
+        $eventid = $_REQUEST["id"];
+
         if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
             !$this->permissions->isOwner($this->currentUser->getID(), $eventid, "event")
         ){
@@ -121,11 +127,6 @@ class EVENT_Controller extends BaseController
             $this->view->redirect("user", "login");
         }
         
-        if (!isset($_REQUEST["id"])) {
-            throw new Exception(i18n("An event id is mandatory"));
-        }
-        
-        $eventid = $_REQUEST["id"];
         $event   = $this->eventModel->showcurrent($eventid);
         
         if ($event == NULL) {
