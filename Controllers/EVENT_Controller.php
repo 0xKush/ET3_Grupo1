@@ -22,7 +22,7 @@ class EVENT_Controller extends BaseController
     
     public function showall()
     {
-        if (!$this->permissions->isAdmin($this->currentUser->getID())){
+        if (!$this->permissions->isAdmin($this->currentUser->getID())) {
             $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
             $this->view->redirect("user", "login");
         }
@@ -39,17 +39,13 @@ class EVENT_Controller extends BaseController
         }
         
         $eventid = $_REQUEST["id"];
-
-        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
-            !$this->permissions->isOwner($this->currentUser->getID(), $eventid, "event") &&
-            !$this->permissions->isEventMember($this->currentUser->getID(), $eventid) &&
-            !$this->permissions->isPublic($eventid, "event")
-        ){
+        
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) && !$this->permissions->isOwner($this->currentUser->getID(), $eventid, "event") && !$this->permissions->isEventMember($this->currentUser->getID(), $eventid) && !$this->permissions->isPublic($eventid, "event")) {
             $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
             $this->view->redirect("user", "login");
         }
         
-        $event   = $this->eventModel->showcurrent($eventid);
+        $event = $this->eventModel->showcurrent($eventid);
         
         if ($event == NULL) {
             throw new Exception(i18n("No such event with id: ") . $eventid);
@@ -77,8 +73,7 @@ class EVENT_Controller extends BaseController
     
     public function add()
     {
-
-        if (!$this->currentUser->getID()){
+        if (!$this->currentUser->getID()) {
             $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
             $this->view->redirect("user", "login");
         }
@@ -86,11 +81,28 @@ class EVENT_Controller extends BaseController
         $event = new Event();
         
         if (isset($_POST["submit"])) {
-            $event->setName($_POST["name"]);
+            if (!empty($_POST["name"])) {
+                $event->setName($_POST["name"]);
+                if (!empty($_POST["startdate"])) {
+                    $event->setStartDate($_POST["startdate"]);
+                    if (!empty($_POST["enddate"])) {
+                        $event->setEndDate($_POST["enddate"]);
+                    } else {
+                        $this->view->setFlash(sprintf(i18n("End date is required.")));
+                        $this->view->redirect("event", "add");
+                    }
+                } else {
+                    $this->view->setFlash(sprintf(i18n("Start date is required.")));
+                    $this->view->redirect("event", "add");
+                }
+            } else {
+                $this->view->setFlash(sprintf(i18n("Event name is required.")));
+                $this->view->redirect("event", "add");
+            }
+            
+            
             $event->setOwner($this->currentUser->getID());
             $event->setPrivate($_POST["private"]);
-            $event->setStartDate($_POST["startdate"]);
-            $event->setEndDate($_POST["enddate"]);
             $event->setStartHour($_POST["starthour"]);
             $event->setEndHour($_POST["endhour"]);
             $event->setDescription($_POST["description"]);
@@ -101,10 +113,10 @@ class EVENT_Controller extends BaseController
                     $event->checkIsValidForCreate();
                     $this->eventModel->add($event);
                     $this->view->setFlash(sprintf(i18n("Event\"%s\" successfully added."), $event->getName()));
-                    if ($this->permissions->isAdmin($this->currentUser->getID())){
+                    if ($this->permissions->isAdmin($this->currentUser->getID())) {
                         $this->view->redirect("event", "showall");
                     }
-                    $this->view->redirect("guest", "showall", "id=".$this->currentUser->getID());
+                    $this->view->redirect("guest", "showall", "id=" . $this->currentUser->getID());
                 } else {
                     $errors            = array();
                     $errors["general"] = i18n("Event already exists");
@@ -122,32 +134,46 @@ class EVENT_Controller extends BaseController
     }
     
     public function edit()
-    {        
+    {
         if (!isset($_REQUEST["id"])) {
             throw new Exception(i18n("An event id is mandatory"));
         }
         
         $eventid = $_REQUEST["id"];
-
-        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
-            !$this->permissions->isOwner($this->currentUser->getID(), $eventid, "event")
-        ){
+        
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) && !$this->permissions->isOwner($this->currentUser->getID(), $eventid, "event")) {
             $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
             $this->view->redirect("user", "login");
         }
         
-        $event   = $this->eventModel->showcurrent($eventid);
+        $event = $this->eventModel->showcurrent($eventid);
         
         if ($event == NULL) {
             throw new Exception(i18n("No such event with id: ") . $eventid);
         }
         
         if (isset($_POST["submit"])) {
-            $event->setName($_POST["name"]);
+            if (!empty($_POST["name"])) {
+                $event->setName($_POST["name"]);
+                if (!empty($_POST["startdate"])) {
+                    $event->setStartDate($_POST["startdate"]);
+                    if (!empty($_POST["enddate"])) {
+                        $event->setEndDate($_POST["enddate"]);
+                    } else {
+                        $this->view->setFlash(sprintf(i18n("End date is required.")));
+                        $this->view->redirect("event", "edit", "id=" . $eventid);
+                    }
+                } else {
+                    $this->view->setFlash(sprintf(i18n("Start date is required.")));
+                    $this->view->redirect("event", "edit", "id=" . $eventid);
+                }
+            } else {
+                $this->view->setFlash(sprintf(i18n("Event name is required.")));
+                $this->view->redirect("event", "edit", "id=" . $eventid);
+            }
+            
             $event->setOwner($this->currentUser->getID());
             $event->setPrivate($_POST["private"]);
-            $event->setStartDate($_POST["startdate"]);
-            $event->setEndDate($_POST["enddate"]);
             $event->setStartHour($_POST["starthour"]);
             $event->setEndHour($_POST["endhour"]);
             $event->setDescription($_POST["description"]);
@@ -157,10 +183,10 @@ class EVENT_Controller extends BaseController
                 $event->checkIsValidForCreate();
                 $this->eventModel->edit($event);
                 $this->view->setFlash(sprintf(i18n("Event\"%s\" successfully updated."), $event->getName()));
-                if ($this->permissions->isAdmin($this->currentUser->getID())){
+                if ($this->permissions->isAdmin($this->currentUser->getID())) {
                     $this->view->redirect("event", "showall");
                 }
-                $this->view->redirect("guest", "showall", "id=".$this->currentUser->getID());
+                $this->view->redirect("guest", "showall", "id=" . $this->currentUser->getID());
                 
             }
             catch (ValidationException $ex) {
@@ -180,15 +206,13 @@ class EVENT_Controller extends BaseController
         }
         
         $eventid = $_REQUEST["id"];
-
-        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
-            !$this->permissions->isOwner($this->currentUser->getID(), $eventid, "event")
-        ){
+        
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) && !$this->permissions->isOwner($this->currentUser->getID(), $eventid, "event")) {
             $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
             $this->view->redirect("user", "login");
         }
         
-        $event   = $this->eventModel->showcurrent($eventid);
+        $event = $this->eventModel->showcurrent($eventid);
         
         if ($event == NULL) {
             throw new Exception(i18n("No such event with id: ") . $eventid);
@@ -200,10 +224,10 @@ class EVENT_Controller extends BaseController
                 $this->eventModel->delete($event);
                 $this->view->setFlash(sprintf(i18n("Event \"%s\" successfully deleted."), $event->getName()));
             }
-            if ($this->permissions->isAdmin($this->currentUser->getID())){
+            if ($this->permissions->isAdmin($this->currentUser->getID())) {
                 $this->view->redirect("event", "showall");
             }
-            $this->view->redirect("guest", "showall", "id=".$this->currentUser->getID());
+            $this->view->redirect("guest", "showall", "id=" . $this->currentUser->getID());
         }
         $this->view->setVariable("event", $event);
         $this->view->render("event", "EVENT_DELETE_Vista");
