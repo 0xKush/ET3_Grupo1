@@ -50,6 +50,11 @@ class GUEST_Controller extends BaseController
         foreach ($events as $guest) {
             $owners[$guest->getOwner()] = $this->userModel->showcurrent($guest->getOwner());
         }
+
+        $requests = $this->guestModel->requests($userid);
+
+        $this->view->setVariable("requests", $requests);
+
         $this->view->setVariable("owners", $owners);
         $this->view->render("guest", "GUEST_SHOWALL_Vista");
     }
@@ -139,6 +144,7 @@ class GUEST_Controller extends BaseController
                 $guest->setEvent($eventid);
                 $guest->setMember($this->currentUser->getID());
                 $guest->setSecondaryMember($invite);
+                $guest->setStatus(0);
             
                 try {
                     if (!$this->guestModel->guestExists($guest->getEvent(), $guest->getMember(), $guest->getSecondaryMember())) {
