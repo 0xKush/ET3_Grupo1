@@ -2,6 +2,7 @@
 
 define('MB', 1048576);
 require_once(__DIR__ . "/../core/ValidationException.php");
+require_once(__DIR__ . "/../core/ViewManager.php");
 
 
 class Upload
@@ -14,6 +15,7 @@ class Upload
     
     public function __construct($var = "file")
     {
+        $this->view = ViewManager::getInstance();
         $this->allowedExts      = array(
             "pdf",
             "doc",
@@ -46,17 +48,17 @@ class Upload
         $name     = $_FILES["$this->var"]["name"];
         $mime     = $_FILES["$this->var"]["type"];
         $tmp_name = $_FILES["$this->var"]["tmp_name"];
-        
+
         if (!$this->checkExt($name)) {
-            throw new ValidationException($errors, "Ext not valid");
+            $this->view->setFlash(sprintf(i18n("Ext not valid")));
         }
         
         if (!$this->checkMime($mime)) {
-            throw new ValidationException($errors, "Mime not valid");
+            $this->view->setFlash(sprintf(i18n("Mime not valid")));
         }
         
         if ($this->checkUploadSize($size)) {
-            throw new ValidationException($errors, "Provide a smaller file");
+            $this->view->setFlash(sprintf(i18n("Provide a smaller file")));
         }
         if ($this->moveUploadedFile($tmp_name, $name)) {
             return true;
@@ -65,8 +67,13 @@ class Upload
     }
     
     public function moveUploadedFile($tmp_name, $name)
-    {
+    {   
         $destination = $this->Destination($name);
+
+        if (!$destination){
+            return false;
+        }
+        
         $this->setDestination($destination, $name);
         
         if (!move_uploaded_file($tmp_name, $this->getDestination())) {
@@ -84,14 +91,22 @@ class Upload
             "pdf",
             "doc",
             "docx",
-            "odt"
+            "odt",
+            "PDF",
+            "DOC",
+            "DOCX",
+            "ODT"
         );
         $array_img = array(
             "PNG",
             "JPG",
+            "GIF",
+            "png",
             "jpg",
             "gif"
         );
+
+        $destination = "";
         
         if (in_array($extension, $array_doc)) {
             $destination = "media/documents/";
