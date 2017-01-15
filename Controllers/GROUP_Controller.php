@@ -23,7 +23,7 @@ class GROUP_Controller extends BaseController
     
     public function showall()
     {
-        if (!$this->permissions->isAdmin($this->currentUser->getID())){
+        if (!$this->permissions->isAdmin($this->currentUser->getID())) {
             $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
             $this->view->redirect("user", "login");
         }
@@ -40,17 +40,13 @@ class GROUP_Controller extends BaseController
         }
         
         $groupid = $_REQUEST["id"];
-
-        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
-            !$this->permissions->isOwner($this->currentUser->getID(), $groupid, "groupp") &&
-            !$this->permissions->isGroupMember($this->currentUser->getID(), $groupid) &&
-            !$this->permissions->isPublic($groupid, "groupp")
-        ){
+        
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) && !$this->permissions->isOwner($this->currentUser->getID(), $groupid, "groupp") && !$this->permissions->isGroupMember($this->currentUser->getID(), $groupid) && !$this->permissions->isPublic($groupid, "groupp")) {
             $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
             $this->view->redirect("user", "login");
         }
         
-        $group   = $this->groupModel->showcurrent($groupid);
+        $group = $this->groupModel->showcurrent($groupid);
         
         if ($group == NULL) {
             throw new Exception(i18n("No such group with id: ") . $groupid);
@@ -79,7 +75,7 @@ class GROUP_Controller extends BaseController
     
     public function add()
     {
-        if (!$this->currentUser->getID()){
+        if (!$this->currentUser->getID()) {
             $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
             $this->view->redirect("user", "login");
         }
@@ -87,7 +83,13 @@ class GROUP_Controller extends BaseController
         $group = new Group();
         
         if (isset($_POST["submit"])) {
-            $group->setName($_POST["name"]);
+            if (!empty($_POST["name"])) {
+                $group->setName($_POST["name"]);
+            } else {
+                $this->view->setFlash(sprintf(i18n("Group name is required.")));
+                $this->view->redirect("group", "add");
+            }
+            
             $group->setDescription($_POST["description"]);
             $group->setOwner($this->currentUser->getID());
             $group->setPrivate($_POST["private"]);
@@ -98,10 +100,10 @@ class GROUP_Controller extends BaseController
                     $group->checkIsValidForCreate();
                     $this->groupModel->add($group);
                     $this->view->setFlash(sprintf(i18n("Group\"%s\" successfully added."), $group->getName()));
-                    if ($this->permissions->isAdmin($this->currentUser->getID())){
+                    if ($this->permissions->isAdmin($this->currentUser->getID())) {
                         $this->view->redirect("group", "showall");
                     }
-                    $this->view->redirect("usergroup", "showall", "id=".$this->currentUser->getID());
+                    $this->view->redirect("usergroup", "showall", "id=" . $this->currentUser->getID());
                 } else {
                     $errors            = array();
                     $errors["general"] = i18n("Group already exists");
@@ -125,20 +127,24 @@ class GROUP_Controller extends BaseController
         }
         
         $groupid = $_REQUEST["id"];
-
-        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
-            !$this->permissions->isOwner($this->currentUser->getID(), $groupid, "groupp")
-        ){
+        
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) && !$this->permissions->isOwner($this->currentUser->getID(), $groupid, "groupp")) {
             $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
             $this->view->redirect("user", "login");
         }
         
-        $group   = $this->groupModel->showcurrent($groupid);
+        $group = $this->groupModel->showcurrent($groupid);
         if ($group == NULL) {
             throw new Exception(i18n("No such group with id: ") . $groupid);
         }
         if (isset($_POST["submit"])) {
-            $group->setName($_POST["name"]);
+            if (!empty($_POST["name"])) {
+                $group->setName($_POST["name"]);
+            } else {
+                $this->view->setFlash(sprintf(i18n("Group name is required.")));
+                $this->view->redirect("group", "add", "id=" . $groupid);
+            }
+            
             $group->setDescription($_POST["description"]);
             $group->setOwner($this->currentUser->getID());
             $group->setPrivate($_POST["private"]);
@@ -148,10 +154,10 @@ class GROUP_Controller extends BaseController
                 $group->checkIsValidForCreate();
                 $this->groupModel->edit($group);
                 $this->view->setFlash(sprintf(i18n("Group \"%s\" successfully updated."), $group->getName()));
-                if ($this->permissions->isAdmin($this->currentUser->getID())){
+                if ($this->permissions->isAdmin($this->currentUser->getID())) {
                     $this->view->redirect("group", "showall");
                 }
-                $this->view->redirect("usergroup", "showall", "id=".$this->currentUser->getID());
+                $this->view->redirect("usergroup", "showall", "id=" . $this->currentUser->getID());
                 
             }
             catch (ValidationException $ex) {
@@ -170,15 +176,13 @@ class GROUP_Controller extends BaseController
             throw new Exception(i18n("Id is mandatory"));
         }
         $groupid = $_REQUEST["id"];
-
-        if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
-            !$this->permissions->isOwner($this->currentUser->getID(), $groupid, "groupp")
-        ){
+        
+        if (!$this->permissions->isAdmin($this->currentUser->getID()) && !$this->permissions->isOwner($this->currentUser->getID(), $groupid, "groupp")) {
             $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
             $this->view->redirect("user", "login");
         }
         
-        $group   = $this->groupModel->showcurrent($groupid);
+        $group = $this->groupModel->showcurrent($groupid);
         if ($group == NULL) {
             throw new Exception(i18n("No such group with id: ") . $groupid);
         }
@@ -187,10 +191,10 @@ class GROUP_Controller extends BaseController
                 $this->groupModel->delete($group);
                 $this->view->setFlash(sprintf(i18n("Group \"%s\" successfully deleted."), $group->getName()));
             }
-            if ($this->permissions->isAdmin($this->currentUser->getID())){
+            if ($this->permissions->isAdmin($this->currentUser->getID())) {
                 $this->view->redirect("group", "showall");
             }
-            $this->view->redirect("usergroup", "showall", "id=".$this->currentUser->getID());
+            $this->view->redirect("usergroup", "showall", "id=" . $this->currentUser->getID());
         }
         $this->view->setVariable("group", $group);
         $this->view->render("group", "GROUP_DELETE_Vista");
@@ -245,9 +249,9 @@ class GROUP_Controller extends BaseController
             } else {
                 $groups = $this->groupModel->search($query);
             }
-
+            
             $usergroupModel = new USERGROUP_Model();
-            $usergroups = $usergroupModel->getGroups($this->currentUser->getID());
+            $usergroups     = $usergroupModel->getGroups($this->currentUser->getID());
             
             $this->view->setVariable("usergroups", $usergroups);
             
@@ -257,5 +261,5 @@ class GROUP_Controller extends BaseController
             $this->view->render("group", "GROUP_SEARCH_Vista");
         }
     }
-
+    
 }
