@@ -7,7 +7,7 @@ $errors = $view->getVariable("errors");
 $publication = $view->getVariable("publication");
 
 $comments = $view->getVariable("comments");
-$commentOwners = $view->getVariable("commentowners");
+$commentOwners = $view->getVariable("commentOwners");
 
 $owner = $view->getVariable("user");
 
@@ -21,7 +21,7 @@ $owner = $view->getVariable("user");
 				<div  class="panel-heading">
 					<font size="3" class="name">
 						<?= $owner->getName()." ".$owner->getSurname() ?>
-					</font >  <a href="index.php?controller=user&action=showcurrent&id=<?= $owner->getID() ?>"><font size="3" class="user">@<?=$owner->getUser()  ?></font></a>
+					</font >  <a href="index.php?controller=user&action=showcurrent&id=<?= $owner->getID() ?>"><font size="3" class="user">@<?= $owner->getUser()  ?></font></a>
 				</div>
 				<div class="panel-body">
 					<font size="4" class="user"><?= $publication->getDescription() ?></font>
@@ -69,7 +69,7 @@ $owner = $view->getVariable("user");
 			<div class="panel-headingl">
 				<?php $commentowner = $commentOwners[$comment->getOwner()]  ?>
 				<font size="4" class=""><?=  $commentowner->getName()." ". $commentowner->getSurname() ?></font>
-				<a href="index.php?controller=user&action=showcurrent&id=<?=$commentowner->getID() ?>"></a><font color="user">@<?=$commentowner->getUser ?></font></a>
+				<a href="index.php?controller=user&action=showcurrent&id=<?=$commentowner->getID() ?>"></a><font class="user">@<?=$commentowner->getUser() ?></font></a>
 			</div>
 				<div class="panel-body">
 					<font size="4" class="user"><?= $comment->getContent() ?></font>

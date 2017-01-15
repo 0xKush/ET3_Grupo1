@@ -53,7 +53,7 @@ $requests = $view->getVariable("requests");
 						<div class="panel-footer">
 							<div class="row"> 
 							
-								<div class="col-md-6">
+								<div class="col-md-9">
 					 				<a href="index.php?controller=guest&action=delete&id=<?= $request->getID()  ?>">
 					 					<button class="btn btn-danger btn-md"><?= i18n("Decline") ?></button>
 					 				</a>		 			
@@ -66,7 +66,7 @@ $requests = $view->getVariable("requests");
 					 				</form>						 			
 					 				</div>
 					 								 			
-								<div class="col-md-6">
+								<div class="col-md-3">
 									<a href="index.php?controller=event&action=showcurrent&id=<?=$request->getID() ?>">
 										<button class="btn btn-info btn-md pull-right">
 											<?= i18n("View") ?>
@@ -123,7 +123,7 @@ $requests = $view->getVariable("requests");
 							<div class="row"> 
 							
 							<?php if ($owner->getID() == $currentuserid): ?>
-								<div class="col-md-6">
+								<div class="col-md-9">
 					 				<a href="index.php?controller=event&action=delete&id=<?= $event->getID()  ?>">
 					 					<button class="btn btn-danger btn-md"><i class="fa fa-trash-o"></i> <?= i18n("Delete") ?></button>
 					 				</a>
@@ -135,13 +135,13 @@ $requests = $view->getVariable("requests");
 						</a>
 					 			</div>				 			
 					 		<?php else: ?>
-					 			<div class="col-md-6">
+					 			<div class="col-md-9">
 									<form action="index.php?controller=guest&action=delete" method="post">
 					 					<button type="submit" name="id" value="<?=$event->getID() ?>"	 class="btn btn-warning" btn-md><?= i18n("Unsubscribe") ?></button>
 					 				</form>						 			</div>
 					 								 			
 				 			<?php endif ?>
-								<div class="col-md-6">
+								<div class="col-md-3">
 									<a href="index.php?controller=event&action=showcurrent&id=<?=$event->getID() ?>">
 										<button class="btn btn-info btn-md pull-right">
 											<?= i18n("View") ?>
