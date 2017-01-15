@@ -109,7 +109,7 @@ class PUBLICATION_Controller extends BaseController
                 $this->publicationModel->delete($publication);
                 $this->view->setFlash(sprintf(i18n("Publication \"%s\" successfully deleted.")));
             }
-            $this->view->redirect("publication", "show");
+            $this->view->redirect("user", "login");
         }
         $this->view->setVariable("publication", $publication);
         $this->view->render("publication", "PUBLICATION_DELETE_Vista");
