@@ -28,9 +28,11 @@ if ($friendship->getMember() == $currentuserid) {
  					<div class="pull-right">
  						<form action="index.php?controller=friendship&action=delete" method="post">
  							<input hidden="hidden" type="text" name="id" value="<?=$friendid?>">
- 							<button class="btn btn-default" type="submit" value="no" name="submit">
- 								<?= i18n("No") ?>
- 							</button>
+ 							<a href="index.php?controller=user&action=login">
+						<button type="button" class="btn btn-default">
+							<?= i18n("No, go back") ?>
+						</button>
+					</a>    
  							<button class="btn btn-danger" value="yes" type="submit" name="submit">
  								<?= i18n("Yes") ?>
  							</button>

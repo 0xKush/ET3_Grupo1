@@ -23,9 +23,11 @@ $id = $_GET["id"];
 			<div class="panel-footer">
 				<form action="index.php?controller=user&action=delete" method="post">
 					<input type="text" name="id" value="<?= $user->getID() ?>" hidden>
-					<button class="btn btn-default" name="submit" type="submit" value="no">
-						<?= i18n("No, go back") ?>
-					</button>
+					<a href="index.php?controller=user&action=login">
+						<button type="button" class="btn btn-default">
+							<?= i18n("No, go back") ?>
+						</button>
+					</a>    
 					<button class="btn btn-danger pull-right" type="submit" name="submit" value="yes">
 						<?= i18n("Yes, delete it") ?>
 					</button>
