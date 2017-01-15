@@ -63,8 +63,11 @@ class GROUP_Controller extends BaseController
         
         $publications = $publicationModel->showall($groupid, "group");
         
+        $members = $this->groupModel->showmembers($groupid);
         
         $this->view->setVariable("group", $group);
+        
+        $this->view->setVariable("members", $members);
         
         $this->view->setVariable("ismember", $ismember);
         

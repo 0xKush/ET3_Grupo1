@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . "/../core/PDOConnection.php");
 require_once(__DIR__ . "/../Models/UserGroup.php");
+require_once(__DIR__ . "/../Models/User.php");
 
 
 class GROUP_Model
@@ -11,6 +12,33 @@ class GROUP_Model
     public function __construct()
     {
         $this->db = PDOConnection::getInstance();
+    }
+    
+    public function showmembers($groupid)
+    {
+        $members = array();
+        
+        $sql = $this->db->prepare("SELECT DISTINCT u.id as id, u.name as name, u.surname as surname,u.photo as photo FROM user as u, usergroup as ug where ug.groupid=? and u.id=ug.member or u.id=ug.secondarymember");
+        $sql->execute(array(
+            $groupid
+        ));
+        
+        $members_db = $sql->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        
+        foreach ($members_db as $member) {
+            $user = new User();
+            
+            $user->setID($member["id"]);
+            $user->setName($member["name"]);
+            $user->setSurname($member["surname"]);
+            $user->setPhoto($member["photo"]);
+            
+            array_push($members, $user);
+        }
+        
+        return $members;
     }
     
     public function showall()

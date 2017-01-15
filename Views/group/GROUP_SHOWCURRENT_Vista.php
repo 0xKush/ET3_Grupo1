@@ -187,7 +187,7 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 					</button>
 				</form>
 			<?php endif ?>
-				<a href="index.php?controller=user&action=showcurrent&id=<?=$friend->getID()  ?>">
+				<a href="index.php?controller=user&action=showcurrent&id=<?=$member->getID()  ?>">
 					<button class="btn btn-default pull-right">
 					<i class="fa fa-angle-double-right"></i>
 						<?= i18n("View") ?>	
