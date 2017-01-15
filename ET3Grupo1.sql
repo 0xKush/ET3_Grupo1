@@ -49,7 +49,13 @@ CREATE TABLE IF NOT EXISTS `comment` (
 
 INSERT INTO `comment` (`id`, `publication`, `owner`, `origincomment`, `creationdate`, `hour`, `content`, `status`) VALUES
 (1, 6, 3, NULL, '2016-12-26', '18:50:00', 'O máximo é de 2 personas por equipo.', 0),
-(2, 6, 5, 1, '2016-12-26', '18:55:00', 'Vale, moitas grazas.', 0);
+(2, 6, 5, 1, '2016-12-26', '18:55:00', 'Vale, moitas grazas.', 0),
+(4, 11, 6, NULL, '2016-12-23', '11:16:00', 'Que va, seguimos coma sempre jaja', 0),
+(5, 20, 11, NULL, '2016-11-11', '20:48:00', 'A mi me interesan, mandamelos al email, porfa.', 0),
+(6, 22, 9, NULL, '2017-01-14', '16:06:00', 'En el restaurante Pepito.', 0),
+(7, 23, 7, NULL, '2017-01-03', '12:23:00', 'El aforo es de 150 personas.', 0),
+(8, 24, 11, NULL, '2017-01-04', '16:52:00', 'El coste de la entrada será de 1 euro, destinandose lo recaudado a la asociacion X.', 0),
+(9, 25, 9, NULL, '2017-01-06', '09:28:00', 'El número máximo de plazas es 25.', 0);
 
 --
 -- RELACIONES PARA LA TABLA `comment`:
@@ -142,10 +148,10 @@ CREATE TABLE IF NOT EXISTS `event` (
 INSERT INTO `event` (`id`, `creationdate`, `owner`, `startdate`, `enddate`, `starthour`, `endhour`, `description`, `status`, `name`, `private`) VALUES
 (1, '2016-10-12', 2, '2016-12-31', '2017-01-01', '22:00:00', '07:00:00', 'Cena de fin de año 2016', 0, 'Fin de Año 2016', 1),
 (2, '2016-12-20', 3, '2017-02-02', '2017-02-02', '17:00:00', '21:00:00', 'Torneo Billar 2017.\r\n\r\nEl primer premio del torneo será una cena para dos personas en le restaurante Il Popolo el día 04/02/2017.', 0, 'Torneo de Billar', 0),
-(3, '2017-01-21', 12, '2017-01-26', '2017-01-27', '22:00:00', '05:00:00', 'El día 26 de Enero se realizará una fiesta organizada por los estudiantes de erasmus por el fin de los examenes.', 0, 'Cena Erasmus fin examens', 0),
+(3, '2017-01-14', 12, '2017-01-26', '2017-01-27', '22:00:00', '05:00:00', 'El día 26 de Enero se realizará una fiesta organizada por los estudiantes de erasmus por el fin de los examenes.', 0, 'Cena Erasmus fin examens', 0),
 (4, '2016-10-06', 3, '2017-01-30', '2017-01-30', '11:00:00', '12:30:00', 'Conferencia en el Salón de Actos a cargo de Chema Alonso.', 0, 'Conferencia Chema Alonso', 1),
 (5, '2016-09-13', 8, '2017-02-16', '2017-02-16', '19:00:00', '20:30:00', 'Concierto a cargo de la Banda de Música de la Uvigo en el auditorio de Ourense.', 0, 'Concierto Banda de Musica Uvigo.', 0),
-(6, '2016-11-08', 13, '2017-02-19', '2017-02-12', '18:30:00', '19:30:00', 'Curso de programación web a cargo del profesor Federico Tilves. La duración es de cuatro semanas. Se impartirá los lunes en el sotano 3 del edificio politecnico de Ourense.', 0, 'Curso de Programación Web.', 1);
+(6, '2016-11-08', 13, '2017-02-20', '2017-03-13', '18:30:00', '19:30:00', 'Curso de programación web a cargo del profesor Federico Tilves. La duración es de cuatro semanas. Se impartirá los lunes en el sotano 3 del edificio politecnico de Ourense.', 0, 'Curso de Programación Web.', 1);
 
 -- --------------------------------------------------------
 
@@ -374,7 +380,24 @@ INSERT INTO `publication` (`id`, `destination`, `type`, `owner`, `creationdate`,
 (4, 1, 'group', 4, '2016-12-26', '19:45:00', 'A darle duro con la ET3.', 0),
 (5, 1, 'event', 2, '2016-10-13', '17:00:00', 'Haberá que ir pensado sitio para a cea.', 0),
 (6, 2, 'event', 5, '2016-12-26', '18:46:20', 'Cal é o máximo de persoas por equipo?', 0),
-(7, 2, 'group', 5, '2017-01-09', '21:05:00', 'Partidazo contra o malaga. 3 puntiños máis.', 0);
+(7, 2, 'group', 5, '2017-01-09', '21:05:00', 'Partidazo contra o malaga. 3 puntiños máis.', 0),
+(9, 2, 'user', 3, '2017-01-06', '11:00:00', 'Que ben o pasamos onte. Hai que repetir.', 0),
+(10, 2, 'user', 2, '2017-01-08', '16:30:00', 'Empezan os exames. Que a sorte vos acompañe.', 0),
+(11, 3, 'user', 3, '2016-12-22', '18:30:00', 'Tocouvos a lotería? Aquí seguimos sin ser ricos.', 0),
+(12, 3, 'user', 3, '2017-01-01', '10:00:00', 'Feliz ano a todos!', 0),
+(13, 4, 'user', 4, '2017-01-09', '08:50:00', 'Volta a rutina.', 0),
+(14, 1, 'group', 6, '2017-01-09', '11:00:00', 'Ultima semana, veña que non queda nada.', 0),
+(15, 3, 'group', 8, '2016-11-17', '15:00:00', 'Se vos acercades ata Ourense non podedes deixar de visitar as Termas', 0),
+(16, 3, 'group', 10, '2016-12-13', '16:00:00', 'Que ben se come no Restaurante Nova. Un dez.', 0),
+(17, 4, 'group', 13, '2016-12-09', '14:30:00', 'Buscase camareiro para reforzar o servizo de Nadal. Interesados contactar con Alberto no numero 684597125.', 0),
+(18, 4, 'group', 9, '2016-12-27', '18:00:00', 'Si buscas un cuidador para tu perro llama al 694587125 y pregunta por Manuel.', 0),
+(19, 5, 'group', 12, '2016-11-17', '14:00:00', 'Se necesitades calqueira información acercadevos ao edificio miralles na porta 3. Agardamoste!', 0),
+(20, 6, 'group', 7, '2016-11-09', '18:00:00', 'Tengo unos apuntes bastante completos de LC, si alguien los necesita que me avise.', 0),
+(21, 6, 'group', 5, '2016-12-13', '15:00:00', 'Ayuda! Se buscan apuntes del tema de transacciones de BDII, si alguien tiene algo se lo agradeceria mil.', 0),
+(22, 3, 'event', 5, '2017-01-14', '12:00:00', 'Donde se celebrará?', 0),
+(23, 4, 'event', 6, '2017-01-02', '16:45:00', 'Cual es el aforo máximo del salón de actos?', 0),
+(24, 5, 'event', 8, '2017-01-03', '19:35:00', 'El concierto es gratuito o habrá que pagar?', 0),
+(25, 6, 'event', 13, '2017-01-05', '17:28:00', 'Cual es el numero de plazas del curso?', 0);
 
 --
 -- RELACIONES PARA LA TABLA `publication`:
@@ -424,7 +447,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `name` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `surname` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `phone` int(9) NOT NULL,
+  `phone` varchar(12) NOT NULL,
   `user` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `birthday` date NOT NULL,
@@ -601,7 +624,7 @@ ALTER TABLE `usergroup`
 -- AUTO_INCREMENT de la tabla `comment`
 --
 ALTER TABLE `comment`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `conversation`
 --
@@ -641,7 +664,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT de la tabla `publication`
 --
 ALTER TABLE `publication`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT de la tabla `publidoc`
 --

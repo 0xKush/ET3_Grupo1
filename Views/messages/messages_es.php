@@ -224,7 +224,7 @@
 		"email already exists"=>"El email ya existe",
 		"Username already exists"=>"Nombre de usuario ya existe",
 		"User \"%s\" successfully updated."=>"Usuario \"%s\" actualizado satisfactoriamente.",
-		"Email already exists or NULL"=>"El email ya existeo es NULL.",
+		"Email already exists or NULL"=>"El email ya existe o es NULL.",
 		"Username already exists or NULL"=>"El nombre de usuario ya existe o es NULL",
 		"User \"%s\" successfully deleted."=>"Usuario \"%s\" eliminado satisfactoriamente.",
 		"User \"%s\" successfully registered."=>"Usuario \"%s\" registrado correctamente.",
