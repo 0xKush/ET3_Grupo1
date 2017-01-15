@@ -10,6 +10,7 @@ $currentuser = $view->getVariable("currentusername");
 $userid = $view->getVariable("currentuserid");
 $umapper = new USER_Model();
 $photo = $umapper->showcurrent($userid)->getPhoto();
+$isAdmin = $umapper->showcurrent($userid)->getType();
 
 
 ?><!DOCTYPE html>
@@ -102,7 +103,7 @@ $photo = $umapper->showcurrent($userid)->getPhoto();
               <li><a href="index.php?controller=guest&action=showall&id=<?= $userid ?>"><i class="fa fa-calendar fa-fw"></i>  <?= i18n("Events") ?></a></li>
               <li><a href="index.php?controller=conversation&action=showall&id=<?= $userid ?>"><i class="fa fa-envelope fa-fw"></i>  <?= i18n("Conversation") ?>  </a></li>
               
-              <?php if (true): ?>
+              <?php if ($isAdmin): ?>
                   <li role="separator" class="divider"></li>
                     <li>
                     <a href="index.php?controller=user&action=admin"><i class="fa fa-cog fa-fw"></i>  <?= i18n("Admin Zone") ?></a>
