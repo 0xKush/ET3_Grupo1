@@ -187,6 +187,7 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 					</button>
 
 				</form> -->
+				<!-- <a href="index.php?controller=usergroup&action=delete&id=<?=$group->getID()?>&kick=<?=$member->getID()  ?>"> <?=i18n("Kick") ?></a> -->
 			<?php endif ?>
 				<a href="index.php?controller=user&action=showcurrent&id=<?=$member->getID()  ?>">
 					<button class="btn btn-default pull-right">
