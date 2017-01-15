@@ -52,6 +52,7 @@ class USERGROUP_Controller extends BaseController
             $owners[$group->getOwner()] = $this->userModel->showcurrent($group->getOwner());
         }
 
+        $requests = $this->usergroupModel->requests($userid);
 
         $this->view->setVariable("requests", $requests);
 
