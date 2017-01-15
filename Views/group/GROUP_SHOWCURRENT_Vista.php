@@ -104,8 +104,8 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 							</button>
 						</form>
 					<?php elseif($group->getPrivate()): ?>
-						<form action="index.php?controller=usergroup&action=join" method="post">
-							<input type="text" name="id" value="<?=$group->getID() ?>" hidden>
+						<form action="index.php?controller=usergroup&action=request" method="post">
+							<input type="text" name="groupid" value="<?=$group->getID() ?>" hidden>
 							<input type="text" name="member" value="<?=$currentuserid ?>" hidden>
 							<button class="btn btn-warning" name="submit" value="yes">
 								<i class="fa fa-"></i>

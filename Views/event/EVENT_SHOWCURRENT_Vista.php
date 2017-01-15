@@ -102,6 +102,15 @@ require_once(__DIR__."/../../Models/USER_Model.php");
 								<?= i18n("Unsubscribe") ?>
 							</button>
 						</form>
+                    <?php elseif($event->getPrivate()): ?>
+						<form action="index.php?controller=guest&action=request" method="post">
+							<input type="text" name="event" value="<?=$event->getID() ?>" hidden>
+							<input type="text" name="member" value="<?=$currentuserid ?>" hidden>
+							<button class="btn btn-warning" name="submit" value="yes">
+								<i class="fa fa-"></i>
+								<?=i18n("Request entrance")  ?>
+							</button>
+						</form>
 					<?php else: ?>
 						<form action="index.php?controller=guest&action=join" method="post">
 							<input type="text" name="event" value="<?=$event->getID() ?>" hidden>

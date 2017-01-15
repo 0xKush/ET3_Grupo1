@@ -24,7 +24,10 @@ class JSON_Controller
 	    $autor = $user->showcurrent($publication->getOwner());
 	    array_push($result, array(
 		"id" => $publication->getID(),
-		"autor" => $autor->getUser(),
+		"author" => $autor->getUser(),
+        "profile_picture" => $autor->getPhoto(),
+        "date" => $publication->getCreationDate(),
+        "hour" => $publication->getHour(),
 		"publication" => $publication->getDescription()
 	    ));
 	}
