@@ -43,13 +43,18 @@ $owners = $view->getVariable("owners");
 				<div class="row">
 					
 				
-					<div class="col-xs-4 pull-left">
-						
+					<div class=" pull-left">
+						<?php if ($publication->getOwner() == $currentuserid): ?>
+							<a href="index.php?controller=publication&action=delete&id=<?=$publication->getID() ?>">
+							<button class="btn btn-danger">
+								<?= i18n("Delete") ?>
+								<i class="fa fa-trash-o"></i>
+							</button>
+							</a>
+						<?php endif ?>
 					</div>
-					<div class="col-xs-4">
-						
-					</div>
-					<div class="col-xs-4 pull-right">
+					
+					<div class=" pull-right">
 						<a href="index.php?controller=publication&action=showcurrent&id=<?=$publication->getID() ?>">
 							<button class="btn btn-primary">
 								<?= i18n("View") ?>
