@@ -87,6 +87,10 @@ class EVENT_Controller extends BaseController
                     $event->setStartDate($_POST["startdate"]);
                     if (!empty($_POST["enddate"])) {
                         $event->setEndDate($_POST["enddate"]);
+                        if ($event->getEndDate() < $event->getStartDate()){
+                            $this->view->setFlash(sprintf(i18n("Start Date can't be greater than End Date.")));
+                            $this->view->redirect("event", "add");
+                        }
                     } else {
                         $this->view->setFlash(sprintf(i18n("End date is required.")));
                         $this->view->redirect("event", "add");
