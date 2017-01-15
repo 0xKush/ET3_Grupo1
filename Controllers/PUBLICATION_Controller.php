@@ -21,7 +21,7 @@ class PUBLICATION_Controller extends BaseController
     {
         parent::__construct();
         $this->publicationModel = new PUBLICATION_Model();
-        $this->userModel = new USER_Model();
+        $this->userModel        = new USER_Model();
         $this->view->setLayout("base");
     }
     
@@ -39,7 +39,7 @@ class PUBLICATION_Controller extends BaseController
         /*  $type     = $_REQUEST["type"];*/
         
         $publications = $this->publicationModel->showall($entityid, "user");
-
+        
         $owners = array();
         foreach ($publications as $publication) {
             $owners[$publication->getOwner()] = $this->userModel->showcurrent($publication->getOwner());
@@ -64,10 +64,11 @@ class PUBLICATION_Controller extends BaseController
         }
         
         $user = $this->userModel->showcurrent($publication->getOwner());
-
+        
+        $comment_Model = new COMMENT_Model();
         //AQUI O showpublicomments
-        $comments = NULL;
-
+        $comments = $comment_Model->showall($publicationid);
+        
         $this->view->setVariable("user", $user);
         $this->view->setVariable("comments", $comments);
         $this->view->setVariable("publication", $publication);

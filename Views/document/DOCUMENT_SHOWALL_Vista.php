@@ -5,7 +5,7 @@ $user = $view->getVariable("user");
 $documents = $view->getVariable("documents");
 $errors = $view->getVariable("errors");
 $currentuserid = $view->getVariable("currentuserid");
-$isAdmin = $view->getVariable("isadmin");
+$isAdmin = $view->getVariable("isAdmin");
 ?>
 <?= isset($errors["general"])?$errors["general"]:"" ?>
 <?php $view->moveToDefaultFragment(); ?>

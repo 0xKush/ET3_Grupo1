@@ -12,10 +12,13 @@ class COMMENT_Model
     }
     
     
-    public function showall()
+    public function showall($publication)
     {
-        $sql = $this->db->prepare("SELECT * FROM comment ORDER BY creationdate,hour");
-        $sql->execute();
+        $sql = $this->db->prepare("SELECT * FROM comment WHERE publication = ? ORDER BY creationdate,hour");
+        $sql->execute(array(
+            $publication
+        ));
+        
         $comments_db = $sql->fetchAll(PDO::FETCH_ASSOC);
         
         $comments = array();
