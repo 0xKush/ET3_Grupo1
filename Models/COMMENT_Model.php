@@ -48,9 +48,8 @@ class COMMENT_Model
     
     public function add(Comment $comment)
     {
-        $sql = $this->db->prepare("INSERT INTO comment(id,publication,owner,origincomment,creationdate,hour,content,status) values (?,?,?,?,?,?,?,?)");
+        $sql = $this->db->prepare("INSERT INTO comment(publication,owner,origincomment,creationdate,hour,content,status) values (?,?,?,?,?,?,?)");
         $sql->execute(array(
-            $comment->getID(),
             $comment->getPublication(),
             $comment->getOwner(),
             $comment->getOriginComment(),
