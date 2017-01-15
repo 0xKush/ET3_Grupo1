@@ -42,7 +42,7 @@ $owner = $view->getVariable("user");
 						
 					
 					<div class=" pull-right" style="margin-right: 15px">
-					<a href="index.php?controller=comment&action=add&id=<?=$publication->getDestination() ?>">
+					<a href="index.php?controller=comment&action=add&id=<?=$publication->getID() ?>">
 							<button class="btn btn-success">
 								<?= i18n("Comment") ?>
 								<i class="fa fa-comment"></i>
@@ -60,18 +60,21 @@ $owner = $view->getVariable("user");
 			</div>
 
 	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			
+	
 		<?php foreach ($comments as $comment): ?>
 			<div class="panel">
 				<div class="panel-body">
-					<font size="4" class="user"><?= $publication->getDescription() ?></font>
+					<font size="4" class="user"><?= $comment->getContent() ?></font>
 				</div>
 				<div class="panel-footer">
 				<div class="row">
 					
 				
 					<div class=" pull-left" style="margin-left: 15px"> 
-						<?php if ($publication->getOwner() == $currentuserid): ?>
-							<a href="index.php?controller=publication&action=delete&id=<?=$publication->getID() ?>">
+						<?php if ($comment->getOwner() == $currentuserid): ?>
+							<a href="index.php?controller=comment&action=delete&id=<?=$comment->getID() ?>">
 							<button class="btn btn-danger">
 								<?= i18n("Delete") ?>
 								<i class="fa fa-trash-o"></i>
@@ -80,20 +83,14 @@ $owner = $view->getVariable("user");
 						<?php endif ?>
 					</div>
 					
-					<div class=" pull-right" style="margin-right: 15px">
-						<a href="index.php?controller=<?=$publication->getType() ?>&action=showcurrent&id=<?=$publication->getDestination() ?>">
-							<button class="btn btn-primary">
-								<?= i18n("View in site posted") ?>
-								<i class="fa fa-eye"></i>
-							</button>
-						</a>
-					</div>
+					
 					</div>
 				</div>
 			</div>
 
 		<?php endforeach ?>
 	</div>
+		</div>
 
 </div>
 

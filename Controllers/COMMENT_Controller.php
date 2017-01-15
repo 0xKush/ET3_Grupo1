@@ -129,7 +129,7 @@ class COMMENT_Controller extends BaseController
                 $this->commentModel->delete($comment);
                 $this->view->setFlash(sprintf(i18n("Comment \"%s\" successfully deleted.")));
             }
-            $this->view->redirect("comment", "show");
+            $this->view->redirect("publication", "showall", "id=".$this->currentUser->getID());
         }
         $this->view->setVariable("comment", $comment);
         $this->view->render("comment", "COMMENT_DELETE_Vista");
