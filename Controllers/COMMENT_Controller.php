@@ -46,18 +46,17 @@ class COMMENT_Controller extends BaseController
         
         if (isset($_POST["submit"])) {
             $comment->setPublication($_POST["publication"]);
-            $comment->setOwner($_POST["owner"]);
-            $comment->setOriginComment($_POST["origincomment"]);
-            $comment->setCreationDate($_POST["creationdate"]);
-            $comment->setHour($_POST["hour"]);
             $comment->setContent($_POST["content"]);
-            $comment->setStatus($_POST["status"]);
+            $comment->setOwner($this->currentUser->getID());
+            $comment->setCreationDate(date("Y-m-d"));
+            $comment->setHour(date('H:i:s'));
+            $comment->setStatus(1);
             
             try {
                 $comment->checkIsValidForCreate();
                 $this->commentModel->add($comment);
                 $this->view->setFlash(sprintf(i18n("Comment\"%s\" successfully added.")));
-                $this->view->redirect("comment", "show");
+                $this->view->redirect("comment", "showall");
                 
             }
             catch (ValidationException $ex) {
