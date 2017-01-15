@@ -136,7 +136,7 @@ class USER_Model {
             return false;
         }
 
-        $sql = $this->db->prepare("SELECT count(user) FROM user where user=? and password=?");
+        $sql = $this->db->prepare("SELECT count(user) FROM user where user=? and password=? and status=1");
         $sql->execute(array($user, $password));
 
         if ($sql->fetchColumn() > 0) {
