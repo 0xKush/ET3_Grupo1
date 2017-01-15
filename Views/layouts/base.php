@@ -12,7 +12,7 @@ $umapper = new USER_Model();
 $photo = $umapper->showcurrent($userid)->getPhoto();
 $isAdmin = $umapper->showcurrent($userid)->getType();
 
-
+$errors = $view->getVariable("errors");
 ?><!DOCTYPE html>
 <html>
     <head>

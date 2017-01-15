@@ -34,10 +34,10 @@ $errors = $view->getVariable("errors");
 							<div class="col-lg-12">
 								<form id="login-form" action="index.php?controller=user&action=login" method="post" role="form" style="display: block;">
 									<div class="form-group">
-										<input type="text" name="user" id="user" tabindex="1" required class="form-control" placeholder="<?= i18n("Username") ?>" value="">
+										<input data-parsley-validate type="text" name="user" id="user" tabindex="1" required class="form-control" placeholder="<?= i18n("Username") ?>" value="">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" required class="form-control" placeholder="<?= i18n("Password") ?>">
+										<input data-parsley-validate type="password" name="password" id="password" tabindex="2" required class="form-control" placeholder="<?= i18n("Password") ?>">
 									</div>
 									<div class="form-group">
 										<div class="row">

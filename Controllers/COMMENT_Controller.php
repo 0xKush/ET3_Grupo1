@@ -43,6 +43,7 @@ class COMMENT_Controller extends BaseController
     public function add()
     {
         $comment = new Comment();
+        $publicationid = $_REQUEST["id"];
         
         if (isset($_POST["submit"])) {
             $comment->setPublication($_POST["publication"]);
@@ -56,7 +57,7 @@ class COMMENT_Controller extends BaseController
                 $comment->checkIsValidForCreate();
                 $this->commentModel->add($comment);
                 $this->view->setFlash(sprintf(i18n("Comment\"%s\" successfully added.")));
-                $this->view->redirect("comment", "showall");
+                $this->view->redirect("publication", "showcurrent", "id=".$_POST["publication"]);
                 
             }
             catch (ValidationException $ex) {
@@ -65,6 +66,7 @@ class COMMENT_Controller extends BaseController
             }
             
         }
+        $this->view->setVariable("publicationid", $publicationid);
         $this->view->setVariable("comment", $comment);
         $this->view->render("comment", "COMMENT_ADD_Vista");
     }

@@ -8,6 +8,8 @@ $publicationid = $view->getVariable("publicationid");
 
 ?>
 
+<?php print_r($publicationid) ?>
+
 <div class="panel">
 	<div class="panel-heading">
 		<h1><?= i18n("New Comment") ?></h1>
