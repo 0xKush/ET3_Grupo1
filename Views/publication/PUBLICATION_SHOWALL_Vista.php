@@ -19,6 +19,9 @@ $owners = $view->getVariable("owners");
 <?php $view->moveToDefaultFragment(); ?>
 
 <div class="container-fluid">
+	<div class="col-md-10 col-md-offset-1">
+		
+	
 	<div class="row" style="margin-bottom: 10px"> 
 			<div class="pull-right">
 				<form action="index.php?controller=publication&action=add" method="post">
@@ -37,13 +40,13 @@ $owners = $view->getVariable("owners");
 					
 				</div>
 				<div class="panel-body">
-					<?= $publication->getDescription() ?>
+					<font class="user"><?= $publication->getDescription() ?></font>
 				</div>
 				<div class="panel-footer">
 				<div class="row">
 					
 				
-					<div class=" pull-left">
+					<div class=" pull-left" style="margin-left: 15px"> 
 						<?php if ($publication->getOwner() == $currentuserid): ?>
 							<a href="index.php?controller=publication&action=delete&id=<?=$publication->getID() ?>">
 							<button class="btn btn-danger">
@@ -54,7 +57,7 @@ $owners = $view->getVariable("owners");
 						<?php endif ?>
 					</div>
 					
-					<div class=" pull-right">
+					<div class=" pull-right" style="margin-right: 15px">
 						<a href="index.php?controller=publication&action=showcurrent&id=<?=$publication->getID() ?>">
 							<button class="btn btn-primary">
 								<?= i18n("View") ?>
@@ -66,6 +69,7 @@ $owners = $view->getVariable("owners");
 				</div>
 			</div>
 		<?php endforeach ?>
+	</div>
 	</div>
 </div>
 

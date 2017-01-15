@@ -5,19 +5,14 @@ $view = ViewManager::getInstance();
 $currentuserid = $view->getVariable("currentuserid");
 $errors = $view->getVariable("errors");
 $publication = $view->getVariable("publication");
-$document = $view->getVariable("document");
 
-$umapper = new USER_Model();
+$owner = $view->getVariable("user");
+
 ?>
 
 <?= isset($errors["general"])?$errors["general"]:"" ?> 
 <?php $view->moveToDefaultFragment(); ?>
 
-<?php print_r($errors) ?>
-
-
- 	<!-- se user = currentuser mostrar edit perfil -->
-	
 
  	<div class="col-md-8 col-md-offset-2">
  		
@@ -28,7 +23,7 @@ $umapper = new USER_Model();
 	 					<?= $publication->getDescription() ?>
 	 				</div>
 	 				<div class="container-fluid">
-	 					<?= i18n("Author") ?>: <a href="index.php?controller=user&action=showcurrent&id=<?=$publication->getOwner() ?>"><?php $owner = $umapper->showcurrent($publication->getOwner()); echo $owner->getUser();  ?></a>
+	 					<?= i18n("Author") ?>: <a href="index.php?controller=user&action=showcurrent&id=<?=$publication->getOwner() ?>"><?php  echo $owner->getUser();  ?></a>
 	 				</div>
 	 				<div class="container-fluid">
 	 					<?= $publication->getCreationDate();?>

@@ -3,6 +3,9 @@ require_once(__DIR__ . "/../core/ViewManager.php");
 require_once(__DIR__ . "/../core/I18n.php");
 require_once(__DIR__ . "/../Models/Publication.php");
 require_once(__DIR__ . "/../Models/PUBLICATION_Model.php");
+require_once(__DIR__ . "/../Models/User.php");
+require_once(__DIR__ . "/../Models/USER_Model.php");
+
 require_once(__DIR__ . "/../Models/Document.php");
 require_once(__DIR__ . "/../Models/DOCUMENT_Model.php");
 require_once(__DIR__ . "/../Controllers/BaseController.php");
@@ -10,11 +13,13 @@ require_once(__DIR__ . "/../Controllers/BaseController.php");
 class PUBLICATION_Controller extends BaseController
 {
     private $publicationModel;
+    private $userModel;
     
     public function __construct()
     {
         parent::__construct();
         $this->publicationModel = new PUBLICATION_Model();
+        $this->userModel = new USER_Model();
         $this->view->setLayout("base");
     }
     
@@ -50,6 +55,9 @@ class PUBLICATION_Controller extends BaseController
             throw new Exception(i18n("No such publication with id: ") . $publicationid);
         }
         
+        $user = $this->userModel->showcurrent($publication->getOwner());
+
+        $this->view->setVariable("user", $user);
         $this->view->setVariable("publication", $publication);
         $this->view->render("publication", "PUBLICATION_SHOWCURRENT_Vista");
     }
