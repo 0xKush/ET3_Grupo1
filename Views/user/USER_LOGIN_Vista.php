@@ -34,10 +34,10 @@ $errors = $view->getVariable("errors");
 							<div class="col-lg-12">
 								<form id="login-form" action="index.php?controller=user&action=login" method="post" role="form" style="display: block;">
 									<div class="form-group">
-										<input data-parsley-validate type="text" name="user" id="user" tabindex="1" required class="form-control" placeholder="<?= i18n("Username") ?>" value="">
+										<input data-parsley-validate required type="text" name="user" id="user" tabindex="1" required class="form-control" placeholder="<?= i18n("Username") ?>" value="">
 									</div>
 									<div class="form-group">
-										<input data-parsley-validate type="password" name="password" id="password" tabindex="2" required class="form-control" placeholder="<?= i18n("Password") ?>">
+										<input data-parsley-validate required pattern=".{4,14}" type="password" name="password" id="password" tabindex="2" required class="form-control" placeholder="<?= i18n("Password") ?>">
 									</div>
 									<div class="form-group">
 										<div class="row">
@@ -57,10 +57,10 @@ $errors = $view->getVariable("errors");
 									</div>
 									<div id="errmail" class="text-danger"></div>
 									<div class="form-group">
-										<input required type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="<?= i18n("Password") ?>">
+										<input required pattern=".{4,14}" type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="<?= i18n("Password") ?>">
 									</div>
 									<div class="form-group">
-										<input data-parsley-errors-container="#errpass" required type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="<?= i18n("Confirm Password") ?>">
+										<input data-parsley-errors-container="#errpass" required pattern=".{4,14}" type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="<?= i18n("Confirm Password") ?>">
 									</div>
 									<div class="text-danger" id="errpass"></div>
 									<div class="form-group">

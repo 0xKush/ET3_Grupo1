@@ -32,11 +32,11 @@ $errors = $view->getVariable("errors");
 
 			<div class="form-group">
 			    <label for="password"><?= i18n("Password")?></label>
-			    <input type="password" class="form-control" id="password" name="password">
+			    <input type="password" class="form-control" id="password" name="password" pattern=".{4,14}">
 			</div>
 			<div class="form-group">
 			    <label for="phone"><?= i18n("Phone")?></label>
-			    <input type="number" class="form-control" id="phone" name="phone" value="<?= $user->getPhone()?>">
+			    <input minlength="9" maxlength="12" pattern="([0-9\+]{9,12})" type="text" class="form-control" id="phone" name="phone" value="<?= $user->getPhone()?>">
 			</div>
 			<div class="form-group">
 			    <label for="address"><?= i18n("Adress")?></label>
