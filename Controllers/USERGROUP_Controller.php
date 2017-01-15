@@ -51,6 +51,10 @@ class USERGROUP_Controller extends BaseController
         foreach ($groups as $group) {
             $owners[$group->getOwner()] = $this->userModel->showcurrent($group->getOwner());
         }
+
+
+        $this->view->setVariable("requests", $requests);
+
         $this->view->setVariable("owners", $owners);
         $this->view->render("usergroup", "USERGROUP_SHOWALL_Vista");
     }
