@@ -52,6 +52,11 @@ class USER_Controller extends BaseController
     
     public function showall()
     {
+        if (!$this->permissions->isAdmin($this->currentUser->getID())){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $users = $this->userModel->showall();
         $this->view->setVariable("users", $users);
         $this->view->render("user", "USER_SHOWALL_ADMIN_Vista");
@@ -59,11 +64,23 @@ class USER_Controller extends BaseController
     
     public function showcurrent()
     {
+        
         if (!isset($_REQUEST["id"])) {
             throw new Exception(i18n("An user id is mandatory"));
         }
         
         $userid = $_REQUEST["id"];
+
+        if ($this->currentUser->getID() != $userid){
+            if (!$this->permissions->isAdmin($this->currentUser->getID()) &&
+                !$this->permissions->isFriend($this->currentUser->getID(), $userid) &&
+                !$this->permissions->isPublic($userid, "user")
+            ){
+                $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+                $this->view->redirect("user", "login");
+            }
+        }
+        
         $user   = $this->userModel->showcurrent($userid);
         
         if ($user == NULL) {
@@ -94,6 +111,11 @@ class USER_Controller extends BaseController
     
     public function add()
     {
+        if (!$this->permissions->isAdmin($this->currentUser->getID())){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $user   = new User();
         $upload = new Upload();
         $upload->setAllowedExt(array("PNG","JPG","png","jpg"));
@@ -167,6 +189,13 @@ class USER_Controller extends BaseController
         }
         
         $userid = $_REQUEST["id"];
+
+        if ($this->currentUser->getID() != $userid){
+            if (!$this->permissions->isAdmin($this->currentUser->getID())){
+                $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+                $this->view->redirect("user", "login");
+            }
+        }
         
         $user = $this->userModel->showcurrent($userid);
         
@@ -273,6 +302,13 @@ class USER_Controller extends BaseController
         
         $userid = $_REQUEST["id"];
         $user   = $this->userModel->showcurrent($userid);
+
+        if ($this->currentUser->getID() != $userid){
+            if (!$this->permissions->isAdmin($this->currentUser->getID())){
+                $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+                $this->view->redirect("user", "login");
+            }
+        }
         
         if ($user == NULL) {
             throw new Exception(i18n("No such user with id: ") . $userid);
@@ -334,6 +370,11 @@ class USER_Controller extends BaseController
     
     public function admin()
     {
+        if (!$this->permissions->isAdmin($this->currentUser->getID())){
+            $this->view->setFlash(sprintf(i18n("You have no permissions here.")));
+            $this->view->redirect("user", "login");
+        }
+        
         $this->view->render("user", "USER_ADMIN_Vista");
     }
     
