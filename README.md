@@ -1,15 +1,25 @@
-# ET3_Grupo1
-Rede Social Corporativa
+# caralibro
+Just a **Social Network** for a Computer Science Subject. 
+The main goal was learning how to build a web application from scratch and work as a team.
 
-#Prerequisitos
-Ter a Máquina Virtual utilizada para o desenvolvemento, ofrecida polo profesor da asinatura
+**Note: MVC Inspire by https://github.com/lipido/mvcblog**
 
-#Instalacion
-* git clone https://github.com/0xKush/ET3_Grupo1.git
-* mv ET3Grupo1/* /var/www/html
-* Mediante o navegador accedede a ip_do_voso_servidor:porto/install.php (Solicitará usuario e password de root para mysql).
-* Os permisos deberían estar correctos pois estase a empregar git config core.fileMode true, en caso de existir problemas, dispomos dun script no raiz do proxecto chamado install.sh que configurará os permisos especiais necesarios.
+ ![App Overview 1](media/images/app-overview1.png?raw=true "App Overview 1")
+ ---
+ ![App Overview 1](media/images/app-overview2.png?raw=true "App Overview 1")
+ ---
+ ![App Overview 1](media/images/app-overview3.png?raw=true "App Overview 1")
 
-#Usuario Probas
-* nome: admin
-* contrasinal: admin
+
+## Installation
+A quick installation process could be:
+
+1. Download the project
+2. Assign permissions ( if necessary)
+```
+sudo adduser <username> www-data
+sudo chown -R www-data:www-data /var/www
+sudo chmod -R g+rwX /var/www
+```
+3. Start the server and install the database using our script: http://localhost/caralibro/install.php.
+4. Login in: admin - admin
